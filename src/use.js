@@ -16,7 +16,7 @@ export default (hook, context) => (props) => {
 
   context.update({
     rerender: (newProps) => rerender(context.resolveComponent(<HookHarness {...newProps} />)),
-    flushEffects: () => context.rerender(props)
+    flush: () => context.rerender(props)
   })
 
   return context.result
