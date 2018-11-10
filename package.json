@@ -1,0 +1,39 @@
+{
+  "name": "react-hooks-testing-library",
+  "version": "0.1.0",
+  "description": "Utilities for testing React hooks",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel --out-dir lib src",
+    "test": "jest --coverage --colors"
+  },
+  "author": "Michael Peyper",
+  "license": "MIT",
+  "dependencies": {
+    "invariant": "^2.2.4",
+    "react-testing-library": "^5.2.3",
+    "uuid-v4": "^0.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/cli": "^7.1.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "jest": "^23.6.0",
+    "react": "^16.7.0-alpha.0",
+    "react-dom": "^16.7.0-alpha.0"
+  },
+  "peerDependencies": {
+    "react-dom": "^16.7.0-alpha.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/src/**"
+    ],
+    "testURL": "http://localhost/"
+  }
+}
