@@ -1,11 +1,11 @@
 {
   "name": "react-hooks-testing-library",
   "version": "0.1.0",
-  "description": "Utilities for testing React hooks",
+  "description": "Simple component wrapper for testing React hooks",
   "main": "lib/index.js",
   "scripts": {
     "build": "babel --out-dir lib src",
-    "test": "jest --coverage --colors"
+    "test": "jest --coverage"
   },
   "author": "Michael Peyper",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "react-dom": "^16.7.0-alpha.0"
   },
   "peerDependencies": {
-    "react-dom": "^16.7.0-alpha.0"
+    "react": "^16.7.0-alpha.0"
   },
   "jest": {
     "collectCoverageFrom": [

@@ -5,9 +5,9 @@ describe('useHook tests', () => {
   afterEach(cleanup)
 
   test('should handle useState hooks', () => {
-    const { render, update } = useHook(() => useState('foo'))
+    const { use, update } = useHook(() => useState('foo'))
 
-    const [value1, setValue] = render()
+    const [value1, setValue] = use()
 
     expect(value1).toBe('foo')
 
@@ -21,13 +21,13 @@ describe('useHook tests', () => {
   test('should handle useContext hooks', () => {
     const TestContext = createContext('foo')
 
-    const { render } = useHook(() => useContext(TestContext)).wrap(({ children }) => (
+    const { use } = useHook(() => useContext(TestContext)).wrap(({ children }) => (
       <TestContext.Provider value='bar'>
         {children}
       </TestContext.Provider>
     ))
 
-    const value = render()
+    const value = use()
 
     expect(value).toBe('bar')
   })
@@ -36,14 +36,14 @@ describe('useHook tests', () => {
 
     const sideEffect = { [1]: false, [2]: false }
     
-    const { render, flushEffects, update } = useHook(({ id }) => useEffect(() => {
+    const { use, flushEffects, update } = useHook(({ id }) => useEffect(() => {
       sideEffect[id] = true
       return () => {
         sideEffect[id] = false
       }
     }, [id]))
 
-    render({ id: 1 })
+    use({ id: 1 })
 
     expect(sideEffect[1]).toBe(false)
     expect(sideEffect[2]).toBe(false)
