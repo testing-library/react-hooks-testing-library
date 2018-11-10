@@ -4,22 +4,21 @@ import invariant from 'invariant'
 import uuid from 'uuid-v4'
 
 const use = (hook, context) => (props) => {
-
   const HookHarness = (props) => {
     context.result = hook(props)
     return <div data-testid={context.id} />
   }
 
-  const { queryByTestId, rerender } = render(context.resolveComponent({ children: <HookHarness {...props} /> }))
+  const { queryByTestId, rerender } = render(context.resolveComponent(<HookHarness {...props} />))
 
   const container = queryByTestId(context.id)
 
-  invariant(container !== null, 'You must render children when wrapping the hook')
+  invariant(container !== null, 'Failed to render wrapper component')
 
-  context.rerender = (newProps) => rerender(context.resolveComponent({ children: <HookHarness {...newProps} /> }))
+  context.rerender = (newProps) => rerender(context.resolveComponent(<HookHarness {...newProps} />))
   context.flushEffects = () => context.rerender(props)
 
-  return context.result 
+  return context.result
 }
 
 const update = (context) => (props) => {
@@ -38,25 +37,29 @@ const flushEffects = (context) => () => {
   return context.result
 }
 
-const wrap = (hook, context) => (wrap) => {
-  invariant(typeof wrap === 'function', 'wrap must be provided a function')
+const withContextProvider = (hook, context) => (ContextProvider, props) => {
   const { resolveComponent } = context
-  return useHookAdvanced(hook, { ...context, resolveComponent: (props) => wrap({ children: resolveComponent(props) }) })
+  return useHookAdvanced(hook, {
+    ...context,
+    resolveComponent: (Component) => (
+      <ContextProvider {...props}>{resolveComponent(Component)}</ContextProvider>
+    )
+  })
 }
 
 const useHookAdvanced = (hook, context) => {
   return {
     use: use(hook, context),
+    withContextProvider: withContextProvider(hook, context),
     update: update(context),
-    flushEffects: flushEffects(context),
-    wrap: wrap(hook, context)
+    flushEffects: flushEffects(context)
   }
 }
 
 export const useHook = (hook) => {
   const context = {
     id: uuid(),
-    resolveComponent: ({ children }) => children
+    resolveComponent: (Component) => Component
   }
   return useHookAdvanced(hook, context)
 }

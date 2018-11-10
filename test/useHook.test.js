@@ -21,11 +21,10 @@ describe('useHook tests', () => {
   test('should handle useContext hooks', () => {
     const TestContext = createContext('foo')
 
-    const { use } = useHook(() => useContext(TestContext)).wrap(({ children }) => (
-      <TestContext.Provider value='bar'>
-        {children}
-      </TestContext.Provider>
-    ))
+    const { use } = useHook(() => useContext(TestContext)).withContextProvider(
+      TestContext.Provider,
+      { value: 'bar' }
+    )
 
     const value = use()
 
@@ -33,15 +32,19 @@ describe('useHook tests', () => {
   })
 
   test('should handle useEffect hooks', () => {
-
     const sideEffect = { [1]: false, [2]: false }
-    
-    const { use, flushEffects, update } = useHook(({ id }) => useEffect(() => {
-      sideEffect[id] = true
-      return () => {
-        sideEffect[id] = false
-      }
-    }, [id]))
+
+    const { use, flushEffects, update } = useHook(({ id }) =>
+      useEffect(
+        () => {
+          sideEffect[id] = true
+          return () => {
+            sideEffect[id] = false
+          }
+        },
+        [id]
+      )
+    )
 
     use({ id: 1 })
 
