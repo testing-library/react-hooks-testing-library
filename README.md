@@ -2,10 +2,6 @@
 
 Simple component wrapper and utilities for testing React hooks.
 
-> _**NOTE**: Hooks are a proposal in the current alpha version of React and are **NOT** recommended to use in production code. This library should be treated as a proof-of-concept **ONLY**._
->
-> _Please refer to the [hook FAQ](https://reactjs.org/docs/hooks-faq.html) for more details on React hooks, their release timeframe and adoption strategy._
-
 ---
 
 [![Build Status](https://img.shields.io/travis/mpeyper/react-hooks-testing-library.svg?style=flat-square)](https://travis-ci.org/mpeyper/react-hooks-testing-library)
@@ -20,6 +16,10 @@ Simple component wrapper and utilities for testing React hooks.
 [![Watch on GitHub](https://img.shields.io/github/watchers/mpeyper/react-hooks-testing-library.svg?style=social)](https://github.com/mpeyper/react-hooks-testing-library/watchers)
 [![Star on GitHub](https://img.shields.io/github/stars/mpeyper/react-hooks-testing-library.svg?style=social)](https://github.com/mpeyper/react-hooks-testing-library/stargazers)
 [![Tweet](https://img.shields.io/twitter/url/https/github.com/mpeyper/react-hooks-testing-library.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20react-hooks-testing-library%20by%20%40mpeyper%20https%3A%2F%2Fgithub.com%2Fmpeyper%2Freact-hooks-testing-library%20%F0%9F%91%8D)
+
+> _**NOTE**: Hooks are a proposal in the current alpha version of React and are **NOT** recommended to use in production code. This library should be treated as a proof-of-concept **ONLY**._
+>
+> _Please refer to the [hook FAQ](https://reactjs.org/docs/hooks-faq.html) for more details on React hooks, their release timeframe and adoption strategy._
 
 ## The problem
 
