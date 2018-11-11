@@ -1,9 +1,13 @@
 {
   "name": "react-hooks-testing-library",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Simple component wrapper for testing React hooks",
   "main": "lib/index.js",
   "author": "Michael Peyper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mpeyper/react-hooks-testing-library.git"
+  },
   "license": "MIT",
   "scripts": {
     "prepare": "npm run build",
