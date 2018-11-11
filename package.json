@@ -6,6 +6,7 @@
   "author": "Michael Peyper",
   "license": "MIT",
   "scripts": {
+    "prepare": "npm run build",
     "build": "babel --out-dir lib src",
     "format": "prettier-eslint --write \"**/*.{js,json,md}\"",
     "test": "jest --coverage",
