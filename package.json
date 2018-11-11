@@ -1,6 +1,6 @@
 {
   "name": "react-hooks-testing-library",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple component wrapper for testing React hooks",
   "main": "lib/index.js",
   "author": "Michael Peyper",
