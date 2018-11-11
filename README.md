@@ -161,7 +161,7 @@ a 👍. This helps maintainers prioritize what to work on.
 For questions related to using the library, you can [raise issue here](https://github.com/mpeyper/react-hooks-testing-library/issues/new), or visit a support community:
 
 - [Reactiflux on Discord](https://www.reactiflux.com/)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/react-testing-library)
+- [Stack Overflow](https://stackoverflow.com/)
 
 ## LICENSE
 
