@@ -52,11 +52,12 @@ export const useHook = (hook, ...props) => {
   }
 
   const flushEffects = (minTimes = 1, maxTimes = Math.max(minTimes + 1, 100)) => {
+    invariant(minTimes > 0, `minTimes (${minTimes}) must be a positive number`)
+    invariant(maxTimes > 0, `maxTimes (${maxTimes}) must be a positive number`)
     invariant(
-      minTimes > 0 && minTimes <= maxTimes,
-      `minTimes (${minTimes}) must me a positive number that is less than maxTimes (${maxTimes})`
+      minTimes <= maxTimes,
+      `maxTimes (${maxTimes}) must be less than maxTimes (${maxTimes})`
     )
-    invariant(maxTimes > 0, `maxTimes (${maxTimes}) must me a positive number`)
 
     let lastValue
     let currentValue
@@ -69,8 +70,8 @@ export const useHook = (hook, ...props) => {
     }
 
     invariant(
-      flushCount < Math.max(minTimes, maxTimes),
-      `Hook values have not resolved after recalculating ${maxTimes} times`
+      flushCount < maxTimes,
+      `Hook values have not resolved after flushing ${maxTimes} times`
     )
   }
 

@@ -43,4 +43,21 @@ describe('custom hook tests', () => {
     expect(theme.primaryDark).toBe('#FFFFFF')
     expect(typeof theme.changeTheme).toBe('function')
   })
+
+  test('should get custom theme from custom hook', () => {
+    const customThemes = {
+      light: { primaryLight: '#AABBCC', primaryDark: '#CCBBAA' },
+      dark: { primaryLight: '#CCBBAA', primaryDark: '#AABBCC' }
+    }
+
+    const { getCurrentValue, addContextProvider } = useHook(() => useTheme('light'))
+
+    addContextProvider(ThemesContext, { value: customThemes })
+
+    const theme = getCurrentValue()
+
+    expect(theme.primaryLight).toBe('#AABBCC')
+    expect(theme.primaryDark).toBe('#CCBBAA')
+    expect(typeof theme.changeTheme).toBe('function')
+  })
 })

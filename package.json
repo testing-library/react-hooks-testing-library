@@ -8,7 +8,8 @@
   "scripts": {
     "build": "babel --out-dir lib src",
     "format": "prettier-eslint --write \"**/*.{js,json,md}\"",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "contributors:add": "all-contributors add"
   },
   "dependencies": {
     "invariant": "^2.2.4",
@@ -22,6 +23,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "all-contributors-cli": "^5.4.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-module-resolver": "^3.1.1",
