@@ -1,4 +1,5 @@
 import React from 'react'
+import { act } from 'react-dom/test-utils'
 import { render, cleanup } from 'react-testing-library'
 import invariant from 'invariant'
 import uuid from 'uuid-v4'
@@ -27,11 +28,13 @@ export const useHook = (hook, ...props) => {
   }
 
   const getCurrentValue = () => {
-    if (!context.rendered) {
-      renderHook()
-    } else {
-      context.rerender()
-    }
+    act(() => {
+      if (!context.rendered) {
+        renderHook()
+      } else {
+        context.rerender()
+      }
+    })
     return context.currentValue
   }
 
@@ -51,28 +54,8 @@ export const useHook = (hook, ...props) => {
     return { updateContext }
   }
 
-  const flushEffects = (minTimes = 1, maxTimes = Math.max(minTimes + 1, 100)) => {
-    invariant(minTimes > 0, `minTimes (${minTimes}) must be a positive number`)
-    invariant(maxTimes > 0, `maxTimes (${maxTimes}) must be a positive number`)
-    invariant(
-      minTimes <= maxTimes,
-      `maxTimes (${maxTimes}) must be less than maxTimes (${maxTimes})`
-    )
-
-    let lastValue
-    let currentValue
-    let flushCount = 0
-
-    while ((currentValue !== lastValue || flushCount < minTimes) && flushCount < maxTimes) {
-      lastValue = currentValue
-      currentValue = getCurrentValue()
-      flushCount++
-    }
-
-    invariant(
-      flushCount < maxTimes,
-      `Hook values have not resolved after flushing ${maxTimes} times`
-    )
+  const flushEffects = () => {
+    getCurrentValue()
   }
 
   return {

@@ -1,4 +1,4 @@
-import { useRef, useImperativeMethods } from 'react'
+import { useRef, useImperativeHandle } from 'react'
 import { useHook, cleanup } from 'src'
 
 describe('useHook tests', () => {
@@ -13,10 +13,10 @@ describe('useHook tests', () => {
     expect(refContainer.current).toBeUndefined()
   })
 
-  test('should handle useImperativeMethods hook', () => {
+  test('should handle useImperativeHandle hook', () => {
     const { getCurrentValue } = useHook(() => {
       const ref = useRef()
-      useImperativeMethods(ref, () => ({
+      useImperativeHandle(ref, () => ({
         fakeImperativeMethod: () => true
       }))
       return ref
