@@ -13,11 +13,11 @@ describe('useState tests', () => {
   })
 
   test('should update setState value using setter', () => {
-    const { getCurrentValues } = useHook(() => useState('foo'))
+    const { getCurrentValues, act } = useHook(() => useState('foo'))
 
     const [_, setValue] = getCurrentValues()
 
-    setValue('bar')
+    act(() => setValue('bar'))
 
     const [value] = getCurrentValues()
 

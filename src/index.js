@@ -63,7 +63,8 @@ export const useHook = (hook, ...props) => {
     getCurrentValues: getCurrentValue,
     flushEffects,
     setProps,
-    addContextProvider
+    addContextProvider,
+    act
   }
 }
 

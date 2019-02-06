@@ -31,11 +31,11 @@ describe('custom hook tests', () => {
   })
 
   test('should update theme using custom hook', () => {
-    const { getCurrentValue } = useHook(() => useTheme('light'))
+    const { getCurrentValue, act } = useHook(() => useTheme('light'))
 
     const { changeTheme } = getCurrentValue()
 
-    changeTheme()
+    act(() => changeTheme())
 
     const theme = getCurrentValue()
 

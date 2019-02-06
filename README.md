@@ -61,10 +61,10 @@ const ThemesContext = createContext(themes)
 const useTheme = (initialTheme) => {
   const themes = useContext(ThemesContext)
   const [theme, setTheme] = useState(initialTheme)
-  const changeTheme = () => {
+  const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
   }
-  return useMemo(() => ({ ...themes[theme], changeTheme }), [theme])
+  return useMemo(() => ({ ...themes[theme], toggleTheme }), [theme])
 }
 
 // useTheme.test.js
@@ -83,11 +83,11 @@ describe('custom hook tests', () => {
   })
 
   test('should update theme', () => {
-    const { getCurrentValue } = useHook(() => useTheme('light'))
+    const { getCurrentValue, act } = useHook(() => useTheme('light'))
 
-    const { changeTheme } = getCurrentValue()
+    const { toggleTheme } = getCurrentValue()
 
-    changeTheme()
+    act(() => toggleTheme())
 
     const theme = getCurrentValue()
 
@@ -122,7 +122,7 @@ npm install react-hooks-testing-library
 ## Usage
 
 ```js
-// TODO: write this
+// TODO: write this - see Example above for now
 ```
 
 ## Contributors
