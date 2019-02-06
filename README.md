@@ -27,7 +27,7 @@ You don't really want to write a component solely for testing this hook and have
 
 ## The solution
 
-The `react-hooks-testing-library` is build on top of the wonderful [`react-testing-library`](http://npm.im/react-testing-library) to create a simple test harness for React hooks that handles running them within the body of a function component, as well as privings various useful utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
+The `react-hooks-testing-library` is build on top of the wonderful [`react-testing-library`](http://npm.im/react-testing-library) to create a simple test harness for React hooks that handles running them within the body of a function component, as well as providing various useful utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
 
 Using this library, you do not have to concern yourself with how the to interact construct, render or interact with the react component in order to test your hook. You can just use the hook directly and assert the resulting values.
 
