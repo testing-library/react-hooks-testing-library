@@ -1,28 +1,29 @@
 import { useMemo, useCallback } from 'react'
-import { useHook, cleanup } from 'src'
+import { testHook, cleanup } from 'src'
 
 describe('useCallback tests', () => {
   afterEach(cleanup)
 
   test('should handle useMemo hook', () => {
-    const { getCurrentValue, setProps } = useHook(
-      ({ value }) => useMemo(() => ({ value }), [value]),
-      { value: 1 }
-    )
+    const { result, rerender } = testHook(({ value }) => useMemo(() => ({ value }), [value]), {
+      initialProps: { value: 1 }
+    })
 
-    const value1 = getCurrentValue()
+    const value1 = result.current
 
     expect(value1).toEqual({ value: 1 })
 
-    const value2 = getCurrentValue()
+    rerender()
+
+    const value2 = result.current
 
     expect(value2).toEqual({ value: 1 })
 
     expect(value2).toBe(value1)
 
-    setProps({ value: 2 })
+    rerender({ value: 2 })
 
-    const value3 = getCurrentValue()
+    const value3 = result.current
 
     expect(value3).toEqual({ value: 2 })
 
@@ -30,21 +31,21 @@ describe('useCallback tests', () => {
   })
 
   test('should handle useCallback hook', () => {
-    const { getCurrentValue, setProps } = useHook(
+    const { result, rerender } = testHook(
       ({ value }) => {
         const callback = () => ({ value })
         return useCallback(callback, [value])
       },
-      { value: 1 }
+      { initialProps: { value: 1 } }
     )
 
-    const callback1 = getCurrentValue()
+    const callback1 = result.current
 
     const calbackValue1 = callback1()
 
     expect(calbackValue1).toEqual({ value: 1 })
 
-    const callback2 = getCurrentValue()
+    const callback2 = result.current
 
     const calbackValue2 = callback2()
 
@@ -52,9 +53,9 @@ describe('useCallback tests', () => {
 
     expect(callback2).toBe(callback1)
 
-    setProps({ value: 2 })
+    rerender({ value: 2 })
 
-    const callback3 = getCurrentValue()
+    const callback3 = result.current
 
     const calbackValue3 = callback3()
 
