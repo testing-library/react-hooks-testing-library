@@ -13,39 +13,37 @@ describe('custom hook tests', () => {
   const useTheme = (initialTheme) => {
     const themes = useContext(ThemesContext)
     const [theme, setTheme] = useState(initialTheme)
-    const changeTheme = () => {
+    const toggleTheme = () => {
       setTheme(theme === 'light' ? 'dark' : 'light')
     }
-    return useMemo(() => ({ ...themes[theme], changeTheme }), [theme])
+    return useMemo(() => ({ ...themes[theme], toggleTheme }), [theme])
   }
 
   afterEach(cleanup)
 
-  test('should get initial theme from custom hook', () => {
+  test('should use theme', () => {
     const { result } = testHook(() => useTheme('light'))
 
     const theme = result.current
 
     expect(theme.primaryLight).toBe('#FFFFFF')
     expect(theme.primaryDark).toBe('#000000')
-    expect(typeof theme.changeTheme).toBe('function')
   })
 
-  test('should update theme using custom hook', () => {
+  test('should update theme', () => {
     const { result } = testHook(() => useTheme('light'))
 
-    const { changeTheme } = result.current
+    const { toggleTheme } = result.current
 
-    act(() => changeTheme())
+    act(() => toggleTheme())
 
     const theme = result.current
 
     expect(theme.primaryLight).toBe('#000000')
     expect(theme.primaryDark).toBe('#FFFFFF')
-    expect(typeof theme.changeTheme).toBe('function')
   })
 
-  test('should get custom theme from custom hook', () => {
+  test('should use custom theme', () => {
     const customThemes = {
       light: { primaryLight: '#AABBCC', primaryDark: '#CCBBAA' },
       dark: { primaryLight: '#CCBBAA', primaryDark: '#AABBCC' }
@@ -61,6 +59,5 @@ describe('custom hook tests', () => {
 
     expect(theme.primaryLight).toBe('#AABBCC')
     expect(theme.primaryDark).toBe('#CCBBAA')
-    expect(typeof theme.changeTheme).toBe('function')
   })
 })
