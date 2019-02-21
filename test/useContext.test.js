@@ -1,5 +1,6 @@
+import React from 'react'
 import { createContext, useContext } from 'react'
-import { useHook, cleanup } from 'src'
+import { renderHook, cleanup } from 'src'
 
 describe('useContext tests', () => {
   afterEach(cleanup)
@@ -7,9 +8,9 @@ describe('useContext tests', () => {
   test('should get default value from context', () => {
     const TestContext = createContext('foo')
 
-    const { getCurrentValue } = useHook(() => useContext(TestContext))
+    const { result } = renderHook(() => useContext(TestContext))
 
-    const value = getCurrentValue()
+    const value = result.current
 
     expect(value).toBe('foo')
   })
@@ -17,9 +18,9 @@ describe('useContext tests', () => {
   test('should get default value from context provider', () => {
     const TestContext = createContext('foo')
 
-    const { getCurrentValue } = useHook(() => useContext(TestContext))
+    const { result } = renderHook(() => useContext(TestContext))
 
-    const value = getCurrentValue()
+    const value = result.current
 
     expect(value).toBe('foo')
   })
@@ -27,11 +28,13 @@ describe('useContext tests', () => {
   test('should get value from context', () => {
     const TestContext = createContext('foo')
 
-    const { getCurrentValue, addContextProvider } = useHook(() => useContext(TestContext))
+    const wrapper = ({ children }) => (
+      <TestContext.Provider value="bar">{children}</TestContext.Provider>
+    )
 
-    addContextProvider(TestContext, { value: 'bar' })
+    const { result } = renderHook(() => useContext(TestContext), { wrapper })
 
-    const value = getCurrentValue()
+    const value = result.current
 
     expect(value).toBe('bar')
   })
@@ -39,40 +42,30 @@ describe('useContext tests', () => {
   test('should get value from context provider', () => {
     const TestContext = createContext('foo')
 
-    const { getCurrentValue, addContextProvider } = useHook(() => useContext(TestContext))
+    const wrapper = ({ children }) => (
+      <TestContext.Provider value="bar">{children}</TestContext.Provider>
+    )
 
-    addContextProvider(TestContext.Provider, { value: 'bar' })
+    const { result } = renderHook(() => useContext(TestContext), { wrapper })
 
-    const value = getCurrentValue()
-
-    expect(value).toBe('bar')
+    expect(result.current).toBe('bar')
   })
 
   test('should update value in context', () => {
     const TestContext = createContext('foo')
 
-    const { getCurrentValue, addContextProvider } = useHook(() => useContext(TestContext))
+    const value = { current: 'bar' }
 
-    const { updateContext } = addContextProvider(TestContext, { value: 'bar' })
+    const wrapper = ({ children }) => (
+      <TestContext.Provider value={value.current}>{children}</TestContext.Provider>
+    )
 
-    updateContext({ value: 'baz' })
+    const { result, rerender } = renderHook(() => useContext(TestContext), { wrapper })
 
-    const value = getCurrentValue()
+    value.current = 'baz'
 
-    expect(value).toBe('baz')
-  })
+    rerender()
 
-  test('should update value in context provider', () => {
-    const TestContext = createContext('foo')
-
-    const { getCurrentValue, addContextProvider } = useHook(() => useContext(TestContext))
-
-    const { updateContext } = addContextProvider(TestContext.Provider, { value: 'bar' })
-
-    updateContext({ value: 'baz' })
-
-    const value = getCurrentValue()
-
-    expect(value).toBe('baz')
+    expect(result.current).toBe('baz')
   })
 })

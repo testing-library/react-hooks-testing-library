@@ -64,28 +64,28 @@ const useTheme = (initialTheme) => {
 }
 
 // useTheme.test.js
-import { useHook, cleanup } from 'react-hooks-testing-library'
+import { testHook, cleanup, act } from 'react-hooks-testing-library'
 
 describe('custom hook tests', () => {
   afterEach(cleanup)
 
   test('should use theme', () => {
-    const { getCurrentValue } = useHook(() => useTheme('light'))
+    const { result } = testHook(() => useTheme('light'))
 
-    const theme = getCurrentValue()
+    const theme = result.current
 
     expect(theme.primaryLight).toBe('#FFFFFF')
     expect(theme.primaryDark).toBe('#000000')
   })
 
   test('should update theme', () => {
-    const { getCurrentValue, act } = useHook(() => useTheme('light'))
+    const { result } = testHook(() => useTheme('light'))
 
-    const { toggleTheme } = getCurrentValue()
+    const { toggleTheme } = result.current
 
     act(() => toggleTheme())
 
-    const theme = getCurrentValue()
+    const theme = result.current
 
     expect(theme.primaryLight).toBe('#000000')
     expect(theme.primaryDark).toBe('#FFFFFF')
@@ -97,11 +97,13 @@ describe('custom hook tests', () => {
       dark: { primaryLight: '#CCBBAA', primaryDark: '#AABBCC' }
     }
 
-    const { getCurrentValue, addContextProvider } = useHook(() => useTheme('light'))
+    const wrapper = ({ children }) => (
+      <ThemesContext.Provider value={customThemes}>{children}</ThemesContext.Provider>
+    )
 
-    addContextProvider(ThemesContext, { value: customThemes })
+    const { result } = testHook(() => useTheme('light'), { wrapper })
 
-    const theme = getCurrentValue()
+    const theme = result.current
 
     expect(theme.primaryLight).toBe('#AABBCC')
     expect(theme.primaryDark).toBe('#CCBBAA')

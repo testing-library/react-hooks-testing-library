@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect } from 'react'
-import { useHook, cleanup } from 'src'
+import { renderHook, cleanup } from 'src'
 
 describe('useEffect tests', () => {
   afterEach(cleanup)
@@ -7,7 +7,7 @@ describe('useEffect tests', () => {
   test('should handle useEffect hook', () => {
     const sideEffect = { [1]: false, [2]: false }
 
-    const { flushEffects, setProps } = useHook(
+    const { rerender, unmount } = renderHook(
       ({ id }) => {
         useEffect(() => {
           sideEffect[id] = true
@@ -16,25 +16,27 @@ describe('useEffect tests', () => {
           }
         }, [id])
       },
-      { id: 1 }
+      { initialProps: { id: 1 } }
     )
-
-    flushEffects()
 
     expect(sideEffect[1]).toBe(true)
     expect(sideEffect[2]).toBe(false)
 
-    setProps({ id: 2 })
-    flushEffects()
+    rerender({ id: 2 })
 
     expect(sideEffect[1]).toBe(false)
     expect(sideEffect[2]).toBe(true)
+
+    unmount()
+
+    expect(sideEffect[1]).toBe(false)
+    expect(sideEffect[2]).toBe(false)
   })
 
   test('should handle useLayoutEffect hook', () => {
     const sideEffect = { [1]: false, [2]: false }
 
-    const { flushEffects, setProps } = useHook(
+    const { rerender, unmount } = renderHook(
       ({ id }) => {
         useLayoutEffect(() => {
           sideEffect[id] = true
@@ -43,18 +45,20 @@ describe('useEffect tests', () => {
           }
         }, [id])
       },
-      { id: 1 }
+      { initialProps: { id: 1 } }
     )
-
-    flushEffects()
 
     expect(sideEffect[1]).toBe(true)
     expect(sideEffect[2]).toBe(false)
 
-    setProps({ id: 2 })
-    flushEffects()
+    rerender({ id: 2 })
 
     expect(sideEffect[1]).toBe(false)
     expect(sideEffect[2]).toBe(true)
+
+    unmount()
+
+    expect(sideEffect[1]).toBe(false)
+    expect(sideEffect[2]).toBe(false)
   })
 })

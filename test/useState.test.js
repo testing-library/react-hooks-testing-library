@@ -1,25 +1,25 @@
 import { useState } from 'react'
-import { useHook, cleanup } from 'src'
+import { renderHook, cleanup, act } from 'src'
 
 describe('useState tests', () => {
   afterEach(cleanup)
 
   test('should use setState value', () => {
-    const { getCurrentValue } = useHook(() => useState('foo'))
+    const { result } = renderHook(() => useState('foo'))
 
-    const [value] = getCurrentValue()
+    const [value] = result.current
 
     expect(value).toBe('foo')
   })
 
   test('should update setState value using setter', () => {
-    const { getCurrentValues, act } = useHook(() => useState('foo'))
+    const { result } = renderHook(() => useState('foo'))
 
-    const [_, setValue] = getCurrentValues()
+    const [_, setValue] = result.current
 
     act(() => setValue('bar'))
 
-    const [value] = getCurrentValues()
+    const [value] = result.current
 
     expect(value).toBe('bar')
   })

@@ -1,71 +1,44 @@
 import React from 'react'
-import { act } from 'react-dom/test-utils'
-import { render, cleanup } from 'react-testing-library'
-import invariant from 'invariant'
-import uuid from 'uuid-v4'
+import { render, cleanup, act } from 'react-testing-library'
 
-export const useHook = (hook, ...props) => {
-  const context = {
-    id: uuid(),
-    resolveComponent: (Component) => Component,
-    rendered: false,
-    props
-  }
+function TestHook({ callback, hookProps, children }) {
+  children(callback(hookProps))
+  return null
+}
 
-  const HookHarness = () => {
-    context.currentValue = hook(...context.props)
-    return <div data-testid={context.id} />
-  }
+function renderHook(callback, options = {}) {
+  const result = { current: null }
+  const hookProps = { current: options.initialProps }
 
-  const renderHook = () => {
-    const { queryByTestId, rerender } = render(context.resolveComponent(<HookHarness />))
-    const container = queryByTestId(context.id)
-
-    invariant(container !== null, 'Failed to render wrapper component')
-
-    context.rendered = true
-    context.rerender = () => rerender(context.resolveComponent(<HookHarness />))
-  }
-
-  const getCurrentValue = () => {
-    act(() => {
-      if (!context.rendered) {
-        renderHook()
-      } else {
-        context.rerender()
-      }
-    })
-    return context.currentValue
-  }
-
-  const setProps = (...newProps) => {
-    context.props = newProps
-  }
-
-  const addContextProvider = (ContextProvider, contextProps) => {
-    const Provider = ContextProvider.Provider || ContextProvider
-    const { resolveComponent } = context
-    const updateContext = (newContextProps) => {
-      contextProps = newContextProps
-    }
-    context.resolveComponent = (Component) => (
-      <Provider {...contextProps}>{resolveComponent(Component)}</Provider>
+  const toRender = () => {
+    const hookRender = (
+      <TestHook callback={callback} hookProps={hookProps.current}>
+        {(res) => {
+          result.current = res
+        }}
+      </TestHook>
     )
-    return { updateContext }
+
+    return options.wrapper ? React.createElement(options.wrapper, null, hookRender) : hookRender
   }
 
-  const flushEffects = () => {
-    getCurrentValue()
-  }
+  const { unmount, rerender: rerenderComponent } = render(toRender())
 
   return {
-    getCurrentValue,
-    getCurrentValues: getCurrentValue,
-    flushEffects,
-    setProps,
-    addContextProvider,
-    act
+    result,
+    unmount,
+    rerender: (newProps = hookProps.current) => {
+      hookProps.current = newProps
+      rerenderComponent(toRender())
+    }
   }
 }
 
-export { cleanup }
+function testHook(...args) {
+  console.warn(
+    '`testHook` has been deprecated and will be removed in a future release.  Please use `renderHook` instead.'
+  )
+  return renderHook(...args)
+}
+
+export { renderHook, cleanup, act, testHook }

@@ -1,5 +1,6 @@
+import React from 'react'
 import { useState, createContext, useContext, useMemo } from 'react'
-import { useHook, cleanup } from 'src'
+import { renderHook, cleanup, act } from 'src'
 
 describe('custom hook tests', () => {
   const themes = {
@@ -12,52 +13,51 @@ describe('custom hook tests', () => {
   const useTheme = (initialTheme) => {
     const themes = useContext(ThemesContext)
     const [theme, setTheme] = useState(initialTheme)
-    const changeTheme = () => {
+    const toggleTheme = () => {
       setTheme(theme === 'light' ? 'dark' : 'light')
     }
-    return useMemo(() => ({ ...themes[theme], changeTheme }), [theme])
+    return useMemo(() => ({ ...themes[theme], toggleTheme }), [theme])
   }
 
   afterEach(cleanup)
 
-  test('should get initial theme from custom hook', () => {
-    const { getCurrentValue } = useHook(() => useTheme('light'))
+  test('should use theme', () => {
+    const { result } = renderHook(() => useTheme('light'))
 
-    const theme = getCurrentValue()
+    const theme = result.current
 
     expect(theme.primaryLight).toBe('#FFFFFF')
     expect(theme.primaryDark).toBe('#000000')
-    expect(typeof theme.changeTheme).toBe('function')
   })
 
-  test('should update theme using custom hook', () => {
-    const { getCurrentValue, act } = useHook(() => useTheme('light'))
+  test('should update theme', () => {
+    const { result } = renderHook(() => useTheme('light'))
 
-    const { changeTheme } = getCurrentValue()
+    const { toggleTheme } = result.current
 
-    act(() => changeTheme())
+    act(() => toggleTheme())
 
-    const theme = getCurrentValue()
+    const theme = result.current
 
     expect(theme.primaryLight).toBe('#000000')
     expect(theme.primaryDark).toBe('#FFFFFF')
-    expect(typeof theme.changeTheme).toBe('function')
   })
 
-  test('should get custom theme from custom hook', () => {
+  test('should use custom theme', () => {
     const customThemes = {
       light: { primaryLight: '#AABBCC', primaryDark: '#CCBBAA' },
       dark: { primaryLight: '#CCBBAA', primaryDark: '#AABBCC' }
     }
 
-    const { getCurrentValue, addContextProvider } = useHook(() => useTheme('light'))
+    const wrapper = ({ children }) => (
+      <ThemesContext.Provider value={customThemes}>{children}</ThemesContext.Provider>
+    )
 
-    addContextProvider(ThemesContext, { value: customThemes })
+    const { result } = renderHook(() => useTheme('light'), { wrapper })
 
-    const theme = getCurrentValue()
+    const theme = result.current
 
     expect(theme.primaryLight).toBe('#AABBCC')
     expect(theme.primaryDark).toBe('#CCBBAA')
-    expect(typeof theme.changeTheme).toBe('function')
   })
 })
