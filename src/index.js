@@ -6,23 +6,19 @@ function TestHook({ callback, hookProps, children }) {
   return null
 }
 
-function renderHook(callback, options = {}) {
+function renderHook(callback, { initialProps, ...options } = {}) {
   const result = { current: null }
-  const hookProps = { current: options.initialProps }
+  const hookProps = { current: initialProps }
 
-  const toRender = () => {
-    const hookRender = (
-      <TestHook callback={callback} hookProps={hookProps.current}>
-        {(res) => {
-          result.current = res
-        }}
-      </TestHook>
-    )
+  const toRender = () => (
+    <TestHook callback={callback} hookProps={hookProps.current}>
+      {(res) => {
+        result.current = res
+      }}
+    </TestHook>
+  )
 
-    return options.wrapper ? React.createElement(options.wrapper, null, hookRender) : hookRender
-  }
-
-  const { unmount, rerender: rerenderComponent } = render(toRender())
+  const { unmount, rerender: rerenderComponent } = render(toRender(), options)
 
   return {
     result,
