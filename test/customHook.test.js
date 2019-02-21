@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, createContext, useContext, useMemo } from 'react'
-import { testHook, cleanup, act } from 'src'
+import { renderHook, cleanup, act } from 'src'
 
 describe('custom hook tests', () => {
   const themes = {
@@ -22,7 +22,7 @@ describe('custom hook tests', () => {
   afterEach(cleanup)
 
   test('should use theme', () => {
-    const { result } = testHook(() => useTheme('light'))
+    const { result } = renderHook(() => useTheme('light'))
 
     const theme = result.current
 
@@ -31,7 +31,7 @@ describe('custom hook tests', () => {
   })
 
   test('should update theme', () => {
-    const { result } = testHook(() => useTheme('light'))
+    const { result } = renderHook(() => useTheme('light'))
 
     const { toggleTheme } = result.current
 
@@ -53,7 +53,7 @@ describe('custom hook tests', () => {
       <ThemesContext.Provider value={customThemes}>{children}</ThemesContext.Provider>
     )
 
-    const { result } = testHook(() => useTheme('light'), { wrapper })
+    const { result } = renderHook(() => useTheme('light'), { wrapper })
 
     const theme = result.current
 

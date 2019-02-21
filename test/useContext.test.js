@@ -1,6 +1,6 @@
 import React from 'react'
 import { createContext, useContext } from 'react'
-import { testHook, cleanup } from 'src'
+import { renderHook, cleanup } from 'src'
 
 describe('useContext tests', () => {
   afterEach(cleanup)
@@ -8,7 +8,7 @@ describe('useContext tests', () => {
   test('should get default value from context', () => {
     const TestContext = createContext('foo')
 
-    const { result } = testHook(() => useContext(TestContext))
+    const { result } = renderHook(() => useContext(TestContext))
 
     const value = result.current
 
@@ -18,7 +18,7 @@ describe('useContext tests', () => {
   test('should get default value from context provider', () => {
     const TestContext = createContext('foo')
 
-    const { result } = testHook(() => useContext(TestContext))
+    const { result } = renderHook(() => useContext(TestContext))
 
     const value = result.current
 
@@ -32,7 +32,7 @@ describe('useContext tests', () => {
       <TestContext.Provider value="bar">{children}</TestContext.Provider>
     )
 
-    const { result } = testHook(() => useContext(TestContext), { wrapper })
+    const { result } = renderHook(() => useContext(TestContext), { wrapper })
 
     const value = result.current
 
@@ -46,7 +46,7 @@ describe('useContext tests', () => {
       <TestContext.Provider value="bar">{children}</TestContext.Provider>
     )
 
-    const { result } = testHook(() => useContext(TestContext), { wrapper })
+    const { result } = renderHook(() => useContext(TestContext), { wrapper })
 
     expect(result.current).toBe('bar')
   })
@@ -60,7 +60,7 @@ describe('useContext tests', () => {
       <TestContext.Provider value={value.current}>{children}</TestContext.Provider>
     )
 
-    const { result, rerender } = testHook(() => useContext(TestContext), { wrapper })
+    const { result, rerender } = renderHook(() => useContext(TestContext), { wrapper })
 
     value.current = 'baz'
 

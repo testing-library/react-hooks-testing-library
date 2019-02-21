@@ -6,7 +6,7 @@ function TestHook({ callback, hookProps, children }) {
   return null
 }
 
-function testHook(callback, options = {}) {
+function renderHook(callback, options = {}) {
   const result = { current: null }
   const hookProps = { current: options.initialProps }
 
@@ -34,4 +34,11 @@ function testHook(callback, options = {}) {
   }
 }
 
-export { testHook, cleanup, act }
+function testHook(...args) {
+  console.warn(
+    '`testHook` has been deprecated and will be removed in a future release.  Please use `renderHook` instead.'
+  )
+  return renderHook(...args)
+}
+
+export { renderHook, cleanup, act, testHook }

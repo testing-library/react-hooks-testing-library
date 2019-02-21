@@ -1,11 +1,11 @@
 import { useRef, useImperativeHandle } from 'react'
-import { testHook, cleanup } from 'src'
+import { renderHook, cleanup } from 'src'
 
 describe('useHook tests', () => {
   afterEach(cleanup)
 
   test('should handle useRef hook', () => {
-    const { result } = testHook(() => useRef())
+    const { result } = renderHook(() => useRef())
 
     const refContainer = result.current
 
@@ -14,7 +14,7 @@ describe('useHook tests', () => {
   })
 
   test('should handle useImperativeHandle hook', () => {
-    const { result } = testHook(() => {
+    const { result } = renderHook(() => {
       const ref = useRef()
       useImperativeHandle(ref, () => ({
         fakeImperativeMethod: () => true

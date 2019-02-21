@@ -1,11 +1,11 @@
 import { useMemo, useCallback } from 'react'
-import { testHook, cleanup } from 'src'
+import { renderHook, cleanup } from 'src'
 
 describe('useCallback tests', () => {
   afterEach(cleanup)
 
   test('should handle useMemo hook', () => {
-    const { result, rerender } = testHook(({ value }) => useMemo(() => ({ value }), [value]), {
+    const { result, rerender } = renderHook(({ value }) => useMemo(() => ({ value }), [value]), {
       initialProps: { value: 1 }
     })
 
@@ -31,7 +31,7 @@ describe('useCallback tests', () => {
   })
 
   test('should handle useCallback hook', () => {
-    const { result, rerender } = testHook(
+    const { result, rerender } = renderHook(
       ({ value }) => {
         const callback = () => ({ value })
         return useCallback(callback, [value])

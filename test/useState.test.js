@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { testHook, cleanup, act } from 'src'
+import { renderHook, cleanup, act } from 'src'
 
 describe('useState tests', () => {
   afterEach(cleanup)
 
   test('should use setState value', () => {
-    const { result } = testHook(() => useState('foo'))
+    const { result } = renderHook(() => useState('foo'))
 
     const [value] = result.current
 
@@ -13,7 +13,7 @@ describe('useState tests', () => {
   })
 
   test('should update setState value using setter', () => {
-    const { result } = testHook(() => useState('foo'))
+    const { result } = renderHook(() => useState('foo'))
 
     const [_, setValue] = result.current
 

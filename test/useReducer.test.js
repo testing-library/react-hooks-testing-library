@@ -1,12 +1,12 @@
 import { useReducer } from 'react'
-import { testHook, cleanup, act } from 'src'
+import { renderHook, cleanup, act } from 'src'
 
 describe('useReducer tests', () => {
   afterEach(cleanup)
 
   test('should handle useReducer hook', () => {
     const reducer = (state, action) => (action.type === 'inc' ? state + 1 : state)
-    const { result } = testHook(() => useReducer(reducer, 0))
+    const { result } = renderHook(() => useReducer(reducer, 0))
 
     const [initialState, dispatch] = result.current
 

@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect } from 'react'
-import { testHook, cleanup } from 'src'
+import { renderHook, cleanup } from 'src'
 
 describe('useEffect tests', () => {
   afterEach(cleanup)
@@ -7,7 +7,7 @@ describe('useEffect tests', () => {
   test('should handle useEffect hook', () => {
     const sideEffect = { [1]: false, [2]: false }
 
-    const { rerender, unmount } = testHook(
+    const { rerender, unmount } = renderHook(
       ({ id }) => {
         useEffect(() => {
           sideEffect[id] = true
@@ -36,9 +36,9 @@ describe('useEffect tests', () => {
   test('should handle useLayoutEffect hook', () => {
     const sideEffect = { [1]: false, [2]: false }
 
-    const { rerender, unmount } = testHook(
+    const { rerender, unmount } = renderHook(
       ({ id }) => {
-        useEffect(() => {
+        useLayoutEffect(() => {
           sideEffect[id] = true
           return () => {
             sideEffect[id] = false
