@@ -64,13 +64,13 @@ const useTheme = (initialTheme) => {
 }
 
 // useTheme.test.js
-import { testHook, cleanup, act } from 'react-hooks-testing-library'
+import { renderHook, cleanup, act } from 'react-hooks-testing-library'
 
 describe('custom hook tests', () => {
   afterEach(cleanup)
 
   test('should use theme', () => {
-    const { result } = testHook(() => useTheme('light'))
+    const { result } = renderHook(() => useTheme('light'))
 
     const theme = result.current
 
@@ -79,7 +79,7 @@ describe('custom hook tests', () => {
   })
 
   test('should update theme', () => {
-    const { result } = testHook(() => useTheme('light'))
+    const { result } = renderHook(() => useTheme('light'))
 
     const { toggleTheme } = result.current
 
@@ -101,7 +101,7 @@ describe('custom hook tests', () => {
       <ThemesContext.Provider value={customThemes}>{children}</ThemesContext.Provider>
     )
 
-    const { result } = testHook(() => useTheme('light'), { wrapper })
+    const { result } = renderHook(() => useTheme('light'), { wrapper })
 
     const theme = result.current
 
