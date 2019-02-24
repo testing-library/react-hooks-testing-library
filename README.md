@@ -121,11 +121,11 @@ npm install --save-dev react-hooks-testing-library
 
 ### `renderHook(callback[, options])`
 
-Renders a test component that will call the provided `callback`, including any hooks it contains, every time it renders.
+Renders a test component that will call the provided `callback`, including any hooks it calls, every time it renders.
 
 > _Note: `testHook` has been renamed to `renderHook`. `testHook` will continue work in the current version with a deprecation warning, but will be removed in a future version._
 >
-> **_You should update an usages of `testHook` to use `renderHook` instead._**
+> **_You should update any usages of `testHook` to use `renderHook` instead._**
 
 #### Arguments
 
