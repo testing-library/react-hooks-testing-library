@@ -130,9 +130,8 @@ Renders a test component that will call the provided `callback`, including any h
 #### Arguments
 
 - `callback` (`function()`) - function to call each render. This function should call one or more hooks for testing.
-- `options` (`object`):
+- `options` (`object`) - accepts the [same options as `react-testing-library`'s `render` function](https://testing-library.com/docs/react-testing-library/api#render-options), as well as:
   - `initialProps` (`object`) - the initial values to pass to the `callback` function
-  - `wrapper` (`Component`) - A component to wrap the underlying test component, commonly used to add context providers for the `useContext` hook. The component will recieve the test component as `children` and must render it.
 
 #### Returns
 
@@ -140,6 +139,16 @@ Renders a test component that will call the provided `callback`, including any h
   - `current` (`any`) - the return value of the `callback` function
 - `rerender` (`function([newProps])`) - function to rerender the test component including any hooks called in the `callback` function. If `newProps` are passed, the will replace the `initialProps` passed the the `callback` function for future renders.
 - `unmount` (`function()`) - function to unmount the test component, commonly used to trigger cleanup effects for `useEffect` hooks.
+
+### `cleanup()`
+
+Unmounts any React trees that were mounted with [renderHook](#renderhookcallback-options).
+
+This is the same [`cleanup` function](https://testing-library.com/docs/react-testing-library/api#cleanup) that is exported by `react-testing-library`.
+
+### `act(callback)`
+
+This is the same [`act` function](https://testing-library.com/docs/react-testing-library/api#act) that is exported by `react-testing-library`.
 
 ## Contributors
 
