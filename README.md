@@ -119,9 +119,27 @@ npm install react-hooks-testing-library
 
 ## Usage
 
-```js
-// TODO: write this - see Example above for now
-```
+### `renderHook(callback[, options])`
+
+Renders a test component that will call the provided `callback`, including any hooks it contains, every time it renders.
+
+> _Note: `testHook` has been renamed to `renderHook`. `testHook` will continue work in the current version with a deprecation warning, but will be removed in a future version._
+>
+> **_You should update an usages of `testHook` to use `renderHook` instead._**
+
+#### Arguments
+
+- `callback` (`function()`) - function to call each render. This function should call one or more hooks for testing.
+- `options` (`object`):
+  - `initialProps` (`object`) - the initial values to pass to the `callback` function
+  - `wrapper` (`Component`) - A component to wrap the underlying test component, commonly used to add context providers for the `useContext` hook. The component will recieve the test component as `children` and must render it.
+
+#### Returns
+
+- `result` (`object`)
+  - `current` (`any`) - the return value of the `callback` function
+- `rerender` (`function([newProps])`) - function to rerender the test component including any hooks called in the `callback` function. If `newProps` are passed, the will replace the `initialProps` passed the the `callback` function for future renders.
+- `unmount` (`function()`) - function to unmount the test component, commonly used to trigger cleanup effects for `useEffect` hooks.
 
 ## Contributors
 
