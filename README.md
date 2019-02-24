@@ -114,10 +114,10 @@ describe('custom hook tests', () => {
 ## Installation
 
 ```sh
-npm install react-hooks-testing-library
+npm install --save-dev react-hooks-testing-library
 ```
 
-## Usage
+## API
 
 ### `renderHook(callback[, options])`
 
