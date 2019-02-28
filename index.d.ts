@@ -4,8 +4,7 @@ export function renderHook<P extends any, T extends (...args: [P]) => any>(
   callback: (_: P) => ReturnType<T>,
   options?: {
     initialProps?: P
-    options?: RenderOptions
-  }
+  } & RenderOptions
 ): {
   readonly result: {
     current: ReturnType<T>
