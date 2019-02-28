@@ -26,6 +26,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.2.0",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "@types/react": "^16.8.5",
     "all-contributors-cli": "^6.1.2",
     "babel-eslint": "^10.0.1",
     "babel-plugin-module-resolver": "^3.2.0",
@@ -39,7 +40,9 @@
     "prettier-eslint": "^8.8.2",
     "prettier-eslint-cli": "^4.7.1",
     "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react-dom": "^16.8.3",
+    "typescript": "^3.3.3333",
+    "typings-tester": "^0.3.2"
   },
   "peerDependencies": {
     "react": "^16.8.0",
