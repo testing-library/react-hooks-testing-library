@@ -3,6 +3,7 @@
   "version": "0.3.4",
   "description": "Simple component wrapper for testing React hooks",
   "main": "lib/index.js",
+  "typings": "./index.d.ts",
   "author": "Michael Peyper",
   "repository": {
     "type": "git",
