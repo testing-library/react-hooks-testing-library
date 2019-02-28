@@ -1,9 +1,9 @@
 import { cleanup, act, RenderOptions, RenderResult } from 'react-testing-library'
 
-export function renderHook<T extends (...args: any[]) => any>(
-  callback: T,
+export function renderHook<P extends any, T extends (...args: [P]) => any>(
+  callback: (_: P) => ReturnType<T>,
   options?: {
-    initialProps?: Parameters<T>[0]
+    initialProps?: P
     options?: RenderOptions
   }
 ): {
@@ -11,7 +11,7 @@ export function renderHook<T extends (...args: any[]) => any>(
     current: ReturnType<T>
   }
   readonly unmount: RenderResult['unmount']
-  readonly rerender: (hookProps?: Parameters<T>[0]) => void
+  readonly rerender: (hookProps?: P) => void
 }
 
 export const testHook: typeof renderHook

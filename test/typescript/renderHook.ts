@@ -22,8 +22,6 @@ const useTheme = (initialTheme: InitialTheme = DARK) => {
   return useMemo(() => ({ ...themes[theme], toggleTheme }), [theme])
 }
 
-type InitialProps = { initialTheme: InitialTheme }
-
 function checkTypesWithNoInitialProps() {
   const { result, unmount, rerender } = renderHook(() => useTheme())
 
@@ -40,12 +38,9 @@ function checkTypesWithNoInitialProps() {
 }
 
 function checkTypesWithInitialProps() {
-  const { result, unmount, rerender } = renderHook(
-    ({ initialTheme }: InitialProps) => useTheme(initialTheme),
-    {
-      initialProps: { initialTheme: DARK }
-    }
-  )
+  const { result, unmount, rerender } = renderHook(({ theme }) => useTheme(theme), {
+    initialProps: { theme: DARK }
+  })
 
   // check types
   const _result: {
@@ -56,5 +51,5 @@ function checkTypesWithInitialProps() {
     }
   } = result
   const _unmount: () => boolean = unmount
-  const _rerender: (_: InitialProps) => void = rerender
+  const _rerender: (_?: { theme: typeof DARK }) => void = rerender
 }
