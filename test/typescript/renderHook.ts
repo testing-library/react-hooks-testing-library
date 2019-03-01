@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { renderHook } from 'react-hooks-testing-library'
 
 const useCounter = (initialCount: number = 0) => {
@@ -52,4 +52,15 @@ function checkTypesWithInitialProps() {
   } = result
   const _unmount: () => boolean = unmount
   const _rerender: (_?: { count: number }) => void = rerender
+}
+
+function checkTypesWhenHookReturnsVoid() {
+  const { result, unmount, rerender } = renderHook(() => useEffect(() => {}))
+
+  // check types
+  const _result: {
+    current: void
+  } = result
+  const _unmount: () => boolean = unmount
+  const _rerender: () => void = rerender
 }
