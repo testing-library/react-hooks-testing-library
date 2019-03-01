@@ -1,6 +1,6 @@
 import { cleanup, act, RenderOptions, RenderResult } from 'react-testing-library'
 
-export function renderHook<P extends any, R extends any>(
+export function renderHook<P, R>(
   callback: (...args: [P]) => R,
   options?: {
     initialProps?: P
