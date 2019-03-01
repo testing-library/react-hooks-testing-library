@@ -1,36 +1,36 @@
-import { useState, createContext, useContext, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import { renderHook } from 'react-hooks-testing-library'
 
-const DARK: 'dark' = 'dark'
-const LIGHT: 'light' = 'light'
-
-type InitialTheme = typeof DARK | typeof LIGHT | undefined
-
-const themes = {
-  light: { primaryLight: '#FFFFFF', primaryDark: '#000000' },
-  dark: { primaryLight: '#000000', primaryDark: '#FFFFFF' }
-}
-
-const ThemesContext = createContext(themes)
-
-const useTheme = (initialTheme: InitialTheme = DARK) => {
-  const themes = useContext(ThemesContext)
-  const [theme, setTheme] = useState(initialTheme)
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
+const useCounter = (initialCount: number = 0) => {
+  const [count, setCount] = useState(initialCount)
+  const incrementBy = useCallback(
+    (n: number) => {
+      setCount(count + n)
+    },
+    [count]
+  )
+  const decrementBy = useCallback(
+    (n: number) => {
+      setCount(count - n)
+    },
+    [count]
+  )
+  return {
+    count,
+    incrementBy,
+    decrementBy
   }
-  return useMemo(() => ({ ...themes[theme], toggleTheme }), [theme])
 }
 
 function checkTypesWithNoInitialProps() {
-  const { result, unmount, rerender } = renderHook(() => useTheme())
+  const { result, unmount, rerender } = renderHook(() => useCounter())
 
   // check types
   const _result: {
     current: {
-      primaryDark: string
-      primaryLight: string
-      toggleTheme: () => void
+      count: number
+      incrementBy: (_: number) => void
+      decrementBy: (_: number) => void
     }
   } = result
   const _unmount: () => boolean = unmount
@@ -38,18 +38,18 @@ function checkTypesWithNoInitialProps() {
 }
 
 function checkTypesWithInitialProps() {
-  const { result, unmount, rerender } = renderHook(({ theme }) => useTheme(theme), {
-    initialProps: { theme: DARK }
+  const { result, unmount, rerender } = renderHook(({ count }) => useCounter(count), {
+    initialProps: { count: 10 }
   })
 
   // check types
   const _result: {
     current: {
-      primaryDark: string
-      primaryLight: string
-      toggleTheme: () => void
+      count: number
+      incrementBy: (_: number) => void
+      decrementBy: (_: number) => void
     }
   } = result
   const _unmount: () => boolean = unmount
-  const _rerender: (_?: { theme: typeof DARK }) => void = rerender
+  const _rerender: (_?: { count: number }) => void = rerender
 }
