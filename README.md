@@ -9,7 +9,7 @@ Simple component wrapper and utilities for testing React hooks.
 [![downloads](https://img.shields.io/npm/dm/react-hooks-testing-library.svg?style=flat-square)](http://www.npmtrends.com/react-hooks-testing-library)
 [![MIT License](https://img.shields.io/npm/l/react-hooks-testing-library.svg?style=flat-square)](https://github.com/mpeyper/react-hooks-testing-library/blob/master/LICENSE.md)
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/mpeyper/react-hooks-testing-library/blob/master/CODE_OF_CONDUCT.md)
 
@@ -156,8 +156,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars0.githubusercontent.com/u/23029903?v=4" width="100px;"/><br /><sub><b>Michael Peyper</b></sub>](https://github.com/mpeyper)<br />[💻](https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper "Code") [🎨](#design-mpeyper "Design") [📖](https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper "Documentation") [🤔](#ideas-mpeyper "Ideas, Planning, & Feedback") [🚇](#infra-mpeyper "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-mpeyper "Packaging/porting to new platform") [⚠️](https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper "Tests") [🔧](#tool-mpeyper "Tools") |
-| :---: |
+<table><tr><td align="center"><a href="https://github.com/mpeyper"><img src="https://avatars0.githubusercontent.com/u/23029903?v=4" width="100px;" alt="Michael Peyper"/><br /><sub><b>Michael Peyper</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper" title="Code">💻</a> <a href="#design-mpeyper" title="Design">🎨</a> <a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper" title="Documentation">📖</a> <a href="#ideas-mpeyper" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-mpeyper" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#platform-mpeyper" title="Packaging/porting to new platform">📦</a> <a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper" title="Tests">⚠️</a> <a href="#tool-mpeyper" title="Tools">🔧</a></td><td align="center"><a href="https://github.com/otofu-square"><img src="https://avatars0.githubusercontent.com/u/10118235?v=4" width="100px;" alt="otofu-square"/><br /><sub><b>otofu-square</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=otofu-square" title="Code">💻</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
