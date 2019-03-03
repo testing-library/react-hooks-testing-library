@@ -4,6 +4,13 @@
   "description": "Simple component wrapper for testing React hooks",
   "main": "lib/index.js",
   "typings": "./index.d.ts",
+  "files": [
+    "lib",
+    "src",
+    "index.d.ts",
+    "README.md",
+    "LICENSE.md"
+  ],
   "author": "Michael Peyper",
   "repository": {
     "type": "git",
