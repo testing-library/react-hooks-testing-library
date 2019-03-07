@@ -1,5 +1,4 @@
-import React from 'react'
-import { createContext, useContext } from 'react'
+import React, { createContext, useContext } from 'react'
 import { renderHook, cleanup } from 'src'
 
 describe('useContext tests', () => {
@@ -13,30 +12,6 @@ describe('useContext tests', () => {
     const value = result.current
 
     expect(value).toBe('foo')
-  })
-
-  test('should get default value from context provider', () => {
-    const TestContext = createContext('foo')
-
-    const { result } = renderHook(() => useContext(TestContext))
-
-    const value = result.current
-
-    expect(value).toBe('foo')
-  })
-
-  test('should get value from context', () => {
-    const TestContext = createContext('foo')
-
-    const wrapper = ({ children }) => (
-      <TestContext.Provider value="bar">{children}</TestContext.Provider>
-    )
-
-    const { result } = renderHook(() => useContext(TestContext), { wrapper })
-
-    const value = result.current
-
-    expect(value).toBe('bar')
   })
 
   test('should get value from context provider', () => {

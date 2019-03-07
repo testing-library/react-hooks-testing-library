@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, createContext, useContext, useMemo } from 'react'
+import React, { useState, createContext, useContext, useMemo } from 'react'
 import { renderHook, cleanup, act } from 'src'
 
 describe('custom hook tests', () => {
