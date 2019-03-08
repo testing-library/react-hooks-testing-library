@@ -21,7 +21,9 @@
     "prepare": "npm run build",
     "build": "babel --out-dir lib src",
     "format": "prettier-eslint --write \"**/*.{js,json,md}\"",
-    "test": "jest --coverage",
+    "coverage": "codecov",
+    "test": "jest",
+    "test:ci": "npm run test && npm run coverage",
     "contributors:add": "all-contributors add"
   },
   "dependencies": {
@@ -38,6 +40,7 @@
     "all-contributors-cli": "^6.1.2",
     "babel-eslint": "^10.0.1",
     "babel-plugin-module-resolver": "^3.2.0",
+    "codecov": "^3.2.0",
     "eslint": "^5.14.1",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
@@ -57,6 +60,8 @@
     "react-dom": "^16.8.0"
   },
   "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage/",
     "collectCoverageFrom": [
       "**/src/**"
     ],

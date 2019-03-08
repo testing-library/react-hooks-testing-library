@@ -1,5 +1,7 @@
 language: node_js
-node_js:
-- "10"
+node_js: "10"
+cache:
+  directories:
+    - ~/.npm
 script:
-- npm run test
+- npm run test:ci

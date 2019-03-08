@@ -5,6 +5,7 @@ Simple component wrapper and utilities for testing React hooks.
 ---
 
 [![Build Status](https://img.shields.io/travis/mpeyper/react-hooks-testing-library.svg?style=flat-square)](https://travis-ci.org/mpeyper/react-hooks-testing-library)
+[![codecov](https://img.shields.io/codecov/c/github/mpeyper/react-hooks-testing-library.svg?style=flat-square)](https://codecov.io/gh/mpeyper/react-hooks-testing-library)
 [![version](https://img.shields.io/npm/v/react-hooks-testing-library.svg?style=flat-square)](https://www.npmjs.com/package/react-hooks-testing-library)
 [![downloads](https://img.shields.io/npm/dm/react-hooks-testing-library.svg?style=flat-square)](http://www.npmtrends.com/react-hooks-testing-library)
 [![MIT License](https://img.shields.io/npm/l/react-hooks-testing-library.svg?style=flat-square)](https://github.com/mpeyper/react-hooks-testing-library/blob/master/LICENSE.md)
@@ -29,7 +30,7 @@ You don't really want to write a component solely for testing this hook and have
 
 The `react-hooks-testing-library` is built on top of the wonderful [`react-testing-library`](http://npm.im/react-testing-library) to create a simple test harness for React hooks that handles running them within the body of a function component, as well as providing various useful utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
 
-Using this library, you do not have to concern yourself with how to interact, construct, render or interact with the react component in order to test your hook. You can just use the hook directly and assert the results.
+Using this library, you do not have to concern yourself with how to construct, render or interact with the react component in order to test your hook. You can just use the hook directly and assert the results.
 
 ### When to use this library
 
