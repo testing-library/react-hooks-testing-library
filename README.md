@@ -1,7 +1,3 @@
-# react-hooks-testing-library
-
-Simple component wrapper and utilities for testing React hooks.
-
 <div align="center">
 <h1>react-hooks-testing-library</h1>
 
