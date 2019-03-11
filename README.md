@@ -2,7 +2,25 @@
 
 Simple component wrapper and utilities for testing React hooks.
 
----
+<div align="center">
+<h1>react-hooks-testing-library</h1>
+
+<a href="https://www.emojione.com/emoji/1f40f">
+  <img
+    height="80"
+    width="80"
+    alt="ram"
+    src="https://raw.githubusercontent.com/mpeyper/react-hooks-testing-library/master/other/ram.png"
+  />
+</a>
+
+<p>Simple component wrapper and utilities for testing React hooks.</p>
+
+</div>
+
+<hr />
+
+<!-- prettier-ignore-start -->
 
 [![Build Status](https://img.shields.io/travis/mpeyper/react-hooks-testing-library.svg?style=flat-square)](https://travis-ci.org/mpeyper/react-hooks-testing-library)
 [![codecov](https://img.shields.io/codecov/c/github/mpeyper/react-hooks-testing-library.svg?style=flat-square)](https://codecov.io/gh/mpeyper/react-hooks-testing-library)
