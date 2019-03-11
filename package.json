@@ -3,11 +3,11 @@
   "version": "0.3.6",
   "description": "Simple component wrapper for testing React hooks",
   "main": "lib/index.js",
-  "typings": "./index.d.ts",
+  "typings": "typings/index.d.ts",
   "files": [
     "lib",
     "src",
-    "index.d.ts",
+    "typings",
     "README.md",
     "LICENSE.md"
   ],
