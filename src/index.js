@@ -7,13 +7,22 @@ function TestHook({ callback, hookProps, children }) {
 }
 
 function renderHook(callback, { initialProps, ...options } = {}) {
-  const result = { current: null }
+  const result = {
+    current: null
+  }
   const hookProps = { current: initialProps }
+
+  const resolvers = []
+  const nextUpdate = () =>
+    new Promise((resolve) => {
+      resolvers.push(resolve)
+    })
 
   const toRender = () => (
     <TestHook callback={callback} hookProps={hookProps.current}>
       {(res) => {
         result.current = res
+        resolvers.splice(0, resolvers.length).forEach((resolve) => resolve())
       }}
     </TestHook>
   )
@@ -22,6 +31,7 @@ function renderHook(callback, { initialProps, ...options } = {}) {
 
   return {
     result,
+    nextUpdate,
     unmount,
     rerender: (newProps = hookProps.current) => {
       hookProps.current = newProps
