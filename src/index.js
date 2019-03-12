@@ -7,11 +7,8 @@ function TestHook({ callback, hookProps, children }) {
 }
 
 function renderHook(callback, { initialProps, ...options } = {}) {
-  const result = {
-    current: null
-  }
+  const result = { current: null }
   const hookProps = { current: initialProps }
-
   const resolvers = []
   const nextUpdate = () =>
     new Promise((resolve) => {
