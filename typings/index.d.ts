@@ -9,6 +9,7 @@ export function renderHook<P, R>(
   readonly result: {
     current: R
   }
+  readonly nextUpdate: () => Promise<void>
   readonly unmount: RenderResult['unmount']
   readonly rerender: (hookProps?: P) => void
 }
