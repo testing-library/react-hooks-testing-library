@@ -19,41 +19,41 @@ describe('async hook tests', () => {
   afterEach(cleanup)
 
   test('should wait for next update', async () => {
-    const { result, nextUpdate } = renderHook(() => useName())
+    const { result, waitForNextUpdate } = renderHook(() => useName())
 
     expect(result.current).toBe('nobody')
 
-    await nextUpdate()
+    await waitForNextUpdate()
 
     expect(result.current).toBe('Betty')
   })
 
   test('should wait for multiple updates', async () => {
-    const { result, nextUpdate, rerender } = renderHook(({ prefix }) => useName(prefix), {
+    const { result, waitForNextUpdate, rerender } = renderHook(({ prefix }) => useName(prefix), {
       initialProps: { prefix: 'Mrs.' }
     })
 
     expect(result.current).toBe('nobody')
 
-    await nextUpdate()
+    await waitForNextUpdate()
 
     expect(result.current).toBe('Mrs. Betty')
 
     rerender({ prefix: 'Ms.' })
 
-    await nextUpdate()
+    await waitForNextUpdate()
 
     expect(result.current).toBe('Ms. Betty')
   })
 
   test('should resolve all when updating', async () => {
-    const { result, nextUpdate } = renderHook(({ prefix }) => useName(prefix), {
+    const { result, waitForNextUpdate } = renderHook(({ prefix }) => useName(prefix), {
       initialProps: { prefix: 'Mrs.' }
     })
 
     expect(result.current).toBe('nobody')
 
-    await Promise.all([nextUpdate(), nextUpdate(), nextUpdate()])
+    await Promise.all([waitForNextUpdate(), waitForNextUpdate(), waitForNextUpdate()])
 
     expect(result.current).toBe('Mrs. Betty')
   })

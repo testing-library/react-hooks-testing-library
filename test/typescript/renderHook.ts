@@ -65,11 +65,11 @@ function checkTypesWhenHookReturnsVoid() {
   const _rerender: () => void = rerender
 }
 
-async function checkTypesForNextUpdate() {
-  const { nextUpdate } = renderHook(() => {})
+async function checkTypesForWaitForNextUpdate() {
+  const { waitForNextUpdate } = renderHook(() => {})
 
-  await nextUpdate()
+  await waitForNextUpdate()
 
   // check type
-  const _nextUpdate: () => Promise<void> = nextUpdate
+  const _waitForNextUpdate: () => Promise<void> = waitForNextUpdate
 }

@@ -10,7 +10,7 @@ function renderHook(callback, { initialProps, ...options } = {}) {
   const result = { current: null }
   const hookProps = { current: initialProps }
   const resolvers = []
-  const nextUpdate = () =>
+  const waitForNextUpdate = () =>
     new Promise((resolve) => {
       resolvers.push(resolve)
     })
@@ -28,7 +28,7 @@ function renderHook(callback, { initialProps, ...options } = {}) {
 
   return {
     result,
-    nextUpdate,
+    waitForNextUpdate,
     unmount,
     rerender: (newProps = hookProps.current) => {
       hookProps.current = newProps
