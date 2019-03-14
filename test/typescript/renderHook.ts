@@ -64,3 +64,12 @@ function checkTypesWhenHookReturnsVoid() {
   const _unmount: () => boolean = unmount
   const _rerender: () => void = rerender
 }
+
+async function checkTypesForWaitForNextUpdate() {
+  const { waitForNextUpdate } = renderHook(() => {})
+
+  await waitForNextUpdate()
+
+  // check type
+  const _waitForNextUpdate: () => Promise<void> = waitForNextUpdate
+}

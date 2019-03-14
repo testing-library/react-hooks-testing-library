@@ -4,6 +4,7 @@
     "@babel/react"
   ],
   "plugins": [
+    "@babel/plugin-transform-runtime",
     "@babel/proposal-object-rest-spread",
     ["module-resolver", { "alias": { "src": "./src" } }],
     "@babel/transform-modules-commonjs"
