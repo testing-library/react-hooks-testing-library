@@ -1,62 +1,45 @@
-import React, { useState, createContext, useContext, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import { renderHook, cleanup, act } from 'src'
 
 describe('custom hook tests', () => {
-  const themes = {
-    light: { primaryLight: '#FFFFFF', primaryDark: '#000000' },
-    dark: { primaryLight: '#000000', primaryDark: '#FFFFFF' }
-  }
+  function useCounter(initialCount = 0) {
+    const [count, setCount] = useState(initialCount)
 
-  const ThemesContext = createContext(themes)
+    const incrementBy = useCallback((n) => setCount(count + n), [count])
+    const decrementBy = useCallback((n) => setCount(count - n), [count])
 
-  const useTheme = (initialTheme) => {
-    const themes = useContext(ThemesContext)
-    const [theme, setTheme] = useState(initialTheme)
-    const toggleTheme = () => {
-      setTheme(theme === 'light' ? 'dark' : 'light')
-    }
-    return useMemo(() => ({ ...themes[theme], toggleTheme }), [theme])
+    return { count, incrementBy, decrementBy }
   }
 
   afterEach(cleanup)
 
-  test('should use theme', () => {
-    const { result } = renderHook(() => useTheme('light'))
+  test('should create counter', () => {
+    const { result } = renderHook(() => useCounter())
 
-    const theme = result.current
-
-    expect(theme.primaryLight).toBe('#FFFFFF')
-    expect(theme.primaryDark).toBe('#000000')
+    expect(result.current.count).toBe(0)
   })
 
-  test('should update theme', () => {
-    const { result } = renderHook(() => useTheme('light'))
+  test('should increment counter', () => {
+    const { result } = renderHook(() => useCounter())
 
-    const { toggleTheme } = result.current
+    act(() => result.current.incrementBy(1))
 
-    act(() => toggleTheme())
+    expect(result.current.count).toBe(1)
 
-    const theme = result.current
+    act(() => result.current.incrementBy(2))
 
-    expect(theme.primaryLight).toBe('#000000')
-    expect(theme.primaryDark).toBe('#FFFFFF')
+    expect(result.current.count).toBe(3)
   })
 
-  test('should use custom theme', () => {
-    const customThemes = {
-      light: { primaryLight: '#AABBCC', primaryDark: '#CCBBAA' },
-      dark: { primaryLight: '#CCBBAA', primaryDark: '#AABBCC' }
-    }
+  test('should decrement counter', () => {
+    const { result } = renderHook(() => useCounter())
 
-    const wrapper = ({ children }) => (
-      <ThemesContext.Provider value={customThemes}>{children}</ThemesContext.Provider>
-    )
+    act(() => result.current.decrementBy(1))
 
-    const { result } = renderHook(() => useTheme('light'), { wrapper })
+    expect(result.current.count).toBe(-1)
 
-    const theme = result.current
+    act(() => result.current.decrementBy(2))
 
-    expect(theme.primaryLight).toBe('#AABBCC')
-    expect(theme.primaryDark).toBe('#CCBBAA')
+    expect(result.current.count).toBe(-3)
   })
 })

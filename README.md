@@ -59,72 +59,56 @@ Using this library, you do not have to concern yourself with how to construct, r
 ## Example
 
 ```js
-// useTheme.js
-import { useState, createContext, useContext, useMemo } from 'react'
+// useCounter.js
+import { useState } from 'react'
 
-const themes = {
-  light: { primaryLight: '#FFFFFF', primaryDark: '#000000' },
-  dark: { primaryLight: '#000000', primaryDark: '#FFFFFF' }
+function useCounter(initialCount = 0) {
+  const [count, setCount] = useState(initialCount)
+
+  const incrementBy = useCallback((n) => setCount(count + n), [count])
+  const decrementBy = useCallback((n) => setCount(count - n), [count])
+
+  return { count, incrementBy, decrementBy }
 }
 
-const ThemesContext = createContext(themes)
-
-const useTheme = (initialTheme) => {
-  const themes = useContext(ThemesContext)
-  const [theme, setTheme] = useState(initialTheme)
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
-  }
-  return useMemo(() => ({ ...themes[theme], toggleTheme }), [theme])
-}
+export default useCounter
 ```
 
 ```js
-// useTheme.test.js
+// useCounter.test.js
 import { renderHook, cleanup, act } from 'react-hooks-testing-library'
+import useCounter from './useCounter'
 
-describe('custom hook tests', () => {
-  afterEach(cleanup)
+afterEach(cleanup)
 
-  test('should use theme', () => {
-    const { result } = renderHook(() => useTheme('light'))
+test('should create counter', () => {
+  const { result } = renderHook(() => useCounter())
 
-    const theme = result.current
+  expect(result.current.count).toBe(0)
+})
 
-    expect(theme.primaryLight).toBe('#FFFFFF')
-    expect(theme.primaryDark).toBe('#000000')
-  })
+test('should increment counter', () => {
+  const { result } = renderHook(() => useCounter())
 
-  test('should update theme', () => {
-    const { result } = renderHook(() => useTheme('light'))
+  act(() => result.current.incrementBy(1))
 
-    const { toggleTheme } = result.current
+  expect(result.current.count).toBe(1)
 
-    act(() => toggleTheme())
+  act(() => result.current.incrementBy(2))
 
-    const theme = result.current
+  expect(result.current.count).toBe(3)
+})
 
-    expect(theme.primaryLight).toBe('#000000')
-    expect(theme.primaryDark).toBe('#FFFFFF')
-  })
+test('should decrement counter', () => {
+  const { result } = renderHook(() => useCounter())
 
-  test('should use custom theme', () => {
-    const customThemes = {
-      light: { primaryLight: '#AABBCC', primaryDark: '#CCBBAA' },
-      dark: { primaryLight: '#CCBBAA', primaryDark: '#AABBCC' }
-    }
+  act(() => result.current.decrementBy(1))
 
-    const wrapper = ({ children }) => (
-      <ThemesContext.Provider value={customThemes}>{children}</ThemesContext.Provider>
-    )
+  expect(result.current.count).toBe(-1)
 
-    const { result } = renderHook(() => useTheme('light'), { wrapper })
+  act(() => result.current.decrementBy(2))
 
-    const theme = result.current
-
-    expect(theme.primaryLight).toBe('#AABBCC')
-    expect(theme.primaryDark).toBe('#CCBBAA')
-  })
+  expect(result.current.count).toBe(-3)
 })
 ```
 
