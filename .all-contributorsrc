@@ -43,6 +43,15 @@
         "ideas",
         "review"
       ]
+    },
+    {
+      "login": "marquesm91",
+      "name": "Matheus Marques",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7120471?v=4",
+      "profile": "https://twitter.com/matiosfm",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
