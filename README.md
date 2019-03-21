@@ -148,6 +148,22 @@ Unmounts any React trees that were mounted with [renderHook](#renderhookcallback
 
 This is the same [`cleanup` function](https://testing-library.com/docs/react-testing-library/api#cleanup) that is exported by `react-testing-library`.
 
+Optionally, it is possible to import `cleanup` in a global test file. Using that way, it isn't necessary to run `afterEach(cleanup)` on every test script.
+
+```js
+// in package.json
+"jest": {
+  // ...
+  // use this if Jest version < 24
+  "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
+  // or if Jest version >= 24
+  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"],
+}
+
+// src/setupTests.js
+import 'react-hooks-testing-library/cleanup-after-each';
+```
+
 ### `act(callback)`
 
 This is the same [`act` function](https://testing-library.com/docs/react-testing-library/api#act) that is exported by `react-testing-library`.
