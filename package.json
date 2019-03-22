@@ -8,6 +8,7 @@
     "lib",
     "src",
     "typings",
+    "cleanup-after-each.js",
     "README.md",
     "LICENSE.md"
   ],
