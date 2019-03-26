@@ -52,6 +52,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dhruv-m-patel",
+      "name": "Dhruv Patel",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/19353311?v=4",
+      "profile": "https://ca.linkedin.com/in/dhruvmpatel",
+      "contributions": [
+        "bug",
+        "review"
+      ]
     }
   ]
 }
