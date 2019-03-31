@@ -138,6 +138,7 @@ Renders a test component that will call the provided `callback`, including any h
 
 - `result` (`object`)
   - `current` (`any`) - the return value of the `callback` function
+  - `error` (`Error`) - the error that was thrown if the `callback` function threw an error during rendering
 - `waitForNextUpdate` (`function`) - returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as the result of a asynchronous action.
 - `rerender` (`function([newProps])`) - function to rerender the test component including any hooks called in the `callback` function. If `newProps` are passed, the will replace the `initialProps` passed the the `callback` function for future renders.
 - `unmount` (`function()`) - function to unmount the test component, commonly used to trigger cleanup effects for `useEffect` hooks.

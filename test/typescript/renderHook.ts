@@ -65,6 +65,15 @@ function checkTypesWhenHookReturnsVoid() {
   const _rerender: () => void = rerender
 }
 
+function checkTypesWithError() {
+  const { result } = renderHook(() => useCounter())
+
+  // check types
+  const _result: {
+    error: Error
+  } = result
+}
+
 async function checkTypesForWaitForNextUpdate() {
   const { waitForNextUpdate } = renderHook(() => {})
 

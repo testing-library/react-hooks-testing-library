@@ -7,7 +7,8 @@ export function renderHook<P, R>(
   } & RenderOptions
 ): {
   readonly result: {
-    current: R
+    readonly current: R,
+    readonly error: Error
   }
   readonly waitForNextUpdate: () => Promise<void>
   readonly unmount: RenderResult['unmount']

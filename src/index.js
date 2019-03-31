@@ -2,25 +2,51 @@ import React from 'react'
 import { render, cleanup, act } from 'react-testing-library'
 
 function TestHook({ callback, hookProps, children }) {
-  children(callback(hookProps))
+  try {
+    children(callback(hookProps))
+  } catch (e) {
+    children(undefined, e)
+  }
   return null
 }
 
-function renderHook(callback, { initialProps, ...options } = {}) {
-  const result = { current: null }
-  const hookProps = { current: initialProps }
+function resultContainer() {
+  let value = null
+  let error = null
   const resolvers = []
-  const waitForNextUpdate = () =>
-    new Promise((resolve) => {
-      resolvers.push(resolve)
-    })
+
+  const result = {
+    get current() {
+      if (error) {
+        throw error
+      }
+      return value
+    },
+    get error() {
+      return error
+    }
+  }
+
+  return {
+    result,
+    addResolver: (resolver) => {
+      resolvers.push(resolver)
+    },
+    updateResult: (val, err) => {
+      value = val
+      error = err
+      resolvers.splice(0, resolvers.length).forEach((resolve) => resolve())
+    }
+  }
+}
+
+function renderHook(callback, { initialProps, ...options } = {}) {
+  const { result, updateResult, addResolver } = resultContainer()
+  const hookProps = { current: initialProps }
 
   const toRender = () => (
     <TestHook callback={callback} hookProps={hookProps.current}>
-      {(res) => {
-        result.current = res
-        resolvers.splice(0, resolvers.length).forEach((resolve) => resolve())
-      }}
+      {updateResult}
     </TestHook>
   )
 
@@ -28,12 +54,12 @@ function renderHook(callback, { initialProps, ...options } = {}) {
 
   return {
     result,
-    waitForNextUpdate,
-    unmount,
+    waitForNextUpdate: () => new Promise((resolve) => addResolver(resolve)),
     rerender: (newProps = hookProps.current) => {
       hookProps.current = newProps
       rerenderComponent(toRender())
-    }
+    },
+    unmount
   }
 }
 
