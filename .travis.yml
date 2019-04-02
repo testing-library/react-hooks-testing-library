@@ -3,5 +3,8 @@ node_js: "10"
 cache:
   directories:
     - ~/.npm
+branches:
+  except:
+  - /^renovate\/.+/
 script:
 - npm run test:ci
