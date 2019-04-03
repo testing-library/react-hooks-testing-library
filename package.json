@@ -43,7 +43,7 @@
     "all-contributors-cli": "6.2.0",
     "babel-eslint": "10.0.1",
     "babel-plugin-module-resolver": "3.2.0",
-    "codecov": "3.2.0",
+    "codecov": "3.3.0",
     "eslint": "5.16.0",
     "eslint-config-prettier": "4.1.0",
     "eslint-plugin-prettier": "3.0.1",
