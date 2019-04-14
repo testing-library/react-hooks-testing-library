@@ -1,20 +1,19 @@
-import { cleanup, act, RenderOptions, RenderResult } from 'react-testing-library'
-
 export function renderHook<P, R>(
   callback: (props: P) => R,
   options?: {
-    initialProps?: P
-  } & RenderOptions
+    initialProps?: P,
+    wrapper?: React.ComponentType
+  }
 ): {
   readonly result: {
     readonly current: R,
     readonly error: Error
   }
   readonly waitForNextUpdate: () => Promise<void>
-  readonly unmount: RenderResult['unmount']
+  readonly unmount: () => boolean
   readonly rerender: (hookProps?: P) => void
 }
 
 export const testHook: typeof renderHook
 
-export { cleanup, act }
+export function act(callback: () => void): void

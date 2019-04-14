@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { renderHook, cleanup, act } from 'src'
+import { renderHook, act } from 'src'
 
 describe('custom hook tests', () => {
   function useCounter() {
@@ -10,8 +10,6 @@ describe('custom hook tests', () => {
 
     return { count, increment, decrement }
   }
-
-  afterEach(cleanup)
 
   test('should increment counter', () => {
     const { result } = renderHook(() => useCounter())

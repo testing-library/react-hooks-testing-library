@@ -1,1 +1,0 @@
-afterEach(require('./lib').cleanup)

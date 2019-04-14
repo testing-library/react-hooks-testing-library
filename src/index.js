@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup, act } from 'react-testing-library'
+import { create, act } from 'react-test-renderer'
 
 function TestHook({ callback, hookProps, children }) {
   try {
@@ -40,24 +40,34 @@ function resultContainer() {
   }
 }
 
-function renderHook(callback, { initialProps, ...options } = {}) {
+function renderHook(callback, { initialProps, wrapper } = {}) {
   const { result, updateResult, addResolver } = resultContainer()
   const hookProps = { current: initialProps }
 
-  const toRender = () => (
-    <TestHook callback={callback} hookProps={hookProps.current}>
-      {updateResult}
-    </TestHook>
-  )
+  const wrapUiIfNeeded = (innerElement) =>
+    wrapper ? React.createElement(wrapper, null, innerElement) : innerElement
 
-  const { unmount, rerender: rerenderComponent } = render(toRender(), options)
+  const toRender = () =>
+    wrapUiIfNeeded(
+      <TestHook callback={callback} hookProps={hookProps.current}>
+        {updateResult}
+      </TestHook>
+    )
+
+  let testRenderer
+  act(() => {
+    testRenderer = create(toRender())
+  })
+  const { unmount, update } = testRenderer
 
   return {
     result,
     waitForNextUpdate: () => new Promise((resolve) => addResolver(resolve)),
     rerender: (newProps = hookProps.current) => {
       hookProps.current = newProps
-      rerenderComponent(toRender())
+      act(() => {
+        update(toRender())
+      })
     },
     unmount
   }
@@ -70,4 +80,4 @@ function testHook(...args) {
   return renderHook(...args)
 }
 
-export { renderHook, cleanup, act, testHook }
+export { renderHook, act, testHook }

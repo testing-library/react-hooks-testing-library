@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { testHook, cleanup, act } from 'src'
+import { testHook, act } from 'src'
 
 describe('testHook tests', () => {
-  afterEach(cleanup)
-
   test('testHook calls the callback', () => {
     const spy = jest.fn()
     testHook(spy)
