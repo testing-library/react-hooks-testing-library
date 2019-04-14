@@ -69,7 +69,11 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
         update(toRender())
       })
     },
-    unmount
+    unmount: () => {
+      act(() => {
+        unmount()
+      })
+    }
   }
 }
 

@@ -76,10 +76,8 @@ export default useCounter
 
 ```js
 // useCounter.test.js
-import { renderHook, cleanup, act } from 'react-hooks-testing-library'
+import { renderHook, act } from 'react-hooks-testing-library'
 import useCounter from './useCounter'
-
-afterEach(cleanup)
 
 test('should increment counter', () => {
   const { result } = renderHook(() => useCounter())
@@ -117,8 +115,9 @@ Renders a test component that will call the provided `callback`, including any h
 #### Arguments
 
 - `callback` (`function()`) - function to call each render. This function should call one or more hooks for testing.
-- `options` (`object`) - accepts the [same options as `react-testing-library`'s `render` function](https://testing-library.com/docs/react-testing-library/api#render-options), as well as:
+- `options` (`object`) - accept the following settings:
   - `initialProps` (`object`) - the initial values to pass to the `callback` function
+  - `wrapper` (`component`) - pass a React Component as the wrapper option to have it rendered around the inner element. This is most useful for creating reusable custom render functions for common data providers
 
 #### Returns
 
@@ -129,31 +128,9 @@ Renders a test component that will call the provided `callback`, including any h
 - `rerender` (`function([newProps])`) - function to rerender the test component including any hooks called in the `callback` function. If `newProps` are passed, the will replace the `initialProps` passed the the `callback` function for future renders.
 - `unmount` (`function()`) - function to unmount the test component, commonly used to trigger cleanup effects for `useEffect` hooks.
 
-### `cleanup()`
-
-Unmounts any React trees that were mounted with [renderHook](#renderhookcallback-options).
-
-This is the same [`cleanup` function](https://testing-library.com/docs/react-testing-library/api#cleanup) that is exported by `react-testing-library`.
-
-Optionally, it is possible to import `cleanup` in a global test file. Using that way, it isn't necessary to run `afterEach(cleanup)` on every test script.
-
-```js
-// in package.json
-"jest": {
-  // ...
-  // use this if Jest version < 24
-  "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
-  // or if Jest version >= 24
-  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"],
-}
-
-// src/setupTests.js
-import 'react-hooks-testing-library/cleanup-after-each';
-```
-
 ### `act(callback)`
 
-This is the same [`act` function](https://testing-library.com/docs/react-testing-library/api#act) that is exported by `react-testing-library`.
+This is the same [`act` function](https://reactjs.org/docs/hooks-faq.html#how-to-test-components-that-use-hooks) that is exported by `react-test-renderer`.
 
 ## Contributors
 
