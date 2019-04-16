@@ -1,6 +1,6 @@
 {
   "name": "react-hooks-testing-library",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Simple component wrapper for testing React hooks",
   "main": "lib/index.js",
   "typings": "typings/index.d.ts",
