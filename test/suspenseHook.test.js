@@ -1,4 +1,4 @@
-import { renderHook, cleanup } from 'src'
+import { renderHook } from 'src'
 
 describe('suspense hook tests', () => {
   const cache = {}
@@ -30,8 +30,6 @@ describe('suspense hook tests', () => {
   beforeEach(() => {
     delete cache.value
   })
-
-  afterEach(cleanup)
 
   test('should allow rendering to be suspended', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useFetchName(true))
