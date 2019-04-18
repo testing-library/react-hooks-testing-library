@@ -55,7 +55,7 @@
     "prettier-eslint-cli": "4.7.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "typescript": "3.4.3",
+    "typescript": "3.4.4",
     "typings-tester": "0.3.2"
   },
   "peerDependencies": {
