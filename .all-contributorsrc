@@ -62,6 +62,17 @@
         "bug",
         "review"
       ]
+    },
+    {
+      "login": "sgrishchenko",
+      "name": "Sergei Grishchenko",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/15995890?v=4",
+      "profile": "https://github.com/sgrishchenko",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas"
+      ]
     }
   ]
 }
