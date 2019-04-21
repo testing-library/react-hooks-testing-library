@@ -1,16 +1,23 @@
+---
+name: Getting Started
+route: '/'
+---
+
 <div align="center">
-<h1>react-hooks-testing-library</h1>
+  <h1>react-hooks-testing-library</h1>
 
-<a href="https://www.emojione.com/emoji/1f40f">
-  <img
-    height="80"
-    width="80"
-    alt="ram"
-    src="https://raw.githubusercontent.com/mpeyper/react-hooks-testing-library/master/other/ram.png"
-  />
-</a>
+  <a href="https://www.emojione.com/emoji/1f40f">
+    <img
+      height="80"
+      width="80"
+      alt="ram"
+      src="https://raw.githubusercontent.com/mpeyper/react-hooks-testing-library/master/other/ram.png"
+    />
+  </a>
 
-<p>Simple component wrapper and utilities for testing React hooks.</p>
+  <p>
+    Simple component wrapper and utilities for testing React hooks.
+  </p>
 
 </div>
 
@@ -106,33 +113,7 @@ npm install --save-dev react-hooks-testing-library
 
 ## API
 
-### `renderHook(callback[, options])`
-
-Renders a test component that will call the provided `callback`, including any hooks it calls, every time it renders.
-
-> _Note: `testHook` has been renamed to `renderHook`. `testHook` will continue work in the current version with a deprecation warning, but will be removed in a future version._
->
-> **_You should update any usages of `testHook` to use `renderHook` instead._**
-
-#### Arguments
-
-- `callback` (`function()`) - function to call each render. This function should call one or more hooks for testing.
-- `options` (`object`) - accept the following settings:
-  - `initialProps` (`object`) - the initial values to pass to the `callback` function
-  - `wrapper` (`component`) - pass a React Component as the wrapper option to have it rendered around the inner element. This is most useful for creating reusable custom render functions for common data providers
-
-#### Returns
-
-- `result` (`object`)
-  - `current` (`any`) - the return value of the `callback` function
-  - `error` (`Error`) - the error that was thrown if the `callback` function threw an error during rendering
-- `waitForNextUpdate` (`function`) - returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as the result of a asynchronous action.
-- `rerender` (`function([newProps])`) - function to rerender the test component including any hooks called in the `callback` function. If `newProps` are passed, the will replace the `initialProps` passed the the `callback` function for future renders.
-- `unmount` (`function()`) - function to unmount the test component, commonly used to trigger cleanup effects for `useEffect` hooks.
-
-### `act(callback)`
-
-This is the same [`act` function](https://reactjs.org/docs/hooks-faq.html#how-to-test-components-that-use-hooks) that is exported by `react-test-renderer`.
+See the [API documentation](/docs/reference/api.mdx)
 
 ## Contributors
 

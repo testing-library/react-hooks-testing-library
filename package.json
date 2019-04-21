@@ -20,10 +20,13 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "babel --out-dir lib src",
-    "format": "prettier-eslint --write \"**/*.{js,json,md}\"",
+    "format": "prettier-eslint --write \"**/*.{js,json,md,mdx}\"",
     "coverage": "codecov",
     "test": "jest",
     "test:ci": "npm run test && npm run coverage",
+    "docs:dev": "docz dev",
+    "docs:build": "docz build",
+    "docs:publish": "docz build && git add --all site && git commit -m 'Publishing docs [ci skip]' && git push",
     "contributors:add": "all-contributors add"
   },
   "dependencies": {
@@ -42,6 +45,8 @@
     "babel-eslint": "10.0.1",
     "babel-plugin-module-resolver": "3.2.0",
     "codecov": "3.3.0",
+    "docz": "^1.0.4",
+    "docz-theme-default": "^1.0.4",
     "eslint": "5.16.0",
     "eslint-config-prettier": "4.1.0",
     "eslint-plugin-prettier": "3.0.1",

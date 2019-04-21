@@ -1,0 +1,15 @@
+{
+  "vendors.js": "/static/js/vendors.f5541963.js",
+  "vendors.js.map": "/static/js/vendors.d3b2c5d5b76f34507b97.js.map",
+  "app.js": "/static/js/app.d3b2c5d5b76f34507b97.js",
+  "app.js.map": "/static/js/app.d3b2c5d5b76f34507b97.js.map",
+  "docs-reference-api.js": "/static/js/docs-reference-api.08b31792.js",
+  "docs-reference-api.js.map": "/static/js/docs-reference-api.d3b2c5d5b76f34507b97.js.map",
+  "docs-usage-advanced-hooks.js": "/static/js/docs-usage-advanced-hooks.c946c790.js",
+  "docs-usage-advanced-hooks.js.map": "/static/js/docs-usage-advanced-hooks.d3b2c5d5b76f34507b97.js.map",
+  "docs-usage-basic-hooks.js": "/static/js/docs-usage-basic-hooks.d55c5579.js",
+  "docs-usage-basic-hooks.js.map": "/static/js/docs-usage-basic-hooks.d3b2c5d5b76f34507b97.js.map",
+  "readme.js": "/static/js/readme.dbf478df.js",
+  "readme.js.map": "/static/js/readme.d3b2c5d5b76f34507b97.js.map",
+  "index.html": "/index.html"
+}
