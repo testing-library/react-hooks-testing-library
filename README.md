@@ -42,7 +42,9 @@ You don't really want to write a component solely for testing this hook and have
 
 ## The solution
 
-The `react-hooks-testing-library` is built on top of the wonderful [`react-testing-library`](http://npm.im/react-testing-library) to create a simple test harness for React hooks that handles running them within the body of a function component, as well as providing various useful utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
+The `react-hooks-testing-library` allows you to create a simple test harness for React hooks that handles running them within the body of a function component, as well as providing various useful utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
+
+Similarly to [`react-testing-library`](http://npm.im/react-testing-library), which this library draws much of it's inspiration from, it aims to provide a testing experience as close as possible to natively using your hook from within a real component.
 
 Using this library, you do not have to concern yourself with how to construct, render or interact with the react component in order to test your hook. You can just use the hook directly and assert the results.
 
@@ -76,10 +78,8 @@ export default useCounter
 
 ```js
 // useCounter.test.js
-import { renderHook, cleanup, act } from 'react-hooks-testing-library'
+import { renderHook, act } from 'react-hooks-testing-library'
 import useCounter from './useCounter'
-
-afterEach(cleanup)
 
 test('should increment counter', () => {
   const { result } = renderHook(() => useCounter())
@@ -117,8 +117,9 @@ Renders a test component that will call the provided `callback`, including any h
 #### Arguments
 
 - `callback` (`function()`) - function to call each render. This function should call one or more hooks for testing.
-- `options` (`object`) - accepts the [same options as `react-testing-library`'s `render` function](https://testing-library.com/docs/react-testing-library/api#render-options), as well as:
+- `options` (`object`) - accept the following settings:
   - `initialProps` (`object`) - the initial values to pass to the `callback` function
+  - `wrapper` (`component`) - pass a React Component as the wrapper option to have it rendered around the inner element. This is most useful for creating reusable custom render functions for common data providers
 
 #### Returns
 
@@ -129,31 +130,9 @@ Renders a test component that will call the provided `callback`, including any h
 - `rerender` (`function([newProps])`) - function to rerender the test component including any hooks called in the `callback` function. If `newProps` are passed, the will replace the `initialProps` passed the the `callback` function for future renders.
 - `unmount` (`function()`) - function to unmount the test component, commonly used to trigger cleanup effects for `useEffect` hooks.
 
-### `cleanup()`
-
-Unmounts any React trees that were mounted with [renderHook](#renderhookcallback-options).
-
-This is the same [`cleanup` function](https://testing-library.com/docs/react-testing-library/api#cleanup) that is exported by `react-testing-library`.
-
-Optionally, it is possible to import `cleanup` in a global test file. Using that way, it isn't necessary to run `afterEach(cleanup)` on every test script.
-
-```js
-// in package.json
-"jest": {
-  // ...
-  // use this if Jest version < 24
-  "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
-  // or if Jest version >= 24
-  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"],
-}
-
-// src/setupTests.js
-import 'react-hooks-testing-library/cleanup-after-each';
-```
-
 ### `act(callback)`
 
-This is the same [`act` function](https://testing-library.com/docs/react-testing-library/api#act) that is exported by `react-testing-library`.
+This is the same [`act` function](https://reactjs.org/docs/hooks-faq.html#how-to-test-components-that-use-hooks) that is exported by `react-test-renderer`.
 
 ## Contributors
 
@@ -161,7 +140,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://github.com/mpeyper"><img src="https://avatars0.githubusercontent.com/u/23029903?v=4" width="100px;" alt="Michael Peyper"/><br /><sub><b>Michael Peyper</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper" title="Code">💻</a> <a href="#design-mpeyper" title="Design">🎨</a> <a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper" title="Documentation">📖</a> <a href="#ideas-mpeyper" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-mpeyper" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#platform-mpeyper" title="Packaging/porting to new platform">📦</a> <a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper" title="Tests">⚠️</a> <a href="#tool-mpeyper" title="Tools">🔧</a></td><td align="center"><a href="https://github.com/otofu-square"><img src="https://avatars0.githubusercontent.com/u/10118235?v=4" width="100px;" alt="otofu-square"/><br /><sub><b>otofu-square</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=otofu-square" title="Code">💻</a></td><td align="center"><a href="https://github.com/ab18556"><img src="https://avatars2.githubusercontent.com/u/988696?v=4" width="100px;" alt="Patrick P. Henley"/><br /><sub><b>Patrick P. Henley</b></sub></a><br /><a href="#ideas-ab18556" title="Ideas, Planning, & Feedback">🤔</a> <a href="#review-ab18556" title="Reviewed Pull Requests">👀</a></td><td align="center"><a href="https://twitter.com/matiosfm"><img src="https://avatars3.githubusercontent.com/u/7120471?v=4" width="100px;" alt="Matheus Marques"/><br /><sub><b>Matheus Marques</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=marquesm91" title="Code">💻</a></td><td align="center"><a href="https://ca.linkedin.com/in/dhruvmpatel"><img src="https://avatars1.githubusercontent.com/u/19353311?v=4" width="100px;" alt="Dhruv Patel"/><br /><sub><b>Dhruv Patel</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/issues?q=author%3Adhruv-m-patel" title="Bug reports">🐛</a> <a href="#review-dhruv-m-patel" title="Reviewed Pull Requests">👀</a></td><td align="center"><a href="https://ntucker.true.io"><img src="https://avatars0.githubusercontent.com/u/866147?v=4" width="100px;" alt="Nathaniel Tucker"/><br /><sub><b>Nathaniel Tucker</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/issues?q=author%3Antucker" title="Bug reports">🐛</a> <a href="#review-ntucker" title="Reviewed Pull Requests">👀</a></td></tr></table>
+<table><tr><td align="center"><a href="https://github.com/mpeyper"><img src="https://avatars0.githubusercontent.com/u/23029903?v=4" width="100px;" alt="Michael Peyper"/><br /><sub><b>Michael Peyper</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper" title="Code">💻</a> <a href="#design-mpeyper" title="Design">🎨</a> <a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper" title="Documentation">📖</a> <a href="#ideas-mpeyper" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-mpeyper" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#platform-mpeyper" title="Packaging/porting to new platform">📦</a> <a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=mpeyper" title="Tests">⚠️</a> <a href="#tool-mpeyper" title="Tools">🔧</a></td><td align="center"><a href="https://github.com/otofu-square"><img src="https://avatars0.githubusercontent.com/u/10118235?v=4" width="100px;" alt="otofu-square"/><br /><sub><b>otofu-square</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=otofu-square" title="Code">💻</a></td><td align="center"><a href="https://github.com/ab18556"><img src="https://avatars2.githubusercontent.com/u/988696?v=4" width="100px;" alt="Patrick P. Henley"/><br /><sub><b>Patrick P. Henley</b></sub></a><br /><a href="#ideas-ab18556" title="Ideas, Planning, & Feedback">🤔</a> <a href="#review-ab18556" title="Reviewed Pull Requests">👀</a></td><td align="center"><a href="https://twitter.com/matiosfm"><img src="https://avatars3.githubusercontent.com/u/7120471?v=4" width="100px;" alt="Matheus Marques"/><br /><sub><b>Matheus Marques</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=marquesm91" title="Code">💻</a></td><td align="center"><a href="https://ca.linkedin.com/in/dhruvmpatel"><img src="https://avatars1.githubusercontent.com/u/19353311?v=4" width="100px;" alt="Dhruv Patel"/><br /><sub><b>Dhruv Patel</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/issues?q=author%3Adhruv-m-patel" title="Bug reports">🐛</a> <a href="#review-dhruv-m-patel" title="Reviewed Pull Requests">👀</a></td><td align="center"><a href="https://ntucker.true.io"><img src="https://avatars0.githubusercontent.com/u/866147?v=4" width="100px;" alt="Nathaniel Tucker"/><br /><sub><b>Nathaniel Tucker</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/issues?q=author%3Antucker" title="Bug reports">🐛</a> <a href="#review-ntucker" title="Reviewed Pull Requests">👀</a></td><td align="center"><a href="https://github.com/sgrishchenko"><img src="https://avatars3.githubusercontent.com/u/15995890?v=4" width="100px;" alt="Sergei Grishchenko"/><br /><sub><b>Sergei Grishchenko</b></sub></a><br /><a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=sgrishchenko" title="Code">💻</a> <a href="https://github.com/mpeyper/react-hooks-testing-library/commits?author=sgrishchenko" title="Documentation">📖</a> <a href="#ideas-sgrishchenko" title="Ideas, Planning, & Feedback">🤔</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

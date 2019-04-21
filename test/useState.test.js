@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import { renderHook, cleanup, act } from 'src'
+import { renderHook, act } from 'src'
 
 describe('useState tests', () => {
-  afterEach(cleanup)
-
   test('should use setState value', () => {
     const { result } = renderHook(() => useState('foo'))
 

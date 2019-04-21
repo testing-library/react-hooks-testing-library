@@ -8,7 +8,6 @@
     "lib",
     "src",
     "typings",
-    "cleanup-after-each.js",
     "README.md",
     "LICENSE.md"
   ],
@@ -28,8 +27,7 @@
     "contributors:add": "all-contributors add"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.2",
-    "react-testing-library": "^6.0.3"
+    "@babel/runtime": "^7.4.2"
   },
   "devDependencies": {
     "@babel/cli": "7.4.3",
@@ -54,13 +52,13 @@
     "prettier-eslint": "8.8.2",
     "prettier-eslint-cli": "4.7.1",
     "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "react-test-renderer": "16.8.6",
     "typescript": "3.4.4",
     "typings-tester": "0.3.2"
   },
   "peerDependencies": {
     "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react-test-renderer": "^16.8.0"
   },
   "jest": {
     "collectCoverage": true,

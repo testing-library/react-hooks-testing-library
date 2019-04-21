@@ -1,9 +1,7 @@
 import React, { createContext, useContext } from 'react'
-import { renderHook, cleanup } from 'src'
+import { renderHook } from 'src'
 
 describe('useContext tests', () => {
-  afterEach(cleanup)
-
   test('should get default value from context', () => {
     const TestContext = createContext('foo')
 

@@ -1,9 +1,7 @@
 import { useRef, useImperativeHandle } from 'react'
-import { renderHook, cleanup } from 'src'
+import { renderHook } from 'src'
 
 describe('useHook tests', () => {
-  afterEach(cleanup)
-
   test('should handle useRef hook', () => {
     const { result } = renderHook(() => useRef())
 

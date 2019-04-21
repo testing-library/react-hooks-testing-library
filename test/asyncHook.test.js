@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { renderHook, cleanup } from 'src'
+import { renderHook } from 'src'
 
 describe('async hook tests', () => {
   const getSomeName = () => Promise.resolve('Betty')
@@ -15,8 +15,6 @@ describe('async hook tests', () => {
 
     return name
   }
-
-  afterEach(cleanup)
 
   test('should wait for next update', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useName())

@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { render, cleanup, act } from 'react-testing-library'
+import { create, act } from 'react-test-renderer'
 
 function TestHook({ callback, hookProps, children }) {
   children(callback(hookProps))
@@ -68,30 +68,44 @@ function resultContainer() {
   }
 }
 
-function renderHook(callback, { initialProps, ...options } = {}) {
+function renderHook(callback, { initialProps, wrapper } = {}) {
   const { result, setValue, setError, addResolver } = resultContainer()
   const hookProps = { current: initialProps }
 
-  const toRender = () => (
-    <ErrorBoundary onError={setError}>
-      <Suspense fallback={<Fallback />}>
-        <TestHook callback={callback} hookProps={hookProps.current}>
-          {setValue}
-        </TestHook>
-      </Suspense>
-    </ErrorBoundary>
-  )
+  const wrapUiIfNeeded = (innerElement) =>
+    wrapper ? React.createElement(wrapper, null, innerElement) : innerElement
 
-  const { unmount, rerender: rerenderComponent } = render(toRender(), options)
+  const toRender = () =>
+    wrapUiIfNeeded(
+      <ErrorBoundary onError={setError}>
+        <Suspense fallback={<Fallback />}>
+          <TestHook callback={callback} hookProps={hookProps.current}>
+            {setValue}
+          </TestHook>
+        </Suspense>
+      </ErrorBoundary>
+    )
+
+  let testRenderer
+  act(() => {
+    testRenderer = create(toRender())
+  })
+  const { unmount, update } = testRenderer
 
   return {
     result,
     waitForNextUpdate: () => new Promise((resolve) => addResolver(resolve)),
     rerender: (newProps = hookProps.current) => {
       hookProps.current = newProps
-      rerenderComponent(toRender())
+      act(() => {
+        update(toRender())
+      })
     },
-    unmount
+    unmount: () => {
+      act(() => {
+        unmount()
+      })
+    }
   }
 }
 
@@ -102,4 +116,4 @@ function testHook(...args) {
   return renderHook(...args)
 }
 
-export { renderHook, cleanup, act, testHook }
+export { renderHook, act, testHook }

@@ -1,9 +1,7 @@
 import { useEffect, useLayoutEffect } from 'react'
-import { renderHook, cleanup } from 'src'
+import { renderHook } from 'src'
 
 describe('useEffect tests', () => {
-  afterEach(cleanup)
-
   test('should handle useEffect hook', () => {
     const sideEffect = { [1]: false, [2]: false }
 
