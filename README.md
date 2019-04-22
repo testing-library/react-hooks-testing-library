@@ -1,8 +1,3 @@
----
-name: Getting Started
-route: '/'
----
-
 <div align="center">
   <h1>react-hooks-testing-library</h1>
 
@@ -15,10 +10,11 @@ route: '/'
     />
   </a>
 
-  <p>
-    Simple component wrapper and utilities for testing React hooks.
-  </p>
+  <p>Simple component wrapper and utilities for testing React hooks.</p>
 
+  <br />
+  <a href="https://react-hooks-testing-library.netlify.com/"><strong>Read The Docs</strong></a>
+  <br />
 </div>
 
 <hr />
@@ -50,42 +46,41 @@ You don't really want to write a component solely for testing this hook and have
 
 ## The solution
 
-The `react-hooks-testing-library` allows you to create a simple test harness for React hooks that handles running them within the body of a function component, as well as providing various useful utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
-
-Similarly to [`react-testing-library`](http://npm.im/react-testing-library), which this library draws much of it's inspiration from, it aims to provide a testing experience as close as possible to natively using your hook from within a real component.
+The `react-hooks-testing-library` allows you to create a simple test harness for React hooks that handles running them within the body of a function component, as well as providing various useful utility functions for updating the inputs and retrieving the outputs of your amazing custom hook. This library aims to provide a testing experience as close as possible to natively using your hook from within a real component.
 
 Using this library, you do not have to concern yourself with how to construct, render or interact with the react component in order to test your hook. You can just use the hook directly and assert the results.
 
-### When to use this library
+## When to use this library
 
 1. You're writing a library with one or more custom hooks that are not directly tied a component
 2. You have a complex hook that is difficult to test through component interactions
 
-### When not to use this library
+## When not to use this library
 
 1. Your hook is defined along side a component and is only used there
 2. Your hook is easy to test by just testing the components using it
 
 ## Example
 
+### `useCounter.js`
+
 ```js
-// useCounter.js
 import { useState, useCallback } from 'react'
 
 function useCounter() {
   const [count, setCount] = useState(0)
 
   const increment = useCallback(() => setCount((x) => x + 1), [])
-  const decrement = useCallback(() => setCount((x) => x - 1), [])
 
-  return { count, increment, decrement }
+  return { count, increment }
 }
 
 export default useCounter
 ```
 
+### `useCounter.test.js`
+
 ```js
-// useCounter.test.js
 import { renderHook, act } from 'react-hooks-testing-library'
 import useCounter from './useCounter'
 
@@ -95,14 +90,6 @@ test('should increment counter', () => {
   act(() => result.current.increment())
 
   expect(result.current.count).toBe(1)
-})
-
-test('should decrement counter', () => {
-  const { result } = renderHook(() => useCounter())
-
-  act(() => result.current.decrement())
-
-  expect(result.current.count).toBe(-1)
 })
 ```
 
@@ -118,7 +105,7 @@ See the [API documentation](/docs/reference/api.mdx)
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
@@ -126,7 +113,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://allcontributors.org/) specification. Contributions of any kind welcome!
 
 ## Issues
 
