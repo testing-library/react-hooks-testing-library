@@ -83,6 +83,16 @@
         "doc",
         "ideas"
       ]
+    },
+    {
+      "login": "josepot",
+      "name": "Josep M Sobrepere",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/8620144?v=4",
+      "profile": "https://github.com/josepot",
+      "contributions": [
+        "doc"
+      ]
     }
-  ]
+  ],
+  "commitConvention": "none"
 }
