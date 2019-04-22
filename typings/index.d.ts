@@ -1,18 +1,26 @@
-export function renderHook<P, R>(
-  callback: (props: P) => R,
-  options?: {
-    initialProps?: P,
-    wrapper?: React.ComponentType
-  }
-): {
-  readonly result: {
-    readonly current: R,
-    readonly error: Error
-  }
+import * as React from 'react'
+
+interface RenderHookOptions<P> {
+  initialProps?: P
+  wrapper?: React.ComponentType
+}
+
+interface HookResult<R> {
+  readonly current: R
+  readonly error: Error
+}
+
+interface RenderHookResult<P, R> {
+  readonly result: HookResult<R>
   readonly waitForNextUpdate: () => Promise<void>
   readonly unmount: () => boolean
-  readonly rerender: (hookProps?: P) => void
+  readonly rerender: (newProps?: P) => void
 }
+
+export function renderHook<P, R>(
+  callback: (props: P) => R,
+  options?: RenderHookOptions<P>
+): RenderHookResult<P, R>
 
 export const testHook: typeof renderHook
 
