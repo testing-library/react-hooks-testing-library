@@ -101,7 +101,7 @@ npm install --save-dev react-hooks-testing-library
 
 ## API
 
-See the [API documentation](/docs/reference/api.mdx)
+See the [API documentation](https://react-hooks-testing-library.netlify.com/reference/api).
 
 ## Contributors
 
