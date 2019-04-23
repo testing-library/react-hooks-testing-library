@@ -30,7 +30,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/mpeyper/react-hooks-testing-library/blob/master/CODE_OF_CONDUCT.md)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9a8f27a5-df38-4910-a248-4908b1ba29a7/deploy-status)](https://app.netlify.com/sites/dazzling-hodgkin-d143cd/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9a8f27a5-df38-4910-a248-4908b1ba29a7/deploy-status)](https://app.netlify.com/sites/react-hooks-testing-library/deploys)
 
 [![Watch on GitHub](https://img.shields.io/github/watchers/mpeyper/react-hooks-testing-library.svg?style=social)](https://github.com/mpeyper/react-hooks-testing-library/watchers)
 [![Star on GitHub](https://img.shields.io/github/stars/mpeyper/react-hooks-testing-library.svg?style=social)](https://github.com/mpeyper/react-hooks-testing-library/stargazers)
