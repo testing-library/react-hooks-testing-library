@@ -17,7 +17,7 @@ export default {
   },
   menu: [
     { name: 'Introduction', menu: ['Getting Started', 'Setup'] },
-    { name: 'Usage', menu: ['Basic Hooks', 'Advanced Hooks', 'Async Hooks'] },
+    { name: 'Usage', menu: ['Basic Hooks', 'Advanced Hooks'] },
     { name: 'Examples' },
     { name: 'Reference', menu: ['FAQ', 'Troubleshooting', 'API'] }
   ]

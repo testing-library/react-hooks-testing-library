@@ -6,147 +6,178 @@ route: '/usage/advanced-hooks'
 
 # Advanced Hooks
 
-## Providing Props
+## Context
 
-Sometimes a hook relies on the props passed to it in order to do it's thing. For example the `useCounter` hook we built in the [Basic Hooks](/usage/basic-hooks) section could easily accept the initial value of the counter:
+Often, a hook is going to need a value out of context. The `useContext` hook is really good for this, but it will ofter required a `Provider` to be wrapped around the component using the hook. We can use the `wrapper` option for `renderHook` to do just that.
+
+Let's change the `useCounter` example from the [Basic Hooks section](/usage/basic-hooks) to get a `step` value from context and build a `CounterStepProvider` that allows us to set the value:
 
 ```js
-import { useState, useCallback } from 'react'
+import React, { useState, useContext, useCallback } from 'react'
 
-export default function useCounter(initialValue = 0) {
+const CounterStepContext = React.createContext(1)
+
+export const CounterStepProvider = ({ step, children }) => (
+  <CounterStepContext.Provider value={step}>{children}</CounterStepContext.Provider>
+)
+
+export function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue)
-  const increment = useCallback(() => setCount((x) => x + 1), [])
-  return { count, increment }
-}
-```
-
-Overriding the `initialValue` prop in out test is as easy as calling the hook with the value we want to use:
-
-```js
-import { renderHook, act } from 'react-hooks-testing-library'
-import useCounter from './useCounter'
-
-test('should increment counter from custom initial value', () => {
-  const { result } = renderHook(() => useCounter(9000))
-
-  act(() => {
-    result.current.increment()
-  })
-
-  expect(result.current.count).toBe(9001)
-})
-```
-
-### Changing Props
-
-Many of the hook primitives use an array of dependent values to determine when to perform specific actions, such as recalculating an expensive value or running an effect. If we update our `useCounter` hook to have a `reset` function that resets the value to the `initialValue` it might look something like this:
-
-```js
-import { useState, useCallback } from 'react'
-
-export default function useCounter(initialValue = 0) {
-  const [count, setCount] = useState(initialValue)
-  const increment = useCallback(() => setCount((x) => x + 1), [])
+  const step = useContext(CounterStepContext)
+  const increment = useCallback(() => setCount((x) => x + step), [step])
   const reset = useCallback(() => setCount(initialValue), [initialValue])
   return { count, increment, reset }
 }
 ```
 
-Now, the only time the `reset` function will be updated is if `initialValue` changes. The most basic way to handle changing the input props of our hook in a test is to simply update the value in a variable and rerender the hook:
+In our test, we simply use `CounterStepProvider` as the `wrapper` when rendering the hook:
+
+```js
+import { renderHook } from 'react-hooks-testing-library'
+import { CounterStepProvider, useCounter } from './counter'
+
+test('should use custom step when incrementing', () => {
+  const wrapper = ({ children }) => <CounterStepProvider step={2}>{children}</CounterStepProvider>
+  const { result } = renderHook(() => useCounter(), { wrapper })
+
+  act(() => {
+    result.current.increment()
+  })
+
+  expect(result.current.count).toBe(2)
+})
+```
+
+The `wrapper` option will accept any React component, but it **must** render `children` in order for the test component to render and the hook to execute.
+
+### ESLint Warning
+
+It can be very tempting to try to inline the `wrapper` variable into the `renderHook` line, and there is nothing technically wrong with doing that, but if you are using [`eslint`](https://eslint.org/) and [`eslint-plugin-react`](https://github.com/yannickcr/eslint-plugin-react), you will see a linting error that says:
+
+> Component definition is missing display name
+
+This is caused by the `react/display-name` rule and although it's unlikely to cause you any issues, it's best to take steps to remove it. If you feel strongly about not having a seperate `wrapper` variable, you can disable the error for the test file but adding a special comment to the top of the file:
+
+```js
+/* eslint-disable react/display-name */
+
+import { renderHook } from 'react-hooks-testing-library'
+import { CounterStepProvider, useCounter } from './counter'
+
+test('should use custom step when incrementing', () => {
+  const { result } = renderHook(() => useCounter(), {
+    wrapper: ({ children }) => <CounterStepProvider step={2}>{children}</CounterStepProvider>
+  })
+
+  act(() => {
+    result.current.increment()
+  })
+
+  expect(result.current.count).toBe(2)
+})
+```
+
+Similar techniques can be used to disable the error for just the specific line, or for the whole project, but please take the time to understand the impact that disabling linting rules will have on you, your team, and your project.
+
+## Async
+
+Sometimes, a hook can trigger asynchronous updates that will not be immediately reflected in the `result.current` value. Luckily, `renderHook` returns a utility that allows the test to wait for the hook to update using `async/await` (or just promise callbacks if you prefer) called `waitForNextUpdate`.
+
+Let's further extend `useCounter` to have an `incrementAsync` callback that will update the `count` after `100ms`:
+
+```js
+import React, { useState, useContext, useCallback } from 'react'
+
+export function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue)
+  const step = useContext(CounterStepContext)
+  const increment = useCallback(() => setCount((x) => x + step), [step])
+  const incrementAsync = useCallback(() => setTimeout(increment, 100), [increment])
+  const reset = useCallback(() => setCount(initialValue), [initialValue])
+  return { count, increment, incrementAsync, reset }
+}
+```
+
+To test `incrementAsync` we need to `await waitForNextUpdate()` before the make our assertions:
 
 ```js
 import { renderHook, act } from 'react-hooks-testing-library'
-import useCounter from './useCounter'
+import { useCounter } from './counter'
 
-test('should reset counter to updated initial value', () => {
-  let initialValue = 0
-  const { result, rerender } = renderHook(() => useCounter(initialValue))
+test('should increment counter after delay', async () => {
+  const { result, waitForNextUpdate } = renderHook(() => useCounter())
 
-  initialValue = 10
-  rerender()
+  result.current.incrementAsync()
 
-  act(() => {
-    result.current.reset()
-  })
+  await waitForNextUpdate()
 
-  expect(result.current.count).toBe(10)
+  expect(result.current.count).toBe(1)
 })
 ```
 
-This is fine, but if there are lots of props, it can become a bit difficult to have variables to keep track of them all. Another option is to use the `initialProps` option and `newProps` of `rerender`:
+### Suspense
+
+`waitForNextUpdate` will also wait for hooks that suspends using [React's `Suspense`](https://reactjs.org/docs/code-splitting.html#suspense) functionality finish rendering.
+
+### `act` Warning
+
+When testing async hooks, you will likely see a warning from React that tells you to wrap the update in `act(() => {...})`, but you can't because the update is internal to the hook code, not the test code. This is a [known issue](https://github.com/mpeyper/react-hooks-testing-library/issues/14) and should have a fix when React `v16.9.0` is released, but until then, you can either just ignore the warning, or suppress the output:
+
+```js
+import { renderHook } from 'react-hooks-testing-library'
+import { useCounter } from './counter'
+
+it('should increment counter after delay', async () => {
+  const originalError = console.error
+  console.error = jest.fn()
+
+  try {
+    const { result, waitForNextUpdate } = renderHook(() => useCounter())
+
+    result.current.incrementAsync()
+
+    await waitForNextUpdate()
+
+    expect(result.current.count).toBe(1)
+  } finally {
+    console.error = originalError
+  }
+})
+```
+
+## Errors
+
+If you need to test that a hook throws the errors you expect it to, you can use `result.error` to access an error that may have been thrown in the previous render. For example, we could make the `useCounter` hook threw an error if the count reached a specific value:
+
+```js
+import React, { useState, useContext, useCallback } from 'react'
+
+export function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue)
+  const step = useContext(CounterStepContext)
+  const increment = useCallback(() => setCount((x) => x + step), [step])
+  const incrementAsync = useCallback(() => setTimeout(increment, 100), [increment])
+  const reset = useCallback(() => setCount(initialValue), [initialValue])
+
+  if (count > 9000) {
+    throw Error("It's over 9000!")
+  }
+
+  return { count, increment, incrementAsync, reset }
+}
+```
 
 ```js
 import { renderHook, act } from 'react-hooks-testing-library'
-import useCounter from './useCounter'
+import { useCounter } from './counter'
 
-test('should reset counter to updated initial value', () => {
-  const { result, rerender } = renderHook(({ initialValue }) => useCounter(initialValue), {
-    initialProps: { initialValue: 0 }
-  })
-
-  rerender({ initialValue: 10 })
+it('should throw when over 9000', () => {
+  const { result } = renderHook(() => useCounter(9000))
 
   act(() => {
-    result.current.reset()
-  })
+    result.current.increment()
+  }
 
-  expect(result.current.count).toBe(10)
+  expect(result.error).toEqual(Error("It's over 9000!"))
 })
 ```
-
-Another case where this is useful is when you want limit the scope of the variables being closed over to just be inside the hook callback. The following (contrived) example fails because the `id` value changes for both the setup and cleanup of the `useEffect` call:
-
-```js
-import { useEffect } from 'react'
-import { renderHook } from "react-hooks-testing-library"
-import sideEffect from './sideEffect
-
-test("should clean up side effect", () => {
-  let id = "first"
-  const { rerender } = renderHook(() => {
-    useEffect(() => {
-      sideEffect.start(id)
-      return () => {
-        sideEffect.stop(id) // this id will get the new value when the effect is cleaned up
-      }
-    }, [id])
-  })
-
-  id = "second"
-  rerender()
-
-  expect(sideEffect.get("first")).toBe(false)
-  expect(sideEffect.get("second")).toBe(true)
-})
-```
-
-By using the `initialProps` and `newProps` the captured `id` value from the first render is used to clean up the effect, allowing the test to pass as expected:
-
-```js
-import { useEffect } from 'react'
-import { renderHook } from "react-hooks-testing-library"
-import sideEffect from './sideEffect
-
-test("should clean up side effect", () => {
-  const { rerender } = renderHook(
-    ({ id }) => {
-      useEffect(() => {
-      sideEffect.start(id)
-      return () => {
-        sideEffect.stop(id) // this id will get the new value when the effect is cleaned up
-      }
-    }, [id])
-    },
-    {
-      initialProps: { id: "first" }
-    }
-  )
-
-  rerender({ id: "second" })
-
-  expect(thing.get("first")).toBe(false)
-  expect(thing.get("second")).toBe(true)
-})
-```
-
-This is a fairly obscure case, so pick the method that fits best for you and your test.
