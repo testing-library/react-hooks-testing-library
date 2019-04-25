@@ -59,8 +59,6 @@ After `increment` is called, the current `count` value now reflects the new valu
 
 You may have also noticed that we also wrapped the `increment` call in `act`. This utility simulates how our hook will act in a browser, allowing us to update the values within it. For more details on `act`, please see the [React documentation](https://fb.me/react-wrap-tests-with-act).
 
-So there we have it, the first test for our `useCounter` hook.
-
 ## Providing Props
 
 Sometimes a hook relies on the props passed to it in order to do it's thing. For example the `useCounter` hook could easily accept the initial value of the counter as a prop:
