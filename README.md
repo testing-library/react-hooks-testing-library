@@ -10,7 +10,7 @@
   />
 </a>
 
-<p>Simple component wrapper and utilities for testing React hooks.</p>
+<p>Simple and complete React hooks testing utilities that encourage good testing practices.</p>
 
 </div>
 
