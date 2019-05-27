@@ -109,6 +109,9 @@ We are using [react-test-renderer](https://www.npmjs.com/package/react-test-rend
 npm install --save-dev react-test-renderer@x.y.z
 ```
 
+## Documentation
+
+There are some [work-in-progress docs here](https://react-hooks-testing-library.netlify.com/).  Please leave any feedback on them in [this issue](https://github.com/mpeyper/react-hooks-testing-library/issues/19). PRs to update them are very welcome.
 
 ## API
 
