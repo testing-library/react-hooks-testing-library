@@ -21,7 +21,7 @@ assignees: ''
 -->
 
 - `react-hooks-testing-library` version:
-- `react-testing-library` version:
+- `react-test-renderer` version:
 - `react` version:
 - `node` version:
 - `npm` (or `yarn`) version:
