@@ -5,7 +5,11 @@ function TestHook({ callback, hookProps, onError, children }) {
   try {
     children(callback(hookProps))
   } catch (err) {
-    onError(err)
+    if (err.then) {
+      throw err
+    } else {
+      onError(err)
+    }
   }
   return null
 }
