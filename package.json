@@ -50,7 +50,7 @@
     "lint-staged": "8.2.1",
     "prettier": "1.18.2",
     "prettier-eslint": "9.0.0",
-    "prettier-eslint-cli": "4.7.1",
+    "prettier-eslint-cli": "5.0.0",
     "react": "16.8.6",
     "react-test-renderer": "16.8.6",
     "typescript": "3.5.2",
