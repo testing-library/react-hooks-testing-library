@@ -34,19 +34,28 @@
 
 ## The problem
 
-You're writing an awesome custom hook and you want to test it, but as soon as you call it you see the following error:
+You're writing an awesome custom hook and you want to test it, but as soon as you call it you see
+the following error:
 
 > Invariant Violation: Hooks can only be called inside the body of a function component.
 
-You don't really want to write a component solely for testing this hook and have to work out how you were going to trigger all the various ways the hook can be updated, especially given the complexities of how you've wired the whole thing together.
+You don't really want to write a component solely for testing this hook and have to work out how you
+were going to trigger all the various ways the hook can be updated, especially given the
+complexities of how you've wired the whole thing together.
 
 ## The solution
 
-The `react-hooks-testing-library` allows you to create a simple test harness for React hooks that handles running them within the body of a function component, as well as providing various useful utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
+The `react-hooks-testing-library` allows you to create a simple test harness for React hooks that
+handles running them within the body of a function component, as well as providing various useful
+utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
 
-Similarly to [`react-testing-library`](http://npm.im/react-testing-library), which this library draws much of it's inspiration from, it aims to provide a testing experience as close as possible to natively using your hook from within a real component.
+Similarly to [`react-testing-library`](http://npm.im/react-testing-library), which this library
+draws much of it's inspiration from, it aims to provide a testing experience as close as possible to
+natively using your hook from within a real component.
 
-Using this library, you do not have to concern yourself with how to construct, render or interact with the react component in order to test your hook. You can just use the hook directly and assert the results.
+Using this library, you do not have to concern yourself with how to construct, render or interact
+with the react component in order to test your hook. You can just use the hook directly and assert
+the results.
 
 ### When to use this library
 
@@ -104,7 +113,9 @@ test('should decrement counter', () => {
 npm install --save-dev react-hooks-testing-library
 ```
 
-We are using [react-test-renderer](https://www.npmjs.com/package/react-test-renderer) as a peerDependency, so make sure you have installed this library as well. Install the same version like you use in react.
+We are using [react-test-renderer](https://www.npmjs.com/package/react-test-renderer) as a
+peerDependency, so make sure you have installed this library as well. Install the same version like
+you use in react.
 
 ```sh
 npm install --save-dev react-test-renderer@x.y.z
@@ -112,41 +123,52 @@ npm install --save-dev react-test-renderer@x.y.z
 
 ## Documentation
 
-There are some [work-in-progress docs here](https://react-hooks-testing-library.netlify.com/). Please leave any feedback on them in [this issue](https://github.com/testing-library/react-hooks-testing-library/issues/19). PRs to update them are very welcome.
+There are some [work-in-progress docs here](https://react-hooks-testing-library.netlify.com/).
+Please leave any feedback on them in
+[this issue](https://github.com/testing-library/react-hooks-testing-library/issues/19). PRs to
+update them are very welcome.
 
 ## API
 
 ### `renderHook(callback[, options])`
 
-Renders a test component that will call the provided `callback`, including any hooks it calls, every time it renders.
-
-> _Note: `testHook` has been renamed to `renderHook`. `testHook` will continue work in the current version with a deprecation warning, but will be removed in a future version._
->
-> **_You should update any usages of `testHook` to use `renderHook` instead._**
+Renders a test component that will call the provided `callback`, including any hooks it calls, every
+time it renders.
 
 #### Arguments
 
-- `callback` (`function()`) - function to call each render. This function should call one or more hooks for testing.
+- `callback` (`function()`) - function to call each render. This function should call one or more
+  hooks for testing.
 - `options` (`object`) - accept the following settings:
   - `initialProps` (`object`) - the initial values to pass to the `callback` function
-  - `wrapper` (`component`) - pass a React Component as the wrapper option to have it rendered around the inner element. This is most useful for creating reusable custom render functions for common data providers
+  - `wrapper` (`component`) - pass a React Component as the wrapper option to have it rendered
+    around the inner element. This is most useful for creating reusable custom render functions for
+    common data providers
 
 #### Returns
 
 - `result` (`object`)
   - `current` (`any`) - the return value of the `callback` function
-  - `error` (`Error`) - the error that was thrown if the `callback` function threw an error during rendering
-- `waitForNextUpdate` (`function`) - returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as the result of a asynchronous action.
-- `rerender` (`function([newProps])`) - function to rerender the test component including any hooks called in the `callback` function. If `newProps` are passed, the will replace the `initialProps` passed the the `callback` function for future renders.
-- `unmount` (`function()`) - function to unmount the test component, commonly used to trigger cleanup effects for `useEffect` hooks.
+  - `error` (`Error`) - the error that was thrown if the `callback` function threw an error during
+    rendering
+- `waitForNextUpdate` (`function`) - returns a `Promise` that resolves the next time the hook
+  renders, commonly when state is updated as the result of a asynchronous action.
+- `rerender` (`function([newProps])`) - function to rerender the test component including any hooks
+  called in the `callback` function. If `newProps` are passed, the will replace the `initialProps`
+  passed the the `callback` function for future renders.
+- `unmount` (`function()`) - function to unmount the test component, commonly used to trigger
+  cleanup effects for `useEffect` hooks.
 
 ### `act(callback)`
 
-This is the same [`act` function](https://reactjs.org/docs/hooks-faq.html#how-to-test-components-that-use-hooks) that is exported by `react-test-renderer`.
+This is the same
+[`act` function](https://reactjs.org/docs/hooks-faq.html#how-to-test-components-that-use-hooks) that
+is exported by `react-test-renderer`.
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+Thanks goes to these wonderful people
+([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
@@ -154,11 +176,13 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors)
+specification. Contributions of any kind welcome!
 
 ## Issues
 
-_Looking to contribute? Look for the [Good First Issue](https://github.com/testing-library/react-hooks-testing-library/issues?utf8=✓&q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc+label%3A"good+first+issue"+)
+_Looking to contribute? Look for the
+[Good First Issue](https://github.com/testing-library/react-hooks-testing-library/issues?utf8=✓&q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc+label%3A"good+first+issue"+)
 label._
 
 ### 🐛 Bugs
@@ -169,14 +193,16 @@ Please file an issue for bugs, missing documentation, or unexpected behavior.
 
 ### 💡 Feature Requests
 
-Please file an issue to suggest new features. Vote on feature requests by adding
-a 👍. This helps maintainers prioritize what to work on.
+Please file an issue to suggest new features. Vote on feature requests by adding a 👍. This helps
+maintainers prioritize what to work on.
 
 [**See Feature Requests**](https://github.com/testing-library/react-hooks-testing-library/issues?q=is%3Aissue+sort%3Areactions-%2B1-desc+label%3Aenhancement+is%3Aopen)
 
 ### ❓ Questions
 
-For questions related to using the library, you can [raise issue here](https://github.com/testing-library/react-hooks-testing-library/issues/new), or visit a support community:
+For questions related to using the library, you can
+[raise issue here](https://github.com/testing-library/react-hooks-testing-library/issues/new), or
+visit a support community:
 
 - [Reactiflux on Discord](https://www.reactiflux.com/)
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/react-hooks-testing-library)

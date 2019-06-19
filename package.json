@@ -79,7 +79,8 @@
     "printWidth": 100,
     "semi": false,
     "singleQuote": true,
-    "arrowParens": "always"
+    "arrowParens": "always",
+    "proseWrap": "always"
   },
   "eslintConfig": {
     "extends": [
