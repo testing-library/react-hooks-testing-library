@@ -87,7 +87,7 @@ export default useCounter
 
 ```js
 // useCounter.test.js
-import { renderHook, act } from 'react-hooks-testing-library'
+import { renderHook, act } from '@testing-library/react-hooks'
 import useCounter from './useCounter'
 
 test('should increment counter', () => {
