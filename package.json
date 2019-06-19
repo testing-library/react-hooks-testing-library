@@ -14,7 +14,7 @@
   "author": "Michael Peyper",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mpeyper/react-hooks-testing-library.git"
+    "url": "https://github.com/testing-library/react-hooks-testing-library.git"
   },
   "license": "MIT",
   "scripts": {
