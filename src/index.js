@@ -90,11 +90,4 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
   }
 }
 
-function testHook(...args) {
-  console.warn(
-    '`testHook` has been deprecated and will be removed in a future release.  Please use `renderHook` instead.'
-  )
-  return renderHook(...args)
-}
-
-export { renderHook, act, testHook }
+export { renderHook, act }

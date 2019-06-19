@@ -14,6 +14,4 @@ export function renderHook<P, R>(
   readonly rerender: (hookProps?: P) => void
 }
 
-export const testHook: typeof renderHook
-
 export function act(callback: () => void): void
