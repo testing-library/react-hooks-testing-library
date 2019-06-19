@@ -1,9 +1,16 @@
 {
-  "name": "react-hooks-testing-library",
-  "version": "0.5.1",
-  "description": "Simple component wrapper for testing React hooks",
+  "name": "@testing-library/react-hooks",
+  "version": "1.0.0",
+  "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
   "main": "lib/index.js",
   "typings": "typings/index.d.ts",
+  "keywords": [
+    "testing",
+    "react",
+    "hooks",
+    "unit",
+    "integration"
+  ],
   "files": [
     "lib",
     "src",
@@ -11,7 +18,7 @@
     "README.md",
     "LICENSE.md"
   ],
-  "author": "Michael Peyper",
+  "author": "Michael Peyper <mpeyper7@gmail.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/testing-library/react-hooks-testing-library.git"
@@ -57,8 +64,8 @@
     "typings-tester": "0.3.2"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-test-renderer": "^16.8.0"
+    "react": ">=16.8.0",
+    "react-test-renderer": ">=16.8.0"
   },
   "jest": {
     "collectCoverage": true,

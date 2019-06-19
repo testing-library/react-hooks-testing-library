@@ -6,9 +6,9 @@
 
 * Please make sure that you are familiar with and follow the Code of Conduct for
   this project (found in the CODE_OF_CONDUCT.md file).
-  
+
 * If this issue is a bug, feature request or question, there are specific templates that can be used for those:
-  https://github.com/mpeyper/react-hooks-testing-library/issues/new/choose
+  https://github.com/testing-library/react-hooks-testing-library/issues/new/choose
 
 -->
 
