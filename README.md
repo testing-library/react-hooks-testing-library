@@ -49,7 +49,7 @@ The `react-hooks-testing-library` allows you to create a simple test harness for
 handles running them within the body of a function component, as well as providing various useful
 utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
 
-Similarly to [`react-testing-library`](http://npm.im/react-testing-library), which this library
+Similarly to [`react-testing-library`](http://npm.im/@testing-library/react), which this library
 draws much of it's inspiration from, it aims to provide a testing experience as close as possible to
 natively using your hook from within a real component.
 
@@ -110,7 +110,7 @@ test('should decrement counter', () => {
 ## Installation
 
 ```sh
-npm install --save-dev react-hooks-testing-library
+npm install --save-dev @testing-library/react-hooks
 ```
 
 We are using [react-test-renderer](https://www.npmjs.com/package/react-test-renderer) as a
