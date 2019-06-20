@@ -1,4 +1,5 @@
-import * as React from 'react'
+import { ComponentType } from 'react'
+export { act } from 'react-test-renderer'
 
 interface RenderHookOptions<P> {
   initialProps?: P
@@ -21,5 +22,3 @@ export function renderHook<P, R>(
   callback: (props: P) => R,
   options?: RenderHookOptions<P>
 ): RenderHookResult<P, R>
-
-export function act(callback: () => void): void

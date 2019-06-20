@@ -17,7 +17,7 @@ route: '/'
   </a>
 
   <p>
-    Simple component wrapper and utilities for testing React hooks.
+    Simple and complete React hooks testing utilities that encourage good testing practices.
   </p>
 
 </div>
@@ -26,17 +26,26 @@ route: '/'
 
 ## The problem
 
-You're writing an awesome custom hook and you want to test it, but as soon as you call it you see the following error:
+You're writing an awesome custom hook and you want to test it, but as soon as you call it you see
+the following error:
 
 > Invariant Violation: Hooks can only be called inside the body of a function component.
 
-You don't really want to write a component solely for testing this hook and have to work out how you were going to trigger all the various ways the hook can be updated, especially given the complexities of how you've wired the whole thing together.
+You don't really want to write a component solely for testing this hook and have to work out how you
+were going to trigger all the various ways the hook can be updated, especially given the
+complexities of how you've wired the whole thing together.
 
 ## The solution
 
-The `react-hooks-testing-library` allows you to create a simple test harness for React hooks that handles running them within the body of a function component, as well as providing various useful utility functions for updating the inputs and retrieving the outputs of your amazing custom hook. This library aims to provide a testing experience as close as possible to natively using your hook from within a real component.
+The `react-hooks-testing-library` allows you to create a simple test harness for React hooks that
+handles running them within the body of a function component, as well as providing various useful
+utility functions for updating the inputs and retrieving the outputs of your amazing custom hook.
+This library aims to provide a testing experience as close as possible to natively using your hook
+from within a real component.
 
-Using this library, you do not have to concern yourself with how to construct, render or interact with the react component in order to test your hook. You can just use the hook directly and assert the results.
+Using this library, you do not have to concern yourself with how to construct, render or interact
+with the react component in order to test your hook. You can just use the hook directly and assert
+the results.
 
 ### When to use this library
 

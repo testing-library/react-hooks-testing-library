@@ -8,9 +8,12 @@ route: '/usage/advanced-hooks'
 
 ## Context
 
-Often, a hook is going to need a value out of context. The `useContext` hook is really good for this, but it will ofter required a `Provider` to be wrapped around the component using the hook. We can use the `wrapper` option for `renderHook` to do just that.
+Often, a hook is going to need a value out of context. The `useContext` hook is really good for
+this, but it will ofter required a `Provider` to be wrapped around the component using the hook. We
+can use the `wrapper` option for `renderHook` to do just that.
 
-Let's change the `useCounter` example from the [Basic Hooks section](/usage/basic-hooks) to get a `step` value from context and build a `CounterStepProvider` that allows us to set the value:
+Let's change the `useCounter` example from the [Basic Hooks section](/usage/basic-hooks) to get a
+`step` value from context and build a `CounterStepProvider` that allows us to set the value:
 
 ```js
 import React, { useState, useContext, useCallback } from 'react'
@@ -33,7 +36,7 @@ export function useCounter(initialValue = 0) {
 In our test, we simply use `CounterStepProvider` as the `wrapper` when rendering the hook:
 
 ```js
-import { renderHook } from 'react-hooks-testing-library'
+import { renderHook } from '@testing-library/react-hooks'
 import { CounterStepProvider, useCounter } from './counter'
 
 test('should use custom step when incrementing', () => {
@@ -48,20 +51,28 @@ test('should use custom step when incrementing', () => {
 })
 ```
 
-The `wrapper` option will accept any React component, but it **must** render `children` in order for the test component to render and the hook to execute.
+The `wrapper` option will accept any React component, but it **must** render `children` in order for
+the test component to render and the hook to execute.
 
 ### ESLint Warning
 
-It can be very tempting to try to inline the `wrapper` variable into the `renderHook` line, and there is nothing technically wrong with doing that, but if you are using [`eslint`](https://eslint.org/) and [`eslint-plugin-react`](https://github.com/yannickcr/eslint-plugin-react), you will see a linting error that says:
+It can be very tempting to try to inline the `wrapper` variable into the `renderHook` line, and
+there is nothing technically wrong with doing that, but if you are using
+[`eslint`](https://eslint.org/) and
+[`eslint-plugin-react`](https://github.com/yannickcr/eslint-plugin-react), you will see a linting
+error that says:
 
 > Component definition is missing display name
 
-This is caused by the `react/display-name` rule and although it's unlikely to cause you any issues, it's best to take steps to remove it. If you feel strongly about not having a seperate `wrapper` variable, you can disable the error for the test file but adding a special comment to the top of the file:
+This is caused by the `react/display-name` rule and although it's unlikely to cause you any issues,
+it's best to take steps to remove it. If you feel strongly about not having a seperate `wrapper`
+variable, you can disable the error for the test file but adding a special comment to the top of the
+file:
 
 ```js
 /* eslint-disable react/display-name */
 
-import { renderHook } from 'react-hooks-testing-library'
+import { renderHook } from '@testing-library/react-hooks'
 import { CounterStepProvider, useCounter } from './counter'
 
 test('should use custom step when incrementing', () => {
@@ -77,13 +88,19 @@ test('should use custom step when incrementing', () => {
 })
 ```
 
-Similar techniques can be used to disable the error for just the specific line, or for the whole project, but please take the time to understand the impact that disabling linting rules will have on you, your team, and your project.
+Similar techniques can be used to disable the error for just the specific line, or for the whole
+project, but please take the time to understand the impact that disabling linting rules will have on
+you, your team, and your project.
 
 ## Async
 
-Sometimes, a hook can trigger asynchronous updates that will not be immediately reflected in the `result.current` value. Luckily, `renderHook` returns a utility that allows the test to wait for the hook to update using `async/await` (or just promise callbacks if you prefer) called `waitForNextUpdate`.
+Sometimes, a hook can trigger asynchronous updates that will not be immediately reflected in the
+`result.current` value. Luckily, `renderHook` returns a utility that allows the test to wait for the
+hook to update using `async/await` (or just promise callbacks if you prefer) called
+`waitForNextUpdate`.
 
-Let's further extend `useCounter` to have an `incrementAsync` callback that will update the `count` after `100ms`:
+Let's further extend `useCounter` to have an `incrementAsync` callback that will update the `count`
+after `100ms`:
 
 ```js
 import React, { useState, useContext, useCallback } from 'react'
@@ -101,7 +118,7 @@ export function useCounter(initialValue = 0) {
 To test `incrementAsync` we need to `await waitForNextUpdate()` before the make our assertions:
 
 ```js
-import { renderHook, act } from 'react-hooks-testing-library'
+import { renderHook, act } from '@testing-library/react-hooks'
 import { useCounter } from './counter'
 
 test('should increment counter after delay', async () => {
@@ -117,14 +134,20 @@ test('should increment counter after delay', async () => {
 
 ### Suspense
 
-`waitForNextUpdate` will also wait for hooks that suspends using [React's `Suspense`](https://reactjs.org/docs/code-splitting.html#suspense) functionality finish rendering.
+`waitForNextUpdate` will also wait for hooks that suspends using
+[React's `Suspense`](https://reactjs.org/docs/code-splitting.html#suspense) functionality finish
+rendering.
 
 ### `act` Warning
 
-When testing async hooks, you will likely see a warning from React that tells you to wrap the update in `act(() => {...})`, but you can't because the update is internal to the hook code, not the test code. This is a [known issue](https://github.com/mpeyper/react-hooks-testing-library/issues/14) and should have a fix when React `v16.9.0` is released, but until then, you can either just ignore the warning, or suppress the output:
+When testing async hooks, you will likely see a warning from React that tells you to wrap the update
+in `act(() => {...})`, but you can't because the update is internal to the hook code, not the test
+code. This is a [known issue](https://github.com/mpeyper/react-hooks-testing-library/issues/14) and
+should have a fix when React `v16.9.0` is released, but until then, you can either just ignore the
+warning, or suppress the output:
 
 ```js
-import { renderHook } from 'react-hooks-testing-library'
+import { renderHook } from '@testing-library/react-hooks'
 import { useCounter } from './counter'
 
 it('should increment counter after delay', async () => {
@@ -147,7 +170,9 @@ it('should increment counter after delay', async () => {
 
 ## Errors
 
-If you need to test that a hook throws the errors you expect it to, you can use `result.error` to access an error that may have been thrown in the previous render. For example, we could make the `useCounter` hook threw an error if the count reached a specific value:
+If you need to test that a hook throws the errors you expect it to, you can use `result.error` to
+access an error that may have been thrown in the previous render. For example, we could make the
+`useCounter` hook threw an error if the count reached a specific value:
 
 ```js
 import React, { useState, useContext, useCallback } from 'react'
@@ -168,7 +193,7 @@ export function useCounter(initialValue = 0) {
 ```
 
 ```js
-import { renderHook, act } from 'react-hooks-testing-library'
+import { renderHook, act } from '@testing-library/react-hooks'
 import { useCounter } from './counter'
 
 it('should throw when over 9000', () => {
