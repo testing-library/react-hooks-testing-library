@@ -1,6 +1,6 @@
 {
   "projectName": "react-hooks-testing-library",
-  "projectOwner": "mpeyper",
+  "projectOwner": "testing-library",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -91,6 +91,25 @@
       "profile": "https://github.com/josepot",
       "contributions": [
         "doc"
+      ]
+    },
+    {
+      "login": "mtinner",
+      "name": "Marcel Tinner",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5487448?v=4",
+      "profile": "https://github.com/mtinner",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "FredyC",
+      "name": "Daniel K.",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1096340?v=4",
+      "profile": "https://github.com/FredyC",
+      "contributions": [
+        "bug",
+        "code"
       ]
     }
   ],

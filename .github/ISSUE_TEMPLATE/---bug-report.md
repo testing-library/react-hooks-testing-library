@@ -4,7 +4,6 @@ about: "Bugs, missing documentation, or unexpected behavior \U0001F914."
 title: ''
 labels: bug
 assignees: ''
-
 ---
 
 <!--
@@ -21,7 +20,7 @@ assignees: ''
 -->
 
 - `react-hooks-testing-library` version:
-- `react-testing-library` version:
+- `react-test-renderer` version:
 - `react` version:
 - `node` version:
 - `npm` (or `yarn`) version:
@@ -29,7 +28,7 @@ assignees: ''
 ### Relevant code or config:
 
 ```js
-let your = (code, tell) => `the ${story}`;
+let your = (code, tell) => `the ${story}`
 ```
 
 ### What you did:

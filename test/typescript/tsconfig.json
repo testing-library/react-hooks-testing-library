@@ -4,7 +4,7 @@
     "strict": true,
     "baseUrl": "../../",
     "paths": {
-      "react-hooks-testing-library": ["typings/index.d.ts"]
+      "@testing-library/react-hooks": ["typings/index.d.ts"]
     }
   }
 }

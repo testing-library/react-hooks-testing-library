@@ -22,6 +22,4 @@ export function renderHook<P, R>(
   options?: RenderHookOptions<P>
 ): RenderHookResult<P, R>
 
-export const testHook: typeof renderHook
-
 export function act(callback: () => void): void
