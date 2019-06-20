@@ -33,7 +33,6 @@
     "test:ci": "npm run test && npm run coverage",
     "docs:dev": "docz dev",
     "docs:build": "docz build",
-    "docs:publish": "docz build && git add --all site && git commit -m 'Publishing docs [ci skip]' && git push",
     "contributors:add": "all-contributors add"
   },
   "dependencies": {
