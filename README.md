@@ -13,7 +13,7 @@
 <p>Simple and complete React hooks testing utilities that encourage good testing practices.</p>
 
   <br />
-  <a href="https://react-hooks-testing-library.netlify.com/"><strong>Read The Docs</strong></a>
+  <a href="https://react-hooks-testing-library.com/"><strong>Read The Docs</strong> (Work-In-Progress)</a>
   <br />
 </div>
 
@@ -120,14 +120,14 @@ npm install --save-dev react-test-renderer@x.y.z
 
 ## Documentation
 
-There are some [work-in-progress docs here](https://react-hooks-testing-library.netlify.com/).
-Please leave any feedback on them in
+There are some [work-in-progress docs here](https://react-hooks-testing-library.com/). Please leave
+any feedback on them in
 [this issue](https://github.com/testing-library/react-hooks-testing-library/issues/19). PRs to
 update them are very welcome.
 
 ## API
 
-See the [API documentation](https://react-hooks-testing-library.netlify.com/reference/api).
+See the [API documentation](https://react-hooks-testing-library.com/reference/api).
 
 ## Contributors
 
