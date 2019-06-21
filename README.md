@@ -110,13 +110,21 @@ test('should increment counter', () => {
 npm install --save-dev @testing-library/react-hooks
 ```
 
-We are using [react-test-renderer](https://www.npmjs.com/package/react-test-renderer) as a
-peerDependency, so make sure you have installed this library as well. Install the same version like
-you use in react.
+### Peer Dependencies
+
+`react-hooks-testing-library` does not come bundled with a version of
+[`react`](https://www.npmjs.com/package/react) or
+[`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer) to allow you to install
+the specific version you want to test against. Generally, the installed versions for `react` and
+`react-test-renderer` should match:
 
 ```sh
-npm install --save-dev react-test-renderer@x.y.z
+npm install react@^x.y.z
+npm install --save-dev react-test-renderer@^x.y.z
 ```
+
+Both of these dependecies must be installed as at least version `16.8.0` to be compatible with
+`react-hooks-testing-library`.
 
 ## Documentation
 

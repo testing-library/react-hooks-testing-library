@@ -1,4 +1,5 @@
 export default {
+  title: 'React Hooks Testing Library',
   files: '**/*.{md,mdx}',
   src: 'docs',
   dest: 'site',
