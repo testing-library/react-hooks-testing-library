@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.2",
-    "@types/react": "16.8.22",
+    "@types/react": "^16.8.22",
     "@types/react-test-renderer": "^16.8.2"
   },
   "devDependencies": {
