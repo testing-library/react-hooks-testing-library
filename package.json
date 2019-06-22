@@ -27,7 +27,7 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "babel --out-dir lib src",
-    "format": "prettier-eslint --write \"**/*.{js,json,md,mdx}\"",
+    "format": "prettier-eslint --write \"**/*.{js,ts,json,yml,md,mdx}\"",
     "coverage": "codecov",
     "test": "jest",
     "test:ci": "npm run test && npm run coverage",
@@ -54,7 +54,7 @@
     "codecov": "3.5.0",
     "docz": "^1.0.4",
     "docz-theme-default": "^1.0.4",
-    "eslint": "5.16.0",
+    "eslint": "6.0.0",
     "eslint-config-prettier": "5.0.0",
     "eslint-plugin-prettier": "3.1.0",
     "husky": "2.4.1",
@@ -99,7 +99,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,md}": [
+    "*.{js,ts,json,yml,md,mdx}": [
       "prettier-eslint --write",
       "git add"
     ]
