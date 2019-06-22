@@ -80,7 +80,7 @@ export default function useCounter(initialValue = 0) {
 }
 ```
 
-Setting the `initialValue` prop in out test is as easy as calling the hook with the value we want to
+Setting the `initialValue` prop in our test is as easy as calling the hook with the value we want to
 use:
 
 ```js
