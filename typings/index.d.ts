@@ -22,3 +22,5 @@ export function renderHook<P, R>(
   callback: (props: P) => R,
   options?: RenderHookOptions<P>
 ): RenderHookResult<P, R>
+
+export function cleanup(): void

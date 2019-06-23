@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react'
 import { act, create } from 'react-test-renderer'
 
+const unmounts = []
+
 function TestHook({ callback, hookProps, onError, children }) {
   try {
     children(callback(hookProps))
@@ -51,6 +53,11 @@ function resultContainer() {
   }
 }
 
+function cleanup() {
+  unmounts.forEach((unmount) => unmount())
+  unmounts.length = 0
+}
+
 function renderHook(callback, { initialProps, wrapper } = {}) {
   const { result, setValue, setError, addResolver } = resultContainer()
   const hookProps = { current: initialProps }
@@ -73,6 +80,14 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
   })
   const { unmount, update } = testRenderer
 
+  function unmountHook() {
+    act(() => {
+      unmount()
+    })
+  }
+
+  unmounts.push(unmountHook)
+
   return {
     result,
     waitForNextUpdate: () => new Promise((resolve) => addResolver(resolve)),
@@ -82,12 +97,8 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
         update(toRender())
       })
     },
-    unmount: () => {
-      act(() => {
-        unmount()
-      })
-    }
+    unmount: unmountHook
   }
 }
 
-export { renderHook, act }
+export { renderHook, cleanup, act }
