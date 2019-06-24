@@ -111,6 +111,16 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "apostolidhs",
+      "name": "John Apostolidis",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2164902?v=4",
+      "profile": "http://apostolidis.me",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
