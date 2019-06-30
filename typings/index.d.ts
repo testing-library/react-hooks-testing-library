@@ -1,17 +1,17 @@
 import { ComponentType } from 'react'
 export { act } from 'react-test-renderer'
 
-interface RenderHookOptions<P> {
+export interface RenderHookOptions<P> {
   initialProps?: P
   wrapper?: React.ComponentType
 }
 
-interface HookResult<R> {
+export interface HookResult<R> {
   readonly current: R
   readonly error: Error
 }
 
-interface RenderHookResult<P, R> {
+export interface RenderHookResult<P, R> {
   readonly result: HookResult<R>
   readonly waitForNextUpdate: () => Promise<void>
   readonly unmount: () => boolean
