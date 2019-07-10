@@ -36,11 +36,11 @@
     "contributors:add": "all-contributors add"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.2",
-    "@types/react": "^16.8.22",
-    "@types/react-test-renderer": "^16.8.2"
+    "@babel/runtime": "^7.4.2"
   },
   "devDependencies": {
+    "@types/react": "16.8.22",
+    "@types/react-test-renderer": "16.8.2",
     "@babel/cli": "7.4.4",
     "@babel/core": "7.4.5",
     "@babel/plugin-proposal-object-rest-spread": "7.4.4",
@@ -69,6 +69,8 @@
     "typings-tester": "0.3.2"
   },
   "peerDependencies": {
+    "@types/react": ">=16.8.13",
+    "@types/react-test-renderer": ">=16.8.2",
     "react": ">=16.8.0",
     "react-test-renderer": ">=16.8.0"
   },
