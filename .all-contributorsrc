@@ -120,6 +120,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ericmackrodt",
+      "name": "Eric Mackrodt",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/450616?s=180&v=4",
+      "profile": "http://ericmackrodt.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
