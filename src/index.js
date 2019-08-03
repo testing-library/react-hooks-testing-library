@@ -21,6 +21,7 @@ function Fallback() {
 function resultContainer() {
   let value = null
   let error = null
+  let renderCount = 0
   const resolvers = []
 
   const result = {
@@ -32,10 +33,14 @@ function resultContainer() {
     },
     get error() {
       return error
+    },
+    get renderCount() {
+      return renderCount
     }
   }
 
   const updateResult = (val, err) => {
+    renderCount++
     value = val
     error = err
     resolvers.splice(0, resolvers.length).forEach((resolve) => resolve())

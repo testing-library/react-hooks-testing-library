@@ -221,3 +221,25 @@ test("should clean up side effect", () => {
 ```
 
 This is a fairly obscure case, so pick the method that fits best for you and your test.
+
+## Knowing how many times component was rendered
+
+It's also possible to know how many times the component containing the tested hook was rendered
+under `renderCount` property within result.
+
+```js
+import { renderHook, act } from '@testing-library/react-hooks'
+import { useState } from 'react'
+
+test('should rerender component on each update', () => {
+  const { result } = renderHook(() => useState('foo'))
+  const [, setState] = result.current
+  expect(result.renderCount).toBe(1)
+
+  act(() => {
+    setState('bar')
+  })
+
+  expect(result.renderCount).toBe(2)
+})
+```

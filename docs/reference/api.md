@@ -62,12 +62,14 @@ The `renderHook` method returns an object that has a following properties:
 ```js
 {
   current: any,
-  error: Error
+  error: Error,
+  renderCount: number
 }
 ```
 
 The `current` value or the `result` will reflect whatever is returned from the `callback` passed to
-`renderHook`. Any thrown values will be reflected in the `error` value of the `result`.
+`renderHook`. Any thrown values will be reflected in the `error` value of the `result`. Within
+`renderCount` it's possible to know how many times the component was rendered.
 
 ### `waitForNextUpdate`
 
