@@ -9,6 +9,7 @@ export interface RenderHookOptions<P> {
 export interface HookResult<R> {
   readonly current: R
   readonly error: Error
+  readonly renderCount: number
 }
 
 export interface RenderHookResult<P, R> {

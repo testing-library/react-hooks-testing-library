@@ -120,6 +120,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Belco90",
+      "name": "Mario Beltrán",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2677072?v=4",
+      "profile": "https://mario.dev",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
     }
   ],
   "commitConvention": "none"
