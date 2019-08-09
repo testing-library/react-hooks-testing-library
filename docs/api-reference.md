@@ -1,6 +1,5 @@
 ---
-name: API
-menu: Reference
+name: API Reference
 route: '/reference/api'
 ---
 

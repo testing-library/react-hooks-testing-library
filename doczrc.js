@@ -9,7 +9,7 @@ export default {
     favicon: '/public/ram.png'
   },
   themeConfig: {
-    mode: 'dark',
+    mode: 'light',
     logo: {
       src: '/public/ram.png',
       margin: 'auto',
@@ -17,9 +17,8 @@ export default {
     }
   },
   menu: [
-    { name: 'Introduction', menu: ['Getting Started', 'Setup'] },
+    { name: 'Introduction' },
     { name: 'Usage', menu: ['Basic Hooks', 'Advanced Hooks'] },
-    { name: 'Examples' },
-    { name: 'Reference', menu: ['FAQ', 'Troubleshooting', 'API'] }
+    { name: 'API Reference' }
   ]
 }

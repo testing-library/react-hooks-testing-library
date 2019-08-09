@@ -13,7 +13,7 @@
 <p>Simple and complete React hooks testing utilities that encourage good testing practices.</p>
 
   <br />
-  <a href="https://react-hooks-testing-library.com/"><strong>Read The Docs</strong> (Work-In-Progress)</a>
+  <a href="https://react-hooks-testing-library.com/"><strong>Read The Docs</strong></a>
   <br />
 </div>
 
@@ -104,6 +104,9 @@ test('should increment counter', () => {
 })
 ```
 
+More advanced usage can be found in the
+[documentation](https://react-hooks-testing-library.com/usage/basic-hooks).
+
 ## Installation
 
 ```sh
@@ -116,26 +119,19 @@ npm install --save-dev @testing-library/react-hooks
 [`react`](https://www.npmjs.com/package/react) or
 [`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer) to allow you to install
 the specific version you want to test against. Generally, the installed versions for `react` and
-`react-test-renderer` should match:
+`react-test-renderer` should have matching versions:
 
 ```sh
-npm install react@^x.y.z
-npm install --save-dev react-test-renderer@^x.y.z
+npm install react@^16.9.0
+npm install --save-dev react-test-renderer@^16.9.0
 ```
 
-Both of these dependecies must be installed as at least version `16.8.0` to be compatible with
+Both of these dependecies must be installed as at least version `16.9.0` to be compatible with
 `react-hooks-testing-library`.
-
-## Documentation
-
-There are some [work-in-progress docs here](https://react-hooks-testing-library.com/). Please leave
-any feedback on them in
-[this issue](https://github.com/testing-library/react-hooks-testing-library/issues/19). PRs to
-update them are very welcome.
 
 ## API
 
-See the [API documentation](https://react-hooks-testing-library.com/reference/api).
+See the [API reference](https://react-hooks-testing-library.com/reference/api).
 
 ## Contributors
 

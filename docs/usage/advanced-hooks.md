@@ -65,7 +65,7 @@ error that says:
 > Component definition is missing display name
 
 This is caused by the `react/display-name` rule and although it's unlikely to cause you any issues,
-it's best to take steps to remove it. If you feel strongly about not having a seperate `wrapper`
+it's best to take steps to remove it. If you feel strongly about not having a separate `wrapper`
 variable, you can disable the error for the test file but adding a special comment to the top of the
 file:
 
@@ -137,36 +137,6 @@ test('should increment counter after delay', async () => {
 `waitForNextUpdate` will also wait for hooks that suspends using
 [React's `Suspense`](https://reactjs.org/docs/code-splitting.html#suspense) functionality finish
 rendering.
-
-### `act` Warning
-
-When testing async hooks, you will likely see a warning from React that tells you to wrap the update
-in `act(() => {...})`, but you can't because the update is internal to the hook code, not the test
-code. This is a [known issue](https://github.com/mpeyper/react-hooks-testing-library/issues/14) and
-should have a fix when React `v16.9.0` is released, but until then, you can either just ignore the
-warning, or suppress the output:
-
-```js
-import { renderHook } from '@testing-library/react-hooks'
-import { useCounter } from './counter'
-
-it('should increment counter after delay', async () => {
-  const originalError = console.error
-  console.error = jest.fn()
-
-  try {
-    const { result, waitForNextUpdate } = renderHook(() => useCounter())
-
-    result.current.incrementAsync()
-
-    await waitForNextUpdate()
-
-    expect(result.current.count).toBe(1)
-  } finally {
-    console.error = originalError
-  }
-})
-```
 
 ## Errors
 
