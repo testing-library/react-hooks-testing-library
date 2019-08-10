@@ -66,7 +66,7 @@ error that says:
 
 This is caused by the `react/display-name` rule and although it's unlikely to cause you any issues,
 it's best to take steps to remove it. If you feel strongly about not having a separate `wrapper`
-variable, you can disable the error for the test file but adding a special comment to the top of the
+variable, you can disable the error for the test file by adding a special comment to the top of the
 file:
 
 ```js
