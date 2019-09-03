@@ -129,6 +129,15 @@
       "contributions": [
         "blog"
       ]
+    },
+    {
+      "login": "gillchristian",
+      "name": "Christian Gill",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/8309423?v=4",
+      "profile": "https://gillchristian.xyz",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"

@@ -65,6 +65,10 @@ You may have also noticed that we also wrapped the `increment` call in `act`. Th
 how our hook will act in a browser, allowing us to update the values within it. For more details on
 `act`, please see the [React documentation](https://fb.me/react-wrap-tests-with-act).
 
+**NOTE**: There's a gottcha with updates. `renderHook` mutates the value of `current` when updates
+happen so you cannot destructure it's values as the assignment will make a copy locking into the
+value at that time.
+
 ## Providing Props
 
 Sometimes a hook relies on the props passed to it in order to do it's thing. For example the

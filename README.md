@@ -27,7 +27,7 @@
 [![downloads](https://img.shields.io/npm/dm/@testing-library/react-hooks.svg?style=flat-square)](http://www.npmtrends.com/@testing-library/react-hooks)
 [![MIT License](https://img.shields.io/npm/l/@testing-library/react-hooks.svg?style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/blob/master/LICENSE.md)
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/blob/master/CODE_OF_CONDUCT.md)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9a8f27a5-df38-4910-a248-4908b1ba29a7/deploy-status)](https://app.netlify.com/sites/react-hooks-testing-library/deploys)
@@ -155,7 +155,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/mtinner"><img src="https://avatars0.githubusercontent.com/u/5487448?v=4" width="100px;" alt="Marcel Tinner"/><br /><sub><b>Marcel Tinner</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=mtinner" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/FredyC"><img src="https://avatars0.githubusercontent.com/u/1096340?v=4" width="100px;" alt="Daniel K."/><br /><sub><b>Daniel K.</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/issues?q=author%3AFredyC" title="Bug reports">🐛</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=FredyC" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/VinceMalone"><img src="https://avatars0.githubusercontent.com/u/2516349?v=4" width="100px;" alt="Vince Malone"/><br /><sub><b>Vince Malone</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=VinceMalone" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/doppelmutzi"><img src="https://avatars1.githubusercontent.com/u/4130968?v=4" width="100px;" alt="doppelmutzi"/><br /><sub><b>doppelmutzi</b></sub></a><br /><a href="#blog-doppelmutzi" title="Blogposts">📝</a></td>
+    <td align="center"><a href="https://github.com/doppelmutzi"><img src="https://avatars1.githubusercontent.com/u/4130968?v=4" width="100px;" alt="Sebastian Weber"/><br /><sub><b>Sebastian Weber</b></sub></a><br /><a href="#blog-doppelmutzi" title="Blogposts">📝</a></td>
+    <td align="center"><a href="https://gillchristian.xyz"><img src="https://avatars2.githubusercontent.com/u/8309423?v=4" width="100px;" alt="Christian Gill"/><br /><sub><b>Christian Gill</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=gillchristian" title="Documentation">📖</a></td>
   </tr>
 </table>
 
