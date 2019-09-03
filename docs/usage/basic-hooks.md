@@ -66,7 +66,7 @@ how our hook will act in a browser, allowing us to update the values within it. 
 `act`, please see the [React documentation](https://fb.me/react-wrap-tests-with-act).
 
 **NOTE**: There's a gottcha with updates. `renderHook` mutates the value of `current` when updates
-happen so you cannot destructure it's values as the assignment will make a copy locking into the
+happen so you cannot destructure its values as the assignment will make a copy locking into the
 value at that time.
 
 ## Providing Props
