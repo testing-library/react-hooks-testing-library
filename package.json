@@ -48,7 +48,7 @@
     "@babel/plugin-transform-runtime": "7.5.5",
     "@babel/preset-env": "7.5.5",
     "@babel/preset-react": "7.0.0",
-    "all-contributors-cli": "6.8.2",
+    "all-contributors-cli": "6.9.0",
     "babel-eslint": "10.0.3",
     "babel-plugin-module-resolver": "3.2.0",
     "codecov": "3.5.0",
