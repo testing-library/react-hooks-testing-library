@@ -41,12 +41,12 @@
     "@types/react-test-renderer": ">=16.9.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.5.5",
-    "@babel/core": "7.5.5",
+    "@babel/cli": "7.6.0",
+    "@babel/core": "7.6.0",
     "@babel/plugin-proposal-object-rest-spread": "7.5.5",
-    "@babel/plugin-transform-modules-commonjs": "7.5.0",
-    "@babel/plugin-transform-runtime": "7.5.5",
-    "@babel/preset-env": "7.5.5",
+    "@babel/plugin-transform-modules-commonjs": "7.6.0",
+    "@babel/plugin-transform-runtime": "7.6.0",
+    "@babel/preset-env": "7.6.0",
     "@babel/preset-react": "7.0.0",
     "all-contributors-cli": "6.9.0",
     "babel-eslint": "10.0.3",
