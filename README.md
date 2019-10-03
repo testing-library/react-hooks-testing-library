@@ -126,8 +126,7 @@ npm install react@^16.9.0
 npm install --save-dev react-test-renderer@^16.9.0
 ```
 
-Both of these dependecies must be installed as at least version `16.9.0` to be compatible with
-`react-hooks-testing-library`.
+> **NOTE: The minimum supported version of `react` and `react-test-renderer` is `^16.9.0`.**
 
 ## API
 
