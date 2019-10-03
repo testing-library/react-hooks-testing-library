@@ -3,7 +3,6 @@
   "version": "2.0.1",
   "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
   "main": "lib/index.js",
-  "typings": "typings/index.d.ts",
   "keywords": [
     "testing",
     "react",
@@ -14,7 +13,6 @@
   "files": [
     "lib",
     "src",
-    "typings",
     "README.md",
     "LICENSE.md"
   ],
@@ -37,8 +35,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.4",
-    "@types/react": ">=16.9.0",
-    "@types/react-test-renderer": ">=16.9.0"
+    "@types/testing-library__react-hooks": "^2.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.6.2",
@@ -64,9 +61,7 @@
     "prettier-eslint": "9.0.0",
     "prettier-eslint-cli": "5.0.0",
     "react": "16.10.1",
-    "react-test-renderer": "16.10.1",
-    "typescript": "3.6.3",
-    "typings-tester": "0.3.2"
+    "react-test-renderer": "16.10.1"
   },
   "peerDependencies": {
     "react": ">=16.9.0",

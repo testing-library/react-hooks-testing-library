@@ -27,12 +27,10 @@ select the added contribution type.
 Please make sure to run the tests before you commit your changes. You can do so by running
 `npm test`.
 
-### Add typings
+### Update Typings
 
-If your PR introduced some changes in the API, you are more than welcome to modify the Typescript
-type definition to reflect those changes. Just modify the `index.d.ts` file accordingly. If you have
-never seen Typescript definitions before, you can read more about it in its
-[documentation pages](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html)
+The TypeScript type definitions are in the
+[DefinitelyTyped repo](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/testing-library__react-hooks)
 
 ## Help needed
 
