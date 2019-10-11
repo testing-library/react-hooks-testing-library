@@ -173,7 +173,7 @@ value changes for both the setup and cleanup of the `useEffect` call:
 ```js
 import { useEffect } from 'react'
 import { renderHook } from "react-hooks-testing-library"
-import sideEffect from './sideEffect
+import sideEffect from './sideEffect'
 
 test("should clean up side effect", () => {
   let id = "first"
@@ -200,7 +200,7 @@ clean up the effect, allowing the test to pass as expected:
 ```js
 import { useEffect } from 'react'
 import { renderHook } from "react-hooks-testing-library"
-import sideEffect from './sideEffect
+import sideEffect from './sideEffect'
 
 test("should clean up side effect", () => {
   const { rerender } = renderHook(
