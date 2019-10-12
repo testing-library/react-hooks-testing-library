@@ -36,7 +36,7 @@ export function useCounter(initialValue = 0) {
 In our test, we simply use `CounterStepProvider` as the `wrapper` when rendering the hook:
 
 ```js
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react-hooks'
 import { CounterStepProvider, useCounter } from './counter'
 
 test('should use custom step when incrementing', () => {
@@ -72,7 +72,7 @@ file:
 ```js
 /* eslint-disable react/display-name */
 
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react-hooks'
 import { CounterStepProvider, useCounter } from './counter'
 
 test('should use custom step when incrementing', () => {
@@ -118,7 +118,7 @@ export function useCounter(initialValue = 0) {
 To test `incrementAsync` we need to `await waitForNextUpdate()` before the make our assertions:
 
 ```js
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react-hooks'
 import { useCounter } from './counter'
 
 test('should increment counter after delay', async () => {
