@@ -34,7 +34,7 @@ more hooks for testing.
 The `props` passed into the callback will be the `initialProps` provided in the `options` to
 `renderHook`, unless new props are provided by a subsequent `rerender` call.
 
-### `options`
+### `options` (Optional)
 
 An options object to modify the execution of the `callback` function. See the
 [`renderHook` Options](/reference/api#renderhook-options) section for more details.
@@ -68,15 +68,6 @@ The `renderHook` method returns an object that has a following properties:
 The `current` value or the `result` will reflect whatever is returned from the `callback` passed to
 `renderHook`. Any thrown values will be reflected in the `error` value of the `result`.
 
-### `waitForNextUpdate`
-
-```js
-function waitForNextUpdate(): Promise<void>
-```
-
-- `waitForNextUpdate` (`function`) - returns a `Promise` that resolves the next time the hook
-  renders, commonly when state is updated as the result of a asynchronous action
-
 ### `rerender`
 
 ```js
@@ -96,9 +87,39 @@ function unmount(): void
 A function to unmount the test component. This is commonly used to trigger cleanup effects for
 `useEffect` hooks.
 
+### `...asyncUtils`
+
+Utilities to assist with testing asynchronous behaviour. See the
+[Async Utils](/reference/api#async-utils) section for more details.
+
 ---
 
 ## `act`
 
 This is the same [`act` function](https://reactjs.org/docs/test-utils.html#act) that is exported by
 `react-test-renderer`.
+
+---
+
+## Async Utilities
+
+### `waitForNextUpdate`
+
+```js
+function waitForNextUpdate(options?: WaitOptions): Promise<void>
+```
+
+`waitForNextUpdate` returns a `Promise` that resolves the next time the hook renders, commonly when
+state is updated as the result of an asynchronous update.
+
+An options object is accepted as the first parameter to modify it's execution. See the
+[`wait` Options](/reference/api#wait-options) section for more details.
+
+### `wait` Options
+
+The async utilities accepts the following options:
+
+#### `timeout`
+
+The amount of time in milliseconds (ms) to wait. By default, the `wait` utilities will wait
+indefinitely.
