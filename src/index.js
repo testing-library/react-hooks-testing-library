@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 import { act, create } from 'react-test-renderer'
-
-let cleanupCallbacks = []
+import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
 function TestHook({ callback, hookProps, onError, children }) {
   try {
@@ -77,12 +76,12 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
 
   function unmountHook() {
     act(() => {
-      cleanupCallbacks = cleanupCallbacks.filter((cb) => cb !== unmountHook)
+      removeCleanup(unmountHook)
       unmount()
     })
   }
 
-  cleanupCallbacks.push(unmountHook)
+  addCleanup(unmountHook)
 
   let waitingForNextUpdate = null
   const resolveOnNextUpdate = (resolve) => {
@@ -106,20 +105,6 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
     },
     unmount: unmountHook
   }
-}
-
-async function cleanup() {
-  await act(async () => {
-    await act(async () => {})
-    cleanupCallbacks.forEach((cb) => cb())
-    cleanupCallbacks = []
-  })
-}
-
-if (typeof afterEach === 'function' && !process.env.RHTL_SKIP_AUTO_CLEANUP) {
-  afterEach(async () => {
-    await cleanup()
-  })
 }
 
 export { renderHook, cleanup, act }
