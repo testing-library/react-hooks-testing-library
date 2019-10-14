@@ -108,6 +108,10 @@ This is the same [`act` function](https://reactjs.org/docs/test-utils.html#act) 
 
 ## `cleanup`
 
+```js
+function cleanup: Promise<void>
+```
+
 Unmounts any rendered hooks rendered with `renderHook`, ensuring all effects have been flushed.
 
 > Please note that this is done automatically if the testing framework you're using supports the
@@ -116,10 +120,6 @@ Unmounts any rendered hooks rendered with `renderHook`, ensuring all effects hav
 >
 > Setting the `RHTL_SKIP_AUTO_CLEANUP` environment variable to `true` before the
 > `@testing-library/react-hooks` is imported will disable this feature.
-
-```js
-async function cleanup: void
-```
 
 The `cleanup` function should be called after each test to ensure that previously rendered hooks
 will not have any unintended side-effects on the following tests.
