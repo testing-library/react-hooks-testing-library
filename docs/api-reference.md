@@ -103,17 +103,32 @@ This is the same [`act` function](https://reactjs.org/docs/test-utils.html#act) 
 
 ## Async Utilities
 
+### `wait`
+
+```js
+function wait(callback: function(): boolean|void, options?: WaitOptions): Promise<void>
+```
+
+Returns a `Promise` that resolves if the provided callback executes without exception and returns a
+truthy or `undefined` value. The callback is tested after each render of the hook.
+
+It is safe to use the [`result` of `renderHook`](/reference/api#result) in the callback to perform
+assertion or to test values.
+
+See the [`wait` Options](/reference/api#wait-options) section for more details on the optional
+`options` parameter.
+
 ### `waitForNextUpdate`
 
 ```js
 function waitForNextUpdate(options?: WaitOptions): Promise<void>
 ```
 
-`waitForNextUpdate` returns a `Promise` that resolves the next time the hook renders, commonly when
-state is updated as the result of an asynchronous update.
+Returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as
+the result of an asynchronous update.
 
-An options object is accepted as the first parameter to modify it's execution. See the
-[`wait` Options](/reference/api#wait-options) section for more details.
+See the [`wait` Options](/reference/api#wait-options) section for more details on the optional
+`options` parameter.
 
 ### `wait` Options
 
@@ -121,5 +136,4 @@ The async utilities accepts the following options:
 
 #### `timeout`
 
-The amount of time in milliseconds (ms) to wait. By default, the `wait` utilities will wait
-indefinitely.
+The maximum amount of time in milliseconds (ms) to wait. By default, no timeout is applied.

@@ -1,5 +1,13 @@
 import { act } from 'react-test-renderer'
 
+function actForResult(callback) {
+  let value
+  act(() => {
+    value = callback()
+  })
+  return value
+}
+
 function createTimeoutError(utilName, timeout) {
   const timeoutError = new Error(`Timed out in ${utilName} after ${timeout}ms.`)
   timeoutError.timeout = true
@@ -32,7 +40,27 @@ function asyncUtils(addResolver) {
     return await nextUpdatePromise
   }
 
+  const wait = async (callback, options = {}) => {
+    const initialTimeout = options.timeout
+    while (true) {
+      const startTime = Date.now()
+      try {
+        await waitForNextUpdate(options)
+        const callbackResult = actForResult(callback)
+        if (callbackResult || callbackResult === undefined) {
+          break
+        }
+      } catch (e) {
+        if (e.timeout) {
+          throw createTimeoutError('wait', initialTimeout)
+        }
+      }
+      options.timeout -= Date.now() - startTime
+    }
+  }
+
   return {
+    wait,
     waitForNextUpdate
   }
 }
