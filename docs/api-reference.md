@@ -110,10 +110,10 @@ function wait(callback: function(): boolean|void, options?: WaitOptions): Promis
 ```
 
 Returns a `Promise` that resolves if the provided callback executes without exception and returns a
-truthy or `undefined` value. The callback is tested after each render of the hook.
+truthy or `undefined` value. It is safe to use the [`result` of `renderHook`](/reference/api#result)
+in the callback to perform assertion or to test values.
 
-It is safe to use the [`result` of `renderHook`](/reference/api#result) in the callback to perform
-assertion or to test values.
+The callback is tested after each render of the hook.
 
 See the [`wait` Options](/reference/api#wait-options) section for more details on the optional
 `options` parameter.
@@ -126,6 +126,21 @@ function waitForNextUpdate(options?: WaitOptions): Promise<void>
 
 Returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as
 the result of an asynchronous update.
+
+See the [`wait` Options](/reference/api#wait-options) section for more details on the optional
+`options` parameter.
+
+### `waitForValueToChange`
+
+```js
+function waitForValueToChange(selector: function(): any, options?: WaitOptions): Promise<void>
+```
+
+Returns a `Promise` that resolves if the value returned from the provided selector changes. It
+expected that the [`result` of `renderHook`](/reference/api#result) to select the value for
+comparison.
+
+The value is selected for comparison after each render of the hook.
 
 See the [`wait` Options](/reference/api#wait-options) section for more details on the optional
 `options` parameter.

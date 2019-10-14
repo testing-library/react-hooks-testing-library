@@ -59,9 +59,30 @@ function asyncUtils(addResolver) {
     }
   }
 
+  const waitForValueToChange = async (selector, options = {}) => {
+    const initialTimeout = options.timeout
+    const initialValue = actForResult(selector)
+    while (true) {
+      const startTime = Date.now()
+      try {
+        await waitForNextUpdate(options)
+        if (actForResult(selector) !== initialValue) {
+          break
+        }
+      } catch (e) {
+        if (e.timeout) {
+          throw createTimeoutError('waitForValueToChange', initialTimeout)
+        }
+        throw e
+      }
+      options.timeout -= Date.now() - startTime
+    }
+  }
+
   return {
     wait,
-    waitForNextUpdate
+    waitForNextUpdate,
+    waitForValueToChange
   }
 }
 

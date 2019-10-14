@@ -101,4 +101,45 @@ describe('async hook tests', () => {
       )
     ).rejects.toThrow(Error('Timed out in wait after 75ms.'))
   })
+
+  test('should wait for value to change', async () => {
+    const { result, waitForValueToChange } = renderHook(() =>
+      useSequence('first', 'second', 'third')
+    )
+
+    expect(result.current).toBe('first')
+
+    await waitForValueToChange(() => result.current === 'third')
+
+    expect(result.current).toBe('third')
+  })
+
+  test('should reject if timeout exceeded when waiting for value to change', async () => {
+    const { result, waitForValueToChange } = renderHook(() =>
+      useSequence('first', 'second', 'third')
+    )
+
+    expect(result.current).toBe('first')
+
+    await expect(
+      waitForValueToChange(() => result.current === 'third', {
+        timeout: 75
+      })
+    ).rejects.toThrow(Error('Timed out in waitForValueToChange after 75ms.'))
+  })
+
+  test('should reject if selector throws error', async () => {
+    const { result, waitForValueToChange } = renderHook(() => useSequence('first', 'second'))
+
+    expect(result.current).toBe('first')
+
+    await expect(
+      waitForValueToChange(() => {
+        if (result.current === 'second') {
+          throw new Error('Something Unexpected')
+        }
+        return result.current
+      })
+    ).rejects.toThrow(Error('Something Unexpected'))
+  })
 })
