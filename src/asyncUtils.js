@@ -1,14 +1,6 @@
 import { act } from 'react-test-renderer'
 
-function actForResult(callback) {
-  let value
-  act(() => {
-    value = callback()
-  })
-  return value
-}
-
-function createTimeoutError(utilName, timeout) {
+function createTimeoutError(utilName, { timeout }) {
   const timeoutError = new Error(`Timed out in ${utilName} after ${timeout}ms.`)
   timeoutError.timeout = true
   return timeoutError
@@ -17,65 +9,77 @@ function createTimeoutError(utilName, timeout) {
 function asyncUtils(addResolver) {
   let nextUpdatePromise = null
 
-  const resolveOnNextUpdate = ({ timeout }) => (resolve, reject) => {
-    let timeoutId
-    if (timeout > 0) {
-      timeoutId = setTimeout(
-        () => reject(createTimeoutError('waitForNextUpdate', timeout)),
-        timeout
-      )
-    }
-    addResolver(() => {
-      clearTimeout(timeoutId)
-      nextUpdatePromise = null
-      resolve()
-    })
-  }
-
   const waitForNextUpdate = async (options = {}) => {
     if (!nextUpdatePromise) {
-      nextUpdatePromise = new Promise(resolveOnNextUpdate(options))
+      const resolveOnNextUpdate = (resolve, reject) => {
+        let timeoutId
+        if (options.timeout > 0) {
+          timeoutId = setTimeout(
+            () => reject(createTimeoutError('waitForNextUpdate', options)),
+            options.timeout
+          )
+        }
+        addResolver(() => {
+          clearTimeout(timeoutId)
+          nextUpdatePromise = null
+          resolve()
+        })
+      }
+
+      nextUpdatePromise = new Promise(resolveOnNextUpdate)
       await act(() => nextUpdatePromise)
     }
     return await nextUpdatePromise
   }
 
-  const wait = async (callback, options = {}) => {
-    const initialTimeout = options.timeout
-    while (true) {
-      const startTime = Date.now()
+  const wait = async (callback, { timeout, suppressErrors = true } = {}) => {
+    const checkResult = () => {
       try {
-        await waitForNextUpdate(options)
-        const callbackResult = actForResult(callback)
-        if (callbackResult || callbackResult === undefined) {
-          break
-        }
+        const callbackResult = callback()
+        return callbackResult || callbackResult === undefined
       } catch (e) {
-        if (e.timeout) {
-          throw createTimeoutError('wait', initialTimeout)
+        if (!suppressErrors) {
+          throw e
         }
       }
-      options.timeout -= Date.now() - startTime
+    }
+
+    const waitForResult = async () => {
+      const initialTimeout = timeout
+      while (true) {
+        const startTime = Date.now()
+        try {
+          await waitForNextUpdate({ timeout })
+          if (checkResult()) {
+            return
+          }
+        } catch (e) {
+          if (e.timeout) {
+            throw createTimeoutError('wait', { timeout: initialTimeout })
+          }
+          throw e
+        }
+        timeout -= Date.now() - startTime
+      }
+    }
+
+    if (!checkResult()) {
+      await waitForResult()
     }
   }
 
   const waitForValueToChange = async (selector, options = {}) => {
-    const initialTimeout = options.timeout
-    const initialValue = actForResult(selector)
-    while (true) {
-      const startTime = Date.now()
-      try {
-        await waitForNextUpdate(options)
-        if (actForResult(selector) !== initialValue) {
-          break
-        }
-      } catch (e) {
-        if (e.timeout) {
-          throw createTimeoutError('waitForValueToChange', initialTimeout)
-        }
-        throw e
+    const initialValue = selector()
+    try {
+      await wait(() => selector() !== initialValue, {
+        suppressErrors: false,
+        ...options
+      })
+    } catch (e) {
+      if (e.timeout) {
+        throw createTimeoutError('waitForValueToChange', options)
       }
-      options.timeout -= Date.now() - startTime
+      throw e
     }
   }
 

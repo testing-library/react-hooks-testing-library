@@ -103,6 +103,18 @@ This is the same [`act` function](https://reactjs.org/docs/test-utils.html#act) 
 
 ## Async Utilities
 
+### `waitForNextUpdate`
+
+```js
+function waitForNextUpdate(options?: WaitOptions): Promise<void>
+```
+
+Returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as
+the result of an asynchronous update.
+
+See the [`wait` Options](/reference/api#wait-options) section for more details on the available
+`options`.
+
 ### `wait`
 
 ```js
@@ -113,22 +125,11 @@ Returns a `Promise` that resolves if the provided callback executes without exce
 truthy or `undefined` value. It is safe to use the [`result` of `renderHook`](/reference/api#result)
 in the callback to perform assertion or to test values.
 
-The callback is tested after each render of the hook.
+The callback is tested after each render of the hook. By default, errors raised from the callback
+will be suppressed (`suppressErrors = true`).
 
-See the [`wait` Options](/reference/api#wait-options) section for more details on the optional
-`options` parameter.
-
-### `waitForNextUpdate`
-
-```js
-function waitForNextUpdate(options?: WaitOptions): Promise<void>
-```
-
-Returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as
-the result of an asynchronous update.
-
-See the [`wait` Options](/reference/api#wait-options) section for more details on the optional
-`options` parameter.
+See the [`wait` Options](/reference/api#wait-options) section for more details on the available
+`options`.
 
 ### `waitForValueToChange`
 
@@ -140,10 +141,11 @@ Returns a `Promise` that resolves if the value returned from the provided select
 expected that the [`result` of `renderHook`](/reference/api#result) to select the value for
 comparison.
 
-The value is selected for comparison after each render of the hook.
+The value is selected for comparison after each render of the hook. By default, errors raised from
+selecting the value will not be suppressed (`suppressErrors = false`).
 
-See the [`wait` Options](/reference/api#wait-options) section for more details on the optional
-`options` parameter.
+See the [`wait` Options](/reference/api#wait-options) section for more details on the available
+`options`.
 
 ### `wait` Options
 
@@ -152,3 +154,10 @@ The async utilities accepts the following options:
 #### `timeout`
 
 The maximum amount of time in milliseconds (ms) to wait. By default, no timeout is applied.
+
+#### `suppressErrors`
+
+If this option is set to `true`, any errors that occur while waiting are treated as a failed check.
+If this option is set to `false`, any errors that occur while waiting cause the promise to be
+rejected. Please refer to the [utility descriptions](/reference/api#async-utilities) for the default
+values of this option (if applicable).

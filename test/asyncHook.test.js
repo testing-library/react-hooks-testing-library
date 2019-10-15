@@ -9,8 +9,10 @@ describe('async hook tests', () => {
 
     useEffect(() => {
       const interval = setInterval(() => {
-        setValue(otherValues[index.current])
-        index.current++
+        setValue(otherValues[index.current++])
+        if (index.current === otherValues.length) {
+          clearInterval(interval)
+        }
       }, 50)
       return () => {
         clearInterval(interval)
@@ -77,6 +79,57 @@ describe('async hook tests', () => {
     expect(complete).toBe(true)
   })
 
+  test('should not hang if expectation is already passing', async () => {
+    const { result, wait } = renderHook(() => useSequence('first', 'second'))
+
+    expect(result.current).toBe('first')
+
+    let complete = false
+    await wait(() => {
+      expect(result.current).toBe('first')
+      complete = true
+    })
+    expect(complete).toBe(true)
+  })
+
+  test('should reject if callback throws error', async () => {
+    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
+
+    expect(result.current).toBe('first')
+
+    await expect(
+      wait(
+        () => {
+          console.log(result.current)
+          if (result.current === 'second') {
+            throw new Error('Something Unexpected')
+          }
+          return result.current === 'third'
+        },
+        {
+          suppressErrors: false
+        }
+      )
+    ).rejects.toThrow(Error('Something Unexpected'))
+  })
+
+  test('should reject if callback immediately throws error', async () => {
+    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
+
+    expect(result.current).toBe('first')
+
+    await expect(
+      wait(
+        () => {
+          throw new Error('Something Unexpected')
+        },
+        {
+          suppressErrors: false
+        }
+      )
+    ).rejects.toThrow(Error('Something Unexpected'))
+  })
+
   test('should wait for truthy value', async () => {
     const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
 
@@ -141,5 +194,25 @@ describe('async hook tests', () => {
         return result.current
       })
     ).rejects.toThrow(Error('Something Unexpected'))
+  })
+
+  test('should not reject if selector throws error and suppress errors option is enabled', async () => {
+    const { result, waitForValueToChange } = renderHook(() =>
+      useSequence('first', 'second', 'third')
+    )
+
+    expect(result.current).toBe('first')
+
+    await waitForValueToChange(
+      () => {
+        if (result.current === 'second') {
+          throw new Error('Something Unexpected')
+        }
+        return result.current === 'third'
+      },
+      { suppressErrors: true }
+    )
+
+    expect(result.current).toBe('third')
   })
 })
