@@ -38,7 +38,6 @@ Remove any items that are relevant to your changes
 
 - [ ] Documentation updated
 - [ ] Tests
-- [ ] Typescript definitions updated
 - [ ] Ready to be merged
       <!-- In your opinion, is this ready to be merged as soon as it's reviewed? -->
 - [ ] Added myself to contributors table
