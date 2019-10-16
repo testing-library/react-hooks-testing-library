@@ -9,6 +9,7 @@ route: '/reference/api'
 
 - [`renderHook`](/reference/api#renderhook)
 - [`act`](/reference/api#act)
+- [`cleanup`](/reference/api#cleanup)
 
 ---
 
@@ -102,3 +103,23 @@ A function to unmount the test component. This is commonly used to trigger clean
 
 This is the same [`act` function](https://reactjs.org/docs/test-utils.html#act) that is exported by
 `react-test-renderer`.
+
+---
+
+## `cleanup`
+
+```js
+function cleanup: Promise<void>
+```
+
+Unmounts any rendered hooks rendered with `renderHook`, ensuring all effects have been flushed.
+
+> Please note that this is done automatically if the testing framework you're using supports the
+> `afterEach` global (like mocha, Jest, and Jasmine). If not, you will need to do manual cleanups
+> after each test.
+>
+> Setting the `RHTL_SKIP_AUTO_CLEANUP` environment variable to `true` before the
+> `@testing-library/react-hooks` is imported will disable this feature.
+
+The `cleanup` function should be called after each test to ensure that previously rendered hooks
+will not have any unintended side-effects on the following tests.
