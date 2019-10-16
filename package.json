@@ -1,6 +1,6 @@
 {
   "name": "@testing-library/react-hooks",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
   "main": "lib/index.js",
   "keywords": [
