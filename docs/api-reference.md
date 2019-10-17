@@ -115,11 +115,28 @@ function cleanup: Promise<void>
 Unmounts any rendered hooks rendered with `renderHook`, ensuring all effects have been flushed.
 
 > Please note that this is done automatically if the testing framework you're using supports the
-> `afterEach` global (like mocha, Jest, and Jasmine). If not, you will need to do manual cleanups
+> `afterEach` global (like Jest, mocha and Jasmine). If not, you will need to do manual cleanups
 > after each test.
->
-> Setting the `RHTL_SKIP_AUTO_CLEANUP` environment variable to `true` before the
-> `@testing-library/react-hooks` is imported will disable this feature.
 
 The `cleanup` function should be called after each test to ensure that previously rendered hooks
 will not have any unintended side-effects on the following tests.
+
+### Skipping Auto-Cleanup
+
+Importing `@testing-library/react-hooks/dont-cleanup-after-each.js` in test setup files will disable
+the auto-cleanup feature.
+
+For example, in [Jest](https://jestjs.io/) this can be added to your
+[Jest config](https://jestjs.io/docs/configuration):
+
+```js
+module.exports = {
+  setupFilesAfterEnv: [
+    '@testing-library/react-hooks/dont-cleanup-after-each.js'
+    // other setup files
+  ]
+}
+```
+
+Alternatively, setting the `RHTL_SKIP_AUTO_CLEANUP` environment variable to `true` before importing
+`@testing-library/react-hooks` will also disable this feature.
