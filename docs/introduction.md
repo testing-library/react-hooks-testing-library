@@ -53,7 +53,7 @@ the results.
 
 ### When not to use this library
 
-1. Your hook is defined along side a component and is only used there
+1. Your hook is defined alongside a component and is only used there
 2. Your hook is easy to test by just testing the components using it
 
 ## Installation
@@ -83,5 +83,5 @@ npm install --save-dev react-test-renderer@^16.9.0
 ## Testing Framework
 
 In order to run tests, you will probably want to be using a test framework. If you have not already
-got one, we recommend using [jest](https://jestjs.io/), but this library should work without issues
+got one, we recommend using [Jest](https://jestjs.io/), but this library should work without issues
 with any of the alternatives.

@@ -25,7 +25,7 @@ function renderHook(
 Renders a test component that will call the provided `callback`, including any hooks it calls, every
 time it renders.
 
-The `renderHook` function accept the following arguments:
+The `renderHook` function accepts the following arguments:
 
 ### `callback`
 
@@ -42,7 +42,7 @@ An options object to modify the execution of the `callback` function. See the
 
 ## `renderHook` Options
 
-The `renderHook` function accepts the following options as the second parameter:
+The `renderHook` method accepts the following options as the second parameter:
 
 ### `initialProps`
 
@@ -55,7 +55,7 @@ providers from `React.createContext` for the hook to access with `useContext`.
 
 ## `renderHook` Result
 
-The `renderHook` method returns an object that has a following properties:
+The `renderHook` method returns an object that has the following properties:
 
 ### `result`
 
@@ -76,7 +76,7 @@ function waitForNextUpdate(): Promise<void>
 ```
 
 - `waitForNextUpdate` (`function`) - returns a `Promise` that resolves the next time the hook
-  renders, commonly when state is updated as the result of a asynchronous action
+  renders, commonly when state is updated as the result of an asynchronous action.
 
 ### `rerender`
 
@@ -85,8 +85,7 @@ function rerender(newProps?: any): void
 ```
 
 A function to rerender the test component, causing any hooks to be recalculated. If `newProps` are
-passed, the will replace the `initialProps` passed to the `callback` function for the rerender any
-subsequent renders.
+passed, they will replace the `callback` function's `initialProps` for subsequent rerenders.
 
 ### `unmount`
 
