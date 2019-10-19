@@ -42,7 +42,7 @@ An options object to modify the execution of the `callback` function. See the
 
 ## `renderHook` Options
 
-The `renderHook` method accepts the following options as the second parameter:
+The `renderHook` function accepts the following options as the second parameter:
 
 ### `initialProps`
 
@@ -55,7 +55,7 @@ providers from `React.createContext` for the hook to access with `useContext`.
 
 ## `renderHook` Result
 
-The `renderHook` method returns an object that has the following properties:
+The `renderHook` function returns an object that has the following properties:
 
 ### `result`
 
