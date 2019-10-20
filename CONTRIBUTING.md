@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for wanting to make contribution and wanting to improve this library for everyone!
+Thanks for wanting to make a contribution and wanting to improve this library for everyone!
 
 ## Project setup
 
@@ -29,12 +29,11 @@ Please make sure to run the tests before you commit your changes. You can do so 
 
 ### Update Typings
 
-The TypeScript type definitions are in the
-[DefinitelyTyped repo](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/testing-library__react-hooks)
+The TypeScript type definitions can be found in the [DefinitelyTyped repo](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/testing-library__react-hooks).
 
 ## Help needed
 
-Please checkout the
-[the open issues](https://github.com/testing-library/react-hooks-testing-library/issues)
+Please check out the
+[the open issues](https://github.com/testing-library/react-hooks-testing-library/issues).
 
 Also, please watch the repo and respond to questions/bug reports/feature requests! Thanks!

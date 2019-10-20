@@ -33,7 +33,7 @@ merge of your pull request!
 
 <!--
 To check an item, place an "x" in the box like so: "- [x] Documentation"
-Remove any items that are relevant to your changes
+Remove items that are irrelevant to your changes.
 -->
 
 - [ ] Documentation updated
