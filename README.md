@@ -27,7 +27,7 @@
 [![downloads](https://img.shields.io/npm/dm/@testing-library/react-hooks.svg?style=flat-square)](http://www.npmtrends.com/@testing-library/react-hooks)
 [![MIT License](https://img.shields.io/npm/l/@testing-library/react-hooks.svg?style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/blob/master/LICENSE.md)
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/blob/master/CODE_OF_CONDUCT.md)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9a8f27a5-df38-4910-a248-4908b1ba29a7/deploy-status)](https://app.netlify.com/sites/react-hooks-testing-library/deploys)
