@@ -14,7 +14,8 @@
     "lib",
     "src",
     "README.md",
-    "LICENSE.md"
+    "LICENSE.md",
+    "dont-cleanup-after-each.js"
   ],
   "author": "Michael Peyper <mpeyper7@gmail.com>",
   "repository": {
