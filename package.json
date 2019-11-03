@@ -1,6 +1,6 @@
 {
   "name": "@testing-library/react-hooks",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
   "main": "lib/index.js",
   "keywords": [
@@ -13,8 +13,7 @@
   "files": [
     "lib",
     "src",
-    "README.md",
-    "LICENSE.md"
+    "dont-cleanup-after-each.js"
   ],
   "author": "Michael Peyper <mpeyper7@gmail.com>",
   "repository": {
@@ -35,7 +34,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.4",
-    "@types/testing-library__react-hooks": "^2.0.0"
+    "@types/testing-library__react-hooks": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.6.4",
@@ -45,14 +44,14 @@
     "@babel/plugin-transform-runtime": "7.6.2",
     "@babel/preset-env": "7.6.3",
     "@babel/preset-react": "7.6.3",
-    "all-contributors-cli": "6.9.1",
+    "all-contributors-cli": "6.9.3",
     "babel-eslint": "10.0.3",
     "babel-plugin-module-resolver": "3.2.0",
     "codecov": "3.6.1",
     "docz": "1.3.2",
     "docz-theme-default": "1.2.0",
-    "eslint": "6.5.1",
-    "eslint-config-prettier": "6.4.0",
+    "eslint": "6.6.0",
+    "eslint-config-prettier": "6.5.0",
     "eslint-plugin-prettier": "3.1.1",
     "husky": "3.0.9",
     "jest": "24.9.0",
@@ -60,8 +59,8 @@
     "prettier": "1.18.2",
     "prettier-eslint": "9.0.0",
     "prettier-eslint-cli": "5.0.0",
-    "react": "16.10.2",
-    "react-test-renderer": "16.10.2"
+    "react": "16.11.0",
+    "react-test-renderer": "16.11.0"
   },
   "peerDependencies": {
     "react": ">=16.9.0",

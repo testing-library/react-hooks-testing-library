@@ -100,7 +100,6 @@ describe('async hook tests', () => {
     await expect(
       wait(
         () => {
-          console.log(result.current)
           if (result.current === 'second') {
             throw new Error('Something Unexpected')
           }

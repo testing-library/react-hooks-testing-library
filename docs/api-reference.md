@@ -25,7 +25,7 @@ function renderHook(
 Renders a test component that will call the provided `callback`, including any hooks it calls, every
 time it renders.
 
-The `renderHook` function accept the following arguments:
+The `renderHook` function accepts the following arguments:
 
 ### `callback`
 
@@ -55,7 +55,7 @@ providers from `React.createContext` for the hook to access with `useContext`.
 
 ## `renderHook` Result
 
-The `renderHook` method returns an object that has a following properties:
+The `renderHook` function returns an object that has the following properties:
 
 ### `result`
 
@@ -76,8 +76,7 @@ function rerender(newProps?: any): void
 ```
 
 A function to rerender the test component, causing any hooks to be recalculated. If `newProps` are
-passed, the will replace the `initialProps` passed to the `callback` function for the rerender any
-subsequent renders.
+passed, they will replace the `callback` function's `initialProps` for subsequent rerenders.
 
 ### `unmount`
 
@@ -91,7 +90,7 @@ A function to unmount the test component. This is commonly used to trigger clean
 ### `...asyncUtils`
 
 Utilities to assist with testing asynchronous behaviour. See the
-[Async Utils](/reference/api#async-utils) section for more details.
+[Async Utils](/reference/api#async-utilities) section for more details.
 
 ---
 
@@ -134,8 +133,16 @@ module.exports = {
 }
 ```
 
-Alternatively, setting the `RHTL_SKIP_AUTO_CLEANUP` environment variable to `true` before importing
-`@testing-library/react-hooks` will also disable this feature.
+Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` instead
+of the regular imports.
+
+```diff
+- import { renderHook, cleanup, act } from '@testing-library/react-hooks'
++ import { renderHook, cleanup, act } from '@testing-library/react-hooks/pure'
+```
+
+If neither of these approaches are suitable, setting the `RHTL_SKIP_AUTO_CLEANUP` environment
+variable to `true` before importing `@testing-library/react-hooks` will also disable this feature.
 
 ---
 
