@@ -1,9 +1,9 @@
-import { act } from 'react-test-renderer'
+import flushMicroTasks from './flush-microtasks'
 
 let cleanupCallbacks = []
 
 async function cleanup() {
-  await act(async () => {})
+  await flushMicroTasks()
   cleanupCallbacks.forEach((cb) => cb())
   cleanupCallbacks = []
 }
