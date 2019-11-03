@@ -137,5 +137,13 @@ module.exports = {
 }
 ```
 
-Alternatively, setting the `RHTL_SKIP_AUTO_CLEANUP` environment variable to `true` before importing
-`@testing-library/react-hooks` will also disable this feature.
+Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` instead
+of the regular imports.
+
+```diff
+- import { renderHook, cleanup, act } from '@testing-library/react-hooks'
++ import { renderHook, cleanup, act } from '@testing-library/react-hooks/pure'
+```
+
+If neither of these approaches are suitable, setting the `RHTL_SKIP_AUTO_CLEANUP` environment
+variable to `true` before importing `@testing-library/react-hooks` will also disable this feature.
