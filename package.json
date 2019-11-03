@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.4",
-    "@types/testing-library__react-hooks": "^2.0.0"
+    "@types/testing-library__react-hooks": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.6.4",
