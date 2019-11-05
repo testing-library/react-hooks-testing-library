@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { act, create } from 'react-test-renderer'
+import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
 function TestHook({ callback, hookProps, onError, children }) {
@@ -83,27 +84,16 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
 
   addCleanup(unmountHook)
 
-  let waitingForNextUpdate = null
-  const resolveOnNextUpdate = (resolve) => {
-    addResolver((...args) => {
-      waitingForNextUpdate = null
-      resolve(...args)
-    })
-  }
-
   return {
     result,
-    waitForNextUpdate: () => {
-      waitingForNextUpdate = waitingForNextUpdate || act(() => new Promise(resolveOnNextUpdate))
-      return waitingForNextUpdate
-    },
     rerender: (newProps = hookProps.current) => {
       hookProps.current = newProps
       act(() => {
         update(toRender())
       })
     },
-    unmount: unmountHook
+    unmount: unmountHook,
+    ...asyncUtils(addResolver)
   }
 }
 
