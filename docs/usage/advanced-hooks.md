@@ -9,7 +9,7 @@ route: '/usage/advanced-hooks'
 ## Context
 
 Often, a hook is going to need a value out of context. The `useContext` hook is really good for
-this, but it will often required a `Provider` to be wrapped around the component using the hook. We
+this, but it will often require a `Provider` to be wrapped around the component using the hook. We
 can use the `wrapper` option for `renderHook` to do just that.
 
 Let's change the `useCounter` example from the [Basic Hooks section](/usage/basic-hooks) to get a
