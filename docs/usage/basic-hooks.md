@@ -65,7 +65,7 @@ You may have also noticed that we also wrapped the `increment` call in `act`. Th
 how our hook will act in a browser, allowing us to update the values within it. For more details on
 `act`, please see the [React documentation](https://fb.me/react-wrap-tests-with-act).
 
-**NOTE**: There's a gottcha with updates. `renderHook` mutates the value of `current` when updates
+**NOTE**: There's a gotcha with updates. `renderHook` mutates the value of `current` when updates
 happen so you cannot destructure its values as the assignment will make a copy locking into the
 value at that time.
 
@@ -172,11 +172,11 @@ value changes for both the setup and cleanup of the `useEffect` call:
 
 ```js
 import { useEffect } from 'react'
-import { renderHook } from "react-hooks-testing-library"
+import { renderHook } from '@testing-library/react-hooks'
 import sideEffect from './sideEffect'
 
-test("should clean up side effect", () => {
-  let id = "first"
+test('should clean up side effect', () => {
+  let id = 'first'
   const { rerender } = renderHook(() => {
     useEffect(() => {
       sideEffect.start(id)
@@ -186,11 +186,11 @@ test("should clean up side effect", () => {
     }, [id])
   })
 
-  id = "second"
+  id = 'second'
   rerender()
 
-  expect(sideEffect.get("first")).toBe(false)
-  expect(sideEffect.get("second")).toBe(true)
+  expect(sideEffect.get('first')).toBe(false)
+  expect(sideEffect.get('second')).toBe(true)
 })
 ```
 
@@ -199,10 +199,10 @@ clean up the effect, allowing the test to pass as expected:
 
 ```js
 import { useEffect } from 'react'
-import { renderHook } from "react-hooks-testing-library"
+import { renderHook } from '@testing-library/react-hooks'
 import sideEffect from './sideEffect'
 
-test("should clean up side effect", () => {
+test('should clean up side effect', () => {
   const { rerender } = renderHook(
     ({ id }) => {
       useEffect(() => {
@@ -213,14 +213,14 @@ test("should clean up side effect", () => {
       }, [id])
     },
     {
-      initialProps: { id: "first" }
+      initialProps: { id: 'first' }
     }
   )
 
-  rerender({ id: "second" })
+  rerender({ id: 'second' })
 
-  expect(thing.get("first")).toBe(false)
-  expect(thing.get("second")).toBe(true)
+  expect(thing.get('first')).toBe(false)
+  expect(thing.get('second')).toBe(true)
 })
 ```
 
