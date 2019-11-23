@@ -51,7 +51,7 @@
     "codecov": "3.6.1",
     "docz": "1.3.2",
     "docz-theme-default": "1.2.0",
-    "eslint": "6.6.0",
+    "eslint": "6.7.0",
     "eslint-config-prettier": "6.7.0",
     "eslint-plugin-prettier": "3.1.1",
     "husky": "3.1.0",
