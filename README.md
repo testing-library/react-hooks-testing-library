@@ -156,7 +156,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/VinceMalone"><img src="https://avatars0.githubusercontent.com/u/2516349?v=4" width="100px;" alt="Vince Malone"/><br /><sub><b>Vince Malone</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=VinceMalone" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/doppelmutzi"><img src="https://avatars1.githubusercontent.com/u/4130968?v=4" width="100px;" alt="Sebastian Weber"/><br /><sub><b>Sebastian Weber</b></sub></a><br /><a href="#blog-doppelmutzi" title="Blogposts">📝</a></td>
     <td align="center"><a href="https://gillchristian.xyz"><img src="https://avatars2.githubusercontent.com/u/8309423?v=4" width="100px;" alt="Christian Gill"/><br /><sub><b>Christian Gill</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=gillchristian" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://jsjoe.io"><img src="https://avatars3.githubusercontent.com/u/3806031?v=4" width="100px;" alt="JavaScript Joe"/><br /><sub><b>JavaScript Joe</b></sub></a><br /><a href="#talk-jsjoeio" title="Talks">📢</a></td>
+    <td align="center"><a href="https://jsjoe.io"><img src="https://avatars3.githubusercontent.com/u/3806031?v=4" width="100px;" alt="JavaScript Joe"/><br /><sub><b>JavaScript Joe</b></sub></a><br /><a href="#tutorial-jsjoeio" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
