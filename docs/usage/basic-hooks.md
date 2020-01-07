@@ -20,7 +20,7 @@ export default function useCounter() {
 }
 ```
 
-To test `useCounter` we need to render it using the `renderHook` function to provided by
+To test `useCounter` we need to render it using the `renderHook` function provided by
 `react-hooks-testing-library`:
 
 ```js
@@ -71,7 +71,7 @@ value at that time.
 
 ## Providing Props
 
-Sometimes a hook relies on the props passed to it in order to do it's thing. For example the
+Sometimes a hook relies on the props passed to it in order to do its thing. For example the
 `useCounter` hook could easily accept the initial value of the counter as a prop:
 
 ```js
