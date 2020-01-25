@@ -133,8 +133,8 @@ test('should increment counter after delay', async () => {
 ```
 
 Wrapping `incrementAsync` in `act()` is not necessary since the state updates happen
-asynchronously during `await waitForNextUpdate()`. The async utils automatically wrap the waiting
-code in the asynchronous `act()` wrapper.
+asynchronously during `await waitForNextUpdate()`. The async utilities automatically wrap the
+waiting code in the asynchronous `act()` wrapper.
 
 For more details on the the other async utilities, please refer to the
 [API Reference](/reference/api#async-utilities).
