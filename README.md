@@ -61,12 +61,12 @@ the results.
 
 ## When to use this library
 
-1. You're writing a library with one or more custom hooks that are not directly tied a component
+1. You're writing a library with one or more custom hooks that are not directly tied to a component
 2. You have a complex hook that is difficult to test through component interactions
 
 ## When not to use this library
 
-1. Your hook is defined along side a component and is only used there
+1. Your hook is defined alongside a component and is only used there
 2. Your hook is easy to test by just testing the components using it
 
 ## Example
