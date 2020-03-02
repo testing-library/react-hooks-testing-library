@@ -142,7 +142,7 @@ For more details on the the other async utilities, please refer to the
 ### Suspense
 
 All the [async utilities](/reference/api#async-utilities) will also wait for hooks that suspends
-using [React's `Suspense`](https://reactjs.org/docs/code-splitting.html#reactlazy) functionality to
+using [React's `Suspense`](https://reactjs.org/docs/react-api.html#reactsuspense) functionality to
 complete rendering.
 
 ## Errors
