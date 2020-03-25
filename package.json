@@ -60,8 +60,8 @@
     "prettier": "2.0.2",
     "prettier-eslint": "9.0.1",
     "prettier-eslint-cli": "5.0.0",
-    "react": "16.13.0",
-    "react-test-renderer": "16.13.0"
+    "react": "16.13.1",
+    "react-test-renderer": "16.13.1"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
