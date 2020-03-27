@@ -115,7 +115,7 @@ export function useCounter(initialValue = 0) {
 }
 ```
 
-To test `incrementAsync` we need to `await waitForNextUpdate()` before the make our assertions:
+To test `incrementAsync` we need to `await waitForNextUpdate()` before making our assertions:
 
 ```js
 import { renderHook } from '@testing-library/react-hooks'
