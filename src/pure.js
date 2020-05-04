@@ -75,6 +75,13 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
   })
   const { unmount, update } = testRenderer
 
+  function rerenderHook(newProps = hookProps.current) {
+    hookProps.current = newProps
+    act(() => {
+      update(toRender())
+    })
+  }
+
   function unmountHook() {
     act(() => {
       removeCleanup(unmountHook)
@@ -86,12 +93,7 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
 
   return {
     result,
-    rerender: (newProps = hookProps.current) => {
-      hookProps.current = newProps
-      act(() => {
-        update(toRender())
-      })
-    },
+    rerender: rerenderHook,
     unmount: unmountHook,
     ...asyncUtils(addResolver)
   }

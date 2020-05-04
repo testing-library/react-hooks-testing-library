@@ -11,7 +11,7 @@ function asyncUtils(addResolver) {
 
   const waitForNextUpdate = async (options = {}) => {
     if (!nextUpdatePromise) {
-      const resolveOnNextUpdate = (resolve, reject) => {
+      nextUpdatePromise = new Promise((resolve, reject) => {
         let timeoutId
         if (options.timeout > 0) {
           timeoutId = setTimeout(
@@ -24,12 +24,10 @@ function asyncUtils(addResolver) {
           nextUpdatePromise = null
           resolve()
         })
-      }
-
-      nextUpdatePromise = new Promise(resolveOnNextUpdate)
+      })
       await act(() => nextUpdatePromise)
     }
-    return await nextUpdatePromise
+    await nextUpdatePromise
   }
 
   const wait = async (callback, { timeout, suppressErrors = true } = {}) => {
