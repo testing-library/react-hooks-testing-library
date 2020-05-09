@@ -219,8 +219,8 @@ test('should clean up side effect', () => {
 
   rerender({ id: 'second' })
 
-  expect(thing.get('first')).toBe(false)
-  expect(thing.get('second')).toBe(true)
+  expect(sideEffect.get('first')).toBe(false)
+  expect(sideEffect.get('second')).toBe(true)
 })
 ```
 
