@@ -58,7 +58,7 @@
     "jest": "26.0.1",
     "lint-staged": "10.2.6",
     "prettier": "2.0.5",
-    "prettier-eslint": "10.1.0",
+    "prettier-eslint": "10.1.1",
     "prettier-eslint-cli": "5.0.0",
     "react": "16.13.1",
     "react-test-renderer": "16.13.1"
