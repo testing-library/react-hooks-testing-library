@@ -1,5 +1,5 @@
 {
-  "name": "@testing-library/react-hooks",
+  "name": "@sstdev/react-hooks",
   "version": "3.2.1",
   "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
   "main": "lib/index.js",
