@@ -95,8 +95,8 @@ you, your team, and your project.
 ## Async
 
 Sometimes, a hook can trigger asynchronous updates that will not be immediately reflected in the
-`result.current` value. Luckily, `renderHook` returns some utilities that allows the test to wait
-for the hook to update using `async/await` (or just promise callbacks if you prefer). The most basic
+`result.current` value. Luckily, `renderHook` returns some utilities that allow the test to wait for
+the hook to update using `async/await` (or just promise callbacks if you prefer). The most basic
 async utility is called `waitForNextUpdate`.
 
 Let's further extend `useCounter` to have an `incrementAsync` callback that will update the `count`
@@ -132,16 +132,16 @@ test('should increment counter after delay', async () => {
 })
 ```
 
-Wrapping `incrementAsync` in `act()` is not necessary since the state updates happen
-asynchronously during `await waitForNextUpdate()`. The async utilities automatically wrap the
-waiting code in the asynchronous `act()` wrapper.
+Wrapping `incrementAsync` in `act()` is not necessary since the state updates happen asynchronously
+during `await waitForNextUpdate()`. The async utilities automatically wrap the waiting code in the
+asynchronous `act()` wrapper.
 
-For more details on the the other async utilities, please refer to the
+For more details on the other async utilities, please refer to the
 [API Reference](/reference/api#asyncutils).
 
 ### Suspense
 
-All the [async utilities](/reference/api#async-utilities) will also wait for hooks that suspends
+All the [async utilities](/reference/api#async-utilities) will also wait for hooks that suspend
 using [React's `Suspense`](https://reactjs.org/docs/react-api.html#reactsuspense) functionality to
 complete rendering.
 
