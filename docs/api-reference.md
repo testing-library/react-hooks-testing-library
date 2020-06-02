@@ -194,7 +194,7 @@ See the [`wait` Options](/reference/api#wait-options) section for more details o
 
 ### `wait` Options
 
-The async utilities accepts the following options:
+The async utilities accept the following options:
 
 #### `timeout`
 

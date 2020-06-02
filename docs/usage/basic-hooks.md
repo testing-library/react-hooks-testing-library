@@ -166,7 +166,7 @@ test('should reset counter to updated initial value', () => {
 })
 ```
 
-Another case where this is useful is when you want limit the scope of the variables being closed
+Another case where this is useful is when you want to limit the scope of the variables being closed
 over to just be inside the hook callback. The following (contrived) example fails because the `id`
 value changes for both the setup and cleanup of the `useEffect` call:
 
