@@ -46,12 +46,13 @@ The `renderHook` function accepts the following options as the second parameter:
 
 ### `initialProps`
 
-The initial values to pass as `props` to the `callback` function of `renderHook.
+The initial values to pass as `props` to the `callback` function of `renderHook`.
 
 ### `wrapper`
 
 A React component to wrap the test component in when rendering. This is usually used to add context
-providers from `React.createContext` for the hook to access with `useContext`.
+providers from `React.createContext` for the hook to access with `useContext`. `initialProps` and
+props subsequently set by `rerender` will be provided to the wrapper.
 
 ## `renderHook` Result
 

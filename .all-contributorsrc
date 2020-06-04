@@ -165,6 +165,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "hemlok",
+      "name": "Adam Seckel",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/9043345?v=4",
+      "profile": "https://github.com/hemlok",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

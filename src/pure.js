@@ -58,7 +58,7 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
   const hookProps = { current: initialProps }
 
   const wrapUiIfNeeded = (innerElement) =>
-    wrapper ? React.createElement(wrapper, null, innerElement) : innerElement
+    wrapper ? React.createElement(wrapper, hookProps.current, innerElement) : innerElement
 
   const toRender = () =>
     wrapUiIfNeeded(
