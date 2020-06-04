@@ -161,6 +161,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="http://frontstuff.io"><img src="https://avatars1.githubusercontent.com/u/5370675?v=4" width="100px;" alt=""/><br /><sub><b>Sarah Dayan</b></sub></a><br /><a href="#platform-sarahdayan" title="Packaging/porting to new platform">📦</a></td>
     <td align="center"><a href="https://github.com/102"><img src="https://avatars1.githubusercontent.com/u/5839225?v=4" width="100px;" alt=""/><br /><sub><b>Roman Gusev</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=102" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/hemlok"><img src="https://avatars2.githubusercontent.com/u/9043345?v=4" width="100px;" alt=""/><br /><sub><b>Adam Seckel</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=hemlok" title="Code">💻</a></td>
   </tr>
 </table>
 
