@@ -41,7 +41,7 @@ import { CounterStepProvider, useCounter } from './counter'
 
 test('should use custom step when incrementing', () => {
   const wrapper = ({ children }) => <CounterStepProvider step={2}>{children}</CounterStepProvider>
-  const { result } = renderHook(() => useCounter(), { wrapper })
+  const { result } = renderHook(useCounter, { wrapper })
 
   act(() => {
     result.current.increment()
@@ -76,7 +76,7 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { CounterStepProvider, useCounter } from './counter'
 
 test('should use custom step when incrementing', () => {
-  const { result } = renderHook(() => useCounter(), {
+  const { result } = renderHook(useCounter, {
     wrapper: ({ children }) => <CounterStepProvider step={2}>{children}</CounterStepProvider>
   })
 
@@ -122,7 +122,7 @@ import { renderHook } from '@testing-library/react-hooks'
 import { useCounter } from './counter'
 
 test('should increment counter after delay', async () => {
-  const { result, waitForNextUpdate } = renderHook(() => useCounter())
+  const { result, waitForNextUpdate } = renderHook(useCounter)
 
   result.current.incrementAsync()
 

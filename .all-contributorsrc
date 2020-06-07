@@ -174,6 +174,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "flextremedev",
+      "name": "Pascal Wegner",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/16837852?v=4",
+      "profile": "https://github.com/flextremedev",
+      "contributions": [
+        "doc",
+        "example"
+      ]
     }
   ],
   "commitConvention": "none"

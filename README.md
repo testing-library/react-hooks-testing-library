@@ -94,7 +94,7 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import useCounter from './useCounter'
 
 test('should increment counter', () => {
-  const { result } = renderHook(() => useCounter())
+  const { result } = renderHook(useCounter)
 
   act(() => {
     result.current.increment()
@@ -162,6 +162,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://frontstuff.io"><img src="https://avatars1.githubusercontent.com/u/5370675?v=4" width="100px;" alt=""/><br /><sub><b>Sarah Dayan</b></sub></a><br /><a href="#platform-sarahdayan" title="Packaging/porting to new platform">📦</a></td>
     <td align="center"><a href="https://github.com/102"><img src="https://avatars1.githubusercontent.com/u/5839225?v=4" width="100px;" alt=""/><br /><sub><b>Roman Gusev</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=102" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/hemlok"><img src="https://avatars2.githubusercontent.com/u/9043345?v=4" width="100px;" alt=""/><br /><sub><b>Adam Seckel</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=hemlok" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/flextremedev"><img src="https://avatars0.githubusercontent.com/u/16837852?v=4" width="100px;" alt=""/><br /><sub><b>Pascal Wegner</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=flextremedev" title="Documentation">📖</a> <a href="#example-flextremedev" title="Examples">💡</a></td>
   </tr>
 </table>
 
