@@ -61,11 +61,21 @@
     "prettier-eslint": "11.0.0",
     "prettier-eslint-cli": "5.0.0",
     "react": "16.13.1",
+    "react-dom": "^16.13.1",
     "react-test-renderer": "16.13.1"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
+    "react-dom": ">=16.9.0",
     "react-test-renderer": ">=16.9.0"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    },
+    "react-test-renderer": {
+      "optional": true
+    }
   },
   "jest": {
     "collectCoverage": true,
