@@ -63,7 +63,7 @@ function createRenderHook(createRenderer) {
         </TestHook>
       )
 
-    let { render, rerender, unmount, act } = createRenderer()
+    let { render, rerender, unmount, act, ...rendererUtils } = createRenderer()
 
     render(toRender())
 
@@ -83,7 +83,8 @@ function createRenderHook(createRenderer) {
       result,
       rerender: rerenderHook,
       unmount: unmountHook,
-      ...asyncUtils(act, addResolver)
+      ...asyncUtils(act, addResolver),
+      ...rendererUtils
     }
   }
 }
