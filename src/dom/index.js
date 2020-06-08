@@ -1,5 +1,5 @@
-import { cleanup } from '../core'
+import { renderHook, act, cleanup } from './pure'
 
 cleanup.autoRegister()
 
-export * from './pure'
+export { renderHook, act, cleanup }
