@@ -178,7 +178,7 @@ it('should throw when over 9000', () => {
 
   act(() => {
     result.current.increment()
-  }
+  })
 
   expect(result.error).toEqual(Error("It's over 9000!"))
 })
