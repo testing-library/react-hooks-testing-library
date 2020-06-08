@@ -2,23 +2,23 @@ import { useState } from 'react'
 import { renderHook, act } from 'src/dom'
 
 describe('useState tests', () => {
-  test('should use setState value', () => {
-    const { result } = renderHook(() => useState('foo'))
+  test('should use state value', () => {
+    const { result } = renderHook(() => {
+      const [value, setValue] = useState('foo')
+      return { value, setValue }
+    })
 
-    const [value] = result.current
-
-    expect(value).toBe('foo')
+    expect(result.current.value).toBe('foo')
   })
 
-  test('should update setState value using setter', () => {
-    const { result } = renderHook(() => useState('foo'))
+  test('should update state value using setter', () => {
+    const { result } = renderHook(() => {
+      const [value, setValue] = useState('foo')
+      return { value, setValue }
+    })
 
-    const [_, setValue] = result.current
+    act(() => result.current.setValue('bar'))
 
-    act(() => setValue('bar'))
-
-    const [value] = result.current
-
-    expect(value).toBe('bar')
+    expect(result.current.value).toBe('bar')
   })
 })

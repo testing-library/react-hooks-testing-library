@@ -137,12 +137,9 @@ describe('error hook tests', () => {
     })
 
     test('should reset effect error', () => {
-      const { result, waitForNextUpdate, rerender } = renderHook(
-        (throwError) => useEffectError(throwError),
-        {
-          initialProps: true
-        }
-      )
+      const { result, rerender } = renderHook((throwError) => useEffectError(throwError), {
+        initialProps: true
+      })
 
       expect(result.error).not.toBe(undefined)
 

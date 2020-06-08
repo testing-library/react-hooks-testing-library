@@ -24,39 +24,19 @@ describe('useContext tests', () => {
     expect(result.current).toBe('bar')
   })
 
-  test('should update mutated value in context', () => {
-    const TestContext = createContext('foo')
-
-    const value = { current: 'bar' }
-
-    const wrapper = ({ children }) => (
-      <TestContext.Provider value={value.current}>{children}</TestContext.Provider>
-    )
-
-    const { result, rerender } = renderHook(() => useContext(TestContext), { wrapper })
-
-    value.current = 'baz'
-
-    rerender()
-
-    expect(result.current).toBe('baz')
-  })
-
   test('should update value in context when props are updated', () => {
     const TestContext = createContext('foo')
 
-    const wrapper = ({ current, children }) => (
-      <TestContext.Provider value={current}>{children}</TestContext.Provider>
+    const wrapper = ({ contextValue, children }) => (
+      <TestContext.Provider value={contextValue}>{children}</TestContext.Provider>
     )
 
     const { result, rerender } = renderHook(() => useContext(TestContext), {
       wrapper,
-      initialProps: {
-        current: 'bar'
-      }
+      initialProps: { contextValue: 'bar' }
     })
 
-    rerender({ current: 'baz' })
+    rerender({ contextValue: 'baz' })
 
     expect(result.current).toBe('baz')
   })

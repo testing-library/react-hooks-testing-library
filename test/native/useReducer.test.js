@@ -4,16 +4,15 @@ import { renderHook, act } from 'src/native'
 describe('useReducer tests', () => {
   test('should handle useReducer hook', () => {
     const reducer = (state, action) => (action.type === 'inc' ? state + 1 : state)
-    const { result } = renderHook(() => useReducer(reducer, 0))
+    const { result } = renderHook(() => {
+      const [state, dispatch] = useReducer(reducer, 0)
+      return { state, dispatch }
+    })
 
-    const [initialState, dispatch] = result.current
+    expect(result.current.state).toBe(0)
 
-    expect(initialState).toBe(0)
+    act(() => result.current.dispatch({ type: 'inc' }))
 
-    act(() => dispatch({ type: 'inc' }))
-
-    const [state] = result.current
-
-    expect(state).toBe(1)
+    expect(result.current.state).toBe(1)
   })
 })
