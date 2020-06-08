@@ -1,5 +1,5 @@
 import React from 'react'
-import asyncUtils from './asyncUtils'
+import asyncUtils from './async-utils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
 function TestHook({ callback, hookProps, onError, children }) {
