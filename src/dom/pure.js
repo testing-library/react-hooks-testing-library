@@ -25,8 +25,8 @@ function createRenderer() {
     unmount() {
       act(() => {
         ReactDOM.unmountComponentAtNode(container)
-        document.body.removeChild(container)
       })
+      document.body.removeChild(container)
     },
     act
   }
