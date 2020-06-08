@@ -13,6 +13,9 @@
   "files": [
     "lib",
     "src",
+    "dom",
+    "native",
+    "server",
     "pure.js",
     "dont-cleanup-after-each.js"
   ],
