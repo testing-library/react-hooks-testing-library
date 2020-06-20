@@ -198,7 +198,7 @@ For questions related to using the library, you can
 [raise issue here](https://github.com/testing-library/react-hooks-testing-library/issues/new), or
 visit a support community:
 
-- [Reactiflux on Discord](https://www.reactiflux.com/)
+- [Discord](https://discord.gg/c6JN9fM)
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/react-hooks-testing-library)
 
 ## LICENSE
