@@ -1,17 +1,16 @@
 ---
-name: "❓ Support Question"
+name: '❓ Support Question'
 about: "I have a question \U0001F4AC"
 title: ''
 labels: question
 assignees: ''
-
 ---
 
 <!--
 
 🛑Consider whether Github issues is the best place to ask this question.  Perhaps some of the support channels will give you better help, faster:
 
-- Reactiflux on Discord https://www.reactiflux.com
+- Discord https://discord.gg/c6JN9fM
 - Stack Overflow https://stackoverflow.com/questions/tagged/react-hooks-testing-library
 
 * Please fill out this template with all the relevant information so we can

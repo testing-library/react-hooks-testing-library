@@ -31,6 +31,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/blob/master/CODE_OF_CONDUCT.md)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9a8f27a5-df38-4910-a248-4908b1ba29a7/deploy-status)](https://app.netlify.com/sites/react-hooks-testing-library/deploys)
+[![Discord](https://img.shields.io/discord/723559267868737556.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/c6JN9fM)
 
 [![Watch on GitHub](https://img.shields.io/github/watchers/testing-library/react-hooks-testing-library.svg?style=social)](https://github.com/testing-library/react-hooks-testing-library/watchers)
 [![Star on GitHub](https://img.shields.io/github/stars/testing-library/react-hooks-testing-library.svg?style=social)](https://github.com/testing-library/react-hooks-testing-library/stargazers)
