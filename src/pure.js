@@ -15,7 +15,7 @@ const autoDetectableRenderers = [
 const validRenderers = autoDetectableRenderers.filter(({ required }) => hasDependency(required))
 
 if (validRenderers.length === 0) {
-  const options = autoDetectableRenderers.map(({ required }) => `  - ${required}`).join('\n')
+  const options = autoDetectableRenderers.map(({ option }) => `  - ${option}`).join('\n')
   throw new Error(`Could not auto-detect a React renderer.  Options are:\n${options}`)
 }
 

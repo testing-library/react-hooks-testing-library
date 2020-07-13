@@ -5,19 +5,24 @@ import { createRenderHook, cleanup } from '../core'
 function Fallback() {
   return null
 }
-
-function createRenderer() {
+function createRenderer(TestHook, testHookProps, { wrapper: Wrapper }) {
   let container
 
+  const toRender = (props) => (
+    <Wrapper {...props}>
+      <TestHook {...props} {...testHookProps} />
+    </Wrapper>
+  )
+
   return {
-    render(component) {
+    render(props) {
       act(() => {
-        container = create(<Suspense fallback={<Fallback />}>{component}</Suspense>)
+        container = create(<Suspense fallback={<Fallback />}>{toRender(props)}</Suspense>)
       })
     },
-    rerender(component) {
+    rerender(props) {
       act(() => {
-        container.update(<Suspense fallback={<Fallback />}>{component}</Suspense>)
+        container.update(<Suspense fallback={<Fallback />}>{toRender(props)}</Suspense>)
       })
     },
     unmount() {

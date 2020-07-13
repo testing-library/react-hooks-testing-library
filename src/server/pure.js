@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import ReactDOM from 'react-dom'
 import { act as baseAct } from 'react-dom/test-utils'
@@ -5,10 +6,17 @@ import { createRenderHook, cleanup } from '../core'
 
 let act
 
-function createRenderer() {
+function createRenderer(TestHook, testHookProps, { wrapper: Wrapper }) {
   const container = document.createElement('div')
+
+  const toRender = (props) => (
+    <Wrapper {...props}>
+      <TestHook {...props} {...testHookProps} />
+    </Wrapper>
+  )
+
+  let renderProps
   let hydrated = false
-  let ssrComponent
 
   act = function act(...args) {
     if (!hydrated) {
@@ -18,10 +26,10 @@ function createRenderer() {
   }
 
   return {
-    render(component) {
-      ssrComponent = component
+    render(props) {
+      renderProps = props
       baseAct(() => {
-        const serverOutput = ReactDOMServer.renderToString(component)
+        const serverOutput = ReactDOMServer.renderToString(toRender(props))
         container.innerHTML = serverOutput
       })
     },
@@ -32,17 +40,17 @@ function createRenderer() {
       if (!hydrated) {
         document.body.appendChild(container)
         baseAct(() => {
-          ReactDOM.hydrate(ssrComponent, container)
+          ReactDOM.hydrate(toRender(renderProps), container)
         })
         hydrated = true
       }
     },
-    rerender(component) {
+    rerender(props) {
       if (!hydrated) {
         throw new Error('You must hydrate the component before you can rerender')
       }
       baseAct(() => {
-        ReactDOM.render(component, container)
+        ReactDOM.render(toRender(props), container)
       })
     },
     unmount() {

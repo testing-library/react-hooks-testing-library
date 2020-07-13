@@ -7,19 +7,26 @@ function Fallback() {
   return null
 }
 
-function createRenderer() {
+function createRenderer(TestHook, testHookProps, { wrapper: Wrapper }) {
   const container = document.createElement('div')
 
+  const toRender = (props) =>
+    console.log(props) || (
+      <Wrapper {...props}>
+        <TestHook {...props} {...testHookProps} />
+      </Wrapper>
+    )
+
   return {
-    render(component) {
+    render(props) {
       document.body.appendChild(container)
       act(() => {
-        ReactDOM.render(<Suspense fallback={<Fallback />}>{component}</Suspense>, container)
+        ReactDOM.render(<Suspense fallback={<Fallback />}>{toRender(props)}</Suspense>, container)
       })
     },
-    rerender(component) {
+    rerender(props) {
       act(() => {
-        ReactDOM.render(<Suspense fallback={<Fallback />}>{component}</Suspense>, container)
+        ReactDOM.render(<Suspense fallback={<Fallback />}>{toRender(props)}</Suspense>, container)
       })
     },
     unmount() {

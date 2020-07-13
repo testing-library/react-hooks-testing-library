@@ -48,15 +48,15 @@ describe('error hook tests', () => {
     })
 
     test('should reset error', () => {
-      const { result, hydrate, rerender } = renderHook((throwError) => useError(throwError), {
-        initialProps: true
+      const { result, hydrate, rerender } = renderHook(({ throwError }) => useError(throwError), {
+        initialProps: { throwError: true }
       })
 
       expect(result.error).not.toBe(undefined)
 
       hydrate()
 
-      rerender(false)
+      rerender({ throwError: false })
 
       expect(result.current).not.toBe(undefined)
       expect(result.error).toBe(undefined)
@@ -99,10 +99,8 @@ describe('error hook tests', () => {
 
     test('should reset async error', async () => {
       const { result, hydrate, waitForNextUpdate, rerender } = renderHook(
-        (throwError) => useAsyncError(throwError),
-        {
-          initialProps: true
-        }
+        ({ throwError }) => useAsyncError(throwError),
+        { initialProps: { throwError: true } }
       )
 
       hydrate()
@@ -111,7 +109,7 @@ describe('error hook tests', () => {
 
       expect(result.error).not.toBe(undefined)
 
-      rerender(false)
+      rerender({ throwError: false })
 
       await waitForNextUpdate()
 
@@ -154,15 +152,16 @@ describe('error hook tests', () => {
     })
 
     test('should reset effect error', () => {
-      const { result, hydrate, rerender } = renderHook((throwError) => useEffectError(throwError), {
-        initialProps: true
-      })
+      const { result, hydrate, rerender } = renderHook(
+        ({ throwError }) => useEffectError(throwError),
+        { initialProps: { throwError: true } }
+      )
 
       hydrate()
 
       expect(result.error).not.toBe(undefined)
 
-      rerender(false)
+      rerender({ throwError: false })
 
       expect(result.current).not.toBe(undefined)
       expect(result.error).toBe(undefined)

@@ -1,15 +1,14 @@
-import React from 'react'
 import asyncUtils from './async-utils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
-function TestHook({ callback, hookProps, onError, children }) {
+function TestHook({ callback, setValue, setError, ...props }) {
   try {
-    children(callback(hookProps))
+    setValue(callback(props))
   } catch (err) {
     if (err.then) {
       throw err
     } else {
-      onError(err)
+      setError(err)
     }
   }
   return null
@@ -48,28 +47,28 @@ function resultContainer() {
   }
 }
 
+function defaultWrapper({ children }) {
+  return children
+}
+
 function createRenderHook(createRenderer) {
-  return function renderHook(callback, { initialProps, wrapper } = {}) {
+  return function renderHook(callback, { initialProps, wrapper = defaultWrapper } = {}) {
     const { result, setValue, setError, addResolver } = resultContainer()
     const hookProps = { current: initialProps }
+    const props = { callback, setValue, setError }
+    const options = { initialProps, wrapper }
 
-    const wrapUiIfNeeded = (innerElement) =>
-      wrapper ? React.createElement(wrapper, hookProps.current, innerElement) : innerElement
+    const { render, rerender, unmount, act, ...rendererUtils } = createRenderer(
+      TestHook,
+      props,
+      options
+    )
 
-    const toRender = () =>
-      wrapUiIfNeeded(
-        <TestHook callback={callback} hookProps={hookProps.current} onError={setError}>
-          {setValue}
-        </TestHook>
-      )
-
-    let { render, rerender, unmount, act, ...rendererUtils } = createRenderer()
-
-    render(toRender())
+    render(hookProps.current)
 
     function rerenderHook(newProps = hookProps.current) {
       hookProps.current = newProps
-      rerender(toRender())
+      rerender(hookProps.current)
     }
 
     function unmountHook() {
