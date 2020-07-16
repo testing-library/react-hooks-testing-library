@@ -6,6 +6,14 @@ function createTimeoutError(utilName, { timeout }) {
   return timeoutError
 }
 
+function resolveAfter(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+}
+
+let hasWarnedDeprecatedWait = false
+
 function asyncUtils(addResolver) {
   let nextUpdatePromise = null
 
@@ -30,7 +38,7 @@ function asyncUtils(addResolver) {
     await nextUpdatePromise
   }
 
-  const wait = async (callback, { timeout, suppressErrors = true } = {}) => {
+  const waitFor = async (callback, { interval = 50, timeout, suppressErrors = true } = {}) => {
     const checkResult = () => {
       try {
         const callbackResult = callback()
@@ -47,13 +55,13 @@ function asyncUtils(addResolver) {
       while (true) {
         const startTime = Date.now()
         try {
-          await waitForNextUpdate({ timeout })
+          await Promise.race([waitForNextUpdate({ timeout }), resolveAfter(interval)])
           if (checkResult()) {
             return
           }
         } catch (e) {
           if (e.timeout) {
-            throw createTimeoutError('wait', { timeout: initialTimeout })
+            throw createTimeoutError('waitFor', { timeout: initialTimeout })
           }
           throw e
         }
@@ -69,7 +77,7 @@ function asyncUtils(addResolver) {
   const waitForValueToChange = async (selector, options = {}) => {
     const initialValue = selector()
     try {
-      await wait(() => selector() !== initialValue, {
+      await waitFor(() => selector() !== initialValue, {
         suppressErrors: false,
         ...options
       })
@@ -81,8 +89,26 @@ function asyncUtils(addResolver) {
     }
   }
 
+  const wait = async (callback, { timeout, suppressErrors } = {}) => {
+    if (!hasWarnedDeprecatedWait) {
+      hasWarnedDeprecatedWait = true
+      console.warn(
+        '`wait` has been deprecated. Use `waitFor` instead: https://react-hooks-testing-library.com/reference/api#waitFor.'
+      )
+    }
+    try {
+      await waitFor(callback, { timeout, suppressErrors })
+    } catch (e) {
+      if (e.timeout) {
+        throw createTimeoutError('wait', { timeout })
+      }
+      throw e
+    }
+  }
+
   return {
     wait,
+    waitFor,
     waitForNextUpdate,
     waitForValueToChange
   }

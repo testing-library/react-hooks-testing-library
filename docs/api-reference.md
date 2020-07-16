@@ -152,50 +152,36 @@ variable to `true` before importing `@testing-library/react-hooks` will also dis
 ### `waitForNextUpdate`
 
 ```js
-function waitForNextUpdate(options?: WaitOptions): Promise<void>
+function waitForNextUpdate(options?: {
+  timeout?: number
+}): Promise<void>
 ```
 
 Returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as
 the result of an asynchronous update.
 
-See the [`wait` Options](/reference/api#wait-options) section for more details on the available
-`options`.
+#### `timeout`
 
-### `wait`
+The maximum amount of time in milliseconds (ms) to wait. By default, no timeout is applied.
+
+### `waitFor`
 
 ```js
-function wait(callback: function(): boolean|void, options?: WaitOptions): Promise<void>
+function waitFor(callback: function(): boolean|void, options?: {
+  interval?: number,
+  timeout?: number,
+  suppressErrors?: boolean
+}): Promise<void>
 ```
 
 Returns a `Promise` that resolves if the provided callback executes without exception and returns a
 truthy or `undefined` value. It is safe to use the [`result` of `renderHook`](/reference/api#result)
 in the callback to perform assertion or to test values.
 
-The callback is tested after each render of the hook. By default, errors raised from the callback
-will be suppressed (`suppressErrors = true`).
+#### `interval`
 
-See the [`wait` Options](/reference/api#wait-options) section for more details on the available
-`options`.
-
-### `waitForValueToChange`
-
-```js
-function waitForValueToChange(selector: function(): any, options?: WaitOptions): Promise<void>
-```
-
-Returns a `Promise` that resolves if the value returned from the provided selector changes. It
-expected that the [`result` of `renderHook`](/reference/api#result) to select the value for
-comparison.
-
-The value is selected for comparison after each render of the hook. By default, errors raised from
-selecting the value will not be suppressed (`suppressErrors = false`).
-
-See the [`wait` Options](/reference/api#wait-options) section for more details on the available
-`options`.
-
-### `wait` Options
-
-The async utilities accept the following options:
+The amount of time in milliseconds (ms) to wait between checks of the callback if no renders occur.
+By default, an interval of 50ms is used.
 
 #### `timeout`
 
@@ -205,5 +191,58 @@ The maximum amount of time in milliseconds (ms) to wait. By default, no timeout 
 
 If this option is set to `true`, any errors that occur while waiting are treated as a failed check.
 If this option is set to `false`, any errors that occur while waiting cause the promise to be
-rejected. Please refer to the [utility descriptions](/reference/api#async-utilities) for the default
-values of this option (if applicable).
+rejected. By default, errors are suppressed for this utility.
+
+### `waitForValueToChange`
+
+```js
+function waitForValueToChange(selector: function(): any, options?: {
+  interval?: number,
+  timeout?: number,
+  suppressErrors?: boolean
+}): Promise<void>
+```
+
+Returns a `Promise` that resolves if the value returned from the provided selector changes. It
+expected that the [`result` of `renderHook`](/reference/api#result) to select the value for
+comparison.
+
+#### `interval`
+
+The amount of time in milliseconds (ms) to wait between checks of the callback if no renders occur.
+By default, an interval of 50ms is used.
+
+#### `timeout`
+
+The maximum amount of time in milliseconds (ms) to wait. By default, no timeout is applied.
+
+#### `suppressErrors`
+
+If this option is set to `true`, any errors that occur while waiting are treated as a failed check.
+If this option is set to `false`, any errors that occur while waiting cause the promise to be
+rejected. By default, errors are not suppressed for this utility.
+
+### `wait`
+
+_(DEPRECATED, use [`waitFor`](/reference/api#waitFor) instead)_
+
+```js
+function waitFor(callback: function(): boolean|void, options?: {
+  timeout?: number,
+  suppressErrors?: boolean
+}): Promise<void>
+```
+
+Returns a `Promise` that resolves if the provided callback executes without exception and returns a
+truthy or `undefined` value. It is safe to use the [`result` of `renderHook`](/reference/api#result)
+in the callback to perform assertion or to test values.
+
+#### `timeout`
+
+The maximum amount of time in milliseconds (ms) to wait. By default, no timeout is applied.
+
+#### `suppressErrors`
+
+If this option is set to `true`, any errors that occur while waiting are treated as a failed check.
+If this option is set to `false`, any errors that occur while waiting cause the promise to be
+rejected. By default, errors are suppressed for this utility.
