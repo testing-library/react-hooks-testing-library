@@ -38,7 +38,7 @@ function asyncUtils(addResolver) {
     await nextUpdatePromise
   }
 
-  const waitFor = async (callback, { interval = 50, timeout, suppressErrors = true } = {}) => {
+  const waitFor = async (callback, { interval, timeout, suppressErrors = true } = {}) => {
     const checkResult = () => {
       try {
         const callbackResult = callback()
@@ -55,7 +55,12 @@ function asyncUtils(addResolver) {
       while (true) {
         const startTime = Date.now()
         try {
-          await Promise.race([waitForNextUpdate({ timeout }), resolveAfter(interval)])
+          const nextCheck = interval
+            ? Promise.race([waitForNextUpdate({ timeout }), resolveAfter(interval)])
+            : waitForNextUpdate({ timeout })
+
+          await nextCheck
+
           if (checkResult()) {
             return
           }

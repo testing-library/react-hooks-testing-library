@@ -280,28 +280,6 @@ describe('async hook tests', () => {
     expect(complete).toBe(true)
   })
 
-  test('should wait for arbitrary expectation to pass (deprecated)', async () => {
-    const { wait } = renderHook(() => null)
-
-    let actual = 0
-    let expected = 1
-
-    setTimeout(() => {
-      actual = expected
-    }, 200)
-
-    let complete = false
-    await wait(
-      () => {
-        expect(actual).toBe(expected)
-        complete = true
-      },
-      { interval: 100 }
-    )
-
-    expect(complete).toBe(true)
-  })
-
   test('should not hang if expectation is already passing (deprecated)', async () => {
     const { result, wait } = renderHook(() => useSequence('first', 'second'))
 

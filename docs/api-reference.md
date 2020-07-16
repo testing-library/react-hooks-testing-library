@@ -181,7 +181,8 @@ in the callback to perform assertion or to test values.
 #### `interval`
 
 The amount of time in milliseconds (ms) to wait between checks of the callback if no renders occur.
-By default, an interval of 50ms is used.
+Interval checking is disabled if `interval` is not provided in the options or provided as a `falsy`
+value. By default, it is disabled.
 
 #### `timeout`
 
@@ -210,7 +211,8 @@ comparison.
 #### `interval`
 
 The amount of time in milliseconds (ms) to wait between checks of the callback if no renders occur.
-By default, an interval of 50ms is used.
+Interval checking is disabled if `interval` is not provided in the options or provided as a `falsy`
+value. By default, it is disabled.
 
 #### `timeout`
 
