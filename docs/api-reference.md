@@ -227,7 +227,7 @@ rejected. By default, errors are not suppressed for this utility.
 _(DEPRECATED, use [`waitFor`](/reference/api#waitfor) instead)_
 
 ```js
-function waitFor(callback: function(): boolean|void, options?: {
+function wait(callback: function(): boolean|void, options?: {
   timeout?: number,
   suppressErrors?: boolean
 }): Promise<void>
