@@ -224,7 +224,7 @@ rejected. By default, errors are not suppressed for this utility.
 
 ### `wait`
 
-_(DEPRECATED, use [`waitFor`](/reference/api#waitFor) instead)_
+_(DEPRECATED, use [`waitFor`](/reference/api#waitfor) instead)_
 
 ```js
 function waitFor(callback: function(): boolean|void, options?: {

@@ -93,7 +93,7 @@ function asyncUtils(addResolver) {
     if (!hasWarnedDeprecatedWait) {
       hasWarnedDeprecatedWait = true
       console.warn(
-        '`wait` has been deprecated. Use `waitFor` instead: https://react-hooks-testing-library.com/reference/api#waitFor.'
+        '`wait` has been deprecated. Use `waitFor` instead: https://react-hooks-testing-library.com/reference/api#waitfor.'
       )
     }
     try {
