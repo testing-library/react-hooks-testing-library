@@ -48,7 +48,7 @@
     "all-contributors-cli": "6.16.1",
     "babel-eslint": "10.1.0",
     "babel-plugin-module-resolver": "4.0.0",
-    "codecov": "3.7.0",
+    "codecov": "3.7.1",
     "docz": "2.3.1",
     "docz-theme-default": "1.2.0",
     "eslint": "7.4.0",
