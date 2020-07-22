@@ -39,15 +39,15 @@ describe('useCallback tests', () => {
 
     const callback1 = result.current
 
-    const calbackValue1 = callback1()
+    const callbackValue1 = callback1()
 
-    expect(calbackValue1).toEqual({ value: 1 })
+    expect(callbackValue1).toEqual({ value: 1 })
 
     const callback2 = result.current
 
-    const calbackValue2 = callback2()
+    const callbackValue2 = callback2()
 
-    expect(calbackValue2).toEqual({ value: 1 })
+    expect(callbackValue2).toEqual({ value: 1 })
 
     expect(callback2).toBe(callback1)
 
@@ -55,9 +55,9 @@ describe('useCallback tests', () => {
 
     const callback3 = result.current
 
-    const calbackValue3 = callback3()
+    const callbackValue3 = callback3()
 
-    expect(calbackValue3).toEqual({ value: 2 })
+    expect(callbackValue3).toEqual({ value: 2 })
 
     expect(callback3).not.toBe(callback1)
   })
