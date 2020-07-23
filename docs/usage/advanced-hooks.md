@@ -54,6 +54,48 @@ test('should use custom step when incrementing', () => {
 The `wrapper` option will accept any React component, but it **must** render `children` in order for
 the test component to render and the hook to execute.
 
+### Providing Props
+
+Sometimes we need to test a hook with different context values. By using the `initialProps` option
+and the new props of `rerender` method, we can easily do this:
+
+```js
+import { renderHook, act } from '@testing-library/react-hooks'
+import { CounterStepProvider, useCounter } from './counter'
+
+test('should use custom step when incrementing', () => {
+  const wrapper = ({ children, step }) => (
+    <CounterStepProvider step={step}>{children}</CounterStepProvider>
+  )
+  const { result, rerender } = renderHook(() => useCounter(), {
+    wrapper,
+    initialProps: {
+      step: 2
+    }
+  })
+
+  act(() => {
+    result.current.increment()
+  })
+
+  expect(result.current.count).toBe(2)
+
+  /**
+   * Change the step value
+   */
+  rerender({ step: 8 })
+
+  act(() => {
+    result.current.increment()
+  })
+
+  expect(result.current.count).toBe(10)
+})
+```
+
+Note the `initialProps` and the new props of `rerender` are also accessed by the callback function
+of the `renderHook` which the wrapper is provided to.
+
 ### ESLint Warning
 
 It can be very tempting to try to inline the `wrapper` variable into the `renderHook` line, and
