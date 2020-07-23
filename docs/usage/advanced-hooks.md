@@ -40,35 +40,19 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { CounterStepProvider, useCounter } from './counter'
 
 test('should use custom step when incrementing', () => {
-  const wrapper = ({ children, step }) => (
-    <CounterStepProvider step={step}>{children}</CounterStepProvider>
-  )
-  const { result, rerender } = renderHook(() => useCounter(), {
-    wrapper,
-    initialProps: {
-      step: 2
-    }
-  })
+  const wrapper = ({ children }) => <CounterStepProvider step={2}>{children}</CounterStepProvider>
+  const { result } = renderHook(() => useCounter(), { wrapper })
 
   act(() => {
     result.current.increment()
   })
 
   expect(result.current.count).toBe(2)
-
-  rerender({ step: -2 })
-
-  act(() => {
-    result.current.increment()
-  })
-
-  expect(result.current.count).toBe(0)
 })
 ```
 
-The `wrapper` option will accept any React component and access the `initialProps` option and new
-props from `rerender` method as its properties, but it **must** render `children` in order for the
-test component to render and the hook to execute.
+The `wrapper` option will accept any React component, but it **must** render `children` in order for
+the test component to render and the hook to execute.
 
 ### ESLint Warning
 
