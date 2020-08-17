@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { act, create } from 'react-test-renderer'
 import asyncUtils from './asyncUtils'
-import { cleanup, addCleanup, removeCleanup } from './cleanup'
+import { cleanup, addCleanup, addInternalCleanup, removeInternalCleanup } from './cleanup'
 
 function TestHook({ callback, hookProps, onError, children }) {
   try {
@@ -84,12 +84,12 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
 
   function unmountHook() {
     act(() => {
-      removeCleanup(unmountHook)
+      removeInternalCleanup(unmountHook)
       unmount()
     })
   }
 
-  addCleanup(unmountHook)
+  addInternalCleanup(unmountHook)
 
   return {
     result,
@@ -99,4 +99,4 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
   }
 }
 
-export { renderHook, cleanup, act }
+export { renderHook, cleanup, act, addCleanup }

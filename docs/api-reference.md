@@ -10,6 +10,7 @@ route: '/reference/api'
 - [`renderHook`](/reference/api#renderhook)
 - [`act`](/reference/api#act)
 - [`cleanup`](/reference/api#cleanup)
+- [`addCleanup`](/reference/api#addcleanup)
 
 ---
 
@@ -144,6 +145,31 @@ of the regular imports.
 
 If neither of these approaches are suitable, setting the `RHTL_SKIP_AUTO_CLEANUP` environment
 variable to `true` before importing `@testing-library/react-hooks` will also disable this feature.
+
+---
+
+## `addCleanup`
+
+```js
+function addCleanup(
+  callback: function(props?: any): any
+): void
+```
+
+Callback to be called after `cleanup`.
+
+In some cases you might want to run some callback after internal `cleanup` happen, especially after
+`unmount` happens in `cleanup`. If the sequence matters to you, you could use `addCleanup`.
+
+```js
+import { addCleanup } from '@testing-library/react-hooks'
+
+jest.useFakeTimers()
+
+addCleanup(() => {
+  jest.runOnlyPendingTimers()
+})
+```
 
 ---
 
