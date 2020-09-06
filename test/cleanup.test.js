@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { renderHook, cleanup } from 'src'
+import { renderHook, cleanup, addCleanup, removeCleanup } from 'src/pure'
 
 describe('cleanup tests', () => {
   test('should flush effects on cleanup', async () => {
@@ -37,5 +37,99 @@ describe('cleanup tests', () => {
 
     expect(cleanupCalled[1]).toBe(true)
     expect(cleanupCalled[2]).toBe(true)
+  })
+
+  test('should call cleanups in reverse order', async () => {
+    let callSequence = []
+    addCleanup(() => {
+      callSequence.push('cleanup')
+    })
+    addCleanup(() => {
+      callSequence.push('another cleanup')
+    })
+    const hookWithCleanup = () => {
+      useEffect(() => {
+        return () => {
+          callSequence.push('unmount')
+        }
+      })
+    }
+    renderHook(() => hookWithCleanup())
+
+    await cleanup()
+
+    expect(callSequence).toEqual(['unmount', 'another cleanup', 'cleanup'])
+  })
+
+  test('should wait for async cleanup', async () => {
+    let callSequence = []
+    addCleanup(() => {
+      callSequence.push('cleanup')
+    })
+    addCleanup(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 10))
+      callSequence.push('another cleanup')
+    })
+    const hookWithCleanup = () => {
+      useEffect(() => {
+        return () => {
+          callSequence.push('unmount')
+        }
+      })
+    }
+    renderHook(() => hookWithCleanup())
+
+    await cleanup()
+
+    expect(callSequence).toEqual(['unmount', 'another cleanup', 'cleanup'])
+  })
+
+  test('should remove cleanup using removeCleanup', async () => {
+    let callSequence = []
+    addCleanup(() => {
+      callSequence.push('cleanup')
+    })
+    const anotherCleanup = () => {
+      callSequence.push('another cleanup')
+    }
+    addCleanup(anotherCleanup)
+    const hookWithCleanup = () => {
+      useEffect(() => {
+        return () => {
+          callSequence.push('unmount')
+        }
+      })
+    }
+    renderHook(() => hookWithCleanup())
+
+    removeCleanup(anotherCleanup)
+
+    await cleanup()
+
+    expect(callSequence).toEqual(['unmount', 'cleanup'])
+  })
+
+  test('should remove cleanup using returned handler', async () => {
+    let callSequence = []
+    addCleanup(() => {
+      callSequence.push('cleanup')
+    })
+    const remove = addCleanup(() => {
+      callSequence.push('another cleanup')
+    })
+    const hookWithCleanup = () => {
+      useEffect(() => {
+        return () => {
+          callSequence.push('unmount')
+        }
+      })
+    }
+    renderHook(() => hookWithCleanup())
+
+    remove()
+
+    await cleanup()
+
+    expect(callSequence).toEqual(['unmount', 'cleanup'])
   })
 })

@@ -1,25 +1,22 @@
 import flushMicroTasks from './flush-microtasks'
 
-let internalCleanupCbs = []
-let cleanupCbs = []
+let cleanupCallbacks = []
 
 async function cleanup() {
   await flushMicroTasks()
-  internalCleanupCbs.forEach((cb) => cb())
-  internalCleanupCbs = []
-  cleanupCbs.forEach((cb) => cb())
-}
-
-function addInternalCleanup(callback) {
-  internalCleanupCbs.push(callback)
+  for (const callback of cleanupCallbacks) {
+    await callback()
+  }
+  cleanupCallbacks = []
 }
 
 function addCleanup(callback) {
-  cleanupCbs.push(callback)
+  cleanupCallbacks.unshift(callback)
+  return () => removeCleanup(callback)
 }
 
-function removeInternalCleanup(callback) {
-  internalCleanupCbs = internalCleanupCbs.filter((cb) => cb !== callback)
+function removeCleanup(callback) {
+  cleanupCallbacks = cleanupCallbacks.filter((cb) => cb !== callback)
 }
 
-export { cleanup, addCleanup, addInternalCleanup, removeInternalCleanup }
+export { cleanup, addCleanup, removeCleanup }
