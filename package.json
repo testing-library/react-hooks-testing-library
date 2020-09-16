@@ -57,7 +57,7 @@
     "husky": "4.3.0",
     "jest": "26.4.2",
     "lint-staged": "10.3.0",
-    "prettier": "2.1.1",
+    "prettier": "2.1.2",
     "prettier-eslint": "11.0.0",
     "prettier-eslint-cli": "5.0.0",
     "react": "16.13.1",
