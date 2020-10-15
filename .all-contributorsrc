@@ -183,6 +183,15 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "gortron",
+      "name": "Gordy Lanza",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6877497?v=4",
+      "profile": "https://www.gordonlanza.com/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
