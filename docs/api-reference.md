@@ -1,15 +1,15 @@
 ---
 name: API Reference
-route: '/reference/api'
+route: '/docs/api-reference'
 ---
 
 # API
 
 `react-hooks-testing-library` exports the following methods:
 
-- [`renderHook`](/reference/api#renderhook)
-- [`act`](/reference/api#act)
-- [`cleanup`](/reference/api#cleanup)
+- [`renderHook`](/docs/api-reference.md#renderhook)
+- [`act`](/docs/api-reference.md#act)
+- [`cleanup`](/docs/api-reference.md#cleanup)
 
 ---
 
@@ -38,7 +38,7 @@ The `props` passed into the callback will be the `initialProps` provided in the 
 ### `options` (Optional)
 
 An options object to modify the execution of the `callback` function. See the
-[`renderHook` Options](/reference/api#renderhook-options) section for more details.
+[`renderHook` Options](/docs/api-reference.md#renderhook-options) section for more details.
 
 ## `renderHook` Options
 
@@ -91,7 +91,7 @@ A function to unmount the test component. This is commonly used to trigger clean
 ### `...asyncUtils`
 
 Utilities to assist with testing asynchronous behaviour. See the
-[Async Utils](/reference/api#async-utilities) section for more details.
+[Async Utils](/docs/api-reference.md#async-utilities) section for more details.
 
 ---
 
@@ -175,8 +175,9 @@ function waitFor(callback: function(): boolean|void, options?: {
 ```
 
 Returns a `Promise` that resolves if the provided callback executes without exception and returns a
-truthy or `undefined` value. It is safe to use the [`result` of `renderHook`](/reference/api#result)
-in the callback to perform assertion or to test values.
+truthy or `undefined` value. It is safe to use the
+[`result` of `renderHook`](/docs/api-reference.md#result) in the callback to perform assertion or to
+test values.
 
 #### `interval`
 
@@ -205,7 +206,7 @@ function waitForValueToChange(selector: function(): any, options?: {
 ```
 
 Returns a `Promise` that resolves if the value returned from the provided selector changes. It
-expected that the [`result` of `renderHook`](/reference/api#result) to select the value for
+expected that the [`result` of `renderHook`](/docs/api-reference.md#result) to select the value for
 comparison.
 
 #### `interval`
@@ -226,7 +227,7 @@ rejected. By default, errors are not suppressed for this utility.
 
 ### `wait`
 
-_(DEPRECATED, use [`waitFor`](/reference/api#waitfor) instead)_
+_(DEPRECATED, use [`waitFor`](/docs/api-reference.md#waitfor) instead)_
 
 ```js
 function wait(callback: function(): boolean|void, options?: {
@@ -236,8 +237,9 @@ function wait(callback: function(): boolean|void, options?: {
 ```
 
 Returns a `Promise` that resolves if the provided callback executes without exception and returns a
-truthy or `undefined` value. It is safe to use the [`result` of `renderHook`](/reference/api#result)
-in the callback to perform assertion or to test values.
+truthy or `undefined` value. It is safe to use the
+[`result` of `renderHook`](/docs/api-reference.md#result) in the callback to perform assertion or to
+test values.
 
 #### `timeout`
 

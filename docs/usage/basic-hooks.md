@@ -1,7 +1,7 @@
 ---
 name: Basic Hooks
 menu: Usage
-route: '/usage/basic-hooks'
+route: '/docs/usage/basic-hooks'
 ---
 
 # Basic Hooks

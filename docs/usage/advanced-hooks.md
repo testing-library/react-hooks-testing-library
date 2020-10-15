@@ -1,7 +1,7 @@
 ---
 name: Advanced Hooks
 menu: Usage
-route: '/usage/advanced-hooks'
+route: '/docs/usage/advanced-hooks'
 ---
 
 # Advanced Hooks
@@ -12,8 +12,8 @@ Often, a hook is going to need a value out of context. The `useContext` hook is 
 this, but it will often require a `Provider` to be wrapped around the component using the hook. We
 can use the `wrapper` option for `renderHook` to do just that.
 
-Let's change the `useCounter` example from the [Basic Hooks section](/usage/basic-hooks) to get a
-`step` value from context and build a `CounterStepProvider` that allows us to set the value:
+Let's change the `useCounter` example from the [Basic Hooks section](/docs/usage/basic-hooks.md) to
+get a `step` value from context and build a `CounterStepProvider` that allows us to set the value:
 
 ```js
 import React, { useState, useContext, useCallback } from 'react'
@@ -179,13 +179,13 @@ during `await waitForNextUpdate()`. The async utilities automatically wrap the w
 asynchronous `act()` wrapper.
 
 For more details on the other async utilities, please refer to the
-[API Reference](/reference/api#asyncutils).
+[API Reference](/docs/api-reference.md#asyncutils).
 
 ### Suspense
 
-All the [async utilities](/reference/api#async-utilities) will also wait for hooks that suspend
-using [React's `Suspense`](https://reactjs.org/docs/react-api.html#reactsuspense) functionality to
-complete rendering.
+All the [async utilities](/docs/api-reference.md#async-utilities) will also wait for hooks that
+suspend using [React's `Suspense`](https://reactjs.org/docs/react-api.html#reactsuspense)
+functionality to complete rendering.
 
 ## Errors
 
