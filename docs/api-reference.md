@@ -10,6 +10,7 @@ route: '/reference/api'
 - [`renderHook`](/reference/api#renderhook)
 - [`act`](/reference/api#act)
 - [`cleanup`](/reference/api#cleanup)
+- [`addCleanup`](/reference/api#addcleanup)
 
 ---
 
@@ -108,7 +109,9 @@ This is the same [`act` function](https://reactjs.org/docs/test-utils.html#act) 
 function cleanup: Promise<void>
 ```
 
-Unmounts any rendered hooks rendered with `renderHook`, ensuring all effects have been flushed.
+Unmounts any rendered hooks rendered with `renderHook`, ensuring all effects have been flushed. Any
+callbacks added with [`addCleanup`](<(/reference/api#addCleanup).>) will also be called when
+`cleanup` is run.
 
 > Please note that this is done automatically if the testing framework you're using supports the
 > `afterEach` global (like Jest, mocha and Jasmine). If not, you will need to do manual cleanups
@@ -144,6 +147,35 @@ of the regular imports.
 
 If neither of these approaches are suitable, setting the `RHTL_SKIP_AUTO_CLEANUP` environment
 variable to `true` before importing `@testing-library/react-hooks` will also disable this feature.
+
+---
+
+## `addCleanup`
+
+```js
+function addCleanup(callback: function(): void|Promise<void>): function(): void
+```
+
+Add a callback to be called during [`cleanup`](/reference/api#cleanup), returning a function to
+remove the cleanup if is no longer required. Cleanups are called in reverse order to being added.
+This is usually only relevant when wanting a cleanup to run after the component has been unmounted.
+
+If the provided callback is an `async` function or returns a promise, `cleanup` will wait for it to
+be resolved before moving onto the next cleanup callback.
+
+> Please note that any cleanups added using `addCleanup` are removed after `cleanup` is called. For
+> cleanups that need to run with every test, it is advised to add them in a `beforeEach` block (or
+> equivalent for your test runner).
+
+## `removeCleanup`
+
+```js
+function removeCleanup(callback: function(): void|Promise<void>): void
+```
+
+Removes a cleanup callback previously added with [`addCleanup`](/reference/api#addCleanup). Once
+removed, the provided callback will no longer execute as part of running
+[`cleanup`](/reference/api#cleanup).
 
 ---
 

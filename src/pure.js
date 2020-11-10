@@ -99,4 +99,4 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
   }
 }
 
-export { renderHook, cleanup, act }
+export { renderHook, cleanup, addCleanup, removeCleanup, act }

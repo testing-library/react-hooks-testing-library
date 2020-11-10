@@ -183,6 +183,17 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "huchenme",
+      "name": "Hu Chen",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2078389?v=4",
+      "profile": "https://huchen.dev/",
+      "contributions": [
+        "code",
+        "doc",
+        "example"
+      ]
     }
   ],
   "commitConvention": "none"

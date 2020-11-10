@@ -4,12 +4,15 @@ let cleanupCallbacks = []
 
 async function cleanup() {
   await flushMicroTasks()
-  cleanupCallbacks.forEach((cb) => cb())
+  for (const callback of cleanupCallbacks) {
+    await callback()
+  }
   cleanupCallbacks = []
 }
 
 function addCleanup(callback) {
-  cleanupCallbacks.push(callback)
+  cleanupCallbacks.unshift(callback)
+  return () => removeCleanup(callback)
 }
 
 function removeCleanup(callback) {

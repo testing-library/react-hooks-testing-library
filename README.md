@@ -164,11 +164,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/102"><img src="https://avatars1.githubusercontent.com/u/5839225?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Roman Gusev</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=102" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/hemlok"><img src="https://avatars2.githubusercontent.com/u/9043345?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Adam Seckel</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=hemlok" title="Code">💻</a></td>
     <td align="center"><a href="https://keiya01.github.io/portfolio"><img src="https://avatars1.githubusercontent.com/u/34934510?v=4?s=100" width="100px;" alt=""/><br /><sub><b>keiya sasaki</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=keiya01" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://huchen.dev/"><img src="https://avatars3.githubusercontent.com/u/2078389?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hu Chen</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=huchenme" title="Code">💻</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=huchenme" title="Documentation">📖</a> <a href="#example-huchenme" title="Examples">💡</a></td>
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://allcontributors.org/) specification.
