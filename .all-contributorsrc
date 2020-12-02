@@ -194,6 +194,15 @@
         "doc",
         "example"
       ]
+    },
+    {
+      "login": "joshuaellis",
+      "name": "Josh",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/37798644?v=4",
+      "profile": "https://github.com/joshuaellis",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
