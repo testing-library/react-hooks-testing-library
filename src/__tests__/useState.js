@@ -13,7 +13,7 @@ describe('useState tests', () => {
   test('should update setState value using setter', () => {
     const { result } = renderHook(() => useState('foo'))
 
-    const [_, setValue] = result.current
+    const [ignoredValue, setValue] = result.current
 
     act(() => setValue('bar'))
 

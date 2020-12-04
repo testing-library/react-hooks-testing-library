@@ -3,6 +3,8 @@
   "rules": {
     "max-lines-per-function": "off",
     "no-constant-condition": "off",
-    "no-await-in-loop": "off"
+    "no-await-in-loop": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "no-console": "off"
   }
 }

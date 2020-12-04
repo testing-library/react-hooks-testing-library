@@ -27,7 +27,7 @@
     "validate": "kcd-scripts validate",
     "prepare": "npm run build",
     "build": "kcd-scripts build",
-    "format": "prettier-eslint --write \"**/*.{js,ts,json,yml,md,mdx}\"",
+    "lint": "kcd-scripts lint",
     "coverage": "codecov",
     "test": "kcd-scripts test",
     "test:update": "npm test -- --updateSnapshot --coverage",

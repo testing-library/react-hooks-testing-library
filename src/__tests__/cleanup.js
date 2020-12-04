@@ -21,7 +21,7 @@ describe('cleanup tests', () => {
   })
 
   test('should cleanup all rendered hooks', async () => {
-    let cleanupCalled = []
+    const cleanupCalled = []
     const hookWithCleanup = (id) => {
       useEffect(() => {
         return () => {
@@ -40,7 +40,7 @@ describe('cleanup tests', () => {
   })
 
   test('should call cleanups in reverse order', async () => {
-    let callSequence = []
+    const callSequence = []
     addCleanup(() => {
       callSequence.push('cleanup')
     })
@@ -62,7 +62,7 @@ describe('cleanup tests', () => {
   })
 
   test('should wait for async cleanup', async () => {
-    let callSequence = []
+    const callSequence = []
     addCleanup(() => {
       callSequence.push('cleanup')
     })
@@ -85,7 +85,7 @@ describe('cleanup tests', () => {
   })
 
   test('should remove cleanup using removeCleanup', async () => {
-    let callSequence = []
+    const callSequence = []
     addCleanup(() => {
       callSequence.push('cleanup')
     })
@@ -110,7 +110,7 @@ describe('cleanup tests', () => {
   })
 
   test('should remove cleanup using returned handler', async () => {
-    let callSequence = []
+    const callSequence = []
     addCleanup(() => {
       callSequence.push('cleanup')
     })

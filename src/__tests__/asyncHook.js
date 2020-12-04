@@ -17,7 +17,7 @@ describe('async hook tests', () => {
       return () => {
         clearInterval(interval)
       }
-    }, [...values])
+    }, [otherValues])
 
     return value
   }
@@ -83,7 +83,7 @@ describe('async hook tests', () => {
     const { waitFor } = renderHook(() => null)
 
     let actual = 0
-    let expected = 1
+    const expected = 1
 
     setTimeout(() => {
       actual = expected
@@ -165,7 +165,7 @@ describe('async hook tests', () => {
     const { waitFor } = renderHook(() => null)
 
     let actual = 0
-    let expected = 1
+    const expected = 1
 
     setTimeout(() => {
       actual = expected
@@ -207,7 +207,7 @@ describe('async hook tests', () => {
     const { waitForValueToChange } = renderHook(() => null)
 
     let actual = 0
-    let expected = 1
+    const expected = 1
 
     setTimeout(() => {
       actual = expected
