@@ -11,7 +11,7 @@ route: '/'
       height="80"
       width="80"
       alt="ram"
-      src="https://raw.githubusercontent.com/mpeyper/react-hooks-testing-library/master/other/ram.png"
+      src="https://raw.githubusercontent.com/mpeyper/react-hooks-testing-library/master/public/ram.png"
     />
   </a>
 
