@@ -35,7 +35,8 @@
     "contributors:add": "all-contributors add"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5"
+    "@babel/runtime": "^7.12.5",
+    "@types/testing-library__react-hooks": "^3.4.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
