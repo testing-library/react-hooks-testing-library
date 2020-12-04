@@ -28,6 +28,7 @@
     "prepare": "npm run build",
     "build": "kcd-scripts build --out-dir lib",
     "lint": "kcd-scripts lint",
+    "format": "kcd-scripts format",
     "coverage": "codecov",
     "test": "kcd-scripts test",
     "docs:dev": "docz dev",

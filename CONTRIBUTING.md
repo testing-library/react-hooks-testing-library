@@ -29,7 +29,8 @@ Please make sure to run the tests before you commit your changes. You can do so 
 
 ### Update Typings
 
-The TypeScript type definitions can be found in the [DefinitelyTyped repo](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/testing-library__react-hooks).
+The TypeScript type definitions can be found in the
+[DefinitelyTyped repo](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/testing-library__react-hooks).
 
 ## Help needed
 
