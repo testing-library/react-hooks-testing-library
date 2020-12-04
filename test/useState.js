@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { renderHook, act } from '../'
+import { renderHook, act } from '../src'
 
 describe('useState tests', () => {
   test('should use setState value', () => {

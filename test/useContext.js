@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react'
-import { renderHook } from '../'
+import { renderHook } from '../src'
 
 describe('useContext tests', () => {
   test('should get default value from context', () => {

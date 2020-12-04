@@ -8,7 +8,7 @@ describe('skip auto cleanup (disabled) tests', () => {
 
   beforeAll(() => {
     process.env.RHTL_SKIP_AUTO_CLEANUP = 'true'
-    renderHook = require('../').renderHook
+    renderHook = require('../src').renderHook
   })
 
   test('first', () => {

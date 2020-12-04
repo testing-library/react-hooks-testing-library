@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react'
-import { renderHook } from '../'
+import { renderHook } from '../src'
 
 describe('useCallback tests', () => {
   test('should handle useMemo hook', () => {

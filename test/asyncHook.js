@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { renderHook } from '../'
+import { renderHook } from '../src'
 
 describe('async hook tests', () => {
   const useSequence = (...values) => {

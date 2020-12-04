@@ -1,5 +1,5 @@
 import { useRef, useImperativeHandle } from 'react'
-import { renderHook } from '../'
+import { renderHook } from '../src'
 
 describe('useHook tests', () => {
   test('should handle useRef hook', () => {

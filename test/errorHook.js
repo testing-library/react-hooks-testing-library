@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { renderHook } from '../'
+import { renderHook } from '../src'
 
 describe('error hook tests', () => {
   function useError(throwError) {

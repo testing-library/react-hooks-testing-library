@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect } from 'react'
-import { renderHook } from '../'
+import { renderHook } from '../src'
 
 describe('useEffect tests', () => {
   test('should handle useEffect hook', () => {
