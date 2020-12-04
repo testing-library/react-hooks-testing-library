@@ -40,8 +40,6 @@
   },
   "devDependencies": {
     "all-contributors-cli": "6.19.0",
-    "babel-eslint": "10.1.0",
-    "babel-plugin-module-resolver": "4.0.0",
     "codecov": "3.8.1",
     "docz": "2.3.1",
     "docz-utils": "2.3.0",
