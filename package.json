@@ -39,7 +39,6 @@
     "@types/testing-library__react-hooks": "^3.4.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.15",
     "all-contributors-cli": "6.19.0",
     "babel-eslint": "10.1.0",
     "babel-plugin-module-resolver": "4.0.0",
