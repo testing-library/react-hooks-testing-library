@@ -2,7 +2,7 @@
   "name": "@testing-library/react-hooks",
   "version": "0.0.0-semantically-released",
   "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "keywords": [
     "testing",
     "react",
@@ -11,7 +11,7 @@
     "integration"
   ],
   "files": [
-    "dist",
+    "lib",
     "src",
     "pure.js",
     "dont-cleanup-after-each.js"
@@ -26,7 +26,7 @@
     "setup": "npm install && npm run validate -s",
     "validate": "kcd-scripts validate",
     "prepare": "npm run build",
-    "build": "kcd-scripts build",
+    "build": "kcd-scripts build --out-dir lib",
     "lint": "kcd-scripts lint",
     "coverage": "codecov",
     "test": "kcd-scripts test",

@@ -1,5 +1,5 @@
 node_modules
 coverage
-dist
+lib
 .docz
 site
