@@ -2,7 +2,7 @@
   "name": "@testing-library/react-hooks",
   "version": "3.4.2",
   "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "keywords": [
     "testing",
     "react",
@@ -11,7 +11,7 @@
     "integration"
   ],
   "files": [
-    "lib",
+    "dist",
     "src",
     "pure.js",
     "dont-cleanup-after-each.js"
@@ -23,80 +23,35 @@
   },
   "license": "MIT",
   "scripts": {
+    "setup": "npm install && npm run validate -s",
+    "validate": "kcd-scripts validate",
     "prepare": "npm run build",
-    "build": "babel --out-dir lib src",
+    "build": "kcd-scripts build",
     "format": "prettier-eslint --write \"**/*.{js,ts,json,yml,md,mdx}\"",
     "coverage": "codecov",
-    "test": "jest",
-    "test:ci": "npm run test && npm run coverage",
+    "test": "kcd-scripts test",
+    "test:update": "npm test -- --updateSnapshot --coverage",
     "docs:dev": "docz dev",
     "docs:build": "docz build",
     "contributors:add": "all-contributors add"
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.4",
-    "@types/testing-library__react-hooks": "^3.4.0"
+    "@babel/runtime": "^7.12.5"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.8",
-    "@babel/core": "7.12.9",
-    "@babel/plugin-proposal-object-rest-spread": "7.12.1",
-    "@babel/plugin-transform-modules-commonjs": "7.12.1",
-    "@babel/plugin-transform-runtime": "7.12.1",
-    "@babel/preset-env": "7.12.7",
-    "@babel/preset-react": "7.12.7",
+    "@types/jest": "^26.0.15",
+    "kcd-scripts": "^7.2.0",
     "all-contributors-cli": "6.19.0",
     "babel-eslint": "10.1.0",
     "babel-plugin-module-resolver": "4.0.0",
     "codecov": "3.8.1",
     "docz": "2.3.1",
     "docz-theme-default": "1.2.0",
-    "eslint": "7.14.0",
-    "eslint-config-prettier": "6.15.0",
-    "eslint-plugin-prettier": "3.2.0",
-    "husky": "4.3.0",
-    "jest": "26.6.3",
-    "lint-staged": "10.5.2",
-    "prettier": "2.2.1",
-    "prettier-eslint": "12.0.0",
-    "prettier-eslint-cli": "5.0.0",
     "react": "17.0.1",
     "react-test-renderer": "17.0.1"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-test-renderer": ">=16.9.0"
-  },
-  "jest": {
-    "collectCoverage": true,
-    "coverageDirectory": "./coverage/",
-    "collectCoverageFrom": [
-      "**/src/**"
-    ],
-    "testURL": "http://localhost/"
-  },
-  "prettier": {
-    "printWidth": 100,
-    "semi": false,
-    "singleQuote": true,
-    "arrowParens": "always",
-    "proseWrap": "always",
-    "trailingComma": "none"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:prettier/recommended"
-    ],
-    "parser": "babel-eslint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,json,yml,md,mdx}": [
-      "prettier-eslint --write"
-    ]
   }
 }

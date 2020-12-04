@@ -1,4 +1,4 @@
-import { renderHook } from 'src'
+import { renderHook } from '../'
 
 describe('suspense hook tests', () => {
   const cache = {}
