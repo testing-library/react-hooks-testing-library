@@ -39,6 +39,7 @@ function asyncUtils(addResolver) {
   }
 
   const waitFor = async (callback, { interval, timeout, suppressErrors = true } = {}) => {
+    // eslint-disable-next-line consistent-return
     const checkResult = () => {
       try {
         const callbackResult = callback()

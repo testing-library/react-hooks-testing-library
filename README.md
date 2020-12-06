@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [react-hooks-testing-library](#react-hooks-testing-library)
+  - [The problem](#the-problem)
+  - [The solution](#the-solution)
+  - [When to use this library](#when-to-use-this-library)
+  - [When not to use this library](#when-not-to-use-this-library)
+  - [Example](#example)
+    - [`useCounter.js`](#usecounterjs)
+    - [`useCounter.test.js`](#usecountertestjs)
+  - [Installation](#installation)
+    - [Peer Dependencies](#peer-dependencies)
+  - [API](#api)
+  - [Contributors](#contributors)
+  - [Issues](#issues)
+    - [🐛 Bugs](#-bugs)
+    - [💡 Feature Requests](#-feature-requests)
+    - [❓ Questions](#-questions)
+  - [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <div align="center">
   <h1>react-hooks-testing-library</h1>
 
@@ -6,7 +29,7 @@
     height="80"
     width="80"
     alt="ram"
-    src="https://raw.githubusercontent.com/testing-library/react-hooks-testing-library/master/other/ram.png"
+    src="https://raw.githubusercontent.com/testing-library/react-hooks-testing-library/master/public/ram.png"
   />
 </a>
 

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { renderHook } from 'src'
+import { renderHook } from '../src'
 
 // This verifies that by importing RHTL in an
 // environment which supports afterEach (like Jest)

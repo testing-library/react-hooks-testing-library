@@ -4,7 +4,6 @@ about: "I have a suggestion (and might want to implement myself \U0001F642)!"
 title: ''
 labels: enhancement
 assignees: ''
-
 ---
 
 <!--

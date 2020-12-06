@@ -236,9 +236,9 @@ function waitForValueToChange(selector: function(): any, options?: {
 }): Promise<void>
 ```
 
-Returns a `Promise` that resolves if the value returned from the provided selector changes. It is 
-expected that the [`result` of `renderHook`](/reference/api#result) will be used to select the 
-value for comparison.
+Returns a `Promise` that resolves if the value returned from the provided selector changes. It is
+expected that the [`result` of `renderHook`](/reference/api#result) will be used to select the value
+for comparison.
 
 #### `interval`
 
