@@ -1,5 +1,3 @@
-import { act } from 'react-test-renderer'
-
 function createTimeoutError(utilName, { timeout }) {
   const timeoutError = new Error(`Timed out in ${utilName} after ${timeout}ms.`)
   timeoutError.timeout = true
@@ -14,7 +12,7 @@ function resolveAfter(ms) {
 
 let hasWarnedDeprecatedWait = false
 
-function asyncUtils(addResolver) {
+function asyncUtils(act, addResolver) {
   let nextUpdatePromise = null
 
   const waitForNextUpdate = async (options = {}) => {

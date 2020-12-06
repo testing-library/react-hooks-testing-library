@@ -4,7 +4,7 @@
 // anyway. So we're just going to ignore coverage for this file
 /**
  * copied from React's enqueueTask.js
- * copied again from React Testing Library's flush-microtasks.js
+ * copied again from React Testing Library's flushMicrotasks.js
  */
 
 let didWarnAboutMessageChannel = false

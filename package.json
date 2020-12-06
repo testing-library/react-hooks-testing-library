@@ -13,6 +13,7 @@
   "files": [
     "lib",
     "src",
+    "native",
     "pure.js",
     "dont-cleanup-after-each.js"
   ],
@@ -53,5 +54,13 @@
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-test-renderer": ">=16.9.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-test-renderer": {
+      "optional": true
+    }
   }
 }

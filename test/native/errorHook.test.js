@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { renderHook } from '../src'
+import { renderHook } from '../../src/native'
 
 describe('error hook tests', () => {
   function useError(throwError) {
@@ -21,7 +21,7 @@ describe('error hook tests', () => {
   function useEffectError(throwError) {
     useEffect(() => {
       useError(throwError)
-    }, [throwError])
+    }, [])
     return true
   }
 
@@ -48,13 +48,13 @@ describe('error hook tests', () => {
     })
 
     test('should reset error', () => {
-      const { result, rerender } = renderHook((throwError) => useError(throwError), {
-        initialProps: true
+      const { result, rerender } = renderHook(({ throwError }) => useError(throwError), {
+        initialProps: { throwError: true }
       })
 
       expect(result.error).not.toBe(undefined)
 
-      rerender(false)
+      rerender({ throwError: false })
 
       expect(result.current).not.toBe(undefined)
       expect(result.error).toBe(undefined)
@@ -91,17 +91,15 @@ describe('error hook tests', () => {
 
     test('should reset async error', async () => {
       const { result, waitForNextUpdate, rerender } = renderHook(
-        (throwError) => useAsyncError(throwError),
-        {
-          initialProps: true
-        }
+        ({ throwError }) => useAsyncError(throwError),
+        { initialProps: { throwError: true } }
       )
 
       await waitForNextUpdate()
 
       expect(result.error).not.toBe(undefined)
 
-      rerender(false)
+      rerender({ throwError: false })
 
       await waitForNextUpdate()
 
@@ -115,7 +113,6 @@ describe('error hook tests', () => {
     Refer to https://github.com/testing-library/react-hooks-testing-library/issues/308
     for more details.
   */
-  // eslint-disable-next-line jest/no-disabled-tests
   describe.skip('effect', () => {
     test('should raise effect error', () => {
       const { result } = renderHook(() => useEffectError(true))
@@ -138,13 +135,13 @@ describe('error hook tests', () => {
     })
 
     test('should reset effect error', () => {
-      const { result, rerender } = renderHook((throwError) => useEffectError(throwError), {
-        initialProps: true
+      const { result, rerender } = renderHook(({ throwError }) => useEffectError(throwError), {
+        initialProps: { throwError: true }
       })
 
       expect(result.error).not.toBe(undefined)
 
-      rerender(false)
+      rerender({ throwError: false })
 
       expect(result.current).not.toBe(undefined)
       expect(result.error).toBe(undefined)

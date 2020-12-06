@@ -9,7 +9,7 @@ describe('skip auto cleanup (no afterEach) tests', () => {
   beforeAll(() => {
     // eslint-disable-next-line no-global-assign
     afterEach = false
-    renderHook = require('../').renderHook
+    renderHook = require('../../src/native').renderHook
   })
 
   test('first', () => {
