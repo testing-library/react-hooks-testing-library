@@ -43,7 +43,7 @@
 <hr />
 
 <!-- prettier-ignore-start -->
-![Build Status](https://github.com/testing-library/react-hooks-testing-library/workflows/validate/badge.svg)
+[![Build Status](https://img.shields.io/github/workflow/status/testing-library/react-hooks-testing-library/validate?logo=github&style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/actions?query=workflow%3Avalidate)
 [![codecov](https://img.shields.io/codecov/c/github/testing-library/react-hooks-testing-library.svg?style=flat-square)](https://codecov.io/gh/testing-library/react-hooks-testing-library)
 [![version](https://img.shields.io/npm/v/@testing-library/react-hooks.svg?style=flat-square)](https://www.npmjs.com/package/@testing-library/react-hooks)
 [![downloads](https://img.shields.io/npm/dm/@testing-library/react-hooks.svg?style=flat-square)](http://www.npmtrends.com/@testing-library/react-hooks)
