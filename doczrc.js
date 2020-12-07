@@ -3,7 +3,7 @@ export default {
   files: '**/*.{md,mdx}',
   src: 'docs',
   dest: 'site',
-  public: './other',
+  public: './public',
   ignore: ['CODE_OF_CONDUCT.md', 'CONTRIBUTING.md', 'LICENSE.md'],
   htmlContext: {
     favicon: '/public/ram.png'

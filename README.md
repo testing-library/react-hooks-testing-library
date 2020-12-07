@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [react-hooks-testing-library](#react-hooks-testing-library)
+  - [The problem](#the-problem)
+  - [The solution](#the-solution)
+  - [When to use this library](#when-to-use-this-library)
+  - [When not to use this library](#when-not-to-use-this-library)
+  - [Example](#example)
+    - [`useCounter.js`](#usecounterjs)
+    - [`useCounter.test.js`](#usecountertestjs)
+  - [Installation](#installation)
+    - [Peer Dependencies](#peer-dependencies)
+  - [API](#api)
+  - [Contributors](#contributors)
+  - [Issues](#issues)
+    - [🐛 Bugs](#-bugs)
+    - [💡 Feature Requests](#-feature-requests)
+    - [❓ Questions](#-questions)
+  - [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <div align="center">
   <h1>react-hooks-testing-library</h1>
 
@@ -6,7 +29,7 @@
     height="80"
     width="80"
     alt="ram"
-    src="https://raw.githubusercontent.com/testing-library/react-hooks-testing-library/master/other/ram.png"
+    src="https://raw.githubusercontent.com/testing-library/react-hooks-testing-library/master/public/ram.png"
   />
 </a>
 
@@ -20,8 +43,7 @@
 <hr />
 
 <!-- prettier-ignore-start -->
-
-[![Build Status](https://img.shields.io/travis/testing-library/react-hooks-testing-library.svg?style=flat-square)](https://travis-ci.org/testing-library/react-hooks-testing-library)
+[![Build Status](https://img.shields.io/github/workflow/status/testing-library/react-hooks-testing-library/validate?logo=github&style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/actions?query=workflow%3Avalidate)
 [![codecov](https://img.shields.io/codecov/c/github/testing-library/react-hooks-testing-library.svg?style=flat-square)](https://codecov.io/gh/testing-library/react-hooks-testing-library)
 [![version](https://img.shields.io/npm/v/@testing-library/react-hooks.svg?style=flat-square)](https://www.npmjs.com/package/@testing-library/react-hooks)
 [![downloads](https://img.shields.io/npm/dm/@testing-library/react-hooks.svg?style=flat-square)](http://www.npmtrends.com/@testing-library/react-hooks)
@@ -166,6 +188,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://keiya01.github.io/portfolio"><img src="https://avatars1.githubusercontent.com/u/34934510?v=4?s=100" width="100px;" alt=""/><br /><sub><b>keiya sasaki</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=keiya01" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://huchen.dev/"><img src="https://avatars3.githubusercontent.com/u/2078389?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hu Chen</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=huchenme" title="Code">💻</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=huchenme" title="Documentation">📖</a> <a href="#example-huchenme" title="Examples">💡</a></td>
     <td align="center"><a href="https://github.com/joshuaellis"><img src="https://avatars0.githubusercontent.com/u/37798644?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Josh</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=joshuaellis" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/Goldziher"><img src="https://avatars1.githubusercontent.com/u/30733348?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Na'aman Hirschfeld</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=Goldziher" title="Code">💻</a></td>
   </tr>
 </table>
 

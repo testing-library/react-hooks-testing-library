@@ -1,9 +1,9 @@
 import { useEffect, useLayoutEffect } from 'react'
-import { renderHook } from 'src'
+import { renderHook } from '../src'
 
 describe('useEffect tests', () => {
   test('should handle useEffect hook', () => {
-    const sideEffect = { [1]: false, [2]: false }
+    const sideEffect = { 1: false, 2: false }
 
     const { rerender, unmount } = renderHook(
       ({ id }) => {
@@ -32,7 +32,7 @@ describe('useEffect tests', () => {
   })
 
   test('should handle useLayoutEffect hook', () => {
-    const sideEffect = { [1]: false, [2]: false }
+    const sideEffect = { 1: false, 2: false }
 
     const { rerender, unmount } = renderHook(
       ({ id }) => {
