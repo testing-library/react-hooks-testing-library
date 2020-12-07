@@ -1,9 +1,6 @@
-import flushMicroTasks from './flush-microtasks'
-
 let cleanupCallbacks = []
 
 async function cleanup() {
-  await flushMicroTasks()
   for (const callback of cleanupCallbacks) {
     await callback()
   }
