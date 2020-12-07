@@ -21,25 +21,28 @@ function Fallback() {
 }
 
 function resultContainer() {
-  let value = null
-  let error = null
+  const results = []
   const resolvers = []
 
   const result = {
+    get all() {
+      return results.map(({ value, error }) => error || value)
+    },
     get current() {
+      const { value, error } = results[results.length - 1]
       if (error) {
         throw error
       }
       return value
     },
     get error() {
+      const { error } = results[results.length - 1]
       return error
     }
   }
 
-  const updateResult = (val, err) => {
-    value = val
-    error = err
+  const updateResult = (value, error) => {
+    results.push({ value, error })
     resolvers.splice(0, resolvers.length).forEach((resolve) => resolve())
   }
 
@@ -48,8 +51,8 @@ function resultContainer() {
     addResolver: (resolver) => {
       resolvers.push(resolver)
     },
-    setValue: (val) => updateResult(val),
-    setError: (err) => updateResult(undefined, err)
+    setValue: (value) => updateResult(value),
+    setError: (error) => updateResult(undefined, error)
   }
 }
 
