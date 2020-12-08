@@ -1,26 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [react-hooks-testing-library](#react-hooks-testing-library)
-  - [The problem](#the-problem)
-  - [The solution](#the-solution)
-  - [When to use this library](#when-to-use-this-library)
-  - [When not to use this library](#when-not-to-use-this-library)
-  - [Example](#example)
-    - [`useCounter.js`](#usecounterjs)
-    - [`useCounter.test.js`](#usecountertestjs)
-  - [Installation](#installation)
-    - [Peer Dependencies](#peer-dependencies)
-  - [API](#api)
-  - [Contributors](#contributors)
-  - [Issues](#issues)
-    - [🐛 Bugs](#-bugs)
-    - [💡 Feature Requests](#-feature-requests)
-    - [❓ Questions](#-questions)
-  - [LICENSE](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 <div align="center">
   <h1>react-hooks-testing-library</h1>
 
@@ -58,6 +35,32 @@
 [![Watch on GitHub](https://img.shields.io/github/watchers/testing-library/react-hooks-testing-library.svg?style=social)](https://github.com/testing-library/react-hooks-testing-library/watchers)
 [![Star on GitHub](https://img.shields.io/github/stars/testing-library/react-hooks-testing-library.svg?style=social)](https://github.com/testing-library/react-hooks-testing-library/stargazers)
 [![Tweet](https://img.shields.io/twitter/url/https/github.com/testing-library/react-hooks-testing-library.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20react-hooks-testing-library%20by%20%40testing-library%20https%3A%2F%2Fgithub.com%2Ftesting-library%2Freact-hooks-testing-library%20%F0%9F%91%8D)
+<!-- prettier-ignore-end -->
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [react-hooks-testing-library](#react-hooks-testing-library)
+  - [The problem](#the-problem)
+  - [The solution](#the-solution)
+  - [When to use this library](#when-to-use-this-library)
+  - [When not to use this library](#when-not-to-use-this-library)
+  - [Example](#example)
+    - [`useCounter.js`](#usecounterjs)
+    - [`useCounter.test.js`](#usecountertestjs)
+  - [Installation](#installation)
+    - [Peer Dependencies](#peer-dependencies)
+  - [API](#api)
+  - [Contributors](#contributors)
+  - [Issues](#issues)
+    - [🐛 Bugs](#-bugs)
+    - [💡 Feature Requests](#-feature-requests)
+    - [❓ Questions](#-questions)
+  - [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## The problem
 
