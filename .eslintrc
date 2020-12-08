@@ -1,10 +1,15 @@
 {
-  "extends": "./node_modules/kcd-scripts/eslint.js",
+  "extends": [
+    "./node_modules/kcd-scripts/eslint.js",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
     "max-lines-per-function": "off",
     "no-constant-condition": "off",
     "no-await-in-loop": "off",
     "react-hooks/rules-of-hooks": "off",
-    "no-console": "off"
-  }
+    "no-console": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": "warn"
+  },
 }
