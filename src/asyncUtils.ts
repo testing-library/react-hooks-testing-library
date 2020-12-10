@@ -11,8 +11,7 @@ class TimeoutError extends Error {
 }
 
 function createTimeoutError(utilName: string, { timeout }: Pick<WaitOptions, 'timeout'>) {
-  //eslint-disable-next-line
-  const timeoutError = new TimeoutError(`Timed out in ${utilName} after ${timeout}ms.`)
+  const timeoutError = new TimeoutError(`Timed out in ${utilName} after ${timeout as number}ms.`)
   return timeoutError
 }
 
@@ -22,9 +21,8 @@ function resolveAfter(ms: number) {
   })
 }
 
-// eslint-disable-next-line
-function asyncUtils(addResolver: any) {
-  let nextUpdatePromise: Promise<void | undefined> | null = null
+function asyncUtils(addResolver: (callback: () => void) => void) {
+  let nextUpdatePromise: Promise<void> | null = null
 
   const waitForNextUpdate = async (options: Pick<WaitOptions, 'timeout'> = {}) => {
     if (!nextUpdatePromise) {
@@ -42,14 +40,13 @@ function asyncUtils(addResolver: any) {
           resolve()
         })
       })
-      // eslint-disable-next-line
-      await act(() => nextUpdatePromise!)
+      await act(() => nextUpdatePromise as Promise<void>)
     }
     await nextUpdatePromise
   }
 
-  const waitFor = async (
-    callback: () => boolean | void | undefined,
+  const waitFor = async <T>(
+    callback: () => T | Promise<T> | null,
     { interval, timeout, suppressErrors = true }: WaitOptions = {}
   ) => {
     // eslint-disable-next-line consistent-return
@@ -57,16 +54,16 @@ function asyncUtils(addResolver: any) {
       try {
         const callbackResult = callback()
         return callbackResult ?? callbackResult === undefined
-      } catch (e) {
+      } catch (error: unknown) {
         if (!suppressErrors) {
-          throw e
+          throw error as Error
         }
       }
     }
 
     const waitForResult = async () => {
       const initialTimeout = timeout
-      // eslint-disable-next-line
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       while (true) {
         const startTime = Date.now()
         try {
@@ -79,11 +76,11 @@ function asyncUtils(addResolver: any) {
           if (checkResult()) {
             return
           }
-        } catch (e) {
-          if (e.timeout) {
+        } catch (error: unknown) {
+          if (error instanceof TimeoutError) {
             throw createTimeoutError('waitFor', { timeout: initialTimeout })
           }
-          throw e
+          throw error as Error
         }
         if (timeout) timeout -= Date.now() - startTime
       }
@@ -101,11 +98,11 @@ function asyncUtils(addResolver: any) {
         suppressErrors: false,
         ...options
       })
-    } catch (e) {
-      if (e.timeout) {
+    } catch (error: unknown) {
+      if (error instanceof TimeoutError) {
         throw createTimeoutError('waitForValueToChange', options)
       }
-      throw e
+      throw error as Error
     }
   }
 
