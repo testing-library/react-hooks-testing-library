@@ -1,4 +1,4 @@
-let cleanupCallbacks: (() => Promise<void>)[] = []
+let cleanupCallbacks: (() => Promise<void> | void)[] = []
 
 async function cleanup() {
   for (const callback of cleanupCallbacks) {
@@ -7,12 +7,12 @@ async function cleanup() {
   cleanupCallbacks = []
 }
 
-function addCleanup(callback: () => Promise<void>) {
+function addCleanup(callback: () => Promise<void> | void) {
   cleanupCallbacks.unshift(callback)
   return () => removeCleanup(callback)
 }
 
-function removeCleanup(callback: () => Promise<void>) {
+function removeCleanup(callback: () => Promise<void> | void) {
   cleanupCallbacks = cleanupCallbacks.filter((cb) => cb !== callback)
 }
 
