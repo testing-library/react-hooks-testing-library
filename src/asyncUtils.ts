@@ -1,28 +1,37 @@
 import { act } from 'react-test-renderer'
 
-function createTimeoutError(utilName, { timeout }) {
-  const timeoutError = new Error(`Timed out in ${utilName} after ${timeout}ms.`)
-  timeoutError.timeout = true
+export interface WaitOptions {
+  interval?: number
+  timeout?: number
+  suppressErrors?: boolean
+}
+
+class TimeoutError extends Error {
+  timeout = true
+}
+
+function createTimeoutError(utilName: string, { timeout }: Pick<WaitOptions, 'timeout'>) {
+  //eslint-disable-next-line
+  const timeoutError = new TimeoutError(`Timed out in ${utilName} after ${timeout}ms.`)
   return timeoutError
 }
 
-function resolveAfter(ms) {
+function resolveAfter(ms: number) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
 }
 
-let hasWarnedDeprecatedWait = false
+// eslint-disable-next-line
+function asyncUtils(addResolver: any) {
+  let nextUpdatePromise: Promise<void | undefined> | null = null
 
-function asyncUtils(addResolver) {
-  let nextUpdatePromise = null
-
-  const waitForNextUpdate = async (options = {}) => {
+  const waitForNextUpdate = async (options: Pick<WaitOptions, 'timeout'> = {}) => {
     if (!nextUpdatePromise) {
       nextUpdatePromise = new Promise((resolve, reject) => {
-        let timeoutId
-        if (options.timeout > 0) {
-          timeoutId = setTimeout(
+        let timeoutId: number
+        if (options.timeout && options.timeout > 0) {
+          timeoutId = window.setTimeout(
             () => reject(createTimeoutError('waitForNextUpdate', options)),
             options.timeout
           )
@@ -33,17 +42,21 @@ function asyncUtils(addResolver) {
           resolve()
         })
       })
-      await act(() => nextUpdatePromise)
+      // eslint-disable-next-line
+      await act(() => nextUpdatePromise!)
     }
     await nextUpdatePromise
   }
 
-  const waitFor = async (callback, { interval, timeout, suppressErrors = true } = {}) => {
+  const waitFor = async (
+    callback: () => boolean | void | undefined,
+    { interval, timeout, suppressErrors = true }: WaitOptions = {}
+  ) => {
     // eslint-disable-next-line consistent-return
     const checkResult = () => {
       try {
         const callbackResult = callback()
-        return callbackResult || callbackResult === undefined
+        return callbackResult ?? callbackResult === undefined
       } catch (e) {
         if (!suppressErrors) {
           throw e
@@ -53,6 +66,7 @@ function asyncUtils(addResolver) {
 
     const waitForResult = async () => {
       const initialTimeout = timeout
+      // eslint-disable-next-line
       while (true) {
         const startTime = Date.now()
         try {
@@ -71,7 +85,7 @@ function asyncUtils(addResolver) {
           }
           throw e
         }
-        timeout -= Date.now() - startTime
+        if (timeout) timeout -= Date.now() - startTime
       }
     }
 
@@ -80,7 +94,7 @@ function asyncUtils(addResolver) {
     }
   }
 
-  const waitForValueToChange = async (selector, options = {}) => {
+  const waitForValueToChange = async (selector: () => unknown, options = {}) => {
     const initialValue = selector()
     try {
       await waitFor(() => selector() !== initialValue, {
@@ -95,25 +109,7 @@ function asyncUtils(addResolver) {
     }
   }
 
-  const wait = async (callback, { timeout, suppressErrors } = {}) => {
-    if (!hasWarnedDeprecatedWait) {
-      hasWarnedDeprecatedWait = true
-      console.warn(
-        '`wait` has been deprecated. Use `waitFor` instead: https://react-hooks-testing-library.com/reference/api#waitfor.'
-      )
-    }
-    try {
-      await waitFor(callback, { timeout, suppressErrors })
-    } catch (e) {
-      if (e.timeout) {
-        throw createTimeoutError('wait', { timeout })
-      }
-      throw e
-    }
-  }
-
   return {
-    wait,
     waitFor,
     waitForNextUpdate,
     waitForValueToChange
