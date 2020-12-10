@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react'
 import { act, create } from 'react-test-renderer'
 import asyncUtils from './asyncUtils'
-// TODO: remove this line when it's converted to typescript
-// eslint-disable-next-line import/no-unresolved
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
 function TestHook({ callback, hookProps, onError, children }) {
