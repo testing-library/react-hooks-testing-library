@@ -21,7 +21,7 @@ describe('cleanup tests', () => {
   })
 
   test('should cleanup all rendered hooks', async () => {
-    let cleanupCalled = []
+    const cleanupCalled = []
     const hookWithCleanup = (id) => {
       useEffect(() => {
         return () => {

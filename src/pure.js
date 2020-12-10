@@ -12,11 +12,11 @@ function getRenderer(renderers) {
 
   const [validRenderer] = renderers.filter(({ required }) => hasDependency(required))
 
-  if (!validRenderer) {
+  if (validRenderer) {
+    return validRenderer.renderer
+  } else {
     const options = renderers.map(({ option }) => `  - ${option}`).join('\n')
     throw new Error(`Could not auto-detect a React renderer.  Options are:\n${options}`)
-  } else {
-    return validRenderer.renderer
   }
 }
 
