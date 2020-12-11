@@ -14,6 +14,7 @@
     "lib",
     "src",
     "native",
+    "server",
     "pure.js",
     "dont-cleanup-after-each.js"
   ],
@@ -49,15 +50,20 @@
     "eslint": "^7.15.0",
     "kcd-scripts": "7.5.1",
     "react": "17.0.1",
+    "react-dom": "^17.0.1",
     "react-test-renderer": "17.0.1",
     "typescript": "4.1.2"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
+    "react-dom": ">=16.9.0",
     "react-test-renderer": ">=16.9.0"
   },
   "peerDependenciesMeta": {
     "react": {
+      "optional": true
+    },
+    "react-dom": {
       "optional": true
     },
     "react-test-renderer": {
