@@ -46,10 +46,9 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
   }
 
   const waitFor = async <T>(
-    callback: () => T | Promise<T> | null,
+    callback: () => T | Promise<T> | undefined,
     { interval, timeout, suppressErrors = true }: WaitOptions = {}
   ) => {
-    // eslint-disable-next-line consistent-return
     const checkResult = () => {
       try {
         const callbackResult = callback()
@@ -58,6 +57,7 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
         if (!suppressErrors) {
           throw error as Error
         }
+        return undefined
       }
     }
 
