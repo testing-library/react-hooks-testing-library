@@ -6,7 +6,8 @@ import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
 // TODO: Add better type, currently file is utilizing minimum types to work
 // TODO: Attempt to refactor code to remove ESLint disables if possible
-type Props = {callback: (arg: unknown) => {}, hookProps: unknown, onError: CallableFunction, children: CallableFunction}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Props<T = any, R =any> = {callback: (props: T) => R, hookProps: unknown, onError: CallableFunction, children: CallableFunction}
 function TestHook({ callback, hookProps, onError, children }: Props) {
   try {
     children(callback(hookProps))
@@ -62,6 +63,7 @@ function resultContainer() {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function renderHook<T = any, R = any>(callback: (props: T) => R, { initialProps, wrapper }: {initialProps?: T , wrapper?: React.ComponentType} = {}) {
   const { result, setValue, setError, addResolver } = resultContainer()
   const hookProps = { current: initialProps }
@@ -87,6 +89,7 @@ function renderHook<T = any, R = any>(callback: (props: T) => R, { initialProps,
     act(() => {
     testRenderer = create(toRender())
   })
+
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { unmount, update } = testRenderer as ReactTestRenderer
 
