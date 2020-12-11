@@ -48,13 +48,13 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
   // TODO: Discuss with Kent and Maintainers about behavior of returning nothing currently there are tests handling this behavior that may be an anti-pattern.
   // ? Should waitFor() always expect something returned
   const waitFor = async <T>(
-    callback: () => T | Promise<T> | undefined | VoidFunction,
+    callback: () => T | Promise<T>,
     { interval, timeout, suppressErrors = true }: WaitOptions = {}
   ) => {
     const checkResult = () => {
       try {
         const callbackResult = callback()
-        return callbackResult ?? callbackResult === undefined
+        return callbackResult || callbackResult === undefined
       } catch (error: unknown) {
         if (!suppressErrors) {
           throw error as Error
@@ -65,7 +65,6 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
 
     const waitForResult = async () => {
       const initialTimeout = timeout
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       while (true) {
         const startTime = Date.now()
         try {
