@@ -1,12 +1,18 @@
-import React, { Suspense } from 'react'
-import { act, create } from 'react-test-renderer'
+import React, { ReactElement, ReactNode, Suspense } from 'react'
+import { act, create, ReactTestRenderer } from 'react-test-renderer'
 import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
-function TestHook({ callback, hookProps, onError, children }) {
+
+// TODO: Add better type, currently file is utilizing minimum types to work
+// TODO: Attempt to refactor code to remove ESLint disables if possible
+type Props = {callback: (arg: unknown) => {}, hookProps: unknown, onError: CallableFunction, children: CallableFunction}
+function TestHook({ callback, hookProps, onError, children }: Props) {
   try {
     children(callback(hookProps))
+  // eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
   } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (err.then) {
       throw err
     } else {
@@ -21,8 +27,8 @@ function Fallback() {
 }
 
 function resultContainer() {
-  const results = []
-  const resolvers = []
+  const results: Array<Record<string, unknown>> = [] 
+  const resolvers: Array<VoidFunction> = []
 
   const result = {
     get all() {
@@ -41,26 +47,26 @@ function resultContainer() {
     }
   }
 
-  const updateResult = (value, error) => {
+  const updateResult = (value: unknown, error?: unknown) => {
     results.push({ value, error })
     resolvers.splice(0, resolvers.length).forEach((resolve) => resolve())
   }
 
   return {
     result,
-    addResolver: (resolver) => {
+    addResolver: (resolver: VoidFunction) => {
       resolvers.push(resolver)
     },
-    setValue: (value) => updateResult(value),
-    setError: (error) => updateResult(undefined, error)
+    setValue: (value: unknown) => updateResult(value),
+    setError: (error: unknown) => updateResult(undefined, error)
   }
 }
 
-function renderHook(callback, { initialProps, wrapper } = {}) {
+function renderHook(callback: () => {}, { initialProps, wrapper }: {initialProps?: (React.InputHTMLAttributes<HTMLInputElement> & React.ClassAttributes<HTMLInputElement>) , wrapper?: React.ComponentType} = {}) {
   const { result, setValue, setError, addResolver } = resultContainer()
   const hookProps = { current: initialProps }
 
-  const wrapUiIfNeeded = (innerElement) =>
+  const wrapUiIfNeeded = (innerElement: ReactNode) =>
     wrapper ? React.createElement(wrapper, hookProps.current, innerElement) : innerElement
 
   const toRender = () =>
@@ -70,22 +76,30 @@ function renderHook(callback, { initialProps, wrapper } = {}) {
           {setValue}
         </TestHook>
       </Suspense>
-    )
+    ) as ReactElement 
 
-  let testRenderer
-  act(() => {
+  
+
+
+  // eslint-disable-next-line no-undef-init
+  let testRenderer: ReactTestRenderer | undefined
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    act(() => {
     testRenderer = create(toRender())
   })
-  const { unmount, update } = testRenderer
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const { unmount, update } = testRenderer as ReactTestRenderer
 
   function rerenderHook(newProps = hookProps.current) {
     hookProps.current = newProps
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     act(() => {
       update(toRender())
     })
   }
 
   function unmountHook() {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     act(() => {
       removeCleanup(unmountHook)
       unmount()
