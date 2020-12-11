@@ -62,7 +62,7 @@ function resultContainer() {
   }
 }
 
-function renderHook(callback: () => {}, { initialProps, wrapper }: {initialProps?: (React.HTMLAttributes<HTMLElement> & React.ClassAttributes<HTMLElement>) , wrapper?: React.ComponentType} = {}) {
+function renderHook(callback: () => {}, { initialProps, wrapper }: {initialProps?: T , wrapper?: React.ComponentType} = {}) {
   const { result, setValue, setError, addResolver } = resultContainer()
   const hookProps = { current: initialProps }
 
