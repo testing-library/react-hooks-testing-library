@@ -6,6 +6,6 @@
     "no-await-in-loop": "off",
     "react-hooks/rules-of-hooks": "off",
     "no-console": "off",
-    "import/no-unresolved": "off",
+    "import/no-unresolved": "off"
   }
 }
