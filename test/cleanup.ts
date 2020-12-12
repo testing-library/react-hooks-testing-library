@@ -21,8 +21,8 @@ describe('cleanup tests', () => {
   })
 
   test('should cleanup all rendered hooks', async () => {
-    const cleanupCalled = []
-    const hookWithCleanup = (id) => {
+    const cleanupCalled: boolean[] = []
+    const hookWithCleanup = (id: number) => {
       useEffect(() => {
         return () => {
           cleanupCalled[id] = true
@@ -40,7 +40,7 @@ describe('cleanup tests', () => {
   })
 
   test('should call cleanups in reverse order', async () => {
-    const callSequence = []
+    const callSequence: string[] = []
     addCleanup(() => {
       callSequence.push('cleanup')
     })
@@ -62,7 +62,7 @@ describe('cleanup tests', () => {
   })
 
   test('should wait for async cleanup', async () => {
-    const callSequence = []
+    const callSequence: string[] = []
     addCleanup(() => {
       callSequence.push('cleanup')
     })
@@ -85,7 +85,7 @@ describe('cleanup tests', () => {
   })
 
   test('should remove cleanup using removeCleanup', async () => {
-    const callSequence = []
+    const callSequence: string[] = []
     addCleanup(() => {
       callSequence.push('cleanup')
     })
@@ -110,7 +110,7 @@ describe('cleanup tests', () => {
   })
 
   test('should remove cleanup using returned handler', async () => {
-    const callSequence = []
+    const callSequence: string[] = []
     addCleanup(() => {
       callSequence.push('cleanup')
     })
