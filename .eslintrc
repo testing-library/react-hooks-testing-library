@@ -1,5 +1,5 @@
 {
-  "extends": "./node_modules/kcd-scripts/eslint.js",
+  "extends":[ "./node_modules/kcd-scripts/eslint.js"],
   "rules": {
     "max-lines-per-function": "off",
     "no-constant-condition": "off",
