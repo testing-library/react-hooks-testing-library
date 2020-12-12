@@ -3,10 +3,10 @@ import { renderHook } from '../src'
 
 describe('useEffect tests', () => {
   test('should handle useEffect hook', () => {
-    const sideEffect = { 1: false, 2: false }
+    const sideEffect: { [key: number]: boolean } = { 1: false, 2: false }
 
     const { rerender, unmount } = renderHook(
-      ({ id }: { id: 1 | 2 }) => {
+      ({ id }) => {
         useEffect(() => {
           sideEffect[id] = true
           return () => {
@@ -32,10 +32,10 @@ describe('useEffect tests', () => {
   })
 
   test('should handle useLayoutEffect hook', () => {
-    const sideEffect = { 1: false, 2: false }
+    const sideEffect: { [key: number]: boolean } = { 1: false, 2: false }
 
     const { rerender, unmount } = renderHook(
-      ({ id }: { id: 1 | 2 }) => {
+      ({ id }) => {
         useLayoutEffect(() => {
           sideEffect[id] = true
           return () => {
