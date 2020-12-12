@@ -7,11 +7,5 @@
     "react-hooks/rules-of-hooks": "off",
     "no-console": "off",
     "import/no-unresolved": "off",
-    "@typescript-eslint/unbound-method": [
-      "error",
-      {
-        "ignoreStatic": true
-      }
-    ]
   }
 }
