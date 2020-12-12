@@ -194,6 +194,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/nobrayner"><img src="https://avatars2.githubusercontent.com/u/40751395?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Braydon Hall</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=nobrayner" title="Code">💻</a></td>
+    <td align="center"><a href="https://dev.to/jacobmgevans"><img src="https://avatars1.githubusercontent.com/u/27247160?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jacob M-G Evans</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=JacobMGEvans" title="Code">💻</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=JacobMGEvans" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
