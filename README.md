@@ -192,6 +192,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/joshuaellis"><img src="https://avatars0.githubusercontent.com/u/37798644?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Josh</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=joshuaellis" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Goldziher"><img src="https://avatars1.githubusercontent.com/u/30733348?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Na'aman Hirschfeld</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=Goldziher" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/nobrayner"><img src="https://avatars2.githubusercontent.com/u/40751395?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Braydon Hall</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=nobrayner" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->

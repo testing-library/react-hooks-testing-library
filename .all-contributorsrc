@@ -212,6 +212,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "nobrayner",
+      "name": "Braydon Hall",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/40751395?v=4",
+      "profile": "https://github.com/nobrayner",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
