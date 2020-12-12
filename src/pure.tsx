@@ -89,7 +89,6 @@ function renderHook<T = any, R = any>(callback: (props: T) => R, { initialProps,
     act(() => {
     testRenderer = create(toRender())
   })
-
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { unmount, update } = testRenderer as ReactTestRenderer
 
