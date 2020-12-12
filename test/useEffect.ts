@@ -6,7 +6,7 @@ describe('useEffect tests', () => {
     const sideEffect = { 1: false, 2: false }
 
     const { rerender, unmount } = renderHook(
-      ({ id }) => {
+      ({ id }: { id: 1 | 2 }) => {
         useEffect(() => {
           sideEffect[id] = true
           return () => {
@@ -35,7 +35,7 @@ describe('useEffect tests', () => {
     const sideEffect = { 1: false, 2: false }
 
     const { rerender, unmount } = renderHook(
-      ({ id }) => {
+      ({ id }: { id: 1 | 2 }) => {
         useLayoutEffect(() => {
           sideEffect[id] = true
           return () => {
