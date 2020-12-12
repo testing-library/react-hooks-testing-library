@@ -3,13 +3,15 @@ import { renderHook, act } from '../src'
 
 describe('useReducer tests', () => {
   test('should handle useReducer hook', () => {
-    const reducer = (state, action) => (action.type === 'inc' ? state + 1 : state)
+    const reducer = (state: number, action: { type: string }) =>
+      action.type === 'inc' ? state + 1 : state
     const { result } = renderHook(() => useReducer(reducer, 0))
 
     const [initialState, dispatch] = result.current
 
     expect(initialState).toBe(0)
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     act(() => dispatch({ type: 'inc' }))
 
     const [state] = result.current

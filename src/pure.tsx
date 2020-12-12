@@ -44,7 +44,7 @@ function resultContainer<R>() {
       if (error) {
         throw error
       }
-      return value
+      return value as R
     },
     get error() {
       const { error } = results[results.length - 1]
@@ -70,7 +70,7 @@ function resultContainer<R>() {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function renderHook<T = any, R = any>(
   callback: (props: T) => R,
-  { initialProps, wrapper }: { initialProps?: T; wrapper?: React.ComponentType } = {}
+  { initialProps, wrapper }: { initialProps?: T; wrapper?: React.ComponentType<T> } = {}
 ) {
   const { result, setValue, setError, addResolver } = resultContainer<R>()
   const hookProps = { current: initialProps }

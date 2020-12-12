@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import { renderHook } from '../src'
 
+type throwError = Error | boolean | undefined
 describe('error hook tests', () => {
-  function useError(throwError) {
+  function useError(throwError: throwError) {
     if (throwError) {
       throw new Error('expected')
     }
     return true
   }
 
-  function useAsyncError(throwError) {
-    const [value, setValue] = useState()
+  function useAsyncError(throwError: throwError) {
+    const [value, setValue] = useState<throwError>()
     useEffect(() => {
       const timeout = setTimeout(() => setValue(throwError), 100)
       return () => clearTimeout(timeout)
@@ -18,7 +19,7 @@ describe('error hook tests', () => {
     return useError(value)
   }
 
-  function useEffectError(throwError) {
+  function useEffectError(throwError: throwError) {
     useEffect(() => {
       useError(throwError)
     }, [throwError])

@@ -13,7 +13,7 @@ describe('useHook tests', () => {
 
   test('should handle useImperativeHandle hook', () => {
     const { result } = renderHook(() => {
-      const ref = useRef()
+      const ref = useRef<Record<string, CallableFunction>>({})
       useImperativeHandle(ref, () => ({
         fakeImperativeMethod: () => true
       }))

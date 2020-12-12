@@ -1,10 +1,10 @@
 import { renderHook } from '../src'
 
 describe('suspense hook tests', () => {
-  const cache = {}
-  const fetchName = (isSuccessful) => {
+  const cache: { value?: Promise<string> | string | Error } = {}
+  const fetchName = (isSuccessful: boolean) => {
     if (!cache.value) {
-      cache.value = new Promise((resolve, reject) => {
+      cache.value = new Promise<string>((resolve, reject) => {
         setTimeout(() => {
           if (isSuccessful) {
             resolve('Bob')
@@ -21,7 +21,8 @@ describe('suspense hook tests', () => {
 
   const useFetchName = (isSuccessful = true) => {
     const name = fetchName(isSuccessful)
-    if (typeof name.then === 'function' || name instanceof Error) {
+    if (name instanceof Promise || name instanceof Error) {
+      // eslint-disable-next-line @typescript-eslint/no-throw-literal
       throw name
     }
     return name
