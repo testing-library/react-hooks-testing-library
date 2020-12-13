@@ -8,7 +8,7 @@ async function cleanup() {
 }
 
 function addCleanup(callback: () => Promise<void> | void) {
-  cleanupCallbacks.unshift(callback)
+  cleanupCallbacks = [callback, ...cleanupCallbacks]
   return () => removeCleanup(callback)
 }
 
