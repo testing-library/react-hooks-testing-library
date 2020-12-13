@@ -241,6 +241,35 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "merodiro",
+      "name": "Amr A.Mohammed",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/17033502?v=4",
+      "profile": "https://github.com/merodiro",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "juhanakristian",
+      "name": "Juhana Jauhiainen",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/544386?v=4",
+      "profile": "https://github.com/juhanakristian",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jensmeindertsma",
+      "name": "Jens Meindertsma",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/64677517?v=4",
+      "profile": "https://github.com/jensmeindertsma",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "commitConvention": "none"
