@@ -231,6 +231,16 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "tigerabrodi",
+      "name": "Tiger Abrodi",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/49603590?v=4",
+      "profile": "https://tigerabrodi.dev/",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "commitConvention": "none"
