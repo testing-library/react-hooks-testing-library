@@ -3,8 +3,6 @@ import { act, create, ReactTestRenderer } from 'react-test-renderer'
 import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
-// TODO: Add better type, currently file is utilizing minimum types to work
-// TODO: Attempt to refactor code to remove ESLint disables if possible
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Props<T = any, R = any> = {
   callback: (props: T) => R
