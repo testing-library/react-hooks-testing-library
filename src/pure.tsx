@@ -3,7 +3,6 @@ import { act, create, ReactTestRenderer } from 'react-test-renderer'
 import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TestHookProps<TProps, TResult> = {
   callback: (props: TProps) => TResult
   hookProps: TProps | undefined
@@ -94,7 +93,6 @@ function renderHook<TProps, TResult>(
       </Suspense>
     ) as ReactElement
 
-  // eslint-disable-next-line no-undef-init
   let testRenderer: ReactTestRenderer | undefined
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
   act(() => {
