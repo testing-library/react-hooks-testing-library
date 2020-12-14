@@ -4,15 +4,25 @@ import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Props<T = any, R = any> = {
-  callback: (props: T) => R
-  hookProps: unknown
-  onError: CallableFunction
-  children: CallableFunction
+type TestHookProps<TProps, TResult> = {
+  callback: (props: TProps) => TResult
+  hookProps: TProps | undefined
+  onError: (error: Error) => void
+  children: (value: TResult) => void
 }
-function TestHook({ callback, hookProps, onError, children }: Props) {
+function TestHook<TProps, TResult>({
+  callback,
+  hookProps,
+  onError,
+  children
+}: TestHookProps<TProps, TResult>) {
   try {
-    children(callback(hookProps))
+    if (hookProps) {
+      children(callback(hookProps))
+    } else {
+      // coerce into undefined, so it maintains the previous behaviour
+      children(callback((undefined as unknown) as TProps))
+    }
     // eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
   } catch (err) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -29,8 +39,8 @@ function Fallback() {
   return null
 }
 
-function resultContainer<R>() {
-  const results: Array<{ value?: R; error?: Error }> = []
+function resultContainer<TValue>() {
+  const results: Array<{ value?: TValue; error?: Error }> = []
   const resolvers: Array<VoidFunction> = []
 
   const result = {
@@ -42,7 +52,7 @@ function resultContainer<R>() {
       if (error) {
         throw error
       }
-      return value as R
+      return value as TValue
     },
     get error() {
       const { error } = results[results.length - 1]
@@ -50,7 +60,7 @@ function resultContainer<R>() {
     }
   }
 
-  const updateResult = (value?: R, error?: Error) => {
+  const updateResult = (value?: TValue, error?: Error) => {
     results.push({ value, error })
     resolvers.splice(0, resolvers.length).forEach((resolve) => resolve())
   }
@@ -60,17 +70,16 @@ function resultContainer<R>() {
     addResolver: (resolver: VoidFunction) => {
       resolvers.push(resolver)
     },
-    setValue: (value: R) => updateResult(value),
+    setValue: (value: TValue) => updateResult(value),
     setError: (error: Error) => updateResult(undefined, error)
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function renderHook<T = any, R = any>(
-  callback: (props: T) => R,
-  { initialProps, wrapper }: { initialProps?: T; wrapper?: React.ComponentType<T> } = {}
+function renderHook<TProps, TResult>(
+  callback: (props: TProps) => TResult,
+  { initialProps, wrapper }: { initialProps?: TProps; wrapper?: React.ComponentType<TProps> } = {}
 ) {
-  const { result, setValue, setError, addResolver } = resultContainer<R>()
+  const { result, setValue, setError, addResolver } = resultContainer<TResult>()
   const hookProps = { current: initialProps }
 
   const wrapUiIfNeeded = (innerElement: ReactNode) =>
@@ -94,7 +103,7 @@ function renderHook<T = any, R = any>(
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { unmount, update } = testRenderer as ReactTestRenderer
 
-  function rerenderHook(newProps = hookProps.current) {
+  function rerenderHook(newProps: typeof initialProps = hookProps.current) {
     hookProps.current = newProps
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     act(() => {
