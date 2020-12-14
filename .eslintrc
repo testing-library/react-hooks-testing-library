@@ -1,5 +1,5 @@
 {
-  "extends":[ "./node_modules/kcd-scripts/eslint.js"],
+  "extends": ["./node_modules/kcd-scripts/eslint.js"],
   "rules": {
     "max-lines-per-function": "off",
     "no-constant-condition": "off",
@@ -7,5 +7,8 @@
     "react-hooks/rules-of-hooks": "off",
     "no-console": "off",
     "import/no-unresolved": "off"
+  },
+  "parserOptions": {
+    "project": ["./tsconfig.json", "./test/tsconfig.json"]
   }
 }

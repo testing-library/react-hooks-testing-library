@@ -3,6 +3,7 @@
   "version": "0.0.0-semantically-released",
   "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "keywords": [
     "testing",
     "react",
