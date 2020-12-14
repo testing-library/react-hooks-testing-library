@@ -7,12 +7,9 @@ export interface WaitOptions {
 }
 
 class TimeoutError extends Error {
-  timeout = true
-}
-
-function createTimeoutError(utilName: string, { timeout }: Pick<WaitOptions, 'timeout'>) {
-  const timeoutError = new TimeoutError(`Timed out in ${utilName} after ${timeout as number}ms.`)
-  return timeoutError
+  constructor(utilName: string, { timeout }: Pick<WaitOptions, 'timeout'>) {
+    super(`Timed out in ${utilName} after ${timeout as number}ms.`)
+  }
 }
 
 function resolveAfter(ms: number) {
@@ -27,10 +24,10 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
   const waitForNextUpdate = async (options: Pick<WaitOptions, 'timeout'> = {}) => {
     if (!nextUpdatePromise) {
       nextUpdatePromise = new Promise((resolve, reject) => {
-        let timeoutId: number
+        let timeoutId: ReturnType<typeof setTimeout>
         if (options.timeout && options.timeout > 0) {
-          timeoutId = window.setTimeout(
-            () => reject(createTimeoutError('waitForNextUpdate', options)),
+          timeoutId = setTimeout(
+            () => reject(new TimeoutError('waitForNextUpdate', options)),
             options.timeout
           )
         }
@@ -78,7 +75,7 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
           }
         } catch (error: unknown) {
           if (error instanceof TimeoutError) {
-            throw createTimeoutError('waitFor', { timeout: initialTimeout })
+            throw new TimeoutError('waitFor', { timeout: initialTimeout })
           }
           throw error as Error
         }
@@ -91,7 +88,7 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
     }
   }
 
-  const waitForValueToChange = async (selector: () => unknown, options = {}) => {
+  const waitForValueToChange = async (selector: () => unknown, options: WaitOptions = {}) => {
     const initialValue = selector()
     try {
       await waitFor(() => selector() !== initialValue, {
@@ -100,7 +97,7 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
       })
     } catch (error: unknown) {
       if (error instanceof TimeoutError) {
-        throw createTimeoutError('waitForValueToChange', options)
+        throw new TimeoutError('waitForValueToChange', options)
       }
       throw error as Error
     }
