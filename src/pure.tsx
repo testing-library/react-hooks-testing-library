@@ -90,21 +90,18 @@ function renderHook<TProps, TResult>(
     ) as ReactElement
 
   let testRenderer: ReactTestRenderer
-  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   act(() => {
     testRenderer = create(toRender())
   })
-  
+
   function rerenderHook(newProps: typeof initialProps = hookProps.current) {
     hookProps.current = newProps
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     act(() => {
       testRenderer.update(toRender())
     })
   }
 
   function unmountHook() {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     act(() => {
       removeCleanup(unmountHook)
       testRenderer.unmount()
