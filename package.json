@@ -38,7 +38,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@types/testing-library__react-hooks": "^3.4.0"
+    "@types/react": ">=16.9.0",
+    "@types/react-test-renderer": ">=16.9.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.9.1",
