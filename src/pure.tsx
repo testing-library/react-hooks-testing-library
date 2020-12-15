@@ -39,7 +39,7 @@ function Fallback() {
 
 function resultContainer<TValue>() {
   const results: Array<{ value?: TValue; error?: Error }> = []
-  const resolvers: Array<VoidFunction> = []
+  const resolvers: Array<() => void> = []
 
   const result = {
     get all() {
@@ -65,7 +65,7 @@ function resultContainer<TValue>() {
 
   return {
     result,
-    addResolver: (resolver: VoidFunction) => {
+    addResolver: (resolver: () => void) => {
       resolvers.push(resolver)
     },
     setValue: (value: TValue) => updateResult(value),
