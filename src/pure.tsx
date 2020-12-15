@@ -3,12 +3,17 @@ import { act, create, ReactTestRenderer } from 'react-test-renderer'
 import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
+function isPromise<T>(value: unknown): boolean {
+  return typeof (value as PromiseLike<T>).then === 'function'
+}
+
 type TestHookProps<TProps, TResult> = {
   callback: (props: TProps) => TResult
   hookProps: TProps | undefined
   onError: (error: Error) => void
   children: (value: TResult) => void
 }
+
 function TestHook<TProps, TResult>({
   callback,
   hookProps,
@@ -18,13 +23,11 @@ function TestHook<TProps, TResult>({
   try {
     // coerce undefined into TProps, so it maintains the previous behaviour
     children(callback(hookProps as TProps))
-    // eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
-  } catch (err) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    if (err.then) {
+  } catch (err: unknown) {
+    if (isPromise(err)) {
       throw err
     } else {
-      onError(err)
+      onError(err as Error)
     }
   }
   return null
