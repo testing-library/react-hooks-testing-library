@@ -89,19 +89,17 @@ function renderHook<TProps, TResult>(
       </Suspense>
     ) as ReactElement
 
-  let testRenderer: ReactTestRenderer | undefined
+  let testRenderer: ReactTestRenderer
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
   act(() => {
     testRenderer = create(toRender())
   })
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  const { unmount, update } = testRenderer as ReactTestRenderer
-
+  
   function rerenderHook(newProps: typeof initialProps = hookProps.current) {
     hookProps.current = newProps
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     act(() => {
-      update(toRender())
+      testRenderer.update(toRender())
     })
   }
 
@@ -109,7 +107,7 @@ function renderHook<TProps, TResult>(
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     act(() => {
       removeCleanup(unmountHook)
-      unmount()
+      testRenderer.unmount()
     })
   }
 
