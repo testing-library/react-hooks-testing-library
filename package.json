@@ -28,10 +28,11 @@
     "validate": "kcd-scripts validate",
     "prepare": "npm run build",
     "build": "kcd-scripts build --out-dir lib",
+    "test": "kcd-scripts test",
+    "typecheck": "kcd-scripts typecheck",
     "lint": "kcd-scripts lint",
     "format": "kcd-scripts format",
     "coverage": "codecov",
-    "test": "kcd-scripts test",
     "docs:dev": "docz dev",
     "docs:build": "docz build",
     "contributors:add": "all-contributors add"

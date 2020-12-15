@@ -4,11 +4,11 @@
     "max-lines-per-function": "off",
     "no-constant-condition": "off",
     "no-await-in-loop": "off",
-    "react-hooks/rules-of-hooks": "off",
     "no-console": "off",
     "import/no-unresolved": "off",
+    "react-hooks/rules-of-hooks": "off",
     "@typescript-eslint/no-floating-promises": "off",
-    "@typescript-eslint/no-unnecessary-condition": ["error", { "allowConstantLoopConditions": true }]
+    "@typescript-eslint/no-unnecessary-condition": "off"
   },
   "parserOptions": {
     "project": ["./tsconfig.json", "./test/tsconfig.json"]
