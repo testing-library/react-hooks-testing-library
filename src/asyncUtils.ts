@@ -60,7 +60,6 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
 
     const waitForResult = async () => {
       const initialTimeout = timeout
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       while (true) {
         const startTime = Date.now()
         try {
