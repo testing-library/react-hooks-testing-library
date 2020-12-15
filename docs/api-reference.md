@@ -259,28 +259,3 @@ The maximum amount of time in milliseconds (ms) to wait. By default, no timeout 
 If this option is set to `true`, any errors that occur while waiting are treated as a failed check.
 If this option is set to `false`, any errors that occur while waiting cause the promise to be
 rejected. By default, errors are not suppressed for this utility.
-
-### `wait`
-
-_(DEPRECATED, use [`waitFor`](/reference/api#waitfor) instead)_
-
-```js
-function wait(callback: function(): boolean|void, options?: {
-  timeout?: number,
-  suppressErrors?: boolean
-}): Promise<void>
-```
-
-Returns a `Promise` that resolves if the provided callback executes without exception and returns a
-truthy or `undefined` value. It is safe to use the [`result` of `renderHook`](/reference/api#result)
-in the callback to perform assertion or to test values.
-
-#### `timeout`
-
-The maximum amount of time in milliseconds (ms) to wait. By default, no timeout is applied.
-
-#### `suppressErrors`
-
-If this option is set to `true`, any errors that occur while waiting are treated as a failed check.
-If this option is set to `false`, any errors that occur while waiting cause the promise to be
-rejected. By default, errors are suppressed for this utility.

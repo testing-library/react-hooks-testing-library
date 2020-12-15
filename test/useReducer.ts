@@ -3,7 +3,8 @@ import { renderHook, act } from '../src'
 
 describe('useReducer tests', () => {
   test('should handle useReducer hook', () => {
-    const reducer = (state, action) => (action.type === 'inc' ? state + 1 : state)
+    const reducer = (state: number, action: { type: string }) =>
+      action.type === 'inc' ? state + 1 : state
     const { result } = renderHook(() => useReducer(reducer, 0))
 
     const [initialState, dispatch] = result.current

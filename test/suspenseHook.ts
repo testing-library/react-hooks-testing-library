@@ -1,10 +1,10 @@
 import { renderHook } from '../src'
 
 describe('suspense hook tests', () => {
-  const cache = {}
-  const fetchName = (isSuccessful) => {
+  const cache: { value?: Promise<string | Error> | string | Error } = {}
+  const fetchName = (isSuccessful: boolean) => {
     if (!cache.value) {
-      cache.value = new Promise((resolve, reject) => {
+      cache.value = new Promise<string>((resolve, reject) => {
         setTimeout(() => {
           if (isSuccessful) {
             resolve('Bob')
@@ -14,15 +14,15 @@ describe('suspense hook tests', () => {
         }, 50)
       })
         .then((value) => (cache.value = value))
-        .catch((e) => (cache.value = e))
+        .catch((e: Error) => (cache.value = e))
     }
     return cache.value
   }
 
   const useFetchName = (isSuccessful = true) => {
     const name = fetchName(isSuccessful)
-    if (typeof name.then === 'function' || name instanceof Error) {
-      throw name
+    if (name instanceof Promise || name instanceof Error) {
+      throw name as unknown
     }
     return name
   }
