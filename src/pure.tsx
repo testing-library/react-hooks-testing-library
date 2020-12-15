@@ -16,12 +16,8 @@ function TestHook<TProps, TResult>({
   children
 }: TestHookProps<TProps, TResult>) {
   try {
-    if (hookProps) {
-      children(callback(hookProps))
-    } else {
-      // coerce into undefined, so it maintains the previous behaviour
-      children(callback((undefined as unknown) as TProps))
-    }
+    // coerce undefined into TProps, so it maintains the previous behaviour
+    children(callback(hookProps as TProps))
     // eslint-disable-next-line @typescript-eslint/no-implicit-any-catch
   } catch (err) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
