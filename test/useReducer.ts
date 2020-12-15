@@ -11,7 +11,6 @@ describe('useReducer tests', () => {
 
     expect(initialState).toBe(0)
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     act(() => dispatch({ type: 'inc' }))
 
     const [state] = result.current

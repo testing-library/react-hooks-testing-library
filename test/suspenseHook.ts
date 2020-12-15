@@ -22,8 +22,7 @@ describe('suspense hook tests', () => {
   const useFetchName = (isSuccessful = true) => {
     const name = fetchName(isSuccessful)
     if (name instanceof Promise || name instanceof Error) {
-      // eslint-disable-next-line @typescript-eslint/no-throw-literal
-      throw name
+      throw name as unknown
     }
     return name
   }

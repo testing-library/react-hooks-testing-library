@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useState, useCallback } from 'react'
 import { renderHook, act } from '../src'
 
