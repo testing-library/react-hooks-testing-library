@@ -8,7 +8,8 @@
     "import/no-unresolved": "off",
     "react-hooks/rules-of-hooks": "off",
     "@typescript-eslint/no-floating-promises": "off",
-    "@typescript-eslint/no-unnecessary-condition": "off"
+    "@typescript-eslint/no-unnecessary-condition": "off",
+    "@typescript-eslint/no-invalid-void-type": "off"
   },
   "parserOptions": {
     "project": ["./tsconfig.json", "./test/tsconfig.json"]

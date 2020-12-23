@@ -42,14 +42,14 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
     await nextUpdatePromise
   }
 
-  const waitFor = async <T>(
-    callback: () => T | Promise<T>,
+  const waitFor = async (
+    callback: () => boolean | void,
     { interval, timeout, suppressErrors = true }: WaitOptions = {}
   ) => {
     const checkResult = () => {
       try {
         const callbackResult = callback()
-        return callbackResult || callbackResult === undefined
+        return callbackResult ?? callbackResult === undefined
       } catch (error: unknown) {
         if (!suppressErrors) {
           throw error as Error
