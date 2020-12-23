@@ -7,8 +7,8 @@ export interface WaitOptions {
 }
 
 class TimeoutError extends Error {
-  constructor(utilName: string, timeout: number) {
-    super(`Timed out in ${utilName} after ${timeout}ms.`)
+  constructor(util: Function, timeout: number) {
+    super(`Timed out in ${util.name} after ${timeout}ms.`)
   }
 }
 
@@ -27,7 +27,7 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
         let timeoutId: ReturnType<typeof setTimeout>
         if (timeout && timeout > 0) {
           timeoutId = setTimeout(
-            () => reject(new TimeoutError('waitForNextUpdate', timeout)),
+            () => reject(new TimeoutError(waitForNextUpdate, timeout)),
             timeout
           )
         }
@@ -74,7 +74,7 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
           }
         } catch (error: unknown) {
           if (error instanceof TimeoutError && initialTimeout) {
-            throw new TimeoutError('waitFor', initialTimeout)
+            throw new TimeoutError(waitFor, initialTimeout)
           }
           throw error as Error
         }
@@ -96,7 +96,7 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
       })
     } catch (error: unknown) {
       if (error instanceof TimeoutError && options.timeout) {
-        throw new TimeoutError('waitForValueToChange', options.timeout)
+        throw new TimeoutError(waitForValueToChange, options.timeout)
       }
       throw error as Error
     }
