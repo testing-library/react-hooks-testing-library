@@ -7,8 +7,8 @@ export interface WaitOptions {
 }
 
 class TimeoutError extends Error {
-  constructor(utilName: string, { timeout }: Pick<WaitOptions, 'timeout'>) {
-    super(`Timed out in ${utilName} after ${timeout as number}ms.`)
+  constructor(utilName: string, timeout: number) {
+    super(`Timed out in ${utilName} after ${timeout}ms.`)
   }
 }
 
@@ -21,14 +21,14 @@ function resolveAfter(ms: number) {
 function asyncUtils(addResolver: (callback: () => void) => void) {
   let nextUpdatePromise: Promise<void> | null = null
 
-  const waitForNextUpdate = async (options: Pick<WaitOptions, 'timeout'> = {}) => {
+  const waitForNextUpdate = async ({ timeout }: Pick<WaitOptions, 'timeout'> = {}) => {
     if (!nextUpdatePromise) {
       nextUpdatePromise = new Promise((resolve, reject) => {
         let timeoutId: ReturnType<typeof setTimeout>
-        if (options.timeout && options.timeout > 0) {
+        if (timeout && timeout > 0) {
           timeoutId = setTimeout(
-            () => reject(new TimeoutError('waitForNextUpdate', options)),
-            options.timeout
+            () => reject(new TimeoutError('waitForNextUpdate', timeout)),
+            timeout
           )
         }
         addResolver(() => {
@@ -73,8 +73,8 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
             return
           }
         } catch (error: unknown) {
-          if (error instanceof TimeoutError) {
-            throw new TimeoutError('waitFor', { timeout: initialTimeout })
+          if (error instanceof TimeoutError && initialTimeout) {
+            throw new TimeoutError('waitFor', initialTimeout)
           }
           throw error as Error
         }
@@ -95,8 +95,8 @@ function asyncUtils(addResolver: (callback: () => void) => void) {
         ...options
       })
     } catch (error: unknown) {
-      if (error instanceof TimeoutError) {
-        throw new TimeoutError('waitForValueToChange', options)
+      if (error instanceof TimeoutError && options.timeout) {
+        throw new TimeoutError('waitForValueToChange', options.timeout)
       }
       throw error as Error
     }
