@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { renderHook } from '../../src/native'
 
 describe('async hook tests', () => {
-  const useSequence = (...values) => {
+  const useSequence = (...values: string[]) => {
     const [first, ...otherValues] = values
     const [value, setValue] = useState(first)
     const index = useRef(0)

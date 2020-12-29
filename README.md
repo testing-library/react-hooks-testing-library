@@ -1,26 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [react-hooks-testing-library](#react-hooks-testing-library)
-  - [The problem](#the-problem)
-  - [The solution](#the-solution)
-  - [When to use this library](#when-to-use-this-library)
-  - [When not to use this library](#when-not-to-use-this-library)
-  - [Example](#example)
-    - [`useCounter.js`](#usecounterjs)
-    - [`useCounter.test.js`](#usecountertestjs)
-  - [Installation](#installation)
-    - [Peer Dependencies](#peer-dependencies)
-  - [API](#api)
-  - [Contributors](#contributors)
-  - [Issues](#issues)
-    - [🐛 Bugs](#-bugs)
-    - [💡 Feature Requests](#-feature-requests)
-    - [❓ Questions](#-questions)
-  - [LICENSE](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 <div align="center">
   <h1>react-hooks-testing-library</h1>
 
@@ -58,6 +35,31 @@
 [![Watch on GitHub](https://img.shields.io/github/watchers/testing-library/react-hooks-testing-library.svg?style=social)](https://github.com/testing-library/react-hooks-testing-library/watchers)
 [![Star on GitHub](https://img.shields.io/github/stars/testing-library/react-hooks-testing-library.svg?style=social)](https://github.com/testing-library/react-hooks-testing-library/stargazers)
 [![Tweet](https://img.shields.io/twitter/url/https/github.com/testing-library/react-hooks-testing-library.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20react-hooks-testing-library%20by%20%40testing-library%20https%3A%2F%2Fgithub.com%2Ftesting-library%2Freact-hooks-testing-library%20%F0%9F%91%8D)
+<!-- prettier-ignore-end -->
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [The problem](#the-problem)
+- [The solution](#the-solution)
+- [When to use this library](#when-to-use-this-library)
+- [When not to use this library](#when-not-to-use-this-library)
+- [Example](#example)
+  - [`useCounter.js`](#usecounterjs)
+  - [`useCounter.test.js`](#usecountertestjs)
+- [Installation](#installation)
+  - [Peer Dependencies](#peer-dependencies)
+- [API](#api)
+- [Contributors](#contributors)
+- [Issues](#issues)
+  - [🐛 Bugs](#-bugs)
+  - [💡 Feature Requests](#-feature-requests)
+  - [❓ Questions](#-questions)
+- [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## The problem
 
@@ -188,6 +190,15 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://keiya01.github.io/portfolio"><img src="https://avatars1.githubusercontent.com/u/34934510?v=4?s=100" width="100px;" alt=""/><br /><sub><b>keiya sasaki</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=keiya01" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://huchen.dev/"><img src="https://avatars3.githubusercontent.com/u/2078389?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hu Chen</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=huchenme" title="Code">💻</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=huchenme" title="Documentation">📖</a> <a href="#example-huchenme" title="Examples">💡</a></td>
     <td align="center"><a href="https://github.com/joshuaellis"><img src="https://avatars0.githubusercontent.com/u/37798644?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Josh</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=joshuaellis" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/Goldziher"><img src="https://avatars1.githubusercontent.com/u/30733348?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Na'aman Hirschfeld</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=Goldziher" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/nobrayner"><img src="https://avatars2.githubusercontent.com/u/40751395?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Braydon Hall</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=nobrayner" title="Code">💻</a></td>
+    <td align="center"><a href="https://dev.to/jacobmgevans"><img src="https://avatars1.githubusercontent.com/u/27247160?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jacob M-G Evans</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=JacobMGEvans" title="Code">💻</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=JacobMGEvans" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://tigerabrodi.dev/"><img src="https://avatars1.githubusercontent.com/u/49603590?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tiger Abrodi</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=tigerabrodi" title="Code">💻</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=tigerabrodi" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/merodiro"><img src="https://avatars1.githubusercontent.com/u/17033502?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amr A.Mohammed</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=merodiro" title="Code">💻</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=merodiro" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/juhanakristian"><img src="https://avatars1.githubusercontent.com/u/544386?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Juhana Jauhiainen</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=juhanakristian" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/jensmeindertsma"><img src="https://avatars3.githubusercontent.com/u/64677517?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jens Meindertsma</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=jensmeindertsma" title="Code">💻</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=jensmeindertsma" title="Tests">⚠️</a></td>
   </tr>
 </table>
 

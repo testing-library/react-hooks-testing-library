@@ -2,13 +2,12 @@ import { useEffect } from 'react'
 
 // This verifies that if RHTL_SKIP_AUTO_CLEANUP is set
 // then we DON'T auto-wire up the afterEach for folks
-describe('skip auto cleanup (no afterEach) tests', () => {
+describe('skip auto cleanup (disabled) tests', () => {
   let cleanupCalled = false
-  let renderHook
+  let renderHook: (arg0: () => void) => void
 
   beforeAll(() => {
-    // eslint-disable-next-line no-global-assign
-    afterEach = false
+    process.env.RHTL_SKIP_AUTO_CLEANUP = 'true'
     renderHook = require('../../src/native').renderHook
   })
 
