@@ -1,24 +1,9 @@
-import { act } from 'react-test-renderer'
+import { ActTypes, WaitOptions, AsyncUtilsReturn } from 'types'
 
-export interface WaitOptions {
-  interval?: number
-  timeout?: number
-  suppressErrors?: boolean
-}
+import { resolveAfter } from 'helpers/promises'
+import { TimeoutError } from 'helpers/error'
 
-class TimeoutError extends Error {
-  constructor(util: Function, timeout: number) {
-    super(`Timed out in ${util.name} after ${timeout}ms.`)
-  }
-}
-
-function resolveAfter (ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms)
-  })
-}
-
-function asyncUtils (addResolver: (callback: () => void) => void) {
+function asyncUtils(act: ActTypes, addResolver: (callback: () => void) => void): AsyncUtilsReturn {
   let nextUpdatePromise: Promise<void> | null = null
 
   const waitForNextUpdate = async ({ timeout }: Pick<WaitOptions, 'timeout'> = {}) => {

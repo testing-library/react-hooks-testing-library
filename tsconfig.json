@@ -4,5 +4,10 @@
     "allowJs": true,
     "target": "ES6"
   },
-  "exclude": ["./test"]
+  "exclude": ["./test"],
+  "paths": {
+    "core/*": ["src/core/*"],
+    "helpers/*": ["src/helpers/*"],
+    "types": ["src/types.ts"],
+  }
 }

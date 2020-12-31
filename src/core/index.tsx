@@ -1,58 +1,34 @@
-import React, { ReactElement, ReactNode, Suspense } from 'react'
-import { act, create, ReactTestRenderer } from 'react-test-renderer'
+import React from 'react'
+
+import {
+  TestHookProps,
+  NativeRendererOptions,
+  NativeRendererReturn,
+  ResultContainerReturn,
+  RenderHookOptions,
+  RenderHookReturn,
+  RenderResult
+} from 'types'
+
 import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
-function isPromise<T> (value: unknown): boolean {
-  return typeof (value as PromiseLike<T>).then === 'function'
-}
-
-type TestHookProps<TProps, TResult> = {
-  callback: (props: TProps) => TResult
-  hookProps: TProps | undefined
-  onError: (error: Error) => void
-  children: (value: TResult) => void
-}
-
-function TestHook<TProps, TResult> ({
-  callback,
-  hookProps,
-  onError,
-  children
-}: TestHookProps<TProps, TResult>) {
-  try {
-    // coerce undefined into TProps, so it maintains the previous behaviour
-    children(callback(hookProps as TProps))
-  } catch (err) {
-    if (isPromise(err)) {
-      throw err
-    } else {
-      onError(err as Error)
-    }
-  }
-  return null
-}
-
-function Fallback () {
-  return null
-}
-
-function resultContainer<TValue> () {
+function resultContainer<TValue>(): ResultContainerReturn<TValue> {
   const results: Array<{ value?: TValue; error?: Error }> = []
   const resolvers: Array<() => void> = []
 
-  const result = {
-    get all () {
+  const result: RenderResult = {
+    get all() {
       return results.map(({ value, error }) => error ?? value)
     },
-    get current () {
+    get current() {
       const { value, error } = results[results.length - 1]
       if (error) {
         throw error
       }
       return value as TValue
     },
-    get error () {
+    get error() {
       const { error } = results[results.length - 1]
       return error
     }
@@ -73,42 +49,37 @@ function resultContainer<TValue> () {
   }
 }
 
-function renderHook<TProps, TResult> (
+// typed this way in relation to this https://github.com/DefinitelyTyped/DefinitelyTyped/issues/44572#issuecomment-625878049
+function defaultWrapper({ children }: { children?: React.ReactNode }) {
+  return (children as unknown) as JSX.Element
+}
+
+const createRenderHook = (
+  createRenderer: <TProps, TResult>(
+    testProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
+    opts: NativeRendererOptions
+  ) => NativeRendererReturn<TProps>
+) => <TProps, TResult>(
   callback: (props: TProps) => TResult,
-  { initialProps, wrapper }: { initialProps?: TProps; wrapper?: React.ComponentType<TProps> } = {}
-) {
-  const { result, setValue, setError, addResolver } = resultContainer<TResult>()
+  { initialProps, wrapper = defaultWrapper }: RenderHookOptions<TProps> = {}
+): RenderHookReturn<TProps> => {
+  const { result, setValue, setError, addResolver } = resultContainer()
   const hookProps = { current: initialProps }
+  const props = { callback, setValue, setError }
+  const options = { wrapper }
 
-  const wrapUiIfNeeded = (innerElement: ReactNode) =>
-    wrapper ? React.createElement(wrapper, hookProps.current, innerElement) : innerElement
+  const { render, rerender, unmount, act } = createRenderer<TProps, TResult>(props, options)
 
-  const toRender = () =>
-    wrapUiIfNeeded(
-      <Suspense fallback={<Fallback />}>
-        <TestHook callback={callback} hookProps={hookProps.current} onError={setError}>
-          {setValue}
-        </TestHook>
-      </Suspense>
-    ) as ReactElement
+  render(hookProps.current)
 
-  let testRenderer: ReactTestRenderer
-  act(() => {
-    testRenderer = create(toRender())
-  })
-
-  function rerenderHook (newProps: typeof initialProps = hookProps.current) {
+  function rerenderHook(newProps = hookProps.current) {
     hookProps.current = newProps
-    act(() => {
-      testRenderer.update(toRender())
-    })
+    rerender(hookProps.current)
   }
 
-  function unmountHook () {
-    act(() => {
-      removeCleanup(unmountHook)
-      testRenderer.unmount()
-    })
+  function unmountHook() {
+    removeCleanup(unmountHook)
+    unmount()
   }
 
   addCleanup(unmountHook)
@@ -117,8 +88,8 @@ function renderHook<TProps, TResult> (
     result,
     rerender: rerenderHook,
     unmount: unmountHook,
-    ...asyncUtils(addResolver)
+    ...asyncUtils(act, addResolver)
   }
 }
 
-export { renderHook, cleanup, addCleanup, removeCleanup, act }
+export { createRenderHook, cleanup, addCleanup, removeCleanup }

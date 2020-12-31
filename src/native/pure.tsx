@@ -1,28 +1,32 @@
 import React, { Suspense } from 'react'
-import { act, create } from 'react-test-renderer'
-import { createRenderHook, cleanup } from '../core'
+import { act, create, ReactTestRenderer } from 'react-test-renderer'
 
-function FallbackComponent() {
-  return null
-}
-function createRenderer(TestHook, testHookProps, { wrapper: Wrapper }) {
-  let container
+import { TestHookProps, NativeRendererOptions, NativeRendererReturn } from 'types'
 
-  const toRender = (props) => (
+import { createRenderHook, cleanup, addCleanup, removeCleanup } from 'core/index'
+import TestHook from 'core/testHook'
+
+function createRenderer<TProps, TResult>(
+  testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
+  { wrapper: Wrapper }: NativeRendererOptions
+): NativeRendererReturn<TProps> {
+  let container: ReactTestRenderer
+
+  const toRender = (props?: TProps): JSX.Element => (
     <Wrapper {...props}>
-      <TestHook {...props} {...testHookProps} />
+      <TestHook hookProps={props} {...testHookProps} />
     </Wrapper>
   )
 
   return {
     render(props) {
       act(() => {
-        container = create(<Suspense fallback={<FallbackComponent />}>{toRender(props)}</Suspense>)
+        container = create(<Suspense fallback={null}>{toRender(props)}</Suspense>)
       })
     },
     rerender(props) {
       act(() => {
-        container.update(<Suspense fallback={<FallbackComponent />}>{toRender(props)}</Suspense>)
+        container.update(<Suspense fallback={null}>{toRender(props)}</Suspense>)
       })
     },
     unmount() {
@@ -36,4 +40,4 @@ function createRenderer(TestHook, testHookProps, { wrapper: Wrapper }) {
 
 const renderHook = createRenderHook(createRenderer)
 
-export { renderHook, act, cleanup }
+export { renderHook, act, cleanup, addCleanup, removeCleanup }

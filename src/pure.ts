@@ -1,8 +1,10 @@
-type RendererArray = Array<{ required: string; renderer: string }>
+import { RenderingEngineArray, ReactHooksRenderer } from 'types'
 
-const RENDERERS: RendererArray = [{ required: 'react-test-renderer', renderer: './native/pure' }]
+const RENDERERS: RenderingEngineArray = [
+  { required: 'react-test-renderer', renderer: './native/pure' }
+]
 
-function getRenderer (renderers: RendererArray): string {
+function getRenderer(renderers: RenderingEngineArray): string {
   const hasDependency = (name: string) => {
     try {
       require(name)
@@ -22,12 +24,7 @@ function getRenderer (renderers: RendererArray): string {
   }
 }
 
-interface Renderer {
-  renderHook: () => void
-  act: () => void
-  cleanup: () => void
-}
-
-const { renderHook, act, cleanup } = require(getRenderer(RENDERERS)) as Renderer
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { renderHook, act, cleanup } = require(getRenderer(RENDERERS)) as ReactHooksRenderer
 
 export { renderHook, act, cleanup }
