@@ -67,12 +67,12 @@ describe('async hook tests', () => {
   })
 
   test('should wait for expectation to pass', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
+    const { result, waitFor } = renderHook(() => useSequence('first', 'second', 'third'))
 
     expect(result.current).toBe('first')
 
     let complete = false
-    await wait(() => {
+    await waitFor(() => {
       expect(result.current).toBe('third')
       complete = true
     })
@@ -80,12 +80,12 @@ describe('async hook tests', () => {
   })
 
   test('should not hang if expectation is already passing', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second'))
+    const { result, waitFor } = renderHook(() => useSequence('first', 'second'))
 
     expect(result.current).toBe('first')
 
     let complete = false
-    await wait(() => {
+    await waitFor(() => {
       expect(result.current).toBe('first')
       complete = true
     })
@@ -93,12 +93,12 @@ describe('async hook tests', () => {
   })
 
   test('should reject if callback throws error', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
+    const { result, waitFor } = renderHook(() => useSequence('first', 'second', 'third'))
 
     expect(result.current).toBe('first')
 
     await expect(
-      wait(
+      waitFor(
         () => {
           if (result.current === 'second') {
             throw new Error('Something Unexpected')
@@ -113,12 +113,12 @@ describe('async hook tests', () => {
   })
 
   test('should reject if callback immediately throws error', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
+    const { result, waitFor } = renderHook(() => useSequence('first', 'second', 'third'))
 
     expect(result.current).toBe('first')
 
     await expect(
-      wait(
+      waitFor(
         () => {
           throw new Error('Something Unexpected')
         },
@@ -130,28 +130,28 @@ describe('async hook tests', () => {
   })
 
   test('should wait for truthy value', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
+    const { result, waitFor } = renderHook(() => useSequence('first', 'second', 'third'))
 
     expect(result.current).toBe('first')
 
-    await wait(() => result.current === 'third')
+    await waitFor(() => result.current === 'third')
 
     expect(result.current).toBe('third')
   })
 
   test('should reject if timeout exceeded when waiting for expectation to pass', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
+    const { result, waitFor } = renderHook(() => useSequence('first', 'second', 'third'))
 
     expect(result.current).toBe('first')
 
     await expect(
-      wait(
+      waitFor(
         () => {
           expect(result.current).toBe('third')
         },
         { timeout: 75 }
       )
-    ).rejects.toThrow(Error('Timed out in wait after 75ms.'))
+    ).rejects.toThrow(Error('Timed out in waitFor after 75ms.'))
   })
 
   test('should wait for value to change', async () => {
