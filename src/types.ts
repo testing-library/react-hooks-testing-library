@@ -15,7 +15,7 @@ export interface WaitOptions {
   suppressErrors?: boolean
 }
 
-export type WrapperComponent = React.ComponentType
+export type WrapperComponent<TProps> = React.ComponentType<TProps>
 
 /**
  *
@@ -69,7 +69,7 @@ export type ResultContainerReturn<TValue> = {
 
 export interface RenderHookOptions<TProps> {
   initialProps?: TProps
-  wrapper?: WrapperComponent
+  wrapper?: WrapperComponent<TProps>
 }
 
 export type RenderHookReturn<TProps, TValue> = {
@@ -91,8 +91,8 @@ export type NativeRendererReturn<TProps> = {
   act: typeof RTRAct
 }
 
-export type NativeRendererOptions = {
-  wrapper: WrapperComponent
+export type NativeRendererOptions<TProps> = {
+  wrapper: WrapperComponent<TProps>
 }
 
 export type TestHookProps<TProps, TResult> = {

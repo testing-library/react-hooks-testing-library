@@ -8,7 +8,7 @@ import TestHook from 'core/testHook'
 
 function createRenderer<TProps, TResult>(
   testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-  { wrapper: Wrapper }: NativeRendererOptions
+  { wrapper: Wrapper }: NativeRendererOptions<TProps>
 ): NativeRendererReturn<TProps> {
   let container: ReactTestRenderer
 

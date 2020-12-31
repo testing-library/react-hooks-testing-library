@@ -57,7 +57,7 @@ function defaultWrapper({ children }: { children?: React.ReactNode }) {
 const createRenderHook = (
   createRenderer: <TProps, TResult>(
     testProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-    opts: NativeRendererOptions
+    opts: NativeRendererOptions<TProps>
   ) => NativeRendererReturn<TProps>
 ) => <TProps, TResult>(
   callback: (props: TProps) => TResult,
