@@ -13,7 +13,7 @@ function createRenderer<TProps, TResult>(
   let container: ReactTestRenderer
 
   const toRender = (props?: TProps): JSX.Element => (
-    <Wrapper {...props}>
+    <Wrapper {...(props as TProps)}>
       <TestHook hookProps={props} {...testHookProps} />
     </Wrapper>
   )
