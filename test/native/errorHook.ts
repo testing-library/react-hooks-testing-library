@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { renderHook } from '../../src/native'
 
 describe('error hook tests', () => {
-  function useError(throwError: boolean) {
+  function useError(throwError: boolean | undefined) {
     if (throwError) {
       throw new Error('expected')
     }
