@@ -24,7 +24,7 @@ export type WrapperComponent = React.ComponentType
  */
 
 export interface ReactHooksRenderer {
-  renderHook: <TProps>() => RenderHookReturn<TProps>
+  renderHook: <TProps, TResult>() => RenderHookReturn<TProps, TResult>
   act: ActTypes
   cleanup: {
     autoRegister: () => void
@@ -54,14 +54,14 @@ export type AsyncUtilsReturn = {
  *
  */
 
-export type RenderResult = {
-  readonly all: unknown[]
-  readonly current: unknown
+export type RenderResult<TValue> = {
+  readonly all: (TValue | Error | undefined)[]
+  readonly current: TValue
   readonly error: Error | undefined
 }
 
 export type ResultContainerReturn<TValue> = {
-  result: RenderResult
+  result: RenderResult<TValue>
   addResolver: (resolver: () => void) => void
   setValue: (val: TValue) => void
   setError: (error: Error) => void
@@ -72,8 +72,8 @@ export interface RenderHookOptions<TProps> {
   wrapper?: WrapperComponent
 }
 
-export type RenderHookReturn<TProps> = {
-  result: RenderResult
+export type RenderHookReturn<TProps, TValue> = {
+  result: RenderResult<TValue>
   rerender: (props?: TProps) => void
   unmount: () => void
 } & AsyncUtilsReturn

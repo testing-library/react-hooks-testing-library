@@ -17,7 +17,7 @@ function resultContainer<TValue>(): ResultContainerReturn<TValue> {
   const results: Array<{ value?: TValue; error?: Error }> = []
   const resolvers: Array<() => void> = []
 
-  const result: RenderResult = {
+  const result: RenderResult<TValue> = {
     get all() {
       return results.map(({ value, error }) => error ?? value)
     },
@@ -62,8 +62,8 @@ const createRenderHook = (
 ) => <TProps, TResult>(
   callback: (props: TProps) => TResult,
   { initialProps, wrapper = defaultWrapper }: RenderHookOptions<TProps> = {}
-): RenderHookReturn<TProps> => {
-  const { result, setValue, setError, addResolver } = resultContainer()
+): RenderHookReturn<TProps, TResult> => {
+  const { result, setValue, setError, addResolver } = resultContainer<TResult>()
   const hookProps = { current: initialProps }
   const props = { callback, setValue, setError }
   const options = { wrapper }
