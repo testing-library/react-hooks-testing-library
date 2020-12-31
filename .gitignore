@@ -3,3 +3,4 @@ coverage
 lib
 .docz
 site
+.vscode
