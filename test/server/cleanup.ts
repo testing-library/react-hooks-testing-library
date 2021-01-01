@@ -24,7 +24,7 @@ describe('cleanup tests', () => {
 
   test('should cleanup all rendered hooks', async () => {
     let cleanupCalled = [false, false]
-    const hookWithCleanup = (id) => {
+    const hookWithCleanup = (id: number) => {
       useEffect(() => {
         return () => {
           cleanupCalled = cleanupCalled.map((_, i) => (i === id ? true : _))
@@ -46,7 +46,7 @@ describe('cleanup tests', () => {
 
   test('should only cleanup hydrated hooks', async () => {
     let cleanupCalled = [false, false]
-    const hookWithCleanup = (id) => {
+    const hookWithCleanup = (id: number) => {
       useEffect(() => {
         return () => {
           cleanupCalled = cleanupCalled.map((_, i) => (i === id ? true : _))

@@ -3,7 +3,8 @@ import { renderHook, act } from '../../src/server'
 
 describe('useReducer tests', () => {
   test('should handle useReducer hook', () => {
-    const reducer = (state, action) => (action.type === 'inc' ? state + 1 : state)
+    const reducer = (state: number, action: { type: string }) =>
+      action.type === 'inc' ? state + 1 : state
 
     const { result, hydrate } = renderHook(() => {
       const [state, dispatch] = useReducer(reducer, 0)

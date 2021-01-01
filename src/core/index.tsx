@@ -6,8 +6,9 @@ import {
   NativeRendererReturn,
   ResultContainerReturn,
   RenderHookOptions,
-  RenderHookReturn,
-  RenderResult
+  RenderResult,
+  ServerRendererReturn,
+  ServerRendererOptions
 } from 'types'
 
 import asyncUtils from './asyncUtils'
@@ -57,18 +58,21 @@ function defaultWrapper({ children }: { children?: React.ReactNode }) {
 const createRenderHook = (
   createRenderer: <TProps, TResult>(
     testProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-    opts: NativeRendererOptions<TProps>
-  ) => NativeRendererReturn<TProps>
+    opts: NativeRendererOptions<TProps> | ServerRendererOptions<TProps>
+  ) => NativeRendererReturn<TProps> | ServerRendererReturn<TProps>
 ) => <TProps, TResult>(
   callback: (props: TProps) => TResult,
   { initialProps, wrapper = defaultWrapper }: RenderHookOptions<TProps> = {}
-): RenderHookReturn<TProps, TResult> => {
+) => {
   const { result, setValue, setError, addResolver } = resultContainer<TResult>()
   const hookProps = { current: initialProps }
   const props = { callback, setValue, setError }
   const options = { wrapper }
 
-  const { render, rerender, unmount, act } = createRenderer<TProps, TResult>(props, options)
+  const { render, rerender, unmount, act, ...renderUtils } = createRenderer<TProps, TResult>(
+    props,
+    options
+  )
 
   render(hookProps.current)
 
@@ -88,7 +92,8 @@ const createRenderHook = (
     result,
     rerender: rerenderHook,
     unmount: unmountHook,
-    ...asyncUtils(act, addResolver)
+    ...asyncUtils(act, addResolver),
+    ...renderUtils
   }
 }
 

@@ -5,13 +5,13 @@ import { renderHook } from '../../src/server'
 // environment which supports afterEach (like Jest)
 // we'll get automatic cleanup between tests.
 describe('auto cleanup tests', () => {
-  const cleanups = {
+  const cleanups: Record<string, boolean> = {
     ssr: false,
     hydrated: false
   }
 
   test('first', () => {
-    const hookWithCleanup = (name) => {
+    const hookWithCleanup = (name: string) => {
       useEffect(() => {
         return () => {
           cleanups[name] = true

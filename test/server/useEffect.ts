@@ -3,7 +3,7 @@ import { renderHook } from '../../src/server'
 
 describe('useEffect tests', () => {
   test('should handle useEffect hook', () => {
-    const sideEffect = { 1: false, 2: false }
+    const sideEffect: { [key: number]: boolean } = { 1: false, 2: false }
 
     const { hydrate, rerender, unmount } = renderHook(
       ({ id }) => {

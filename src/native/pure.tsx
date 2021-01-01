@@ -6,7 +6,7 @@ import { TestHookProps, NativeRendererOptions, NativeRendererReturn } from 'type
 import { createRenderHook, cleanup, addCleanup, removeCleanup } from 'core/index'
 import TestHook from 'core/testHook'
 
-function createRenderer<TProps, TResult>(
+function createNativeRenderer<TProps, TResult>(
   testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
   { wrapper: Wrapper }: NativeRendererOptions<TProps>
 ): NativeRendererReturn<TProps> {
@@ -38,6 +38,6 @@ function createRenderer<TProps, TResult>(
   }
 }
 
-const renderHook = createRenderHook(createRenderer)
+const renderHook = createRenderHook(createNativeRenderer)
 
 export { renderHook, act, cleanup, addCleanup, removeCleanup }

@@ -1,5 +1,4 @@
 import { act as RTRAct } from 'react-test-renderer'
-import { act as RDAct } from 'react-dom/test-utils'
 
 /**
  *
@@ -7,7 +6,7 @@ import { act as RDAct } from 'react-dom/test-utils'
  *
  */
 
-export type ActTypes = typeof RTRAct | typeof RDAct
+export type ActTypes = typeof RTRAct | ServerModifiedAct
 
 export interface WaitOptions {
   interval?: number
@@ -17,6 +16,16 @@ export interface WaitOptions {
 
 export type WrapperComponent<TProps> = React.ComponentType<TProps>
 
+export type GenericRendererOptions<TProps> = {
+  wrapper: WrapperComponent<TProps>
+}
+
+export type GenericRendererReturn<TProps> = {
+  render: (props?: TProps) => void
+  rerender: (props?: TProps) => void
+  unmount: () => void
+}
+
 /**
  *
  * pure
@@ -24,7 +33,9 @@ export type WrapperComponent<TProps> = React.ComponentType<TProps>
  */
 
 export interface ReactHooksRenderer {
-  renderHook: <TProps, TResult>() => RenderHookReturn<TProps, TResult>
+  renderHook: <TProps, TResult>() =>
+    | RenderHookReturn<TProps, TResult>
+    | ServerRenderHook<TProps, TResult>
   act: ActTypes
   cleanup: {
     autoRegister: () => void
@@ -74,9 +85,25 @@ export interface RenderHookOptions<TProps> {
 
 export type RenderHookReturn<TProps, TValue> = {
   result: RenderResult<TValue>
-  rerender: (props?: TProps) => void
-  unmount: () => void
-} & AsyncUtilsReturn
+} & Omit<GenericRendererReturn<TProps>, 'render'> &
+  AsyncUtilsReturn
+
+export type ServerRenderHook<TProps, TValue> = RenderHookReturn<TProps, TValue> & {
+  hydrate: () => void
+}
+
+/**
+ *
+ * core/testHook
+ *
+ */
+
+export type TestHookProps<TProps, TResult> = {
+  hookProps: TProps | undefined
+  callback: (props: TProps) => TResult
+  setError: (error: Error) => void
+  setValue: (value: TResult) => void
+}
 
 /**
  *
@@ -84,20 +111,29 @@ export type RenderHookReturn<TProps, TValue> = {
  *
  */
 
-export type NativeRendererReturn<TProps> = {
-  render: (props?: TProps) => void
-  rerender: (props?: TProps) => void
-  unmount: () => void
+export interface NativeRendererReturn<TProps> extends GenericRendererReturn<TProps> {
   act: typeof RTRAct
 }
 
-export type NativeRendererOptions<TProps> = {
-  wrapper: WrapperComponent<TProps>
-}
+export type NativeRendererOptions<TProps> = GenericRendererOptions<TProps>
 
-export type TestHookProps<TProps, TResult> = {
-  hookProps: TProps | undefined
-  callback: (props: TProps) => TResult
-  setError: (error: Error) => void
-  setValue: (value: TResult) => void
+/**
+ *
+ * server/pure
+ *
+ */
+
+export type ServerRendererOptions<TProps> = GenericRendererOptions<TProps>
+
+export type ServerActCallbackAsync = () => Promise<void | undefined>
+
+export type ServerActCallback = () => void | undefined
+
+export type ServerModifiedAct = (
+  cb: ServerActCallbackAsync | ServerActCallback
+) => Promise<undefined> | void
+
+export interface ServerRendererReturn<TProps> extends GenericRendererReturn<TProps> {
+  act: ServerModifiedAct
+  hydrate: () => void
 }

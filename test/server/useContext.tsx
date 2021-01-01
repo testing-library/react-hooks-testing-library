@@ -15,7 +15,7 @@ describe('useContext tests', () => {
   test('should get value from context provider', () => {
     const TestContext = createContext('foo')
 
-    const wrapper = ({ children }) => (
+    const wrapper: React.FC = ({ children }) => (
       <TestContext.Provider value="bar">{children}</TestContext.Provider>
     )
 
@@ -27,7 +27,7 @@ describe('useContext tests', () => {
   test('should update value in context when props are updated', () => {
     const TestContext = createContext('foo')
 
-    const wrapper = ({ contextValue, children }) => (
+    const wrapper: React.FC<{ contextValue: string }> = ({ contextValue, children }) => (
       <TestContext.Provider value={contextValue}>{children}</TestContext.Provider>
     )
 

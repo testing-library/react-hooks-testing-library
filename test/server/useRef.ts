@@ -13,14 +13,14 @@ describe('useHook tests', () => {
 
   test('should handle useImperativeHandle hook', () => {
     const { result, hydrate } = renderHook(() => {
-      const ref = useRef()
+      const ref = useRef<Record<string, () => boolean>>({})
       useImperativeHandle(ref, () => ({
         fakeImperativeMethod: () => true
       }))
       return ref
     })
 
-    expect(result.current.current).toBeUndefined()
+    expect(result.current.current).toEqual({})
 
     hydrate()
 

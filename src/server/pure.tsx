@@ -2,28 +2,47 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import ReactDOM from 'react-dom'
 import { act as baseAct } from 'react-dom/test-utils'
-import { createRenderHook, cleanup } from '../core'
+
+import {
+  TestHookProps,
+  ServerRendererOptions,
+  ServerRendererReturn,
+  ServerActCallback,
+  ServerActCallbackAsync,
+  ServerModifiedAct
+} from 'types'
+
+import { createRenderHook, cleanup } from 'core/index'
+import TestHook from 'core/testHook'
+import { isPromise } from 'helpers/promises'
 
 // eslint-disable-next-line import/no-mutable-exports
-let act
+let act: ServerModifiedAct
 
-function createRenderer(TestHook, testHookProps, { wrapper: Wrapper }) {
+function createServerRenderer<TProps, TResult>(
+  testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
+  { wrapper: Wrapper }: ServerRendererOptions<TProps>
+): ServerRendererReturn<TProps> {
   const container = document.createElement('div')
 
-  const toRender = (props) => (
-    <Wrapper {...props}>
-      <TestHook {...props} {...testHookProps} />
+  const toRender = (props?: TProps): JSX.Element => (
+    <Wrapper {...(props as TProps)}>
+      <TestHook hookProps={props} {...testHookProps} />
     </Wrapper>
   )
 
-  let renderProps
+  let renderProps: TProps | undefined
   let hydrated = false
 
-  act = (...args) => {
+  act = (cb: ServerActCallbackAsync | ServerActCallback) => {
     if (!hydrated) {
       throw new Error('You must hydrate the component before you can act')
     }
-    return baseAct(...args)
+    if (isPromise(cb)) {
+      return baseAct(cb as ServerActCallbackAsync)
+    } else {
+      return baseAct(cb as ServerActCallback)
+    }
   }
 
   return {
@@ -66,6 +85,6 @@ function createRenderer(TestHook, testHookProps, { wrapper: Wrapper }) {
   }
 }
 
-const renderHook = createRenderHook(createRenderer)
+const renderHook = createRenderHook(createServerRenderer)
 
 export { renderHook, act, cleanup }
