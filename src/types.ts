@@ -1,12 +1,10 @@
-import { act as RTRAct } from 'react-test-renderer'
-
 /**
  *
  * Shared
  *
  */
 
-export type ActTypes = typeof RTRAct | ServerModifiedAct
+export type ActTypes = NativeModifedAct | ServerModifiedAct
 
 export interface WaitOptions {
   interval?: number
@@ -108,8 +106,10 @@ export type TestHookProps<TProps, TResult> = {
  *
  */
 
+export type NativeModifedAct = (callback: () => Promise<void | undefined>) => Promise<undefined>
+
 export interface NativeRendererReturn<TProps> extends GenericRendererReturn<TProps> {
-  act: typeof RTRAct
+  act: NativeModifedAct
 }
 
 export type NativeRendererOptions<TProps> = GenericRendererOptions<TProps>
