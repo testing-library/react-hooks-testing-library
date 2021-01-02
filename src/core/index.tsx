@@ -9,7 +9,7 @@ import {
   RenderResult,
   ServerRendererReturn,
   ServerRendererOptions
-} from 'types'
+} from '../types'
 
 import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'

@@ -1,7 +1,7 @@
-import { ActTypes, WaitOptions, AsyncUtilsReturn } from 'types'
+import { ActTypes, WaitOptions, AsyncUtilsReturn } from '../types'
 
-import { resolveAfter } from 'helpers/promises'
-import { TimeoutError } from 'helpers/error'
+import { resolveAfter } from '../helpers/promises'
+import { TimeoutError } from '../helpers/error'
 
 function asyncUtils(act: ActTypes, addResolver: (callback: () => void) => void): AsyncUtilsReturn {
   let nextUpdatePromise: Promise<void> | null = null
@@ -35,7 +35,7 @@ function asyncUtils(act: ActTypes, addResolver: (callback: () => void) => void):
       try {
         const callbackResult = callback()
         return callbackResult ?? callbackResult === undefined
-      } catch (error: unknown) {
+      } catch (error) {
         if (!suppressErrors) {
           throw error as Error
         }
@@ -57,7 +57,7 @@ function asyncUtils(act: ActTypes, addResolver: (callback: () => void) => void):
           if (checkResult()) {
             return
           }
-        } catch (error: unknown) {
+        } catch (error) {
           if (error instanceof TimeoutError && initialTimeout) {
             throw new TimeoutError(waitFor, initialTimeout)
           }
@@ -79,7 +79,7 @@ function asyncUtils(act: ActTypes, addResolver: (callback: () => void) => void):
         suppressErrors: false,
         ...options
       })
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof TimeoutError && options.timeout) {
         throw new TimeoutError(waitForValueToChange, options.timeout)
       }

@@ -1,6 +1,6 @@
-import { isPromise } from 'helpers/promises'
+import { isPromise } from '../helpers/promises'
 
-import { TestHookProps } from 'types'
+import { TestHookProps } from '../types'
 
 export default function TestHook<TProps, TResult>({
   hookProps,
@@ -11,7 +11,7 @@ export default function TestHook<TProps, TResult>({
   try {
     // coerce undefined into TProps, so it maintains the previous behaviour
     setValue(callback(hookProps as TProps))
-  } catch (err: unknown) {
+  } catch (err) {
     if (isPromise(err)) {
       throw err
     } else {

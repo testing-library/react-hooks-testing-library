@@ -10,10 +10,10 @@ import {
   ServerActCallback,
   ServerActCallbackAsync,
   ServerModifiedAct
-} from 'types'
+} from '../types'
 
-import { createRenderHook, cleanup } from 'core/index'
-import TestHook from 'core/testHook'
+import { createRenderHook, cleanup } from '../core/index'
+import TestHook from '../core/testHook'
 
 // eslint-disable-next-line import/no-mutable-exports
 let act: ServerModifiedAct

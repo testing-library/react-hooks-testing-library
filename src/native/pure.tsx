@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react'
 import { act, create, ReactTestRenderer } from 'react-test-renderer'
 
-import { TestHookProps, NativeRendererOptions, NativeRendererReturn } from 'types'
+import { TestHookProps, NativeRendererOptions, NativeRendererReturn } from '../types'
 
-import { createRenderHook, cleanup, addCleanup, removeCleanup } from 'core/index'
-import TestHook from 'core/testHook'
+import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core/index'
+import TestHook from '../core/testHook'
 
 function createNativeRenderer<TProps, TResult>(
   testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
