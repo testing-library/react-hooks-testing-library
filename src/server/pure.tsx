@@ -14,7 +14,6 @@ import {
 
 import { createRenderHook, cleanup } from 'core/index'
 import TestHook from 'core/testHook'
-import { isPromise } from 'helpers/promises'
 
 // eslint-disable-next-line import/no-mutable-exports
 let act: ServerModifiedAct
@@ -38,11 +37,8 @@ function createServerRenderer<TProps, TResult>(
     if (!hydrated) {
       throw new Error('You must hydrate the component before you can act')
     }
-    if (isPromise(cb)) {
-      return baseAct(cb as ServerActCallbackAsync)
-    } else {
-      return baseAct(cb as ServerActCallback)
-    }
+
+    return baseAct(cb as ServerActCallback)
   }
 
   return {
@@ -56,8 +52,7 @@ function createServerRenderer<TProps, TResult>(
     hydrate() {
       if (hydrated) {
         throw new Error('The component can only be hydrated once')
-      }
-      if (!hydrated) {
+      } else {
         document.body.appendChild(container)
         baseAct(() => {
           ReactDOM.hydrate(toRender(renderProps), container)

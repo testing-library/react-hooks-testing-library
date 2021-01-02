@@ -51,11 +51,8 @@ export type RenderingEngineArray = Array<{ required: string; renderer: string }>
  */
 
 export type AsyncUtilsReturn = {
-  waitFor: (
-    callback: () => boolean | void,
-    { interval, timeout, suppressErrors }?: WaitOptions
-  ) => Promise<void>
-  waitForNextUpdate: ({ timeout }?: Pick<WaitOptions, 'timeout'>) => Promise<void>
+  waitFor: (callback: () => boolean | void, opts?: WaitOptions) => Promise<void>
+  waitForNextUpdate: (opts?: Pick<WaitOptions, 'timeout'>) => Promise<void>
   waitForValueToChange: (selector: () => unknown, options?: WaitOptions) => Promise<void>
 }
 

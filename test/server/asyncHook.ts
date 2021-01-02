@@ -18,7 +18,7 @@ describe('async hook tests', () => {
       return () => {
         clearInterval(interval)
       }
-    }, [...values])
+    }, [otherValues])
 
     return value
   }
@@ -99,6 +99,30 @@ describe('async hook tests', () => {
       expect(result.current).toBe('third')
       complete = true
     })
+    expect(complete).toBe(true)
+  })
+
+  test('should wait for arbitrary expectation to pass', async () => {
+    const { waitFor, hydrate } = renderHook(() => null)
+
+    hydrate()
+
+    let actual = 0
+    const expected = 1
+
+    setTimeout(() => {
+      actual = expected
+    }, 200)
+
+    let complete = false
+    await waitFor(
+      () => {
+        expect(actual).toBe(expected)
+        complete = true
+      },
+      { interval: 100 }
+    )
+
     expect(complete).toBe(true)
   })
 
