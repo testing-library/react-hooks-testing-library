@@ -1,32 +1,28 @@
-import React, { Suspense } from 'react'
 import { act, create, ReactTestRenderer } from 'react-test-renderer'
 
 import { TestHookProps, NativeRendererOptions, NativeRendererReturn } from '../types'
 
 import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core/index'
-import TestHook from '../core/testHook'
+
+import toRender from '../helpers/toRender'
 
 function createNativeRenderer<TProps, TResult>(
   testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-  { wrapper: Wrapper }: NativeRendererOptions<TProps>
+  { wrapper }: NativeRendererOptions<TProps>
 ): NativeRendererReturn<TProps> {
   let container: ReactTestRenderer
 
-  const toRender = (props?: TProps): JSX.Element => (
-    <Wrapper {...(props as TProps)}>
-      <TestHook hookProps={props} {...testHookProps} />
-    </Wrapper>
-  )
+  const testHook = toRender(testHookProps, wrapper)
 
   return {
     render(props) {
       act(() => {
-        container = create(<Suspense fallback={null}>{toRender(props)}</Suspense>)
+        container = create(testHook(props))
       })
     },
     rerender(props) {
       act(() => {
-        container.update(<Suspense fallback={null}>{toRender(props)}</Suspense>)
+        container.update(testHook(props))
       })
     },
     unmount() {

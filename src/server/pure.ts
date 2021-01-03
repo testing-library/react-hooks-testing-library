@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import ReactDOM from 'react-dom'
 import { act as baseAct } from 'react-dom/test-utils'
@@ -7,45 +6,42 @@ import {
   TestHookProps,
   ServerRendererOptions,
   ServerRendererReturn,
-  ServerActCallback,
-  ServerActCallbackAsync,
-  ServerModifiedAct
+  ReactDomActCallbackAsync,
+  ReactDomActCallback,
+  ReactDomAct
 } from '../types'
 
 import { createRenderHook, cleanup } from '../core/index'
-import TestHook from '../core/testHook'
+
+import toRender from '../helpers/toRender'
 
 // eslint-disable-next-line import/no-mutable-exports
-let act: ServerModifiedAct
+let act: ReactDomAct
 
 function createServerRenderer<TProps, TResult>(
   testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-  { wrapper: Wrapper }: ServerRendererOptions<TProps>
+  { wrapper }: ServerRendererOptions<TProps>
 ): ServerRendererReturn<TProps> {
   const container = document.createElement('div')
 
-  const toRender = (props?: TProps): JSX.Element => (
-    <Wrapper {...(props as TProps)}>
-      <TestHook hookProps={props} {...testHookProps} />
-    </Wrapper>
-  )
+  const testHook = toRender(testHookProps, wrapper, false)
 
   let renderProps: TProps | undefined
   let hydrated = false
 
-  act = (cb: ServerActCallbackAsync | ServerActCallback) => {
+  act = (cb: ReactDomActCallbackAsync | ReactDomActCallback) => {
     if (!hydrated) {
       throw new Error('You must hydrate the component before you can act')
     }
 
-    return baseAct(cb as ServerActCallback)
+    return baseAct(cb as ReactDomActCallback)
   }
 
   return {
     render(props) {
       renderProps = props
       baseAct(() => {
-        const serverOutput = ReactDOMServer.renderToString(toRender(props))
+        const serverOutput = ReactDOMServer.renderToString(testHook(props))
         container.innerHTML = serverOutput
       })
     },
@@ -55,7 +51,7 @@ function createServerRenderer<TProps, TResult>(
       } else {
         document.body.appendChild(container)
         baseAct(() => {
-          ReactDOM.hydrate(toRender(renderProps), container)
+          ReactDOM.hydrate(testHook(renderProps), container)
         })
         hydrated = true
       }
@@ -65,7 +61,7 @@ function createServerRenderer<TProps, TResult>(
         throw new Error('You must hydrate the component before you can rerender')
       }
       baseAct(() => {
-        ReactDOM.render(toRender(props), container)
+        ReactDOM.render(testHook(props), container)
       })
     },
     unmount() {
