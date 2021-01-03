@@ -4,7 +4,7 @@
  *
  */
 
-export type ActTypes = NativeModifedAct | ServerModifiedAct
+export type ActTypes = NativeModifedAct | ReactDomAct
 
 export interface WaitOptions {
   interval?: number
@@ -23,6 +23,14 @@ export type GenericRendererReturn<TProps> = {
   rerender: (props?: TProps) => void
   unmount: () => void
 }
+
+export type ReactDomAct = (
+  cb: ReactDomActCallbackAsync | ReactDomActCallback
+) => Promise<undefined> | void
+
+export type ReactDomActCallbackAsync = () => Promise<void | undefined>
+
+export type ReactDomActCallback = () => void | undefined
 
 /**
  *
@@ -122,15 +130,19 @@ export type NativeRendererOptions<TProps> = GenericRendererOptions<TProps>
 
 export type ServerRendererOptions<TProps> = GenericRendererOptions<TProps>
 
-export type ServerActCallbackAsync = () => Promise<void | undefined>
-
-export type ServerActCallback = () => void | undefined
-
-export type ServerModifiedAct = (
-  cb: ServerActCallbackAsync | ServerActCallback
-) => Promise<undefined> | void
-
 export interface ServerRendererReturn<TProps> extends GenericRendererReturn<TProps> {
-  act: ServerModifiedAct
+  act: ReactDomAct
   hydrate: () => void
 }
+
+/**
+ *
+ * dom/pure
+ *
+ */
+
+export interface DomRendererReturn<TProps> extends GenericRendererReturn<TProps> {
+  act: ReactDomAct
+}
+
+export type DomRendererOptions<TProps> = GenericRendererOptions<TProps>

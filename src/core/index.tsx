@@ -8,7 +8,8 @@ import {
   RenderHookOptions,
   RenderResult,
   ServerRendererReturn,
-  ServerRendererOptions
+  ServerRendererOptions,
+  DomRendererReturn
 } from '../types'
 
 import asyncUtils from './asyncUtils'
@@ -59,7 +60,7 @@ const createRenderHook = (
   createRenderer: <TProps, TResult>(
     testProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
     opts: NativeRendererOptions<TProps> | ServerRendererOptions<TProps>
-  ) => NativeRendererReturn<TProps> | ServerRendererReturn<TProps>
+  ) => NativeRendererReturn<TProps> | ServerRendererReturn<TProps> | DomRendererReturn<TProps>
 ) => <TProps, TResult>(
   callback: (props: TProps) => TResult,
   { initialProps, wrapper = defaultWrapper }: RenderHookOptions<TProps> = {}
