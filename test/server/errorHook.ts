@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+
 import { renderHook } from '../../src/server'
 
 describe('error hook tests', () => {
@@ -21,7 +22,7 @@ describe('error hook tests', () => {
   function useEffectError(throwError: boolean) {
     useEffect(() => {
       useError(throwError)
-    }, [])
+    }, [throwError])
     return true
   }
 

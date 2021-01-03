@@ -21,7 +21,7 @@ describe('error hook tests', () => {
   function useEffectError(throwError: boolean) {
     useEffect(() => {
       useError(throwError)
-    }, [])
+    }, [throwError])
     return true
   }
 
