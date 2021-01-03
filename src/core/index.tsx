@@ -2,14 +2,13 @@
 import React from 'react'
 
 import {
+  RendererOptions,
   TestHookProps,
-  NativeRendererOptions,
   NativeRendererReturn,
   ResultContainerReturn,
   RenderHookOptions,
   RenderResult,
   ServerRendererReturn,
-  ServerRendererOptions,
   DomRendererReturn,
   RenderHookReturn,
   ServerRenderHook
@@ -62,7 +61,7 @@ function defaultWrapper({ children }: { children?: React.ReactNode }) {
 function createRenderHook(
   createRenderer: <TProps, TResult>(
     testProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-    opts: ServerRendererOptions<TProps>
+    opts: RendererOptions<TProps>
   ) => ServerRendererReturn<TProps>
 ): <TProps, TResult>(
   callback: (props: TProps) => TResult,
@@ -71,7 +70,7 @@ function createRenderHook(
 function createRenderHook(
   createRenderer: <TProps, TResult>(
     testProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-    opts: NativeRendererOptions<TProps>
+    opts: RendererOptions<TProps>
   ) => NativeRendererReturn<TProps> | DomRendererReturn<TProps>
 ): <TProps, TResult>(
   callback: (props: TProps) => TResult,

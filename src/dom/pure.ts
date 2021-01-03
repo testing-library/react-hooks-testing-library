@@ -3,7 +3,7 @@ import { act as baseAct } from 'react-dom/test-utils'
 
 import {
   TestHookProps,
-  DomRendererOptions,
+  RendererOptions,
   DomRendererReturn,
   ReactDomAct,
   ReactDomActCallbackAsync,
@@ -19,7 +19,7 @@ let act: ReactDomAct
 
 function createDomRenderer<TProps, TResult>(
   testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-  { wrapper }: DomRendererOptions<TProps>
+  { wrapper }: RendererOptions<TProps>
 ): DomRendererReturn<TProps> {
   const container = document.createElement('div')
 

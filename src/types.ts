@@ -14,7 +14,7 @@ export interface WaitOptions {
 
 export type WrapperComponent<TProps> = React.ComponentType<TProps>
 
-export type GenericRendererOptions<TProps> = {
+export type RendererOptions<TProps> = {
   wrapper: WrapperComponent<TProps>
 }
 
@@ -120,15 +120,11 @@ export interface NativeRendererReturn<TProps> extends GenericRendererReturn<TPro
   act: NativeModifedAct
 }
 
-export type NativeRendererOptions<TProps> = GenericRendererOptions<TProps>
-
 /**
  *
  * server/pure
  *
  */
-
-export type ServerRendererOptions<TProps> = GenericRendererOptions<TProps>
 
 export interface ServerRendererReturn<TProps> extends GenericRendererReturn<TProps> {
   act: ReactDomAct
@@ -144,5 +140,3 @@ export interface ServerRendererReturn<TProps> extends GenericRendererReturn<TPro
 export interface DomRendererReturn<TProps> extends GenericRendererReturn<TProps> {
   act: ReactDomAct
 }
-
-export type DomRendererOptions<TProps> = GenericRendererOptions<TProps>
