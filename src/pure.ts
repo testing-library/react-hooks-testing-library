@@ -2,7 +2,7 @@ import { RenderingEngineArray, ReactHooksRenderer } from 'types'
 
 const RENDERERS: RenderingEngineArray = [
   { required: 'react-test-renderer', renderer: './native/pure' },
-  { required: 'react-dom', renderer: './server/pure' }
+  { required: 'react-dom', renderer: './dom/pure' }
 ]
 
 function getRenderer(renderers: RenderingEngineArray): string {
