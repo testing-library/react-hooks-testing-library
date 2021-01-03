@@ -4,5 +4,5 @@
     "declaration": false
   },
   "exclude": [],
-  "include": ["./native/*", "./server/*"]
+  "include": ["./native/*", "./server/*", "./dom/*"]
 }
