@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import React from 'react'
 
 import {
@@ -9,7 +10,9 @@ import {
   RenderResult,
   ServerRendererReturn,
   ServerRendererOptions,
-  DomRendererReturn
+  DomRendererReturn,
+  RenderHookReturn,
+  ServerRenderHook
 } from '../types'
 
 import asyncUtils from './asyncUtils'
@@ -56,45 +59,61 @@ function defaultWrapper({ children }: { children?: React.ReactNode }) {
   return (children as unknown) as JSX.Element
 }
 
-const createRenderHook = (
+function createRenderHook(
   createRenderer: <TProps, TResult>(
     testProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-    opts: NativeRendererOptions<TProps> | ServerRendererOptions<TProps>
-  ) => NativeRendererReturn<TProps> | ServerRendererReturn<TProps> | DomRendererReturn<TProps>
-) => <TProps, TResult>(
+    opts: ServerRendererOptions<TProps>
+  ) => ServerRendererReturn<TProps>
+): <TProps, TResult>(
   callback: (props: TProps) => TResult,
-  { initialProps, wrapper = defaultWrapper }: RenderHookOptions<TProps> = {}
-) => {
-  const { result, setValue, setError, addResolver } = resultContainer<TResult>()
-  const hookProps = { current: initialProps }
-  const props = { callback, setValue, setError }
-  const options = { wrapper }
+  opts?: RenderHookOptions<TProps>
+) => ServerRenderHook<TProps, TResult>
+function createRenderHook(
+  createRenderer: <TProps, TResult>(
+    testProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
+    opts: NativeRendererOptions<TProps>
+  ) => NativeRendererReturn<TProps> | DomRendererReturn<TProps>
+): <TProps, TResult>(
+  callback: (props: TProps) => TResult,
+  opts?: RenderHookOptions<TProps>
+) => RenderHookReturn<TProps, TResult>
+function createRenderHook(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  createRenderer: any
+) {
+  return <TProps, TResult>(
+    callback: (props: TProps) => TResult,
+    { initialProps, wrapper = defaultWrapper }: RenderHookOptions<TProps> = {}
+  ) => {
+    const { result, setValue, setError, addResolver } = resultContainer<TResult>()
+    const hookProps = { current: initialProps }
+    const props = { callback, setValue, setError }
+    const options = { wrapper }
 
-  const { render, rerender, unmount, act, ...renderUtils } = createRenderer<TProps, TResult>(
-    props,
-    options
-  )
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const { render, rerender, unmount, act, ...renderUtils } = createRenderer(props, options)
 
-  render(hookProps.current)
+    render(hookProps.current)
 
-  function rerenderHook(newProps = hookProps.current) {
-    hookProps.current = newProps
-    rerender(hookProps.current)
-  }
+    function rerenderHook(newProps = hookProps.current) {
+      hookProps.current = newProps
+      rerender(hookProps.current)
+    }
 
-  function unmountHook() {
-    removeCleanup(unmountHook)
-    unmount()
-  }
+    function unmountHook() {
+      removeCleanup(unmountHook)
+      unmount()
+    }
 
-  addCleanup(unmountHook)
+    addCleanup(unmountHook)
 
-  return {
-    result,
-    rerender: rerenderHook,
-    unmount: unmountHook,
-    ...asyncUtils(act, addResolver),
-    ...renderUtils
+    return {
+      result,
+      rerender: rerenderHook,
+      unmount: unmountHook,
+      ...asyncUtils(act, addResolver),
+      ...renderUtils
+    }
   }
 }
 
