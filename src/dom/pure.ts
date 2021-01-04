@@ -1,46 +1,33 @@
 import ReactDOM from 'react-dom'
-import { act as baseAct } from 'react-dom/test-utils'
+import { act } from 'react-dom/test-utils'
 
-import {
-  TestHookProps,
-  RendererOptions,
-  DomRendererReturn,
-  ReactDomAct,
-  ReactDomActCallbackAsync,
-  ReactDomActCallback
-} from '../types'
+import { TestHookProps, RendererOptions, Renderer } from '../types'
 
 import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core/index'
-
 import toRender from '../helpers/toRender'
-
-// eslint-disable-next-line import/no-mutable-exports
-let act: ReactDomAct
 
 function createDomRenderer<TProps, TResult>(
   testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
   { wrapper }: RendererOptions<TProps>
-): DomRendererReturn<TProps> {
+): Renderer<TProps> {
   const container = document.createElement('div')
 
   const testHook = toRender(testHookProps, wrapper)
 
-  act = (cb: ReactDomActCallbackAsync | ReactDomActCallback) => baseAct(cb as ReactDomActCallback)
-
   return {
     render(props) {
       document.body.appendChild(container)
-      baseAct(() => {
+      act(() => {
         ReactDOM.render(testHook(props), container)
       })
     },
     rerender(props) {
-      baseAct(() => {
+      act(() => {
         ReactDOM.render(testHook(props), container)
       })
     },
     unmount() {
-      baseAct(() => {
+      act(() => {
         ReactDOM.unmountComponentAtNode(container)
       })
       document.body.removeChild(container)

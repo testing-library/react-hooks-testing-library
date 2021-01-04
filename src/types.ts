@@ -4,7 +4,10 @@
  *
  */
 
-export type ActTypes = NativeModifedAct | ReactDomAct
+export interface Act {
+  (callback: () => void | undefined): void
+  (callback: () => Promise<void | undefined>): Promise<undefined>
+}
 
 export interface WaitOptions {
   interval?: number
@@ -18,19 +21,12 @@ export type RendererOptions<TProps> = {
   wrapper: WrapperComponent<TProps>
 }
 
-export type GenericRendererReturn<TProps> = {
+export type Renderer<TProps> = {
   render: (props?: TProps) => void
   rerender: (props?: TProps) => void
   unmount: () => void
+  act: Act
 }
-
-export type ReactDomAct = (
-  cb: ReactDomActCallbackAsync | ReactDomActCallback
-) => Promise<undefined> | void
-
-export type ReactDomActCallbackAsync = () => Promise<void | undefined>
-
-export type ReactDomActCallback = () => void | undefined
 
 /**
  *
@@ -39,10 +35,8 @@ export type ReactDomActCallback = () => void | undefined
  */
 
 export interface ReactHooksRenderer {
-  renderHook: <TProps, TResult>() =>
-    | RenderHookReturn<TProps, TResult>
-    | ServerRenderHook<TProps, TResult>
-  act: ActTypes
+  renderHook: <TProps, TResult>() => RenderHookReturn<TProps, TResult>
+  act: Act
   cleanup: {
     autoRegister: () => void
   }
@@ -68,6 +62,16 @@ export type AsyncUtilsReturn = {
  *
  */
 
+export type CreateRenderer = <TProps, TResult>(
+  props: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
+  options: RendererOptions<TProps>
+) => Renderer<TProps>
+
+export type RendererUtils<TRenderer extends Renderer<never>> = Omit<
+  TRenderer,
+  keyof Renderer<never>
+>
+
 export type RenderResult<TValue> = {
   readonly all: (TValue | Error | undefined)[]
   readonly current: TValue
@@ -88,12 +92,8 @@ export interface RenderHookOptions<TProps> {
 
 export type RenderHookReturn<TProps, TValue> = {
   result: RenderResult<TValue>
-} & Omit<GenericRendererReturn<TProps>, 'render'> &
+} & Omit<Renderer<TProps>, 'render' | 'act'> &
   AsyncUtilsReturn
-
-export type ServerRenderHook<TProps, TValue> = RenderHookReturn<TProps, TValue> & {
-  hydrate: () => void
-}
 
 /**
  *
@@ -110,33 +110,10 @@ export type TestHookProps<TProps, TResult> = {
 
 /**
  *
- * native/pure
- *
- */
-
-export type NativeModifedAct = (callback: () => Promise<void | undefined>) => Promise<undefined>
-
-export interface NativeRendererReturn<TProps> extends GenericRendererReturn<TProps> {
-  act: NativeModifedAct
-}
-
-/**
- *
  * server/pure
  *
  */
 
-export interface ServerRendererReturn<TProps> extends GenericRendererReturn<TProps> {
-  act: ReactDomAct
+export interface ServerRenderer<TProps> extends Renderer<TProps> {
   hydrate: () => void
-}
-
-/**
- *
- * dom/pure
- *
- */
-
-export interface DomRendererReturn<TProps> extends GenericRendererReturn<TProps> {
-  act: ReactDomAct
 }
