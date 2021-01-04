@@ -124,6 +124,7 @@ describe('error hook tests', () => {
     Refer to https://github.com/testing-library/react-hooks-testing-library/issues/308
     for more details.
   */
+  // eslint-disable-next-line jest/no-disabled-tests
   describe.skip('effect', () => {
     test('should raise effect error', () => {
       const { result, hydrate } = renderHook(() => useEffectError(true))
