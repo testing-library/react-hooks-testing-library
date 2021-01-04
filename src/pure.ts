@@ -5,7 +5,7 @@ const RENDERERS: RenderingEngineArray = [
   { required: 'react-dom', renderer: './dom/pure' }
 ]
 
-function getRenderer(renderers: RenderingEngineArray): string {
+function getRenderer(renderers: RenderingEngineArray) {
   const hasDependency = (name: string) => {
     try {
       require(name)
@@ -18,14 +18,14 @@ function getRenderer(renderers: RenderingEngineArray): string {
   const [validRenderer] = renderers.filter(({ required }) => hasDependency(required))
 
   if (validRenderer) {
-    return validRenderer.renderer
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    return require(validRenderer.renderer) as ReactHooksRenderer
   } else {
     const options = renderers.map(({ renderer }) => `  - ${renderer}`).join('\n')
     throw new Error(`Could not auto-detect a React renderer.  Options are:\n${options}`)
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { renderHook, act, cleanup } = require(getRenderer(RENDERERS)) as ReactHooksRenderer
+const { renderHook, act, cleanup } = getRenderer(RENDERERS)
 
 export { renderHook, act, cleanup }
