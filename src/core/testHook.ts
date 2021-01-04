@@ -11,7 +11,7 @@ export default function TestHook<TProps, TResult>({
   try {
     // coerce undefined into TProps, so it maintains the previous behaviour
     setValue(callback(hookProps as TProps))
-  } catch (err) {
+  } catch (err: unknown) {
     if (isPromise(err)) {
       throw err
     } else {

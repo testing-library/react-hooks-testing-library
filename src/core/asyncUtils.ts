@@ -35,9 +35,9 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
       try {
         const callbackResult = callback()
         return callbackResult ?? callbackResult === undefined
-      } catch (error) {
+      } catch (error: unknown) {
         if (!suppressErrors) {
-          throw error as Error
+          throw error
         }
         return undefined
       }
@@ -57,11 +57,11 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
           if (checkResult()) {
             return
           }
-        } catch (error) {
+        } catch (error: unknown) {
           if (error instanceof TimeoutError && initialTimeout) {
             throw new TimeoutError(waitFor, initialTimeout)
           }
-          throw error as Error
+          throw error
         }
         if (timeout) timeout -= Date.now() - startTime
       }
@@ -79,11 +79,11 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
         suppressErrors: false,
         ...options
       })
-    } catch (error) {
+    } catch (error: unknown) {
       if (error instanceof TimeoutError && options.timeout) {
         throw new TimeoutError(waitForValueToChange, options.timeout)
       }
-      throw error as Error
+      throw error
     }
   }
 
