@@ -2,7 +2,7 @@ import { act, create, ReactTestRenderer } from 'react-test-renderer'
 
 import { TestHookProps, RendererOptions, Renderer } from '../types'
 
-import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core/index'
+import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
 import toRender from '../helpers/toRender'
 
 function createNativeRenderer<TProps, TResult>(

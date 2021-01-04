@@ -37,9 +37,9 @@ export type Renderer<TProps> = {
 export interface ReactHooksRenderer {
   renderHook: <TProps, TResult>() => RenderHookReturn<TProps, TResult>
   act: Act
-  cleanup: {
-    autoRegister: () => void
-  }
+  cleanup: () => void
+  addCleanup: (callback: () => Promise<void> | void) => () => void
+  removeCleanup: (callback: () => Promise<void> | void) => void
 }
 
 export type RenderingEngineArray = Array<{ required: string; renderer: string }>

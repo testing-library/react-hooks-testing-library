@@ -1,5 +1,5 @@
-import { createCustomRenderer, cleanup } from './pure'
+import { autoRegisterCleanup } from '../core/cleanup'
 
-cleanup.autoRegister()
+autoRegisterCleanup()
 
-export { createCustomRenderer, cleanup }
+export * from './pure'

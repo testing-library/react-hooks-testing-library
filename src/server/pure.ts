@@ -4,7 +4,7 @@ import { act as baseAct } from 'react-dom/test-utils'
 
 import { TestHookProps, RendererOptions, ServerRenderer } from '../types'
 
-import { createRenderHook, cleanup } from '../core/index'
+import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
 
 import toRender from '../helpers/toRender'
 
@@ -76,4 +76,4 @@ function createServerRenderer<TProps, TResult>(
 
 const renderHook = createRenderHook(createServerRenderer)
 
-export { renderHook, act, cleanup }
+export { renderHook, act, cleanup, addCleanup, removeCleanup }

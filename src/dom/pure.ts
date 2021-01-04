@@ -3,7 +3,7 @@ import { act } from 'react-dom/test-utils'
 
 import { TestHookProps, RendererOptions, Renderer } from '../types'
 
-import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core/index'
+import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
 import toRender from '../helpers/toRender'
 
 function createDomRenderer<TProps, TResult>(

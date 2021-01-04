@@ -32,6 +32,6 @@ function getRenderer(renderers: RenderingEngineArray) {
   }
 }
 
-const { renderHook, act, cleanup } = getRenderer(RENDERERS)
+const { renderHook, act, cleanup, addCleanup, removeCleanup } = getRenderer(RENDERERS)
 
-export { renderHook, act, cleanup }
+export { renderHook, act, cleanup, addCleanup, removeCleanup }
