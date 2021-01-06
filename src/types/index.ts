@@ -22,10 +22,9 @@ export type RenderResult<TValue> = {
   readonly error?: Error
 }
 
-export type RendererUtils<TRenderer extends Renderer<never>> = Omit<
-  TRenderer,
-  keyof Renderer<never>
->
+export type ResultContainer<TValue> = {
+  result: RenderResult<TValue>
+}
 
 export interface WaitOptions {
   interval?: number
@@ -39,10 +38,13 @@ export type AsyncUtils = {
   waitForValueToChange: (selector: () => unknown, options?: WaitOptions) => Promise<void>
 }
 
-export type RenderHook<TProps, TValue, TRenderer extends Renderer<TProps> = Renderer<TProps>> = {
-  result: RenderResult<TValue>
-} & Omit<Renderer<TProps>, 'render' | 'act'> &
-  RendererUtils<TRenderer> &
+export type RenderHook<
+  TProps,
+  TValue,
+  TRenderer extends Renderer<TProps> = Renderer<TProps>
+> = ResultContainer<TValue> &
+  Omit<Renderer<TProps>, 'render' | 'act'> &
+  Omit<TRenderer, keyof Renderer<TProps>> &
   AsyncUtils
 
 export interface ReactHooksRenderer {
