@@ -44,25 +44,19 @@ const createRenderHook = <TProps, TResult, TOptions extends {}, TRenderer extend
   createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>
 ) => (
   callback: (props: TProps) => TResult,
-  { initialProps, ...options }: RenderHookOptions<TProps, TOptions> = {} as RenderHookOptions<
-    TProps,
-    TOptions
-  >
+  options: RenderHookOptions<TProps, TOptions> = {} as RenderHookOptions<TProps, TOptions>
 ): RenderHook<TProps, TResult, TRenderer> => {
   const { result, setValue, setError, addResolver } = resultContainer<TResult>()
-  const hookProps = { current: initialProps }
-  const props = { callback, setValue, setError }
+  const renderProps = { callback, setValue, setError }
+  let hookProps = options.initialProps
 
-  const { render, rerender, unmount, act, ...renderUtils } = createRenderer(
-    props,
-    options as TOptions
-  )
+  const { render, rerender, unmount, act, ...renderUtils } = createRenderer(renderProps, options)
 
-  render(hookProps.current)
+  render(hookProps)
 
-  function rerenderHook(newProps = hookProps.current) {
-    hookProps.current = newProps
-    rerender(hookProps.current)
+  function rerenderHook(newProps = hookProps) {
+    hookProps = newProps
+    rerender(hookProps)
   }
 
   function unmountHook() {
