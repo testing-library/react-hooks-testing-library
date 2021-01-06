@@ -1,14 +1,8 @@
 import { ReactHooksRenderer } from './types'
 
-const RENDERERS = [
+const renderers = [
   { required: 'react-test-renderer', renderer: './native/pure' },
   { required: 'react-dom', renderer: './dom/pure' }
-]
-
-const KNOWN_RENDERERS = [
-  '@testing-library/react-hooks/dom',
-  '@testing-library/react-hooks/native',
-  '@testing-library/react-hooks/server'
 ]
 
 function hasDependency(name: string) {
@@ -21,14 +15,20 @@ function hasDependency(name: string) {
 }
 
 function getRenderer() {
-  const validRenderer = RENDERERS.find(({ required }) => hasDependency(required))
+  const validRenderer = renderers.find(({ required }) => hasDependency(required))
 
   if (validRenderer) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     return require(validRenderer.renderer) as ReactHooksRenderer
   } else {
-    const options = KNOWN_RENDERERS.map((renderer) => `  - ${renderer}`).join('\n')
-    throw new Error(`Could not auto-detect a React renderer.  Options are:\n${options}`)
+    const options = renderers
+      .map(({ required }) => `  - ${required}`)
+      .sort((a, b) => a.localeCompare(b))
+    throw new Error(
+      `Could not auto-detect a React renderer. Are you sure you've installed one of the following\n${options.join(
+        '\n'
+      )}`
+    )
   }
 }
 
