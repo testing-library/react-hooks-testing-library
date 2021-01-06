@@ -3,6 +3,5 @@
   "compilerOptions": {
     "allowJs": true,
     "target": "ES6"
-  },
-  "exclude": ["./test"]
+  }
 }

@@ -1,5 +1,9 @@
 node_modules
 coverage
 lib
+dom
+native
+server
+pure
 .docz
 site
