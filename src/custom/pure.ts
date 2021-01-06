@@ -4,3 +4,5 @@ export {
   addCleanup,
   removeCleanup
 } from '../core'
+
+export * from '../types'

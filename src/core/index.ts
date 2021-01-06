@@ -1,11 +1,5 @@
-import {
-  CreateRenderer,
-  Renderer,
-  ResultContainer,
-  RenderHookOptions,
-  RenderResult,
-  RenderHook
-} from 'types'
+import { CreateRenderer, Renderer, RenderResult, RenderHook } from '../types'
+import { ResultContainer, RenderHookOptions } from '../types/internal'
 
 import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'

@@ -1,10 +1,9 @@
 import React, { Suspense } from 'react'
 
-import { RendererProps } from 'types'
+import { RendererProps } from '../types'
+import { WrapperComponent } from '../types/react'
 
-import { isPromise } from '../helpers/promises'
-
-import { WrapperComponent } from './types'
+import { isPromise } from './promises'
 
 function TestHook<TProps, TResult>({
   hookProps,

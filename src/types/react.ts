@@ -1,4 +1,4 @@
-import { RendererProps } from 'types'
+import { RendererProps } from '.'
 
 export type WrapperComponent<TProps> = React.ComponentType<TProps>
 

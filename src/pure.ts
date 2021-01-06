@@ -1,6 +1,6 @@
-import { RenderingEngineArray, ReactHooksRenderer } from 'types'
+import { ReactHooksRenderer } from './types'
 
-const RENDERERS: RenderingEngineArray = [
+const RENDERERS = [
   { required: 'react-test-renderer', renderer: './native/pure' },
   { required: 'react-dom', renderer: './dom/pure' }
 ]
@@ -20,8 +20,8 @@ function hasDependency(name: string) {
   }
 }
 
-function getRenderer(renderers: RenderingEngineArray) {
-  const validRenderer = renderers.find(({ required }) => hasDependency(required))
+function getRenderer() {
+  const validRenderer = RENDERERS.find(({ required }) => hasDependency(required))
 
   if (validRenderer) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -32,6 +32,9 @@ function getRenderer(renderers: RenderingEngineArray) {
   }
 }
 
-const { renderHook, act, cleanup, addCleanup, removeCleanup } = getRenderer(RENDERERS)
+const { renderHook, act, cleanup, addCleanup, removeCleanup } = getRenderer()
 
 export { renderHook, act, cleanup, addCleanup, removeCleanup }
+
+export * from './types'
+export * from './types/react'

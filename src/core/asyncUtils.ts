@@ -1,4 +1,4 @@
-import { Act, WaitOptions, AsyncUtils } from 'types'
+import { Act, WaitOptions, AsyncUtils } from '../types'
 
 import { resolveAfter } from '../helpers/promises'
 import { TimeoutError } from '../helpers/error'

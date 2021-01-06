@@ -2,11 +2,11 @@ import ReactDOMServer from 'react-dom/server'
 import ReactDOM from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { RendererProps } from 'types'
-import { ReactRendererOptions } from '../react/types'
+import { RendererProps } from '../types'
+import { ReactRendererOptions } from '../types/react'
 
 import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
-import { createTestHarness } from '../react/createTestHarness'
+import { createTestHarness } from '../helpers/createTestHarness'
 
 function createServerRenderer<TProps, TResult>(
   testHookProps: RendererProps<TProps, TResult>,
@@ -61,3 +61,6 @@ function createServerRenderer<TProps, TResult>(
 const renderHook = createRenderHook(createServerRenderer)
 
 export { renderHook, act, cleanup, addCleanup, removeCleanup }
+
+export * from '../types'
+export * from '../types/react'
