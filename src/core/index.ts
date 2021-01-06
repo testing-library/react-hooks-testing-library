@@ -5,7 +5,7 @@ import {
   RenderHookOptions,
   RenderResult,
   RenderHook
-} from '../types'
+} from 'types'
 
 import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'

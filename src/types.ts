@@ -15,12 +15,6 @@ export interface WaitOptions {
   suppressErrors?: boolean
 }
 
-export type WrapperComponent<TProps> = React.ComponentType<TProps>
-
-export type ReactRendererOptions<TProps> = {
-  wrapper?: WrapperComponent<TProps>
-}
-
 export type Renderer<TProps> = {
   render: (props?: TProps) => void
   rerender: (props?: TProps) => void
@@ -100,13 +94,3 @@ export type RenderHook<TProps, TValue, TRenderer extends Renderer<TProps> = Rend
 } & Omit<Renderer<TProps>, 'render' | 'act'> &
   RendererUtils<TRenderer> &
   AsyncUtils
-
-/**
- *
- * core/testHook
- *
- */
-
-export type TestHookProps<TProps, TResult> = RendererProps<TProps, TResult> & {
-  hookProps: TProps | undefined
-}
