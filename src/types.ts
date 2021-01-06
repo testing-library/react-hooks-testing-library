@@ -35,7 +35,7 @@ export type Renderer<TProps> = {
  */
 
 export interface ReactHooksRenderer {
-  renderHook: <TProps, TResult>() => RenderHookReturn<TProps, TResult>
+  renderHook: <TProps, TResult>() => RenderHook<TProps, TResult>
   act: Act
   cleanup: () => void
   addCleanup: (callback: () => Promise<void> | void) => () => void
@@ -50,7 +50,7 @@ export type RenderingEngineArray = Array<{ required: string; renderer: string }>
  *
  */
 
-export type AsyncUtilsReturn = {
+export type AsyncUtils = {
   waitFor: (callback: () => boolean | void, opts?: WaitOptions) => Promise<void>
   waitForNextUpdate: (opts?: Pick<WaitOptions, 'timeout'>) => Promise<void>
   waitForValueToChange: (selector: () => unknown, options?: WaitOptions) => Promise<void>
@@ -84,7 +84,7 @@ export type RenderResult<TValue> = {
   readonly error: Error | undefined
 }
 
-export type ResultContainerReturn<TValue> = {
+export type ResultContainer<TValue> = {
   result: RenderResult<TValue>
   addResolver: (resolver: () => void) => void
   setValue: (val: TValue) => void
@@ -95,15 +95,11 @@ export type RenderHookOptions<TProps, TOptions extends {}> = TOptions & {
   initialProps?: TProps
 }
 
-export type RenderHookReturn<
-  TProps,
-  TValue,
-  TRenderer extends Renderer<TProps> = Renderer<TProps>
-> = {
+export type RenderHook<TProps, TValue, TRenderer extends Renderer<TProps> = Renderer<TProps>> = {
   result: RenderResult<TValue>
 } & Omit<Renderer<TProps>, 'render' | 'act'> &
   RendererUtils<TRenderer> &
-  AsyncUtilsReturn
+  AsyncUtils
 
 /**
  *
@@ -113,14 +109,4 @@ export type RenderHookReturn<
 
 export type TestHookProps<TProps, TResult> = RendererProps<TProps, TResult> & {
   hookProps: TProps | undefined
-}
-
-/**
- *
- * server/pure
- *
- */
-
-export interface ServerRenderer<TProps> extends Renderer<TProps> {
-  hydrate: () => void
 }

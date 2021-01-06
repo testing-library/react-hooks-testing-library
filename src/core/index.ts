@@ -1,16 +1,16 @@
 import {
   CreateRenderer,
   Renderer,
-  ResultContainerReturn,
+  ResultContainer,
   RenderHookOptions,
   RenderResult,
-  RenderHookReturn
+  RenderHook
 } from '../types'
 
 import asyncUtils from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
-function resultContainer<TValue>(): ResultContainerReturn<TValue> {
+function resultContainer<TValue>(): ResultContainer<TValue> {
   const results: Array<{ value?: TValue; error?: Error }> = []
   const resolvers: Array<() => void> = []
 
@@ -54,7 +54,7 @@ const createRenderHook = <TProps, TResult, TOptions extends {}, TRenderer extend
     TProps,
     TOptions
   >
-): RenderHookReturn<TProps, TResult, TRenderer> => {
+): RenderHook<TProps, TResult, TRenderer> => {
   const { result, setValue, setError, addResolver } = resultContainer<TResult>()
   const hookProps = { current: initialProps }
   const props = { callback, setValue, setError }

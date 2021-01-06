@@ -1,9 +1,9 @@
-import { Act, WaitOptions, AsyncUtilsReturn } from '../types'
+import { Act, WaitOptions, AsyncUtils } from '../types'
 
 import { resolveAfter } from '../helpers/promises'
 import { TimeoutError } from '../helpers/error'
 
-function asyncUtils(act: Act, addResolver: (callback: () => void) => void): AsyncUtilsReturn {
+function asyncUtils(act: Act, addResolver: (callback: () => void) => void): AsyncUtils {
   let nextUpdatePromise: Promise<void> | null = null
 
   const waitForNextUpdate = async ({ timeout }: Pick<WaitOptions, 'timeout'> = {}) => {
