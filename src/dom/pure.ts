@@ -1,46 +1,34 @@
 import ReactDOM from 'react-dom'
-import { act as baseAct } from 'react-dom/test-utils'
+import { act } from 'react-dom/test-utils'
 
-import {
-  TestHookProps,
-  RendererOptions,
-  DomRendererReturn,
-  ReactDomAct,
-  ReactDomActCallbackAsync,
-  ReactDomActCallback
-} from '../types'
+import { RendererProps } from '../types'
+import { RendererOptions } from '../types/react'
 
-import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core/index'
-
-import toRender from '../helpers/toRender'
-
-// eslint-disable-next-line import/no-mutable-exports
-let act: ReactDomAct
+import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
+import { createTestHarness } from '../helpers/createTestHarness'
 
 function createDomRenderer<TProps, TResult>(
-  testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
+  rendererProps: RendererProps<TProps, TResult>,
   { wrapper }: RendererOptions<TProps>
-): DomRendererReturn<TProps> {
+) {
   const container = document.createElement('div')
 
-  const testHook = toRender(testHookProps, wrapper)
-
-  act = (cb: ReactDomActCallbackAsync | ReactDomActCallback) => baseAct(cb as ReactDomActCallback)
+  const testHook = createTestHarness(rendererProps, wrapper)
 
   return {
-    render(props) {
+    render(props?: TProps) {
       document.body.appendChild(container)
-      baseAct(() => {
+      act(() => {
         ReactDOM.render(testHook(props), container)
       })
     },
-    rerender(props) {
-      baseAct(() => {
+    rerender(props?: TProps) {
+      act(() => {
         ReactDOM.render(testHook(props), container)
       })
     },
     unmount() {
-      baseAct(() => {
+      act(() => {
         ReactDOM.unmountComponentAtNode(container)
       })
       document.body.removeChild(container)
@@ -52,3 +40,6 @@ function createDomRenderer<TProps, TResult>(
 const renderHook = createRenderHook(createDomRenderer)
 
 export { renderHook, act, cleanup, addCleanup, removeCleanup }
+
+export * from '../types'
+export * from '../types/react'

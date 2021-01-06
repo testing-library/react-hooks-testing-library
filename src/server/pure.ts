@@ -1,46 +1,28 @@
 import ReactDOMServer from 'react-dom/server'
 import ReactDOM from 'react-dom'
-import { act as baseAct } from 'react-dom/test-utils'
+import { act } from 'react-dom/test-utils'
 
-import {
-  TestHookProps,
-  RendererOptions,
-  ServerRendererReturn,
-  ReactDomActCallbackAsync,
-  ReactDomActCallback,
-  ReactDomAct
-} from '../types'
+import { RendererProps } from '../types'
+import { RendererOptions } from '../types/react'
 
-import { createRenderHook, cleanup } from '../core/index'
-
-import toRender from '../helpers/toRender'
-
-// eslint-disable-next-line import/no-mutable-exports
-let act: ReactDomAct
+import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
+import { createTestHarness } from '../helpers/createTestHarness'
 
 function createServerRenderer<TProps, TResult>(
-  testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
+  testHookProps: RendererProps<TProps, TResult>,
   { wrapper }: RendererOptions<TProps>
-): ServerRendererReturn<TProps> {
+) {
   const container = document.createElement('div')
 
-  const testHook = toRender(testHookProps, wrapper, false)
+  const testHook = createTestHarness(testHookProps, wrapper, false)
 
   let renderProps: TProps | undefined
   let hydrated = false
 
-  act = (cb: ReactDomActCallbackAsync | ReactDomActCallback) => {
-    if (!hydrated) {
-      throw new Error('You must hydrate the component before you can act')
-    }
-
-    return baseAct(cb as ReactDomActCallback)
-  }
-
   return {
-    render(props) {
+    render(props?: TProps) {
       renderProps = props
-      baseAct(() => {
+      act(() => {
         const serverOutput = ReactDOMServer.renderToString(testHook(props))
         container.innerHTML = serverOutput
       })
@@ -50,23 +32,23 @@ function createServerRenderer<TProps, TResult>(
         throw new Error('The component can only be hydrated once')
       } else {
         document.body.appendChild(container)
-        baseAct(() => {
+        act(() => {
           ReactDOM.hydrate(testHook(renderProps), container)
         })
         hydrated = true
       }
     },
-    rerender(props) {
+    rerender(props?: TProps) {
       if (!hydrated) {
         throw new Error('You must hydrate the component before you can rerender')
       }
-      baseAct(() => {
+      act(() => {
         ReactDOM.render(testHook(props), container)
       })
     },
     unmount() {
       if (hydrated) {
-        baseAct(() => {
+        act(() => {
           ReactDOM.unmountComponentAtNode(container)
           document.body.removeChild(container)
         })
@@ -78,4 +60,7 @@ function createServerRenderer<TProps, TResult>(
 
 const renderHook = createRenderHook(createServerRenderer)
 
-export { renderHook, act, cleanup }
+export { renderHook, act, cleanup, addCleanup, removeCleanup }
+
+export * from '../types'
+export * from '../types/react'

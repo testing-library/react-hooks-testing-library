@@ -1,9 +1,9 @@
-import { ActTypes, WaitOptions, AsyncUtilsReturn } from '../types'
+import { Act, WaitOptions, AsyncUtils } from '../types'
 
 import { resolveAfter } from '../helpers/promises'
 import { TimeoutError } from '../helpers/error'
 
-function asyncUtils(act: ActTypes, addResolver: (callback: () => void) => void): AsyncUtilsReturn {
+function asyncUtils(act: Act, addResolver: (callback: () => void) => void): AsyncUtils {
   let nextUpdatePromise: Promise<void> | null = null
 
   const waitForNextUpdate = async ({ timeout }: Pick<WaitOptions, 'timeout'> = {}) => {
@@ -35,9 +35,9 @@ function asyncUtils(act: ActTypes, addResolver: (callback: () => void) => void):
       try {
         const callbackResult = callback()
         return callbackResult ?? callbackResult === undefined
-      } catch (error) {
+      } catch (error: unknown) {
         if (!suppressErrors) {
-          throw error as Error
+          throw error
         }
         return undefined
       }
@@ -57,11 +57,11 @@ function asyncUtils(act: ActTypes, addResolver: (callback: () => void) => void):
           if (checkResult()) {
             return
           }
-        } catch (error) {
+        } catch (error: unknown) {
           if (error instanceof TimeoutError && initialTimeout) {
             throw new TimeoutError(waitFor, initialTimeout)
           }
-          throw error as Error
+          throw error
         }
         if (timeout) timeout -= Date.now() - startTime
       }
@@ -79,11 +79,11 @@ function asyncUtils(act: ActTypes, addResolver: (callback: () => void) => void):
         suppressErrors: false,
         ...options
       })
-    } catch (error) {
+    } catch (error: unknown) {
       if (error instanceof TimeoutError && options.timeout) {
         throw new TimeoutError(waitForValueToChange, options.timeout)
       }
-      throw error as Error
+      throw error
     }
   }
 

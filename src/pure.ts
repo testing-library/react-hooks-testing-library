@@ -1,31 +1,40 @@
-import { RenderingEngineArray, ReactHooksRenderer } from 'types'
+import { ReactHooksRenderer } from './types'
 
-const RENDERERS: RenderingEngineArray = [
+const renderers = [
   { required: 'react-test-renderer', renderer: './native/pure' },
   { required: 'react-dom', renderer: './dom/pure' }
 ]
 
-function getRenderer(renderers: RenderingEngineArray): string {
-  const hasDependency = (name: string) => {
-    try {
-      require(name)
-      return true
-    } catch {
-      return false
-    }
-  }
-
-  const [validRenderer] = renderers.filter(({ required }) => hasDependency(required))
-
-  if (validRenderer) {
-    return validRenderer.renderer
-  } else {
-    const options = renderers.map(({ renderer }) => `  - ${renderer}`).join('\n')
-    throw new Error(`Could not auto-detect a React renderer.  Options are:\n${options}`)
+function hasDependency(name: string) {
+  try {
+    require(name)
+    return true
+  } catch {
+    return false
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { renderHook, act, cleanup } = require(getRenderer(RENDERERS)) as ReactHooksRenderer
+function getRenderer() {
+  const validRenderer = renderers.find(({ required }) => hasDependency(required))
 
-export { renderHook, act, cleanup }
+  if (validRenderer) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    return require(validRenderer.renderer) as ReactHooksRenderer
+  } else {
+    const options = renderers
+      .map(({ required }) => `  - ${required}`)
+      .sort((a, b) => a.localeCompare(b))
+      .join('/n')
+
+    throw new Error(
+      `Could not auto-detect a React renderer. Are you sure you've installed one of the following\n${options}`
+    )
+  }
+}
+
+const { renderHook, act, cleanup, addCleanup, removeCleanup } = getRenderer()
+
+export { renderHook, act, cleanup, addCleanup, removeCleanup }
+
+export * from './types'
+export * from './types/react'

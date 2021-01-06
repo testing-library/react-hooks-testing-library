@@ -1,8 +1,8 @@
-import { createRenderHook, cleanup } from '../core/index'
+export {
+  createRenderHook as createCustomRenderer,
+  cleanup,
+  addCleanup,
+  removeCleanup
+} from '../core'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const createCustomRenderer = (createRenderer: any) => ({
-  renderHook: createRenderHook(createRenderer)
-})
-
-export { createCustomRenderer, cleanup }
+export * from '../types'

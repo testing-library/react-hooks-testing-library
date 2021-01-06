@@ -16,7 +16,7 @@ function removeCleanup(callback: () => Promise<void> | void) {
   cleanupCallbacks = cleanupCallbacks.filter((cb) => cb !== callback)
 }
 
-cleanup.autoRegister = () => {
+function autoRegisterCleanup() {
   // Automatically registers cleanup in supported testing frameworks
   if (typeof afterEach === 'function' && !process.env.RHTL_SKIP_AUTO_CLEANUP) {
     afterEach(async () => {
@@ -25,4 +25,4 @@ cleanup.autoRegister = () => {
   }
 }
 
-export { cleanup, addCleanup, removeCleanup }
+export { cleanup, addCleanup, removeCleanup, autoRegisterCleanup }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { ReactHooksRenderer } from '../../src/types'
+import { ReactHooksRenderer } from 'types'
 
 // This verifies that if RHTL_SKIP_AUTO_CLEANUP is set
 // then we DON'T auto-wire up the afterEach for folks

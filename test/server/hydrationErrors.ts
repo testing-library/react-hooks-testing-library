@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { renderHook, act } from '../../src/server'
+import { renderHook } from '../../src/server'
 
 describe('hydration errors tests', () => {
   function useCounter() {
@@ -24,14 +24,6 @@ describe('hydration errors tests', () => {
 
     expect(() => rerender()).toThrow(
       Error('You must hydrate the component before you can rerender')
-    )
-  })
-
-  test('act should throw if called without hydrating', () => {
-    const { result } = renderHook(() => useCounter())
-
-    expect(() => act(() => result.current.decrement())).toThrow(
-      Error('You must hydrate the component before you can act')
     )
   })
 })
