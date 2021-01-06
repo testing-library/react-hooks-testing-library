@@ -17,8 +17,8 @@ export interface WaitOptions {
 
 export type WrapperComponent<TProps> = React.ComponentType<TProps>
 
-export type RendererOptions<TProps> = {
-  wrapper: WrapperComponent<TProps>
+export type ReactRendererOptions<TProps> = {
+  wrapper?: WrapperComponent<TProps>
 }
 
 export type Renderer<TProps> = {
@@ -62,10 +62,16 @@ export type AsyncUtilsReturn = {
  *
  */
 
-export type CreateRenderer = <TProps, TResult>(
-  props: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-  options: RendererOptions<TProps>
-) => Renderer<TProps>
+export type RendererProps<TProps, TResult> = {
+  callback: (props: TProps) => TResult
+  setError: (error: Error) => void
+  setValue: (value: TResult) => void
+}
+
+export type CreateRenderer<TProps, TResult, TOptions, TRenderer extends Renderer<TProps>> = (
+  props: RendererProps<TProps, TResult>,
+  options: TOptions
+) => TRenderer
 
 export type RendererUtils<TRenderer extends Renderer<never>> = Omit<
   TRenderer,
@@ -85,14 +91,18 @@ export type ResultContainerReturn<TValue> = {
   setError: (error: Error) => void
 }
 
-export interface RenderHookOptions<TProps> {
+export type RenderHookOptions<TProps, TOptions extends {}> = TOptions & {
   initialProps?: TProps
-  wrapper?: WrapperComponent<TProps>
 }
 
-export type RenderHookReturn<TProps, TValue> = {
+export type RenderHookReturn<
+  TProps,
+  TValue,
+  TRenderer extends Renderer<TProps> = Renderer<TProps>
+> = {
   result: RenderResult<TValue>
 } & Omit<Renderer<TProps>, 'render' | 'act'> &
+  RendererUtils<TRenderer> &
   AsyncUtilsReturn
 
 /**
@@ -101,11 +111,8 @@ export type RenderHookReturn<TProps, TValue> = {
  *
  */
 
-export type TestHookProps<TProps, TResult> = {
+export type TestHookProps<TProps, TResult> = RendererProps<TProps, TResult> & {
   hookProps: TProps | undefined
-  callback: (props: TProps) => TResult
-  setError: (error: Error) => void
-  setValue: (value: TResult) => void
 }
 
 /**

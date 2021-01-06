@@ -1,14 +1,14 @@
 import ReactDOM from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { TestHookProps, RendererOptions, Renderer } from '../types'
+import { RendererProps, ReactRendererOptions, Renderer } from '../types'
 
 import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
 import toRender from '../helpers/toRender'
 
 function createDomRenderer<TProps, TResult>(
-  testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-  { wrapper }: RendererOptions<TProps>
+  testHookProps: RendererProps<TProps, TResult>,
+  { wrapper }: ReactRendererOptions<TProps>
 ): Renderer<TProps> {
   const container = document.createElement('div')
 

@@ -1,11 +1,16 @@
 import React, { Suspense } from 'react'
 import TestHook from '../core/testHook'
 
-import { TestHookProps, WrapperComponent } from '../types'
+import { RendererProps, WrapperComponent } from '../types'
+
+// typed this way in relation to this https://github.com/DefinitelyTyped/DefinitelyTyped/issues/44572#issuecomment-625878049
+function defaultWrapper({ children }: { children?: React.ReactNode }) {
+  return (children as unknown) as JSX.Element
+}
 
 const toRender = <TProps, TResult>(
-  testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-  Wrapper: WrapperComponent<TProps>,
+  testHookProps: RendererProps<TProps, TResult>,
+  Wrapper: WrapperComponent<TProps> = defaultWrapper,
   suspense: boolean = true
 ) => {
   return function RenderWrapper(props?: TProps) {

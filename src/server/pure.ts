@@ -2,18 +2,25 @@ import ReactDOMServer from 'react-dom/server'
 import ReactDOM from 'react-dom'
 import { act as baseAct } from 'react-dom/test-utils'
 
-import { TestHookProps, RendererOptions, ServerRenderer } from '../types'
+import { RendererProps, ReactRendererOptions, ServerRenderer } from '../types'
 
 import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
 
 import toRender from '../helpers/toRender'
 
-// eslint-disable-next-line import/no-mutable-exports
-let act: typeof baseAct
+let serverAct: typeof baseAct
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const act: typeof serverAct = (callback: any) => {
+  if (!serverAct) {
+    return baseAct(callback)
+  }
+  return serverAct(callback)
+}
 
 function createServerRenderer<TProps, TResult>(
-  testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-  { wrapper }: RendererOptions<TProps>
+  testHookProps: RendererProps<TProps, TResult>,
+  { wrapper }: ReactRendererOptions<TProps>
 ): ServerRenderer<TProps> {
   const container = document.createElement('div')
 
@@ -22,21 +29,16 @@ function createServerRenderer<TProps, TResult>(
   let renderProps: TProps | undefined
   let hydrated = false
 
-  function serverAct(callback: () => void | undefined): void
-  function serverAct(callback: () => Promise<void | undefined>): Promise<undefined>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function serverAct(callback: any) {
+  serverAct = (callback: any) => {
     if (!hydrated) {
       throw new Error('You must hydrate the component before you can act')
     }
     return baseAct(callback)
   }
 
-  act = serverAct
-
   return {
     render(props) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       renderProps = props
       baseAct(() => {
         const serverOutput = ReactDOMServer.renderToString(testHook(props))

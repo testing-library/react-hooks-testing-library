@@ -1,13 +1,13 @@
 import { act, create, ReactTestRenderer } from 'react-test-renderer'
 
-import { TestHookProps, RendererOptions, Renderer } from '../types'
+import { RendererProps, ReactRendererOptions, Renderer } from '../types'
 
 import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
 import toRender from '../helpers/toRender'
 
 function createNativeRenderer<TProps, TResult>(
-  testHookProps: Omit<TestHookProps<TProps, TResult>, 'hookProps'>,
-  { wrapper }: RendererOptions<TProps>
+  testHookProps: RendererProps<TProps, TResult>,
+  { wrapper }: ReactRendererOptions<TProps>
 ): Renderer<TProps> {
   let container: ReactTestRenderer
 

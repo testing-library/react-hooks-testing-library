@@ -1,8 +1,6 @@
-import React from 'react'
-
 import {
   CreateRenderer,
-  RendererUtils,
+  Renderer,
   ResultContainerReturn,
   RenderHookOptions,
   RenderResult,
@@ -48,24 +46,23 @@ function resultContainer<TValue>(): ResultContainerReturn<TValue> {
   }
 }
 
-// typed this way in relation to this https://github.com/DefinitelyTyped/DefinitelyTyped/issues/44572#issuecomment-625878049
-function defaultWrapper({ children }: { children?: React.ReactNode }) {
-  return (children as unknown) as JSX.Element
-}
-
-const createRenderHook = <TCreateRenderer extends CreateRenderer>(
-  createRenderer: TCreateRenderer
-) => <TProps, TResult>(
+const createRenderHook = <TProps, TResult, TOptions extends {}, TRenderer extends Renderer<TProps>>(
+  createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>
+) => (
   callback: (props: TProps) => TResult,
-  { initialProps, wrapper = defaultWrapper }: RenderHookOptions<TProps> = {}
-): RenderHookReturn<TProps, TResult> & RendererUtils<ReturnType<TCreateRenderer>> => {
+  { initialProps, ...options }: RenderHookOptions<TProps, TOptions> = {} as RenderHookOptions<
+    TProps,
+    TOptions
+  >
+): RenderHookReturn<TProps, TResult, TRenderer> => {
   const { result, setValue, setError, addResolver } = resultContainer<TResult>()
   const hookProps = { current: initialProps }
   const props = { callback, setValue, setError }
-  const options = { wrapper }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { render, rerender, unmount, act, ...renderUtils } = createRenderer(props, options)
+  const { render, rerender, unmount, act, ...renderUtils } = createRenderer(
+    props,
+    options as TOptions
+  )
 
   render(hookProps.current)
 
@@ -86,7 +83,7 @@ const createRenderHook = <TCreateRenderer extends CreateRenderer>(
     rerender: rerenderHook,
     unmount: unmountHook,
     ...asyncUtils(act, addResolver),
-    ...(renderUtils as RendererUtils<ReturnType<TCreateRenderer>>)
+    ...renderUtils
   }
 }
 
