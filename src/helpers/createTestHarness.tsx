@@ -10,7 +10,7 @@ function TestHook<TProps, TResult>({
   callback,
   setError,
   setValue
-}: RendererProps<TProps, TResult> & { hookProps: TProps | undefined }) {
+}: RendererProps<TProps, TResult> & { hookProps?: TProps }) {
   try {
     // coerce undefined into TProps, so it maintains the previous behaviour
     setValue(callback(hookProps as TProps))

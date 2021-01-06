@@ -2,14 +2,14 @@ import ReactDOM from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
 import { RendererProps } from '../types'
-import { ReactRendererOptions } from '../types/react'
+import { RendererOptions } from '../types/react'
 
 import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
 
 function createDomRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
-  { wrapper }: ReactRendererOptions<TProps>
+  { wrapper }: RendererOptions<TProps>
 ) {
   const container = document.createElement('div')
 

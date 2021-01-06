@@ -27,7 +27,7 @@ export type RendererProps<TProps, TResult> = {
 export type RenderResult<TValue> = {
   readonly all: (TValue | Error | undefined)[]
   readonly current: TValue
-  readonly error: Error | undefined
+  readonly error?: Error
 }
 
 export type RendererUtils<TRenderer extends Renderer<never>> = Omit<
