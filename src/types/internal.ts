@@ -1,9 +1,4 @@
-import { Renderer, RendererProps, RenderResult } from '.'
-
-export type CreateRenderer<TProps, TResult, TOptions, TRenderer extends Renderer<TProps>> = (
-  props: RendererProps<TProps, TResult>,
-  options: TOptions
-) => TRenderer
+import { RenderResult } from '.'
 
 export type ResultContainer<TValue> = {
   result: RenderResult<TValue>

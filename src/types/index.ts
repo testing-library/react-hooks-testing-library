@@ -1,16 +1,3 @@
-export interface ReactHooksRenderer {
-  renderHook: <TProps, TResult>() => RenderHook<TProps, TResult>
-  act: Act
-  cleanup: () => void
-  addCleanup: (callback: () => Promise<void> | void) => () => void
-  removeCleanup: (callback: () => Promise<void> | void) => void
-}
-
-export type CreateRenderer<TProps, TResult, TOptions, TRenderer extends Renderer<TProps>> = (
-  props: RendererProps<TProps, TResult>,
-  options: TOptions
-) => TRenderer
-
 export type Renderer<TProps> = {
   render: (props?: TProps) => void
   rerender: (props?: TProps) => void
@@ -23,6 +10,11 @@ export type RendererProps<TProps, TResult> = {
   setError: (error: Error) => void
   setValue: (value: TResult) => void
 }
+
+export type CreateRenderer<TProps, TResult, TOptions, TRenderer extends Renderer<TProps>> = (
+  props: RendererProps<TProps, TResult>,
+  options: TOptions
+) => TRenderer
 
 export type RenderResult<TValue> = {
   readonly all: (TValue | Error | undefined)[]
@@ -52,6 +44,14 @@ export type RenderHook<TProps, TValue, TRenderer extends Renderer<TProps> = Rend
 } & Omit<Renderer<TProps>, 'render' | 'act'> &
   RendererUtils<TRenderer> &
   AsyncUtils
+
+export interface ReactHooksRenderer {
+  renderHook: <TProps, TResult>() => RenderHook<TProps, TResult>
+  act: Act
+  cleanup: () => void
+  addCleanup: (callback: () => Promise<void> | void) => () => void
+  removeCleanup: (callback: () => Promise<void> | void) => void
+}
 
 export interface Act {
   (callback: () => void | undefined): void
