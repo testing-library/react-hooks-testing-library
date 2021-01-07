@@ -6,7 +6,3 @@ export type ResultContainer<TValue> = {
   setValue: (val: TValue) => void
   setError: (error: Error) => void
 }
-
-export type RenderHookOptions<TProps, TOptions extends {}> = TOptions & {
-  initialProps?: TProps
-}
