@@ -24,7 +24,7 @@ function getRenderer() {
     const options = renderers
       .map(({ required }) => `  - ${required}`)
       .sort((a, b) => a.localeCompare(b))
-      .join('/n')
+      .join('\n')
 
     throw new Error(
       `Could not auto-detect a React renderer. Are you sure you've installed one of the following\n${options}`
