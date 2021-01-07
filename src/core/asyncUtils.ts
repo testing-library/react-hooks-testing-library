@@ -7,7 +7,9 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
   let nextUpdatePromise: Promise<void> | null = null
 
   const waitForNextUpdate = async ({ timeout }: Pick<WaitOptions, 'timeout'> = {}) => {
-    if (!nextUpdatePromise) {
+    if (nextUpdatePromise) {
+      await nextUpdatePromise
+    } else {
       nextUpdatePromise = new Promise((resolve, reject) => {
         let timeoutId: ReturnType<typeof setTimeout>
         if (timeout && timeout > 0) {
@@ -24,7 +26,6 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
       })
       await act(() => nextUpdatePromise as Promise<void>)
     }
-    await nextUpdatePromise
   }
 
   const waitFor = async (
