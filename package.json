@@ -3,6 +3,7 @@
   "version": "0.0.0-semantically-released",
   "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "keywords": [
     "testing",
     "react",
@@ -27,29 +28,34 @@
     "validate": "kcd-scripts validate",
     "prepare": "npm run build",
     "build": "kcd-scripts build --out-dir lib",
+    "test": "kcd-scripts test",
+    "typecheck": "kcd-scripts typecheck",
     "lint": "kcd-scripts lint",
     "format": "kcd-scripts format",
     "coverage": "codecov",
-    "test": "kcd-scripts test",
     "docs:dev": "docz dev",
     "docs:build": "docz build",
     "contributors:add": "all-contributors add"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@types/testing-library__react-hooks": "^3.4.0"
+    "@types/react": ">=16.9.0",
+    "@types/react-test-renderer": ">=16.9.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.9.1",
+    "@typescript-eslint/parser": "^4.9.1",
     "all-contributors-cli": "6.19.0",
     "codecov": "3.8.1",
     "docz": "2.3.1",
     "docz-theme-default": "1.2.0",
     "docz-utils": "2.3.0",
+    "eslint": "7.15.0",
     "kcd-scripts": "7.5.3",
+    "prettier": "^2.2.1",
     "react": "17.0.1",
     "react-test-renderer": "17.0.1",
-    "typescript": "4.1.3",
-    "eslint": "7.17.0"
+    "typescript": "4.1.3"
   },
   "peerDependencies": {
     "react": ">=16.9.0",

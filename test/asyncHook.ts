@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { renderHook } from '../src'
 
 describe('async hook tests', () => {
-  const useSequence = (...values) => {
+  const useSequence = (...values: string[]) => {
     const [first, ...otherValues] = values
     const [value, setValue] = useState(first)
     const index = useRef(0)
@@ -265,93 +265,5 @@ describe('async hook tests', () => {
     )
 
     expect(result.current).toBe('third')
-  })
-
-  test('should wait for expectation to pass (deprecated)', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
-
-    expect(result.current).toBe('first')
-
-    let complete = false
-    await wait(() => {
-      expect(result.current).toBe('third')
-      complete = true
-    })
-    expect(complete).toBe(true)
-  })
-
-  test('should not hang if expectation is already passing (deprecated)', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second'))
-
-    expect(result.current).toBe('first')
-
-    let complete = false
-    await wait(() => {
-      expect(result.current).toBe('first')
-      complete = true
-    })
-    expect(complete).toBe(true)
-  })
-
-  test('should reject if callback throws error (deprecated)', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
-
-    expect(result.current).toBe('first')
-
-    await expect(
-      wait(
-        () => {
-          if (result.current === 'second') {
-            throw new Error('Something Unexpected')
-          }
-          return result.current === 'third'
-        },
-        {
-          suppressErrors: false
-        }
-      )
-    ).rejects.toThrow(Error('Something Unexpected'))
-  })
-
-  test('should reject if callback immediately throws error (deprecated)', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
-
-    expect(result.current).toBe('first')
-
-    await expect(
-      wait(
-        () => {
-          throw new Error('Something Unexpected')
-        },
-        {
-          suppressErrors: false
-        }
-      )
-    ).rejects.toThrow(Error('Something Unexpected'))
-  })
-
-  test('should wait for truthy value (deprecated)', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
-
-    expect(result.current).toBe('first')
-
-    await wait(() => result.current === 'third')
-
-    expect(result.current).toBe('third')
-  })
-
-  test('should reject if timeout exceeded when waiting for expectation to pass (deprecated)', async () => {
-    const { result, wait } = renderHook(() => useSequence('first', 'second', 'third'))
-
-    expect(result.current).toBe('first')
-
-    await expect(
-      wait(
-        () => {
-          expect(result.current).toBe('third')
-        },
-        { timeout: 75 }
-      )
-    ).rejects.toThrow(Error('Timed out in wait after 75ms.'))
   })
 })

@@ -27,11 +27,6 @@ select the added contribution type.
 Please make sure to run the tests before you commit your changes. You can do so by running
 `npm test`.
 
-### Update Typings
-
-The TypeScript type definitions can be found in the
-[DefinitelyTyped repo](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/testing-library__react-hooks).
-
 ## Help needed
 
 Please check out the

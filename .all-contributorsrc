@@ -212,6 +212,64 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "nobrayner",
+      "name": "Braydon Hall",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/40751395?v=4",
+      "profile": "https://github.com/nobrayner",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "JacobMGEvans",
+      "name": "Jacob M-G Evans",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/27247160?v=4",
+      "profile": "https://dev.to/jacobmgevans",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "tigerabrodi",
+      "name": "Tiger Abrodi",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/49603590?v=4",
+      "profile": "https://tigerabrodi.dev/",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "merodiro",
+      "name": "Amr A.Mohammed",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/17033502?v=4",
+      "profile": "https://github.com/merodiro",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "juhanakristian",
+      "name": "Juhana Jauhiainen",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/544386?v=4",
+      "profile": "https://github.com/juhanakristian",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jensmeindertsma",
+      "name": "Jens Meindertsma",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/64677517?v=4",
+      "profile": "https://github.com/jensmeindertsma",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "commitConvention": "none"
