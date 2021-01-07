@@ -1,3 +1,5 @@
+import { RenderHookOptions } from './internal'
+
 export type Renderer<TProps> = {
   render: (props?: TProps) => void
   rerender: (props?: TProps) => void
@@ -48,7 +50,10 @@ export type RenderHook<
   AsyncUtils
 
 export interface ReactHooksRenderer {
-  renderHook: <TProps, TResult>() => RenderHook<TProps, TResult>
+  renderHook: <TProps, TResult, TOptions>(
+    callback: (props: TProps) => TResult,
+    options?: RenderHookOptions<TProps, TOptions>
+  ) => RenderHook<TProps, TResult>
   act: Act
   cleanup: () => void
   addCleanup: (callback: () => Promise<void> | void) => () => void
