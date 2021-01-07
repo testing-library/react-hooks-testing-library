@@ -1,10 +1,5 @@
-import { cleanup } from './pure'
+import { autoRegisterCleanup } from './core/cleanup'
 
-// Automatically registers cleanup in supported testing frameworks
-if (typeof afterEach === 'function' && !process.env.RHTL_SKIP_AUTO_CLEANUP) {
-  afterEach(async () => {
-    await cleanup()
-  })
-}
+autoRegisterCleanup()
 
 export * from './pure'

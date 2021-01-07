@@ -14,7 +14,10 @@
   "files": [
     "lib",
     "src",
-    "pure.js",
+    "dom",
+    "native",
+    "server",
+    "pure",
     "dont-cleanup-after-each.js"
   ],
   "author": "Michael Peyper <mpeyper7@gmail.com>",
@@ -27,7 +30,8 @@
     "setup": "npm install && npm run validate -s",
     "validate": "kcd-scripts validate",
     "prepare": "npm run build",
-    "build": "kcd-scripts build --out-dir lib",
+    "build": "kcd-scripts build --out-dir lib && npm run generate:submodules",
+    "generate:submodules": "ts-node scripts/generate-submodules.ts",
     "test": "kcd-scripts test",
     "typecheck": "kcd-scripts typecheck",
     "lint": "kcd-scripts lint",
@@ -40,6 +44,7 @@
   "dependencies": {
     "@babel/runtime": "^7.12.5",
     "@types/react": ">=16.9.0",
+    "@types/react-dom": ">=16.9.0",
     "@types/react-test-renderer": ">=16.9.0"
   },
   "devDependencies": {
@@ -54,11 +59,25 @@
     "kcd-scripts": "7.5.3",
     "prettier": "^2.2.1",
     "react": "17.0.1",
+    "react-dom": "^17.0.1",
     "react-test-renderer": "17.0.1",
+    "ts-node": "^9.1.1",
     "typescript": "4.1.3"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
+    "react-dom": ">=16.9.0",
     "react-test-renderer": ">=16.9.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "react-test-renderer": {
+      "optional": true
+    }
   }
 }
