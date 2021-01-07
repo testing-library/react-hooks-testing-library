@@ -9,12 +9,12 @@ import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
 
 function createServerRenderer<TProps, TResult>(
-  testHookProps: RendererProps<TProps, TResult>,
+  rendererProps: RendererProps<TProps, TResult>,
   { wrapper }: RendererOptions<TProps>
 ) {
   const container = document.createElement('div')
 
-  const testHook = createTestHarness(testHookProps, wrapper, false)
+  const testHook = createTestHarness(rendererProps, wrapper, false)
 
   let renderProps: TProps | undefined
   let hydrated = false

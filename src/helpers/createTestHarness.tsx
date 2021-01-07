@@ -5,7 +5,7 @@ import { WrapperComponent } from '../types/react'
 
 import { isPromise } from './promises'
 
-function TestHook<TProps, TResult>({
+function TestComponent<TProps, TResult>({
   hookProps,
   callback,
   setError,
@@ -30,7 +30,7 @@ export const createTestHarness = <TProps, TResult>(
   suspense: boolean = true
 ) => {
   return (props?: TProps) => {
-    let component = <TestHook hookProps={props} {...rendererProps} />
+    let component = <TestComponent hookProps={props} {...rendererProps} />
     if (Wrapper) {
       component = <Wrapper {...(props as TProps)}>{component}</Wrapper>
     }
