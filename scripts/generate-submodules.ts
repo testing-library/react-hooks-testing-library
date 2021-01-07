@@ -16,12 +16,27 @@ const templates = {
 
 const submodules = ['dom', 'native', 'server', 'pure']
 
+function cleanDirectory(directory: string) {
+  const files = fs.readdirSync(directory)
+  files.forEach((file) => fs.unlinkSync(path.join(directory, file)))
+}
+
 function makeDirectory(submodule: string) {
   const submoduleDir = path.join(process.cwd(), submodule)
-  if (!fs.existsSync(submoduleDir)) {
+
+  if (fs.existsSync(submoduleDir)) {
+    cleanDirectory(submoduleDir)
+  } else {
     fs.mkdirSync(submoduleDir)
   }
+
   return submoduleDir
+}
+
+function requiredFile(submodule: string) {
+  return ([name]: [string, unknown]) => {
+    return name !== submodule
+  }
 }
 
 function makeFile(directory: string, submodule: string) {
@@ -32,12 +47,6 @@ function makeFile(directory: string, submodule: string) {
       const filePath = path.join(directory, fileName)
       fs.writeFileSync(filePath, template(submodule))
     })
-  }
-}
-
-function requiredFile(submodule: string) {
-  return ([name]: [string, unknown]) => {
-    return name !== submodule
   }
 }
 
