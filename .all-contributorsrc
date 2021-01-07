@@ -19,6 +19,8 @@
         "code",
         "doc",
         "infra",
+        "maintenance",
+        "question",
         "test"
       ]
     },
@@ -199,7 +201,11 @@
       "profile": "https://github.com/joshuaellis",
       "contributions": [
         "doc",
-        "question"
+        "question",
+        "code",
+        "ideas",
+        "maintenance",
+        "test"
       ]
     },
     {
