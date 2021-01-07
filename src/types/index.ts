@@ -1,5 +1,3 @@
-import { RenderHookOptions } from './internal'
-
 export type Renderer<TProps> = {
   render: (props?: TProps) => void
   rerender: (props?: TProps) => void
@@ -58,6 +56,10 @@ export interface ReactHooksRenderer {
   cleanup: () => void
   addCleanup: (callback: () => Promise<void> | void) => () => void
   removeCleanup: (callback: () => Promise<void> | void) => void
+}
+
+export type RenderHookOptions<TProps, TOptions extends {}> = TOptions & {
+  initialProps?: TProps
 }
 
 export interface Act {
