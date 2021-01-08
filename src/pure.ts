@@ -1,4 +1,4 @@
-import { ReactHooksRenderer } from './types'
+import { ReactHooksRenderer } from './types/react'
 
 const renderers = [
   { required: 'react-test-renderer', renderer: './native/pure' },
