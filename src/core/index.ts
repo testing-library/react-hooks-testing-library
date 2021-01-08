@@ -1,7 +1,7 @@
 import { CreateRenderer, Renderer, RenderResult, RenderHook, RenderHookOptions } from '../types'
 import { ResultContainer } from '../types/internal'
 
-import asyncUtils from './asyncUtils'
+import { asyncUtils } from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
 function resultContainer<TValue>(): ResultContainer<TValue> {
