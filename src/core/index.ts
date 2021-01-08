@@ -40,38 +40,40 @@ function resultContainer<TValue>(): ResultContainer<TValue> {
   }
 }
 
-const createRenderHook = <TProps, TResult, TOptions extends {}, TRenderer extends Renderer<TProps>>(
+function createRenderHook<TProps, TResult, TOptions extends {}, TRenderer extends Renderer<TProps>>(
   createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>
-) => (
-  callback: (props: TProps) => TResult,
-  options: RenderHookOptions<TProps, TOptions> = {} as RenderHookOptions<TProps, TOptions>
-): RenderHook<TProps, TResult, TRenderer> => {
-  const { result, setValue, setError, addResolver } = resultContainer<TResult>()
-  const renderProps = { callback, setValue, setError }
-  let hookProps = options.initialProps
+) {
+  return function renderHook(
+    callback: (props: TProps) => TResult,
+    options: RenderHookOptions<TProps, TOptions> = {} as RenderHookOptions<TProps, TOptions>
+  ): RenderHook<TProps, TResult, TRenderer> {
+    const { result, setValue, setError, addResolver } = resultContainer<TResult>()
+    const renderProps = { callback, setValue, setError }
+    let hookProps = options.initialProps
 
-  const { render, rerender, unmount, act, ...renderUtils } = createRenderer(renderProps, options)
+    const { render, rerender, unmount, act, ...renderUtils } = createRenderer(renderProps, options)
 
-  render(hookProps)
+    render(hookProps)
 
-  function rerenderHook(newProps = hookProps) {
-    hookProps = newProps
-    rerender(hookProps)
-  }
+    const rerenderHook = (newProps = hookProps) => {
+      hookProps = newProps
+      rerender(hookProps)
+    }
 
-  function unmountHook() {
-    removeCleanup(unmountHook)
-    unmount()
-  }
+    const unmountHook = () => {
+      removeCleanup(unmountHook)
+      unmount()
+    }
 
-  addCleanup(unmountHook)
+    addCleanup(unmountHook)
 
-  return {
-    result,
-    rerender: rerenderHook,
-    unmount: unmountHook,
-    ...asyncUtils(act, addResolver),
-    ...renderUtils
+    return {
+      result,
+      rerender: rerenderHook,
+      unmount: unmountHook,
+      ...asyncUtils(act, addResolver),
+      ...renderUtils
+    }
   }
 }
 

@@ -24,11 +24,11 @@ function TestComponent<TProps, TResult>({
   return null
 }
 
-export const createTestHarness = <TProps, TResult>(
+function createTestHarness<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
   Wrapper?: WrapperComponent<TProps>,
   suspense: boolean = true
-) => {
+) {
   return (props?: TProps) => {
     let component = <TestComponent hookProps={props} {...rendererProps} />
     if (Wrapper) {
@@ -40,3 +40,5 @@ export const createTestHarness = <TProps, TResult>(
     return component
   }
 }
+
+export { createTestHarness }
