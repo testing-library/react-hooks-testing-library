@@ -47,17 +47,6 @@ export type RenderHook<
   Omit<TRenderer, keyof Renderer<TProps>> &
   AsyncUtils
 
-export interface ReactHooksRenderer {
-  renderHook: <TProps, TResult, TOptions>(
-    callback: (props: TProps) => TResult,
-    options?: RenderHookOptions<TProps, TOptions>
-  ) => RenderHook<TProps, TResult>
-  act: Act
-  cleanup: () => void
-  addCleanup: (callback: () => Promise<void> | void) => () => void
-  removeCleanup: (callback: () => Promise<void> | void) => void
-}
-
 export type RenderHookOptions<TProps, TOptions extends {}> = TOptions & {
   initialProps?: TProps
 }
