@@ -11,16 +11,17 @@ route: '/reference/api'
 - [`act`](/reference/api#act)
 - [`cleanup`](/reference/api#cleanup)
 - [`addCleanup`](/reference/api#addcleanup)
+- [`removeCleanup`](/reference/api#removecleanup)
 
 ---
 
 ## `renderHook`
 
-```js
-function renderHook(
-  callback: function(props?: any): any,
+```ts
+renderHook: (
+  callback: (props?: any): any,
   options?: RenderHookOptions
-): RenderHookResult
+) => RenderHookResult
 ```
 
 Renders a test component that will call the provided `callback`, including any hooks it calls, every
@@ -61,7 +62,7 @@ The `renderHook` function returns an object that has the following properties:
 
 ### `result`
 
-```js
+```ts
 {
   all: Array<any>
   current: any,
@@ -77,8 +78,8 @@ returned at the time.
 
 ### `rerender`
 
-```js
-function rerender(newProps?: any): void
+```ts
+rerender: (newProps?: any) => void
 ```
 
 A function to rerender the test component, causing any hooks to be recalculated. If `newProps` are
@@ -86,12 +87,23 @@ passed, they will replace the `callback` function's `initialProps` for subsequen
 
 ### `unmount`
 
-```js
-function unmount(): void
+```ts
+unmount: () => void
 ```
 
 A function to unmount the test component. This is commonly used to trigger cleanup effects for
 `useEffect` hooks.
+
+### `hydrate`
+
+```ts
+hydrate: () => void
+```
+
+> This is only used when using the `server` module. See [Rendering](/renderer) for more information
+
+A function to hydrate the component. This is commonly used before `act` calls and after `rerender`
+calls.
 
 ### `...asyncUtils`
 
@@ -102,15 +114,15 @@ Utilities to assist with testing asynchronous behaviour. See the
 
 ## `act`
 
-This is the same [`act` function](https://reactjs.org/docs/test-utils.html#act) that is exported by
-`react-test-renderer`.
+This is the same [`act` function](https://reactjs.org/docs/test-utils.html#act) function that is
+exported from your chosen renderer. Although, they both work the same.
 
 ---
 
 ## `cleanup`
 
-```js
-function cleanup: Promise<void>
+```ts
+cleanup: () => Promise<void>
 ```
 
 Unmounts any rendered hooks rendered with `renderHook`, ensuring all effects have been flushed. Any
@@ -142,7 +154,8 @@ module.exports = {
 ```
 
 Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` instead
-of the regular imports.
+of the regular imports. This applys to any of our export methods documented in
+[Rendering](/rendering#being-specific).
 
 ```diff
 - import { renderHook, cleanup, act } from '@testing-library/react-hooks'
@@ -156,8 +169,8 @@ variable to `true` before importing `@testing-library/react-hooks` will also dis
 
 ## `addCleanup`
 
-```js
-function addCleanup(callback: function(): void|Promise<void>): function(): void
+```ts
+addCleanup: (callback: () => void | Promise<void>) => () => void
 ```
 
 Add a callback to be called during [`cleanup`](/reference/api#cleanup), returning a function to
@@ -173,8 +186,8 @@ be resolved before moving onto the next cleanup callback.
 
 ## `removeCleanup`
 
-```js
-function removeCleanup(callback: function(): void|Promise<void>): void
+```ts
+removeCleanup: (callback: () => void | Promise<void>) => void
 ```
 
 Removes a cleanup callback previously added with [`addCleanup`](/reference/api#addCleanup). Once
@@ -187,10 +200,8 @@ removed, the provided callback will no longer execute as part of running
 
 ### `waitForNextUpdate`
 
-```js
-function waitForNextUpdate(options?: {
-  timeout?: number
-}): Promise<void>
+```ts
+waitForNextUpdate: (options?: { timeout?: number }) => Promise<void>
 ```
 
 Returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as
@@ -203,11 +214,11 @@ The maximum amount of time in milliseconds (ms) to wait. By default, no timeout 
 ### `waitFor`
 
 ```js
-function waitFor(callback: function(): boolean|void, options?: {
+waitFor: (callback: () => boolean | void, options?: {
   interval?: number,
   timeout?: number,
   suppressErrors?: boolean
-}): Promise<void>
+}) => Promise<void>
 ```
 
 Returns a `Promise` that resolves if the provided callback executes without exception and returns a
@@ -233,11 +244,11 @@ rejected. By default, errors are suppressed for this utility.
 ### `waitForValueToChange`
 
 ```js
-function waitForValueToChange(selector: function(): any, options?: {
+waitForValueToChange: (selector: () => any, options?: {
   interval?: number,
   timeout?: number,
   suppressErrors?: boolean
-}): Promise<void>
+}) => Promise<void>
 ```
 
 Returns a `Promise` that resolves if the value returned from the provided selector changes. It is
