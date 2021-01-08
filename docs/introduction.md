@@ -68,17 +68,21 @@ npm install --save-dev @testing-library/react-hooks
 ### Peer Dependencies
 
 `react-hooks-testing-library` does not come bundled with a version of
-[`react`](https://www.npmjs.com/package/react) or
-[`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer) to allow you to install
-the specific version you want to test against. Generally, the installed versions for `react` and
-`react-test-renderer` should have matching versions:
+[`react`](https://www.npmjs.com/package/react) to allow you to install the specific version you want
+to test against. It also does not come installed with a specific renderer, we currently support
+[`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer) and
+[`react-dom`](https://www.npmjs.com/package/react-dom), you only need to install one of them.
+However,you can install both, but `react-test-renderer` is the default, for more information see the
+[installation docs](https://react-hooks-testing-library.com/#installation). Generally, the installed
+versions for `react` and the selected renderer should have matching versions:
 
 ```sh
 npm install react@^16.9.0
 npm install --save-dev react-test-renderer@^16.9.0
 ```
 
-> **NOTE: The minimum supported version of `react` and `react-test-renderer` is `^16.9.0`.**
+> **NOTE: The minimum supported version of `react`, `react-test-renderer` and `react-dom` is
+> `^16.9.0`.**
 
 ## Testing Framework
 
