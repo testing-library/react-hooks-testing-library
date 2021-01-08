@@ -13,18 +13,18 @@ function createDomRenderer<TProps, TResult>(
 ) {
   const container = document.createElement('div')
 
-  const testHook = createTestHarness(rendererProps, wrapper)
+  const testHarness = createTestHarness(rendererProps, wrapper)
 
   return {
     render(props?: TProps) {
       document.body.appendChild(container)
       act(() => {
-        ReactDOM.render(testHook(props), container)
+        ReactDOM.render(testHarness(props), container)
       })
     },
     rerender(props?: TProps) {
       act(() => {
-        ReactDOM.render(testHook(props), container)
+        ReactDOM.render(testHarness(props), container)
       })
     },
     unmount() {

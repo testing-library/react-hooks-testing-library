@@ -29,7 +29,7 @@ function createTestHarness<TProps, TResult>(
   Wrapper?: WrapperComponent<TProps>,
   suspense: boolean = true
 ) {
-  return (props?: TProps) => {
+  return function testHarness(props?: TProps) {
     let component = <TestComponent hookProps={props} {...rendererProps} />
     if (Wrapper) {
       component = <Wrapper {...(props as TProps)}>{component}</Wrapper>
