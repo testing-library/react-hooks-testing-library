@@ -7,22 +7,22 @@ import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
 
 function createNativeRenderer<TProps, TResult>(
-  testHookProps: RendererProps<TProps, TResult>,
+  rendererProps: RendererProps<TProps, TResult>,
   { wrapper }: RendererOptions<TProps>
 ) {
   let container: ReactTestRenderer
 
-  const testHook = createTestHarness(testHookProps, wrapper)
+  const testHarness = createTestHarness(rendererProps, wrapper)
 
   return {
     render(props?: TProps) {
       act(() => {
-        container = create(testHook(props))
+        container = create(testHarness(props))
       })
     },
     rerender(props?: TProps) {
       act(() => {
-        container.update(testHook(props))
+        container.update(testHarness(props))
       })
     },
     unmount() {

@@ -24,12 +24,12 @@ function TestComponent<TProps, TResult>({
   return null
 }
 
-export const createTestHarness = <TProps, TResult>(
+function createTestHarness<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
   Wrapper?: WrapperComponent<TProps>,
   suspense: boolean = true
-) => {
-  return (props?: TProps) => {
+) {
+  const testHarness = (props?: TProps) => {
     let component = <TestComponent hookProps={props} {...rendererProps} />
     if (Wrapper) {
       component = <Wrapper {...(props as TProps)}>{component}</Wrapper>
@@ -39,4 +39,13 @@ export const createTestHarness = <TProps, TResult>(
     }
     return component
   }
+
+  // If the function name does not get used before it is returned,
+  // it's name is removed by babel-plugin-minify-dead-code-elimination.
+  // This dummy usage works around that.
+  testHarness.name // eslint-disable-line @typescript-eslint/no-unused-expressions
+
+  return testHarness
 }
+
+export { createTestHarness }

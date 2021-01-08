@@ -95,4 +95,4 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
   }
 }
 
-export default asyncUtils
+export { asyncUtils }

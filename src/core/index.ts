@@ -1,7 +1,7 @@
 import { CreateRenderer, Renderer, RenderResult, RenderHook, RenderHookOptions } from '../types'
 import { ResultContainer } from '../types/internal'
 
-import asyncUtils from './asyncUtils'
+import { asyncUtils } from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
 function resultContainer<TValue>(): ResultContainer<TValue> {
@@ -40,39 +40,49 @@ function resultContainer<TValue>(): ResultContainer<TValue> {
   }
 }
 
-const createRenderHook = <TProps, TResult, TOptions extends {}, TRenderer extends Renderer<TProps>>(
+function createRenderHook<TProps, TResult, TOptions extends {}, TRenderer extends Renderer<TProps>>(
   createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>
-) => (
-  callback: (props: TProps) => TResult,
-  options: RenderHookOptions<TProps, TOptions> = {} as RenderHookOptions<TProps, TOptions>
-): RenderHook<TProps, TResult, TRenderer> => {
-  const { result, setValue, setError, addResolver } = resultContainer<TResult>()
-  const renderProps = { callback, setValue, setError }
-  let hookProps = options.initialProps
+) {
+  const renderHook = (
+    callback: (props: TProps) => TResult,
+    options: RenderHookOptions<TProps, TOptions> = {} as RenderHookOptions<TProps, TOptions>
+  ): RenderHook<TProps, TResult, TRenderer> => {
+    const { result, setValue, setError, addResolver } = resultContainer<TResult>()
+    const renderProps = { callback, setValue, setError }
+    let hookProps = options.initialProps
 
-  const { render, rerender, unmount, act, ...renderUtils } = createRenderer(renderProps, options)
+    const { render, rerender, unmount, act, ...renderUtils } = createRenderer(renderProps, options)
 
-  render(hookProps)
+    render(hookProps)
 
-  function rerenderHook(newProps = hookProps) {
-    hookProps = newProps
-    rerender(hookProps)
+    const rerenderHook = (newProps = hookProps) => {
+      hookProps = newProps
+      rerender(hookProps)
+    }
+
+    const unmountHook = () => {
+      removeCleanup(unmountHook)
+      unmount()
+    }
+
+    addCleanup(unmountHook)
+
+    return {
+      result,
+      rerender: rerenderHook,
+      unmount: unmountHook,
+      ...asyncUtils(act, addResolver),
+      ...renderUtils
+    }
   }
 
-  function unmountHook() {
-    removeCleanup(unmountHook)
-    unmount()
-  }
+  // If the function name does not get used before it is returned,
+  // it's name is removed by babel-plugin-minify-dead-code-elimination.
+  // This dummy usage works around that.
+  renderHook.name // eslint-disable-line @typescript-eslint/no-unused-expressions
 
-  addCleanup(unmountHook)
 
-  return {
-    result,
-    rerender: rerenderHook,
-    unmount: unmountHook,
-    ...asyncUtils(act, addResolver),
-    ...renderUtils
-  }
+  return renderHook
 }
 
 export { createRenderHook, cleanup, addCleanup, removeCleanup }

@@ -14,7 +14,7 @@ function createServerRenderer<TProps, TResult>(
 ) {
   const container = document.createElement('div')
 
-  const testHook = createTestHarness(rendererProps, wrapper, false)
+  const testHarness = createTestHarness(rendererProps, wrapper, false)
 
   let renderProps: TProps | undefined
   let hydrated = false
@@ -23,7 +23,7 @@ function createServerRenderer<TProps, TResult>(
     render(props?: TProps) {
       renderProps = props
       act(() => {
-        const serverOutput = ReactDOMServer.renderToString(testHook(props))
+        const serverOutput = ReactDOMServer.renderToString(testHarness(props))
         container.innerHTML = serverOutput
       })
     },
@@ -33,7 +33,7 @@ function createServerRenderer<TProps, TResult>(
       } else {
         document.body.appendChild(container)
         act(() => {
-          ReactDOM.hydrate(testHook(renderProps), container)
+          ReactDOM.hydrate(testHarness(renderProps), container)
         })
         hydrated = true
       }
@@ -43,7 +43,7 @@ function createServerRenderer<TProps, TResult>(
         throw new Error('You must hydrate the component before you can rerender')
       }
       act(() => {
-        ReactDOM.render(testHook(props), container)
+        ReactDOM.render(testHarness(props), container)
       })
     },
     unmount() {
