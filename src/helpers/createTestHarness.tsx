@@ -41,9 +41,9 @@ function createTestHarness<TProps, TResult>(
   }
 
   // If the function name does not get used before it is returned,
-  // it seems to vanish in nodejs and does not appear in stack traces.
+  // it's name is removed by babel-plugin-minify-dead-code-elimination.
   // This dummy usage works around that.
-  const _name = testHarness.name // eslint-disable-line @typescript-eslint/no-unused-vars
+  testHarness.name // eslint-disable-line @typescript-eslint/no-unused-expressions
 
   return testHarness
 }

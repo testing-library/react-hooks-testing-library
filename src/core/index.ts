@@ -77,9 +77,10 @@ function createRenderHook<TProps, TResult, TOptions extends {}, TRenderer extend
   }
 
   // If the function name does not get used before it is returned,
-  // it seems to vanish in nodejs and does not appear in stack traces.
+  // it's name is removed by babel-plugin-minify-dead-code-elimination.
   // This dummy usage works around that.
-  const _name = renderHook.name // eslint-disable-line @typescript-eslint/no-unused-vars
+  renderHook.name // eslint-disable-line @typescript-eslint/no-unused-expressions
+
 
   return renderHook
 }
