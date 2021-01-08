@@ -29,7 +29,7 @@ function createTestHarness<TProps, TResult>(
   Wrapper?: WrapperComponent<TProps>,
   suspense: boolean = true
 ) {
-  return function testHarness(props?: TProps) {
+  const testHarness = (props?: TProps) => {
     let component = <TestComponent hookProps={props} {...rendererProps} />
     if (Wrapper) {
       component = <Wrapper {...(props as TProps)}>{component}</Wrapper>
@@ -39,6 +39,13 @@ function createTestHarness<TProps, TResult>(
     }
     return component
   }
+
+  // If the function name does not get used before it is returned,
+  // it seems to vanish in nodejs and does not appear in stack traces.
+  // This dummy usage works around that.
+  const _name = testHarness.name // eslint-disable-line @typescript-eslint/no-unused-vars
+
+  return testHarness
 }
 
 export { createTestHarness }

@@ -43,10 +43,10 @@ function resultContainer<TValue>(): ResultContainer<TValue> {
 function createRenderHook<TProps, TResult, TOptions extends {}, TRenderer extends Renderer<TProps>>(
   createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>
 ) {
-  return function renderHook(
+  const renderHook = (
     callback: (props: TProps) => TResult,
     options: RenderHookOptions<TProps, TOptions> = {} as RenderHookOptions<TProps, TOptions>
-  ): RenderHook<TProps, TResult, TRenderer> {
+  ): RenderHook<TProps, TResult, TRenderer> => {
     const { result, setValue, setError, addResolver } = resultContainer<TResult>()
     const renderProps = { callback, setValue, setError }
     let hookProps = options.initialProps
@@ -75,6 +75,13 @@ function createRenderHook<TProps, TResult, TOptions extends {}, TRenderer extend
       ...renderUtils
     }
   }
+
+  // If the function name does not get used before it is returned,
+  // it seems to vanish in nodejs and does not appear in stack traces.
+  // This dummy usage works around that.
+  const _name = renderHook.name // eslint-disable-line @typescript-eslint/no-unused-vars
+
+  return renderHook
 }
 
 export { createRenderHook, cleanup, addCleanup, removeCleanup }
