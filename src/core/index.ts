@@ -40,7 +40,12 @@ function resultContainer<TValue>(): ResultContainer<TValue> {
   }
 }
 
-function createRenderHook<TProps, TResult, TOptions extends {}, TRenderer extends Renderer<TProps>>(
+function createRenderHook<
+  TProps,
+  TResult,
+  TOptions extends object,
+  TRenderer extends Renderer<TProps>
+>(
   createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>
 ): RenderHook<TProps, TResult, TOptions> {
   const renderHook: RenderHook<TProps, TResult, TOptions> = (

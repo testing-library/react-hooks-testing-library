@@ -47,7 +47,7 @@ export type RenderHookResult<
   Omit<TRenderer, keyof Renderer<TProps>> &
   AsyncUtils
 
-export type RenderHookOptions<TProps, TOptions extends {}> = TOptions & {
+export type RenderHookOptions<TProps, TOptions extends object> = TOptions & {
   initialProps?: TProps
 }
 
