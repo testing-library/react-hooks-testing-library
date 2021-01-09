@@ -1,5 +1,7 @@
+# node
 node_modules
-coverage
+
+# build generated
 lib
 dom
 native
@@ -7,4 +9,12 @@ server
 pure
 .docz
 site
+
+# tests (need the !files because of the build generated above)
+coverage
+!src/dom
+!src/native
+!src/server
+
+# settings from IDE
 .vscode
