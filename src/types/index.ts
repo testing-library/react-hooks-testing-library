@@ -38,7 +38,7 @@ export type AsyncUtils = {
   waitForValueToChange: (selector: () => unknown, options?: WaitOptions) => Promise<void>
 }
 
-export type RenderHook<
+export type RenderHookResult<
   TProps,
   TValue,
   TRenderer extends Renderer<TProps> = Renderer<TProps>
@@ -49,6 +49,13 @@ export type RenderHook<
 
 export type RenderHookOptions<TProps, TOptions extends {}> = TOptions & {
   initialProps?: TProps
+}
+
+export interface RenderHook<TProps, TResult, TOptions extends object> {
+  (
+    callback: (props: TProps) => TResult,
+    options?: RenderHookOptions<TProps, TOptions>
+  ): RenderHookResult<TProps, TResult>
 }
 
 export interface Act {

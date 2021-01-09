@@ -42,11 +42,11 @@ function resultContainer<TValue>(): ResultContainer<TValue> {
 
 function createRenderHook<TProps, TResult, TOptions extends {}, TRenderer extends Renderer<TProps>>(
   createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>
-) {
-  const renderHook = (
-    callback: (props: TProps) => TResult,
-    options: RenderHookOptions<TProps, TOptions> = {} as RenderHookOptions<TProps, TOptions>
-  ): RenderHook<TProps, TResult, TRenderer> => {
+): RenderHook<TProps, TResult, TOptions> {
+  const renderHook: RenderHook<TProps, TResult, TOptions> = (
+    callback,
+    options = {} as RenderHookOptions<TProps, TOptions>
+  ) => {
     const { result, setValue, setError, addResolver } = resultContainer<TResult>()
     const renderProps = { callback, setValue, setError }
     let hookProps = options.initialProps
@@ -80,7 +80,6 @@ function createRenderHook<TProps, TResult, TOptions extends {}, TRenderer extend
   // it's name is removed by babel-plugin-minify-dead-code-elimination.
   // This dummy usage works around that.
   renderHook.name // eslint-disable-line @typescript-eslint/no-unused-expressions
-
 
   return renderHook
 }
