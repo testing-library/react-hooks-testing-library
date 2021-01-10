@@ -47,6 +47,10 @@ import { renderHook, act } from '@testing-library/react-hooks/server' // will us
 
 ## Caveats
 
+## Auto detect
+
+The auto detection function may not work if tests are bundled to run in the browser.
+
 ### SSR
 
 While calling `renderHook` from `@testing-library/react-hooks/native` and
@@ -58,4 +62,5 @@ additional function:
 function hydrate(): void
 ```
 
-For more information on `hydrate` see the [API documentation](/reference/api#hydrate)
+Remember, state will not update with SSR unless `hydrate` is called. For more information on
+`hydrate` see the [API documentation](/reference/api#hydrate).
