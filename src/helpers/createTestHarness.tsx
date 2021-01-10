@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 
-import { RendererProps } from '../types'
-import { WrapperComponent } from '../types/react'
+import { RendererProps, WrapperComponent } from '../types/react'
 
 import { isPromise } from './promises'
 

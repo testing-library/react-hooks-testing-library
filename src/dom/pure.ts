@@ -1,10 +1,9 @@
 import ReactDOM from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { RendererProps } from '../types'
-import { RendererOptions } from '../types/react'
+import { RendererProps, RendererOptions } from '../types/react'
 
-import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
+import { createRenderHook } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
 
 function createDomRenderer<TProps, TResult>(
@@ -39,7 +38,8 @@ function createDomRenderer<TProps, TResult>(
 
 const renderHook = createRenderHook(createDomRenderer)
 
-export { renderHook, act, cleanup, addCleanup, removeCleanup }
+export { renderHook, act }
 
-export * from '../types'
+export { cleanup, addCleanup, removeCleanup } from '../core'
+
 export * from '../types/react'
