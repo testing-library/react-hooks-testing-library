@@ -19,7 +19,7 @@ export type CreateRenderer<
 > = (props: RendererProps<TProps, TResult>, options: TRendererOptions) => TRenderer
 
 export type RenderResult<TValue> = {
-  readonly all: (TValue | Error | undefined)[]
+  readonly all: Array<TValue | Error>
   readonly current: TValue
   readonly error?: Error
 }

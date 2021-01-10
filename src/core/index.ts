@@ -9,10 +9,10 @@ function resultContainer<TValue>() {
 
   const result: RenderResult<TValue> = {
     get all() {
-      return results.map(({ value, error }) => error ?? value)
+      return results.map(({ value, error }) => error ?? (value as TValue))
     },
     get current() {
-      const { value, error } = results[results.length - 1]
+      const { value, error } = results[results.length - 1] ?? { value: undefined, error: undefined }
       if (error) {
         throw error
       }

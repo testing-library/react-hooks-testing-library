@@ -46,4 +46,10 @@ describe('suspense hook tests', () => {
 
     expect(result.error).toEqual(new Error('Failed to fetch name'))
   })
+
+  test('should return undefined if current value is requested before suspension has resolved', async () => {
+    const { result } = renderHook(() => useFetchName(true))
+
+    expect(result.current).toBe(undefined)
+  })
 })
