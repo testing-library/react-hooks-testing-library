@@ -57,3 +57,5 @@ export type Act = {
   (callback: () => void | undefined): void
   (callback: () => Promise<void | undefined>): Promise<undefined>
 }
+
+export type CleanupCallback = () => Promise<void> | void

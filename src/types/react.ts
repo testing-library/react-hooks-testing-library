@@ -1,6 +1,11 @@
 import { ComponentType } from 'react'
 
-import { RenderHookOptions as BaseRenderHookOptions, RenderHookResult, Act } from '.'
+import {
+  RenderHookOptions as BaseRenderHookOptions,
+  RenderHookResult,
+  Act,
+  CleanupCallback
+} from '.'
 
 export type WrapperComponent<TProps> = ComponentType<TProps>
 
@@ -19,8 +24,8 @@ export type ReactHooksRenderer = {
   ) => RenderHookResult<TProps, TResult>
   act: Act
   cleanup: () => void
-  addCleanup: (callback: () => Promise<void> | void) => () => void
-  removeCleanup: (callback: () => Promise<void> | void) => void
+  addCleanup: (callback: CleanupCallback) => () => void
+  removeCleanup: (callback: CleanupCallback) => void
 }
 
 export * from '.'
