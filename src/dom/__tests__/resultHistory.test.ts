@@ -1,4 +1,4 @@
-import { renderHook } from '../index'
+import { renderHook } from '..'
 
 describe('result history tests', () => {
   let count = 0

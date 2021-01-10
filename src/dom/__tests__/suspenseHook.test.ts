@@ -1,4 +1,4 @@
-import { renderHook } from '../index'
+import { renderHook } from '..'
 
 describe('suspense hook tests', () => {
   const cache: { value?: Promise<string | Error> | string | Error } = {}

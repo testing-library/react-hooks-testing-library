@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { renderHook, act } from '../index'
+import { renderHook, act } from '..'
 
 describe('useReducer tests', () => {
   test('should handle useReducer hook', () => {

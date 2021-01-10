@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { renderHook } from '../index'
+import { renderHook } from '..'
 
 describe('useEffect tests', () => {
   test('should handle useEffect hook', () => {

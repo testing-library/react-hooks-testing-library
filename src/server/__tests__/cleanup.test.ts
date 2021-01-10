@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { renderHook, cleanup } from '../index'
+import { renderHook, cleanup } from '..'
 
 describe('cleanup tests', () => {
   test('should flush effects on cleanup', async () => {

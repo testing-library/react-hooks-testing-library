@@ -11,7 +11,7 @@ describe('skip auto cleanup (disabled) tests', () => {
   beforeAll(() => {
     process.env.RHTL_SKIP_AUTO_CLEANUP = 'true'
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    renderHook = (require('../index') as ReactHooksRenderer).renderHook
+    renderHook = (require('..') as ReactHooksRenderer).renderHook
   })
 
   test('first', () => {

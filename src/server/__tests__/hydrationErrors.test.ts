@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { renderHook } from '../index'
+import { renderHook } from '..'
 
 describe('hydration errors tests', () => {
   function useCounter() {

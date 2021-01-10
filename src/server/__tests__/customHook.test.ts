@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { renderHook, act } from '../index'
+import { renderHook, act } from '..'
 
 describe('custom hook tests', () => {
   function useCounter() {

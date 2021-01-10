@@ -13,7 +13,7 @@ describe('skip auto cleanup (no afterEach) tests', () => {
     // eslint-disable-next-line no-global-assign
     afterEach = false
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    renderHook = (require('../index') as ReactHooksRenderer).renderHook
+    renderHook = (require('..') as ReactHooksRenderer).renderHook
   })
 
   test('first', () => {
