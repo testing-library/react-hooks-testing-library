@@ -51,11 +51,16 @@ export type RenderHookOptions<TProps, TOptions extends object> = TOptions & {
   initialProps?: TProps
 }
 
-export interface RenderHook<TProps, TResult, TOptions extends object> {
+export interface RenderHook<
+  TProps,
+  TResult,
+  TOptions extends object,
+  TRenderer extends Renderer<TProps> = Renderer<TProps>
+> {
   (
     callback: (props: TProps) => TResult,
     options?: RenderHookOptions<TProps, TOptions>
-  ): RenderHookResult<TProps, TResult>
+  ): RenderHookResult<TProps, TResult, TRenderer>
 }
 
 export interface Act {

@@ -45,10 +45,8 @@ function createRenderHook<
   TResult,
   TOptions extends object,
   TRenderer extends Renderer<TProps>
->(
-  createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>
-): RenderHook<TProps, TResult, TOptions> {
-  const renderHook: RenderHook<TProps, TResult, TOptions> = (
+>(createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>) {
+  const renderHook: RenderHook<TProps, TResult, TOptions, TRenderer> = (
     callback,
     options = {} as RenderHookOptions<TProps, TOptions>
   ) => {
