@@ -11,6 +11,6 @@
     "@typescript-eslint/no-invalid-void-type": "off"
   },
   "parserOptions": {
-    "project": ["./tsconfig.json", "./test/tsconfig.json", "./scripts/tsconfig.json"]
+    "project": ["./tsconfig.json", "./scripts/tsconfig.json"]
   }
 }
