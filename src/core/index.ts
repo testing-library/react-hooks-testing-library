@@ -12,7 +12,7 @@ function resultContainer<TValue>() {
       return results.map(({ value, error }) => error ?? (value as TValue))
     },
     get current() {
-      const { value, error } = results[results.length - 1] ?? { value: undefined, error: undefined }
+      const { value, error } = results[results.length - 1] ?? {}
       if (error) {
         throw error
       }
