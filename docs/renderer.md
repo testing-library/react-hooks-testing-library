@@ -55,7 +55,7 @@ While calling `renderHook` from `@testing-library/react-hooks/native` and
 additional function:
 
 ```ts
-hydrate: () => void
+function hydrate(): void
 ```
 
 For more information on `hydrate` see the [API documentation](/reference/api#hydrate)

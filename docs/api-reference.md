@@ -18,10 +18,10 @@ route: '/reference/api'
 ## `renderHook`
 
 ```ts
-renderHook: (
+function renderHook(
   callback: (props?: any): any,
   options?: RenderHookOptions
-) => RenderHookResult
+): RenderHookResult
 ```
 
 Renders a test component that will call the provided `callback`, including any hooks it calls, every
@@ -79,7 +79,7 @@ returned at the time.
 ### `rerender`
 
 ```ts
-rerender: (newProps?: any) => void
+function rerender(newProps?: any): void
 ```
 
 A function to rerender the test component, causing any hooks to be recalculated. If `newProps` are
@@ -88,7 +88,7 @@ passed, they will replace the `callback` function's `initialProps` for subsequen
 ### `unmount`
 
 ```ts
-unmount: () => void
+function unmount(): void
 ```
 
 A function to unmount the test component. This is commonly used to trigger cleanup effects for
@@ -97,7 +97,7 @@ A function to unmount the test component. This is commonly used to trigger clean
 ### `hydrate`
 
 ```ts
-hydrate: () => void
+function hydrate(): void
 ```
 
 > This is only used when using the `server` module. See [Rendering](/renderer) for more information
@@ -122,7 +122,7 @@ exported from your chosen renderer. Although, they both work the same.
 ## `cleanup`
 
 ```ts
-cleanup: () => Promise<void>
+function cleanup(): Promise<void>
 ```
 
 Unmounts any rendered hooks rendered with `renderHook`, ensuring all effects have been flushed. Any
@@ -170,7 +170,7 @@ variable to `true` before importing `@testing-library/react-hooks` will also dis
 ## `addCleanup`
 
 ```ts
-addCleanup: (callback: () => void | Promise<void>) => () => void
+function addCleanup(callback: () => void | Promise<void>): (): void
 ```
 
 Add a callback to be called during [`cleanup`](/reference/api#cleanup), returning a function to
@@ -187,7 +187,7 @@ be resolved before moving onto the next cleanup callback.
 ## `removeCleanup`
 
 ```ts
-removeCleanup: (callback: () => void | Promise<void>) => void
+function removeCleanup(callback: () => void | Promise<void>): void
 ```
 
 Removes a cleanup callback previously added with [`addCleanup`](/reference/api#addCleanup). Once
@@ -201,7 +201,7 @@ removed, the provided callback will no longer execute as part of running
 ### `waitForNextUpdate`
 
 ```ts
-waitForNextUpdate: (options?: { timeout?: number }) => Promise<void>
+function waitForNextUpdate(options?: { timeout?: number }): Promise<void>
 ```
 
 Returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as
@@ -213,12 +213,15 @@ The maximum amount of time in milliseconds (ms) to wait. By default, no timeout 
 
 ### `waitFor`
 
-```js
-waitFor: (callback: () => boolean | void, options?: {
-  interval?: number,
-  timeout?: number,
-  suppressErrors?: boolean
-}) => Promise<void>
+```ts
+function waitFor(
+  callback: () => boolean | void,
+  options?: {
+    interval?: number
+    timeout?: number
+    suppressErrors?: boolean
+  }
+): Promise<void>
 ```
 
 Returns a `Promise` that resolves if the provided callback executes without exception and returns a
@@ -243,12 +246,15 @@ rejected. By default, errors are suppressed for this utility.
 
 ### `waitForValueToChange`
 
-```js
-waitForValueToChange: (selector: () => any, options?: {
-  interval?: number,
-  timeout?: number,
-  suppressErrors?: boolean
-}) => Promise<void>
+```ts
+function waitForValueToChange(
+  selector: () => any,
+  options?: {
+    interval?: number
+    timeout?: number
+    suppressErrors?: boolean
+  }
+): Promise<void>
 ```
 
 Returns a `Promise` that resolves if the value returned from the provided selector changes. It is
