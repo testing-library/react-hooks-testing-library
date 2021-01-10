@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 
-import { RenderHook, RenderHookOptions, Act } from '.'
+import { RenderHookOptions, RenderHookResult, Act } from '.'
 
 export type WrapperComponent<TProps> = ComponentType<TProps>
 
@@ -8,11 +8,11 @@ export type RendererOptions<TProps> = {
   wrapper?: WrapperComponent<TProps>
 }
 
-export interface ReactHooksRenderer {
+export type ReactHooksRenderer = {
   renderHook: <TProps, TResult>(
     callback: (props: TProps) => TResult,
     options?: RenderHookOptions<TProps, RendererOptions<TProps>>
-  ) => RenderHook<TProps, TResult>
+  ) => RenderHookResult<TProps, TResult>
   act: Act
   cleanup: () => void
   addCleanup: (callback: () => Promise<void> | void) => () => void
