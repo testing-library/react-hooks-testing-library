@@ -55,37 +55,3 @@ the results.
 
 1. Your hook is defined alongside a component and is only used there
 2. Your hook is easy to test by just testing the components using it
-
-## Installation
-
-This module is distributed via [npm](https://www.npmjs.com/) which is bundled with
-[node](https://nodejs.org) and should be installed as one of your project's `devDependencies`:
-
-```sh
-npm install --save-dev @testing-library/react-hooks
-```
-
-### Peer Dependencies
-
-`react-hooks-testing-library` does not come bundled with a version of
-[`react`](https://www.npmjs.com/package/react) to allow you to install the specific version you want
-to test against. It also does not come installed with a specific renderer, we currently support
-[`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer) and
-[`react-dom`](https://www.npmjs.com/package/react-dom), you only need to install one of them.
-However,you can install both, but `react-test-renderer` is the default, for more information see the
-[installation docs](https://react-hooks-testing-library.com/#installation). Generally, the installed
-versions for `react` and the selected renderer should have matching versions:
-
-```sh
-npm install react@^16.9.0
-npm install --save-dev react-test-renderer@^16.9.0
-```
-
-> **NOTE: The minimum supported version of `react`, `react-test-renderer` and `react-dom` is
-> `^16.9.0`.**
-
-## Testing Framework
-
-In order to run tests, you will probably want to be using a test framework. If you have not already
-got one, we recommend using [Jest](https://jestjs.io/), but this library should work without issues
-with any of the alternatives.

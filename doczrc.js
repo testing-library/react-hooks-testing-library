@@ -18,8 +18,8 @@ export default {
   },
   menu: [
     { name: 'Introduction' },
+    { name: 'Installation' },
     { name: 'Usage', menu: ['Basic Hooks', 'Advanced Hooks'] },
-    { name: 'Renderer' },
     { name: 'API Reference' }
   ]
 }
