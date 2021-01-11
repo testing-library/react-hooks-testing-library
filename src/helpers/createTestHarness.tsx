@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
 
-import { RendererProps } from '../types'
-import { WrapperComponent } from '../types/react'
+import { RendererProps, WrapperComponent } from '../types/react'
 
 import { isPromise } from './promises'
 
@@ -39,11 +38,6 @@ function createTestHarness<TProps, TResult>(
     }
     return component
   }
-
-  // If the function name does not get used before it is returned,
-  // it's name is removed by babel-plugin-minify-dead-code-elimination.
-  // This dummy usage works around that.
-  testHarness.name // eslint-disable-line @typescript-eslint/no-unused-expressions
 
   return testHarness
 }

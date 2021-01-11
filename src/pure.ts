@@ -36,5 +36,4 @@ const { renderHook, act, cleanup, addCleanup, removeCleanup } = getRenderer()
 
 export { renderHook, act, cleanup, addCleanup, removeCleanup }
 
-export * from './types'
 export * from './types/react'

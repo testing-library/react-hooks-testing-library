@@ -1,19 +1,18 @@
-import { CreateRenderer, Renderer, RenderResult, RenderHook, RenderHookOptions } from '../types'
-import { ResultContainer } from '../types/internal'
+import { CreateRenderer, Renderer, RenderResult, RenderHookOptions } from '../types'
 
 import { asyncUtils } from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 
-function resultContainer<TValue>(): ResultContainer<TValue> {
+function resultContainer<TValue>() {
   const results: Array<{ value?: TValue; error?: Error }> = []
   const resolvers: Array<() => void> = []
 
   const result: RenderResult<TValue> = {
     get all() {
-      return results.map(({ value, error }) => error ?? value)
+      return results.map(({ value, error }) => error ?? (value as TValue))
     },
     get current() {
-      const { value, error } = results[results.length - 1]
+      const { value, error } = results[results.length - 1] ?? {}
       if (error) {
         throw error
       }
@@ -43,12 +42,12 @@ function resultContainer<TValue>(): ResultContainer<TValue> {
 function createRenderHook<
   TProps,
   TResult,
-  TOptions extends object,
+  TRendererOptions extends object,
   TRenderer extends Renderer<TProps>
->(createRenderer: CreateRenderer<TProps, TResult, TOptions, TRenderer>) {
-  const renderHook: RenderHook<TProps, TResult, TOptions, TRenderer> = (
-    callback,
-    options = {} as RenderHookOptions<TProps, TOptions>
+>(createRenderer: CreateRenderer<TProps, TResult, TRendererOptions, TRenderer>) {
+  const renderHook = (
+    callback: (props: TProps) => TResult,
+    options = {} as RenderHookOptions<TProps> & TRendererOptions
   ) => {
     const { result, setValue, setError, addResolver } = resultContainer<TResult>()
     const renderProps = { callback, setValue, setError }
@@ -78,11 +77,6 @@ function createRenderHook<
       ...renderUtils
     }
   }
-
-  // If the function name does not get used before it is returned,
-  // it's name is removed by babel-plugin-minify-dead-code-elimination.
-  // This dummy usage works around that.
-  renderHook.name // eslint-disable-line @typescript-eslint/no-unused-expressions
 
   return renderHook
 }

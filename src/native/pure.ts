@@ -1,9 +1,8 @@
 import { act, create, ReactTestRenderer } from 'react-test-renderer'
 
-import { RendererProps } from '../types'
-import { RendererOptions } from '../types/react'
+import { RendererProps, RendererOptions } from '../types/react'
 
-import { createRenderHook, cleanup, addCleanup, removeCleanup } from '../core'
+import { createRenderHook } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
 
 function createNativeRenderer<TProps, TResult>(
@@ -36,7 +35,8 @@ function createNativeRenderer<TProps, TResult>(
 
 const renderHook = createRenderHook(createNativeRenderer)
 
-export { renderHook, act, cleanup, addCleanup, removeCleanup }
+export { renderHook, act }
 
-export * from '../types'
+export { cleanup, addCleanup, removeCleanup } from '../core'
+
 export * from '../types/react'

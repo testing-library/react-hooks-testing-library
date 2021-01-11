@@ -11,13 +11,15 @@ export type RendererProps<TProps, TResult> = {
   setValue: (value: TResult) => void
 }
 
-export type CreateRenderer<TProps, TResult, TOptions, TRenderer extends Renderer<TProps>> = (
-  props: RendererProps<TProps, TResult>,
-  options: TOptions
-) => TRenderer
+export type CreateRenderer<
+  TProps,
+  TResult,
+  TRendererOptions extends object,
+  TRenderer extends Renderer<TProps>
+> = (props: RendererProps<TProps, TResult>, options: TRendererOptions) => TRenderer
 
 export type RenderResult<TValue> = {
-  readonly all: (TValue | Error | undefined)[]
+  readonly all: Array<TValue | Error>
   readonly current: TValue
   readonly error?: Error
 }
@@ -47,23 +49,13 @@ export type RenderHookResult<
   Omit<TRenderer, keyof Renderer<TProps>> &
   AsyncUtils
 
-export type RenderHookOptions<TProps, TOptions extends object> = TOptions & {
+export type RenderHookOptions<TProps> = {
   initialProps?: TProps
 }
 
-export interface RenderHook<
-  TProps,
-  TResult,
-  TOptions extends object,
-  TRenderer extends Renderer<TProps> = Renderer<TProps>
-> {
-  (
-    callback: (props: TProps) => TResult,
-    options?: RenderHookOptions<TProps, TOptions>
-  ): RenderHookResult<TProps, TResult, TRenderer>
-}
-
-export interface Act {
+export type Act = {
   (callback: () => void | undefined): void
   (callback: () => Promise<void | undefined>): Promise<undefined>
 }
+
+export type CleanupCallback = () => Promise<void> | void
