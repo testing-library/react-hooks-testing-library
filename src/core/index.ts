@@ -78,11 +78,6 @@ function createRenderHook<
     }
   }
 
-  // If the function name does not get used before it is returned,
-  // it's name is removed by babel-plugin-minify-dead-code-elimination.
-  // This dummy usage works around that.
-  renderHook.name // eslint-disable-line @typescript-eslint/no-unused-expressions
-
   return renderHook
 }
 
