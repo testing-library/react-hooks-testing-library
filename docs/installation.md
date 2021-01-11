@@ -36,42 +36,60 @@ npm install --save-dev react-test-renderer@^16.9.0
 
 ## Renderer
 
-React requires a rendering engine, typically when creating an application people use `react-dom`.
-When running tests, React still requires an engine. We currently support two different engines:
+When running tests, a renderer is required in order to render the React component we wrap around
+your hook. We currently support two different renderers:
 
 - `react-test-renderer`
 - `react-dom`
 
-If you have both installed in your project, assuming you're using the default imports (see below)
-the library defaults to using `react-test-renderer`. This is because rtr is the defacto test
-renderer for `react-native` for tests and it enables hooks to be correctly tested that are written
-for both `react` & `react-native`.
+When using standard import for this library (show below), we will attempt to auto-detect which
+renderer you have installed and use it without needing any specific wiring up to make it happen. If
+you have both installed in your project, and you use the standard import (see below) the library
+will default to using `react-test-renderer`.
+
+> We use `react-test-renderer` by default as it enables hooks to be tested that are designed for
+> either `react` or `react-native` and it is compatible with more test runners out-of-the-box as
+> there is no DOM requirement to use it.
+
+The standard import looks like:
 
 ```js
 import { renderHook } from '@testing-library/react-hooks'
 ```
 
-> The auto detection function may not work if tests are bundled to run in the browser.
+> Note: The auto detection function may not work if tests are bundles before execution (e.g. to be
+> run in a browser)
+
+### Act
+
+Each render also provides a unique [`act` function](https://reactjs.org/docs/test-utils.html#act)
+that cannot be used with other renderers. In order to simplify with `act `function you need to use,
+we also export the correct one alongside the detected renderer for you:
+
+```js
+import { renderHook, act } from '@testing-library/react-hooks'
+```
 
 ## Being specific
 
-If, however, for certain tests you want to use a specific renderer (e.g. you want to use `react-dom`
-for SSR) you can import the server module directly:
+Auto-detection is great for simplifying setup and getting out of your way, but sometimes you do need
+a little but more control. If a test needs requires a specific type of environment, the import can
+be appended to force a specific renderer to be use. The supported environments are:
+
+- `dom`
+- `native`
+- `server`
+
+The imports for each type of renderer are as follows:
 
 ```ts
-import { renderHook } from '@testing-library/react-hooks/server`
-```
-
-We have the following exports available:
-
-```ts
-import { renderHook, act } from '@testing-library/react-hooks' // will try to auto-detect
+import { renderHook, act } from '@testing-library/react-hooks' // will attempt to auto-detect
 
 import { renderHook, act } from '@testing-library/react-hooks/dom' // will use react-dom
 
 import { renderHook, act } from '@testing-library/react-hooks/native' // will use react-test-renderer
 
-import { renderHook, act } from '@testing-library/react-hooks/server' // will use react-dom
+import { renderHook, act } from '@testing-library/react-hooks/server' // will use react-dom/server
 ```
 
 ## Testing Framework
