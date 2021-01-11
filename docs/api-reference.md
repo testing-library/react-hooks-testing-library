@@ -19,7 +19,7 @@ route: '/reference/api'
 
 ```ts
 function renderHook(
-  callback: (props?: any): any,
+  callback: (props?: any) => any,
   options?: RenderHookOptions
 ): RenderHookResult
 ```
@@ -103,9 +103,10 @@ function hydrate(): void
 > This is only used when using the `server` module. See [SSR](/usage/ssr-hooks) for more information
 > on server-side rendering your hooks.
 
-A function to hydrate the component. This is required before you can interact with the hook, whether
-that is an `act` or `rerender` call. Some effects such as `useEffect` will not be called unless
-`hydrate` is called.
+A function to hydrate a server rendered component into the DOM. This is required before you can
+interact with the hook, whether that is an `act` or `rerender` call. Effects created using
+`useEffect` or `useLayoutEffect` are also not run on server rendered hooks until `hydrate` is
+called.
 
 ### `...asyncUtils`
 
@@ -117,7 +118,7 @@ Utilities to assist with testing asynchronous behaviour. See the
 ## `act`
 
 This is the same [`act` function](https://reactjs.org/docs/test-utils.html#act) function that is
-exported from your chosen renderer. Although, they both work the same.
+exported from your [chosen renderer](/installation#renderer).
 
 ---
 
@@ -157,7 +158,7 @@ module.exports = {
 
 Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` instead
 of the regular imports. This applys to any of our export methods documented in
-[Rendering](/rendering#being-specific).
+[Rendering](/installation#being-specific).
 
 ```diff
 - import { renderHook, cleanup, act } from '@testing-library/react-hooks'
