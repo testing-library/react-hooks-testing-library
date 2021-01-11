@@ -100,10 +100,12 @@ A function to unmount the test component. This is commonly used to trigger clean
 function hydrate(): void
 ```
 
-> This is only used when using the `server` module. See [Rendering](/renderer) for more information
+> This is only used when using the `server` module. See [SSR](/usage/ssr-hooks) for more information
+> on server-side rendering your hooks.
 
-A function to hydrate the component. This is commonly used before `act` calls and after `rerender`
-calls.
+A function to hydrate the component. This is required before you can interact with the hook, whether
+that is an `act` or `rerender` call. Some effects such as `useEffect` will not be called unless
+`hydrate` is called.
 
 ### `...asyncUtils`
 
