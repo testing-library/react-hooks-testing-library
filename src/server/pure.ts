@@ -11,12 +11,10 @@ function createServerRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
   { wrapper }: RendererOptions<TProps>
 ) {
-  const container = document.createElement('div')
-
-  const testHarness = createTestHarness(rendererProps, wrapper, false)
-
   let renderProps: TProps | undefined
   let hydrated = false
+  const container = document.createElement('div')
+  const testHarness = createTestHarness(rendererProps, wrapper, false)
 
   return {
     render(props?: TProps) {
@@ -30,7 +28,6 @@ function createServerRenderer<TProps, TResult>(
       if (hydrated) {
         throw new Error('The component can only be hydrated once')
       } else {
-        document.body.appendChild(container)
         act(() => {
           ReactDOM.hydrate(testHarness(renderProps), container)
         })
@@ -49,7 +46,6 @@ function createServerRenderer<TProps, TResult>(
       if (hydrated) {
         act(() => {
           ReactDOM.unmountComponentAtNode(container)
-          document.body.removeChild(container)
         })
       }
     },

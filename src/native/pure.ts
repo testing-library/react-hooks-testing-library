@@ -10,7 +10,6 @@ function createNativeRenderer<TProps, TResult>(
   { wrapper }: RendererOptions<TProps>
 ) {
   let container: ReactTestRenderer
-
   const testHarness = createTestHarness(rendererProps, wrapper)
 
   return {

@@ -11,12 +11,10 @@ function createDomRenderer<TProps, TResult>(
   { wrapper }: RendererOptions<TProps>
 ) {
   const container = document.createElement('div')
-
   const testHarness = createTestHarness(rendererProps, wrapper)
 
   return {
     render(props?: TProps) {
-      document.body.appendChild(container)
       act(() => {
         ReactDOM.render(testHarness(props), container)
       })
@@ -30,7 +28,6 @@ function createDomRenderer<TProps, TResult>(
       act(() => {
         ReactDOM.unmountComponentAtNode(container)
       })
-      document.body.removeChild(container)
     },
     act
   }
