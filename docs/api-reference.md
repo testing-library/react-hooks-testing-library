@@ -18,10 +18,7 @@ route: '/reference/api'
 ## `renderHook`
 
 ```ts
-function renderHook(
-  callback: (props?: any) => any,
-  options?: RenderHookOptions
-): RenderHookResult
+function renderHook(callback: (props?: any) => any, options?: RenderHookOptions): RenderHookResult
 ```
 
 Renders a test component that will call the provided `callback`, including any hooks it calls, every
@@ -100,8 +97,8 @@ A function to unmount the test component. This is commonly used to trigger clean
 function hydrate(): void
 ```
 
-> This is only used when using the `server` module. See [SSR](/usage/ssr-hooks) for more information
-> on server-side rendering your hooks.
+> This is only used when using the `server` module. See [SSR](/usage/ssr) for more information on
+> server-side rendering your hooks.
 
 A function to hydrate a server rendered component into the DOM. This is required before you can
 interact with the hook, whether that is an `act` or `rerender` call. Effects created using

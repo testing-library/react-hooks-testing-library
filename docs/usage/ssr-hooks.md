@@ -1,8 +1,7 @@
 ---
----
 name: Server-Side Rendering
 menu: Usage
-route: '/usage/ssr-hooks'
+route: '/usage/ssr'
 ---
 
 # Server-Side Rendering (SSR)
