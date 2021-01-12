@@ -201,7 +201,7 @@ removed, the provided callback will no longer execute as part of running
 ### `waitForNextUpdate`
 
 ```ts
-function waitForNextUpdate(options?: { timeout?: number }): Promise<void>
+function waitForNextUpdate(options?: { timeout?: number | false }): Promise<void>
 ```
 
 Returns a `Promise` that resolves the next time the hook renders, commonly when state is updated as
@@ -209,7 +209,9 @@ the result of an asynchronous update.
 
 #### `timeout`
 
-The maximum amount of time in milliseconds (ms) to wait. By default, no timeout is applied.
+_Default: 1000_
+
+The maximum amount of time in milliseconds (ms) to wait.
 
 ### `waitFor`
 
@@ -217,9 +219,8 @@ The maximum amount of time in milliseconds (ms) to wait. By default, no timeout 
 function waitFor(
   callback: () => boolean | void,
   options?: {
-    interval?: number
-    timeout?: number
-    suppressErrors?: boolean
+    interval?: number | false
+    timeout?: number | false
   }
 ): Promise<void>
 ```
@@ -230,19 +231,16 @@ in the callback to perform assertion or to test values.
 
 #### `interval`
 
+_Default: 50_
+
 The amount of time in milliseconds (ms) to wait between checks of the callback if no renders occur.
-Interval checking is disabled if `interval` is not provided in the options or provided as a `falsy`
-value. By default, it is disabled.
+Interval checking is disabled if `interval` is not provided as a `falsy`.
 
 #### `timeout`
 
-The maximum amount of time in milliseconds (ms) to wait. By default, no timeout is applied.
+_Default: 1000_
 
-#### `suppressErrors`
-
-If this option is set to `true`, any errors that occur while waiting are treated as a failed check.
-If this option is set to `false`, any errors that occur while waiting cause the promise to be
-rejected. By default, errors are suppressed for this utility.
+The maximum amount of time in milliseconds (ms) to wait.
 
 ### `waitForValueToChange`
 
@@ -250,9 +248,8 @@ rejected. By default, errors are suppressed for this utility.
 function waitForValueToChange(
   selector: () => any,
   options?: {
-    interval?: number
-    timeout?: number
-    suppressErrors?: boolean
+    interval?: number | false
+    timeout?: number | false
   }
 ): Promise<void>
 ```
@@ -263,16 +260,13 @@ for comparison.
 
 #### `interval`
 
+_Default: 50_
+
 The amount of time in milliseconds (ms) to wait between checks of the callback if no renders occur.
-Interval checking is disabled if `interval` is not provided in the options or provided as a `falsy`
-value. By default, it is disabled.
+Interval checking is disabled if `interval` is not provided as a `falsy`.
 
 #### `timeout`
 
-The maximum amount of time in milliseconds (ms) to wait. By default, no timeout is applied.
+_Default: 1000_
 
-#### `suppressErrors`
-
-If this option is set to `true`, any errors that occur while waiting are treated as a failed check.
-If this option is set to `false`, any errors that occur while waiting cause the promise to be
-rejected. By default, errors are not suppressed for this utility.
+The maximum amount of time in milliseconds (ms) to wait.

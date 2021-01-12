@@ -28,16 +28,26 @@ export type ResultContainer<TValue> = {
   result: RenderResult<TValue>
 }
 
-export interface WaitOptions {
-  interval?: number
-  timeout?: number
-  suppressErrors?: boolean
+export type WaitOptions = {
+  interval?: number | false
+  timeout?: number | false
 }
 
+export type WaitForOptions = WaitOptions
+export type WaitForValueToChangeOptions = WaitOptions
+export type WaitForNextUpdateOptions = Pick<WaitOptions, 'timeout'>
+
+export type WaitFor = (callback: () => boolean | void, options?: WaitForOptions) => Promise<void>
+export type WaitForValueToChange = (
+  selector: () => unknown,
+  options?: WaitForValueToChangeOptions
+) => Promise<void>
+export type WaitForNextUpdate = (options?: WaitForNextUpdateOptions) => Promise<void>
+
 export type AsyncUtils = {
-  waitFor: (callback: () => boolean | void, opts?: WaitOptions) => Promise<void>
-  waitForNextUpdate: (opts?: Pick<WaitOptions, 'timeout'>) => Promise<void>
-  waitForValueToChange: (selector: () => unknown, options?: WaitOptions) => Promise<void>
+  waitFor: WaitFor
+  waitForValueToChange: WaitForValueToChange
+  waitForNextUpdate: WaitForNextUpdate
 }
 
 export type RenderHookResult<
