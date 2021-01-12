@@ -19,7 +19,7 @@ export default {
   menu: [
     { name: 'Introduction' },
     { name: 'Installation' },
-    { name: 'Usage', menu: ['Basic Hooks', 'Advanced Hooks'] },
+    { name: 'Usage', menu: ['Basic Hooks', 'Advanced Hooks', 'Server-Side Rendering'] },
     { name: 'API Reference' }
   ]
 }
