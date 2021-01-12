@@ -14,10 +14,7 @@ const DEFAULT_INTERVAL = 50
 const DEFAULT_TIMEOUT = 1000
 
 function asyncUtils(act: Act, addResolver: (callback: () => void) => void): AsyncUtils {
-  const wait = async (
-    callback: () => boolean | void,
-    { interval = DEFAULT_INTERVAL, timeout = DEFAULT_TIMEOUT }: WaitOptions = {}
-  ) => {
+  const wait = async (callback: () => boolean | void, { interval, timeout }: WaitOptions) => {
     const checkResult = () => {
       const callbackResult = callback()
       return callbackResult ?? callbackResult === undefined
@@ -38,20 +35,28 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
       }
     }
 
+    let timedOut = false
+
     if (!checkResult()) {
       if (timeout) {
-        const timeoutPromise = callAfter(() => {
-          throw new TimeoutError(wait, timeout)
-        }, timeout)
+        const timeoutPromise = () =>
+          callAfter(() => {
+            timedOut = true
+          }, timeout)
 
-        await act(() => Promise.race([waitForResult(), timeoutPromise]))
+        await act(() => Promise.race([waitForResult(), timeoutPromise()]))
       } else {
         await act(waitForResult)
       }
     }
+
+    return !timedOut
   }
 
-  const waitFor = async (callback: () => boolean | void, options: WaitForOptions = {}) => {
+  const waitFor = async (
+    callback: () => boolean | void,
+    { interval = DEFAULT_INTERVAL, timeout = DEFAULT_TIMEOUT }: WaitForOptions = {}
+  ) => {
     const safeCallback = () => {
       try {
         return callback()
@@ -59,47 +64,36 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
         return false
       }
     }
-    try {
-      await wait(safeCallback, options)
-    } catch (error: unknown) {
-      if (error instanceof TimeoutError) {
-        throw new TimeoutError(waitFor, error.timeout)
-      }
-      throw error
+
+    const result = await wait(safeCallback, { interval, timeout })
+    if (!result && timeout) {
+      throw new TimeoutError(waitFor, timeout)
     }
   }
 
   const waitForValueToChange = async (
     selector: () => unknown,
-    options: WaitForValueToChangeOptions = {}
+    { interval = DEFAULT_INTERVAL, timeout = DEFAULT_TIMEOUT }: WaitForValueToChangeOptions = {}
   ) => {
     const initialValue = selector()
-    try {
-      await wait(() => selector() !== initialValue, options)
-    } catch (error: unknown) {
-      if (error instanceof TimeoutError) {
-        throw new TimeoutError(waitForValueToChange, error.timeout)
-      }
-      throw error
+
+    const result = await wait(() => selector() !== initialValue, { interval, timeout })
+    if (!result && timeout) {
+      throw new TimeoutError(waitForValueToChange, timeout)
     }
   }
 
-  const waitForNextUpdate = async (options: WaitForNextUpdateOptions = {}) => {
+  const waitForNextUpdate = async ({
+    timeout = DEFAULT_TIMEOUT
+  }: WaitForNextUpdateOptions = {}) => {
     let updated = false
     addResolver(() => {
       updated = true
     })
 
-    try {
-      await wait(() => updated, {
-        interval: false,
-        ...options
-      })
-    } catch (error: unknown) {
-      if (error instanceof TimeoutError) {
-        throw new TimeoutError(waitForNextUpdate, error.timeout)
-      }
-      throw error
+    const result = await wait(() => updated, { interval: false, timeout })
+    if (!result && timeout) {
+      throw new TimeoutError(waitForNextUpdate, timeout)
     }
   }
 
