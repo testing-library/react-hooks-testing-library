@@ -73,9 +73,14 @@ function resultContainer<TValue>() {
   }
 }
 
+export interface RenderHookOptions<TProps> {
+  initialProps?: TProps
+  wrapper?: React.ComponentType<TProps>
+}
+
 function renderHook<TProps, TResult>(
   callback: (props: TProps) => TResult,
-  { initialProps, wrapper }: { initialProps?: TProps; wrapper?: React.ComponentType<TProps> } = {}
+  { initialProps, wrapper }: RenderHookOptions<TProps> = {}
 ) {
   const { result, setValue, setError, addResolver } = resultContainer<TResult>()
   const hookProps = { current: initialProps }
