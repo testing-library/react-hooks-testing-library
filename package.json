@@ -70,9 +70,6 @@
     "react-test-renderer": ">=16.9.0"
   },
   "peerDependenciesMeta": {
-    "react": {
-      "optional": true
-    },
     "react-dom": {
       "optional": true
     },
