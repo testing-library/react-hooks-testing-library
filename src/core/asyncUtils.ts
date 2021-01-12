@@ -7,7 +7,7 @@ import {
   AsyncUtils
 } from '../types'
 
-import { resolveAfter } from '../helpers/promises'
+import { resolveAfter, callAfter } from '../helpers/promises'
 import { TimeoutError } from '../helpers/error'
 
 const DEFAULT_INTERVAL = 50
@@ -40,13 +40,9 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
 
     if (!checkResult()) {
       if (timeout) {
-        const timeoutPromise = new Promise<void>((resolve, reject) => {
-          if (timeout) {
-            setTimeout(() => reject(new TimeoutError(wait, timeout)), timeout)
-          } else {
-            resolve()
-          }
-        })
+        const timeoutPromise = callAfter(() => {
+          throw new TimeoutError(wait, timeout)
+        }, timeout)
 
         await act(() => Promise.race([waitForResult(), timeoutPromise]))
       } else {
