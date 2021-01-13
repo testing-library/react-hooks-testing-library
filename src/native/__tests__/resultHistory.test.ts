@@ -1,34 +1,39 @@
 import { renderHook } from '..'
 
 describe('result history tests', () => {
-  let count = 0
-  function useCounter() {
-    const result = count++
-    if (result === 2) {
+  function useValue(value: number) {
+    if (value === 2) {
       throw Error('expected')
     }
-    return result
+    return value
   }
 
   test('should capture all renders states of hook', () => {
-    const { result, rerender } = renderHook(() => useCounter())
+    const { result, rerender } = renderHook((value) => useValue(value), {
+      initialProps: 0
+    })
 
     expect(result.current).toEqual(0)
     expect(result.all).toEqual([0])
 
-    rerender()
+    rerender(1)
 
     expect(result.current).toBe(1)
     expect(result.all).toEqual([0, 1])
 
-    rerender()
+    rerender(2)
 
     expect(result.error).toEqual(Error('expected'))
     expect(result.all).toEqual([0, 1, Error('expected')])
 
-    rerender()
+    rerender(3)
 
     expect(result.current).toBe(3)
     expect(result.all).toEqual([0, 1, Error('expected'), 3])
+
+    rerender()
+
+    expect(result.current).toBe(3)
+    expect(result.all).toEqual([0, 1, Error('expected'), 3, 3])
   })
 })

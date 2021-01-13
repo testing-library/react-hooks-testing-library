@@ -20,8 +20,12 @@ function createServerRenderer<TProps, TResult>(
     render(props?: TProps) {
       renderProps = props
       act(() => {
-        const serverOutput = ReactDOMServer.renderToString(testHarness(props))
-        container.innerHTML = serverOutput
+        try {
+          const serverOutput = ReactDOMServer.renderToString(testHarness(props))
+          container.innerHTML = serverOutput
+        } catch (e: unknown) {
+          rendererProps.setError(e as Error)
+        }
       })
     },
     hydrate() {
