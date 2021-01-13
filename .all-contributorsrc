@@ -463,6 +463,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jpeyper",
+      "name": "Jonathan Peyper",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6560018?v=4",
+      "profile": "https://github.com/jpeyper",
+      "contributions": [
+        "review",
+        "code"
+      ]
     }
   ],
   "skipCi": true,
