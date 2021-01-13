@@ -108,13 +108,7 @@ describe('error hook tests', () => {
     })
   })
 
-  /*
-    These tests capture error cases that are not currently being caught successfully.
-    Refer to https://github.com/testing-library/react-hooks-testing-library/issues/308
-    for more details.
-  */
-  // eslint-disable-next-line jest/no-disabled-tests
-  describe.skip('effect', () => {
+  describe('effect', () => {
     test('should raise effect error', () => {
       const { result } = renderHook(() => useEffectError(true))
 
