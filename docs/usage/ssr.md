@@ -21,8 +21,6 @@ import { renderHook } from '@testing-library/react-hooks/server'
 This import has the same [API as the standard import](/reference/api) except the behaviour changes
 to use SSR semantics.
 
-## Example
-
 ## Hydration
 
 The result of rendering you hook is static are not interactive until it is hydrated into the DOM.
