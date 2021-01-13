@@ -231,6 +231,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/techanvil"><img src="https://avatars0.githubusercontent.com/u/18395600?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tom Rees-Herdman</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=techanvil" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/iqbal125"><img src="https://avatars2.githubusercontent.com/u/24860061?v=4?s=100" width="100px;" alt=""/><br /><sub><b>iqbal125</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=iqbal125" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/cliffzhaobupt"><img src="https://avatars3.githubusercontent.com/u/7374506?v=4?s=100" width="100px;" alt=""/><br /><sub><b>cliffzhaobupt</b></sub></a><br /><a href="#maintenance-cliffzhaobupt" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/jonkoops"><img src="https://avatars2.githubusercontent.com/u/695720?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jon Koops</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=jonkoops" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -454,6 +454,17 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "jonkoops",
+      "name": "Jon Koops",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/695720?v=4",
+      "profile": "https://github.com/jonkoops",
+      "contributions": [
+        "code"
+      ]
     }
-  ]
+  ],
+  "skipCi": true,
+  "contributorsPerLine": 7
 }
