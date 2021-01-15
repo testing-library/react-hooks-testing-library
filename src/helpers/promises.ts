@@ -7,4 +7,8 @@ async function callAfter(callback: () => void, ms: number) {
   callback()
 }
 
-export { resolveAfter, callAfter }
+function isPromise<T>(value: unknown): boolean {
+  return value !== undefined && typeof (value as PromiseLike<T>).then === 'function'
+}
+
+export { resolveAfter, callAfter, isPromise }
