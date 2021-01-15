@@ -1,11 +1,14 @@
 import ReactDOMServer from 'react-dom/server'
 import ReactDOM from 'react-dom'
-import { act } from 'react-dom/test-utils'
+import { act as baseAct } from 'react-dom/test-utils'
 
-import { RendererProps, RendererOptions } from '../types/react'
+import { RendererProps, RendererOptions, Act } from '../types/react'
 
 import { createRenderHook } from '../core'
+import { createActWrapper } from '../helpers/act'
 import { createTestHarness } from '../helpers/createTestHarness'
+
+const act = createActWrapper(baseAct)
 
 function createServerRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,

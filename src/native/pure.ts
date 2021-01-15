@@ -1,9 +1,12 @@
-import { act, create, ReactTestRenderer } from 'react-test-renderer'
+import { act as baseAct, create, ReactTestRenderer } from 'react-test-renderer'
 
-import { RendererProps, RendererOptions } from '../types/react'
+import { RendererProps, RendererOptions, Act } from '../types/react'
 
 import { createRenderHook } from '../core'
+import { createActWrapper } from '../helpers/act'
 import { createTestHarness } from '../helpers/createTestHarness'
+
+const act = createActWrapper(baseAct)
 
 function createNativeRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
