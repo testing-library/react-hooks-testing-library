@@ -9,12 +9,12 @@ import { createTestHarness } from '../helpers/createTestHarness'
 
 function createServerRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
-  { wrapper }: RendererOptions<TProps>
+  options: RendererOptions<TProps>
 ) {
   let renderProps: TProps | undefined
   let hydrated = false
   const container = document.createElement('div')
-  const testHarness = createTestHarness(rendererProps, wrapper, false)
+  const testHarness = createTestHarness(rendererProps, options, false)
 
   return {
     render(props?: TProps) {

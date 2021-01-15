@@ -8,10 +8,10 @@ import { createTestHarness } from '../helpers/createTestHarness'
 
 function createDomRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
-  { wrapper }: RendererOptions<TProps>
+  options: RendererOptions<TProps>
 ) {
   const container = document.createElement('div')
-  const testHarness = createTestHarness(rendererProps, wrapper)
+  const testHarness = createTestHarness(rendererProps, options)
 
   return {
     render(props?: TProps) {

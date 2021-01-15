@@ -142,4 +142,42 @@ describe('error hook tests', () => {
       expect(result.error).toBe(undefined)
     })
   })
+
+  describe('error output suppression', () => {
+    const originalConsoleError = console.error
+    const mockConsoleError = jest.fn()
+
+    beforeEach(() => {
+      console.error = mockConsoleError
+    })
+
+    afterEach(() => {
+      console.error = originalConsoleError
+    })
+
+    test('should suppress error output', () => {
+      const { result } = renderHook(() => useError(true), {
+        suppressErrorOutput: true
+      })
+
+      expect(result.error).toEqual(Error('expected'))
+      expect(mockConsoleError).toBeCalledTimes(0)
+    })
+
+    test('should not suppress error output', () => {
+      const { result } = renderHook(() => useError(true), {
+        suppressErrorOutput: false
+      })
+
+      expect(result.error).toEqual(Error('expected'))
+      expect(mockConsoleError).toBeCalledWith(
+        expect.stringMatching(/^Error: Uncaught \[Error: expected\]/),
+        expect.any(Error)
+      )
+      expect(mockConsoleError).toBeCalledWith(
+        expect.stringMatching(/^The above error occurred in the <TestComponent> component:/)
+      )
+      expect(mockConsoleError).toBeCalledTimes(2)
+    })
+  })
 })
