@@ -18,6 +18,7 @@
     "native",
     "server",
     "pure",
+    "disable-error-filtering.js",
     "dont-cleanup-after-each.js"
   ],
   "author": "Michael Peyper <mpeyper7@gmail.com>",

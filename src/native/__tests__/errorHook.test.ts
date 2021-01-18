@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { renderHook } from '..'
+import { renderHook, act } from '..'
 
 describe('error hook tests', () => {
   function useError(throwError?: boolean) {
@@ -140,6 +140,53 @@ describe('error hook tests', () => {
 
       expect(result.current).not.toBe(undefined)
       expect(result.error).toBe(undefined)
+    })
+  })
+
+  describe('error output suppression', () => {
+    test('should allow console.error to be mocked', async () => {
+      const consoleError = console.error
+      console.error = jest.fn()
+
+      try {
+        const { rerender, unmount } = renderHook(
+          (stage) => {
+            useEffect(() => {
+              console.error(`expected in effect`)
+              return () => {
+                console.error(`expected in unmount`)
+              }
+            }, [])
+            console.error(`expected in ${stage}`)
+          },
+          {
+            initialProps: 'render'
+          }
+        )
+
+        act(() => {
+          console.error('expected in act')
+        })
+
+        await act(async () => {
+          await new Promise((resolve) => setTimeout(resolve, 100))
+          console.error('expected in async act')
+        })
+
+        rerender('rerender')
+
+        unmount()
+
+        expect(console.error).toBeCalledWith('expected in render')
+        expect(console.error).toBeCalledWith('expected in effect')
+        expect(console.error).toBeCalledWith('expected in act')
+        expect(console.error).toBeCalledWith('expected in async act')
+        expect(console.error).toBeCalledWith('expected in rerender')
+        expect(console.error).toBeCalledWith('expected in unmount')
+        expect(console.error).toBeCalledTimes(6)
+      } finally {
+        console.error = consoleError
+      }
     })
   })
 })
