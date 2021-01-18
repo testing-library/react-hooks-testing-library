@@ -57,8 +57,8 @@ The standard import looks like:
 import { renderHook } from '@testing-library/react-hooks'
 ```
 
-> Note: The auto detection function may not work if tests are bundles before execution (e.g. to be
-> run in a browser)
+> Note: The auto detection function may not work if tests are being bundled (e.g. to be run in a
+> browser)
 
 ### Act
 
