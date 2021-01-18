@@ -34,7 +34,7 @@ describe('default renderer', () => {
     })
 
     const expectedMessage =
-      "Could not auto-detect a React renderer. Are you sure you've installed one of the following\n  - react-dom\n  - react-test-renderer"
+      "Could not auto-detect a React renderer. Are you sure you've installed one of the following\n  - react-dom\n  - react-test-renderer\nIf you are using a bundler, please update your imports to use a specific renderer.\nFor instructions see: https://react-hooks-testing-library.com/installation#being-specific"
 
     expect(() => require('..')).toThrowError(new Error(expectedMessage))
   })
