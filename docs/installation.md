@@ -17,7 +17,7 @@ npm install --save-dev @testing-library/react-hooks
 yarn add --dev @testing-library/react-hooks
 ```
 
-### Peer Dependencies
+### Peer dependencies
 
 `react-hooks-testing-library` does not come bundled with a version of
 [`react`](https://www.npmjs.com/package/react) to allow you to install the specific version you want
@@ -92,7 +92,31 @@ import { renderHook, act } from '@testing-library/react-hooks/native' // will us
 import { renderHook, act } from '@testing-library/react-hooks/server' // will use react-dom/server
 ```
 
-## Testing Framework
+## Pure imports
+
+Importing from any of the previously mentioned imports will cause some side effects in the test
+environment:
+
+1. `cleanup` is automatically called in an `afterEach` block
+2. `console.error` is patched to hide some React errors
+
+The specifics of these side effects are discussed in more detail in the
+[API reference](/reference/api).
+
+If you want to ensure the imports are free of side-effects, you can use the `pure` imports instead,
+which can be accessed by appending `/pure` to the end of any of the other imports:
+
+```ts
+import { renderHook, act } from '@testing-library/react-hooks/pure'
+
+import { renderHook, act } from '@testing-library/react-hooks/dom/pure'
+
+import { renderHook, act } from '@testing-library/react-hooks/native/pure'
+
+import { renderHook, act } from '@testing-library/react-hooks/server/pure'
+```
+
+## Testing framework
 
 In order to run tests, you will probably want to be using a test framework. If you have not already
 got one, we recommend using [Jest](https://jestjs.io/), but this library should work without issues

@@ -154,9 +154,8 @@ module.exports = {
 }
 ```
 
-Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` instead
-of the regular imports. This applies to any of our export methods documented in
-[Rendering](/installation#being-specific).
+Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` (or any
+of the [other non-pure imports](/installation#pure-imports)) instead of the regular imports.
 
 ```diff
 - import { renderHook, cleanup, act } from '@testing-library/react-hooks'
@@ -282,10 +281,11 @@ used to wrap the hook call includes an
 [significant amount of output noise](https://reactjs.org/docs/error-boundaries.html#component-stack-traces)
 in tests.
 
-To keep test output clean, we patch `console.error` when `renderHook` is called to filter out the
-unnecessary logging and restore the original version during cleanup. This side-effect can affect
-tests that also patch `console.error` (e.g. to assert a specific error message get logged) by
-replacing their custom implementation as well.
+To keep test output clean, we patch `console.error` when importing from
+`@testing-library/react-hooks` (or any of the [other non-pure imports](/installation#pure-imports))
+to filter out the unnecessary logging and restore the original version during cleanup. This
+side-effect can affect tests that also patch `console.error` (e.g. to assert a specific error
+message get logged) by replacing their custom implementation as well.
 
 ### Disabling `console.error` filtering
 
@@ -304,9 +304,8 @@ module.exports = {
 }
 ```
 
-Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` instead
-of the regular imports. This applies to any of our export methods documented in
-[Rendering](/installation#being-specific).
+Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` (or any
+of the [other non-pure imports](/installation#pure-imports)) instead of the regular imports.
 
 ```diff
 - import { renderHook, cleanup, act } from '@testing-library/react-hooks'
