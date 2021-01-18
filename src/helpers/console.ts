@@ -1,6 +1,16 @@
 import filterConsole from 'filter-console'
 
+let errorOutputSuppressionEnabled = false
+
+function enableErrorOutputSuppression() {
+  errorOutputSuppressionEnabled = true
+}
+
 function suppressErrorOutput() {
+  if (!errorOutputSuppressionEnabled || process.env.RHTL_DISABLE_ERROR_FILTERING) {
+    return () => {}
+  }
+
   // The error output from error boundaries is notoriously difficult to suppress.  To save
   // our users from having to work it out, we crudely suppress the output matching the patterns
   // below.  For more information, see these issues:
@@ -19,4 +29,4 @@ function suppressErrorOutput() {
   )
 }
 
-export { suppressErrorOutput }
+export { enableErrorOutputSuppression, suppressErrorOutput }
