@@ -6,7 +6,7 @@ import { ReactHooksRenderer } from '../../types/react'
 // then we DON'T auto-wire up the afterEach for folks
 describe('skip auto cleanup (no afterEach) tests', () => {
   let cleanupCalled = false
-  let renderHook: (arg0: () => void) => void
+  let renderHook: ReactHooksRenderer['renderHook']
 
   beforeAll(() => {
     // @ts-expect-error Turning off AfterEach -- ignore Jest LifeCycle Type
