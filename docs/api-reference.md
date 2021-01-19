@@ -108,7 +108,7 @@ called.
 ### `...asyncUtils`
 
 Utilities to assist with testing asynchronous behaviour. See the
-[Async Utils](/reference/api#async-utilities) section for more details.
+[Async Utils](https://react-hooks-testing-library.com/reference/api#async-utilities) section for more details.
 
 ---
 
