@@ -7,7 +7,7 @@ function enableErrorOutputSuppression() {
     typeof afterEach === 'function' &&
     !process.env.RHTL_DISABLE_ERROR_FILTERING
   ) {
-    let restoreConsole: (() => void) | null = null
+    let restoreConsole: () => void
 
     beforeEach(() => {
       restoreConsole = filterConsole(
