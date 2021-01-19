@@ -77,8 +77,8 @@ test('should increment counter', () => {
 ```
 
 Anything that causes the hook's state to change will not work until `hydrate` is called. This
-includes both the [`rerender`](http://localhost:3000/reference/api#rerender) and
-[`unmount`](http://localhost:3000/reference/api#unmount) functionality.
+includes both the [`rerender`](/reference/api#rerender) and [`unmount`](/reference/api#unmount)
+functionality.
 
 ### Effects
 
