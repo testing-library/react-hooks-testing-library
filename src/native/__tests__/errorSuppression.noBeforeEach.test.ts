@@ -6,13 +6,11 @@ describe('error output suppression (noBeforeEach) tests', () => {
   beforeAll(() => {
     // @ts-expect-error Turning off BeforeEach -- ignore Jest LifeCycle Type
     beforeEach = false
+    require('..')
   })
 
-  describe('first', () => {
-    test('should not patch console.error', () => {
-      require('..')
-      expect(console.error).toBe(originalConsoleError)
-    })
+  test('should not patch console.error', () => {
+    expect(console.error).toBe(originalConsoleError)
   })
 })
 
