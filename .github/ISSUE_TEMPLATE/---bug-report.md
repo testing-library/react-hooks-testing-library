@@ -20,8 +20,9 @@ assignees: ''
 -->
 
 - `react-hooks-testing-library` version:
-- `react-test-renderer` version:
 - `react` version:
+- `react-dom` version (if applicable):
+- `react-test-renderer` version (if applicable):
 - `node` version:
 - `npm` (or `yarn`) version:
 
