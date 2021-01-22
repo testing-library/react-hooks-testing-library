@@ -153,9 +153,8 @@ module.exports = {
 }
 ```
 
-Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` instead
-of the regular imports. This applys to any of our export methods documented in
-[Rendering](/installation#being-specific).
+Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` (or any
+of the [other non-pure imports](/installation#pure-imports)) instead of the regular imports.
 
 ```diff
 - import { renderHook, cleanup, act } from '@testing-library/react-hooks'
@@ -270,3 +269,49 @@ Interval checking is disabled if `interval` is not provided as a `falsy`.
 _Default: 1000_
 
 The maximum amount of time in milliseconds (ms) to wait.
+
+---
+
+## `console.error`
+
+In order to catch errors that are produced in all parts of the hook's lifecycle, the test harness
+used to wrap the hook call includes an
+[Error Boundary](https://reactjs.org/docs/error-boundaries.html) which causes a
+[significant amount of output noise](https://reactjs.org/docs/error-boundaries.html#component-stack-traces)
+in tests.
+
+To keep test output clean, we patch `console.error` when importing from
+`@testing-library/react-hooks` (or any of the [other non-pure imports](/installation#pure-imports))
+to filter out the unnecessary logging and restore the original version during cleanup. This
+side-effect can affect tests that also patch `console.error` (e.g. to assert a specific error
+message get logged) by replacing their custom implementation as well.
+
+### Disabling `console.error` filtering
+
+Importing `@testing-library/react-hooks/disable-error-filtering.js` in test setup files disable the
+error filtering feature and not patch `console.error` in any way.
+
+For example, in [Jest](https://jestjs.io/) this can be added to your
+[Jest config](https://jestjs.io/docs/configuration):
+
+```js
+module.exports = {
+  setupFilesAfterEnv: [
+    '@testing-library/react-hooks/disable-error-filtering.js'
+    // other setup files
+  ]
+}
+```
+
+Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` (or any
+of the [other non-pure imports](/installation#pure-imports)) instead of the regular imports.
+
+```diff
+- import { renderHook, cleanup, act } from '@testing-library/react-hooks'
++ import { renderHook, cleanup, act } from '@testing-library/react-hooks/pure'
+```
+
+If neither of these approaches are suitable, setting the `RHTL_DISABLE_ERROR_FILTERING` environment
+variable to `true` before importing `@testing-library/react-hooks` will also disable this feature.
+
+> Please note that this may result is a significant amount of additional logging in you test output.
