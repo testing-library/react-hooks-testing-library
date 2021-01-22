@@ -10,7 +10,7 @@ assignees: ''
 
 🛑Consider whether Github issues is the best place to ask this question.  Perhaps some of the support channels will give you better help, faster:
 
-- Discord https://discord.gg/c6JN9fM
+- Discord https://discord.gg/testing-library
 - Stack Overflow https://stackoverflow.com/questions/tagged/react-hooks-testing-library
 
 * Please fill out this template with all the relevant information so we can
