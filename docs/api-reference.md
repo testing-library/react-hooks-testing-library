@@ -12,7 +12,6 @@ route: '/reference/api'
 - [`cleanup`](/reference/api#cleanup)
 - [`addCleanup`](/reference/api#addcleanup)
 - [`removeCleanup`](/reference/api#removecleanup)
-- [`console.error`](/reference/api#consoleerror)
 
 ---
 
