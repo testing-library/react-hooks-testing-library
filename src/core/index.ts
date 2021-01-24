@@ -19,7 +19,7 @@ function resultContainer<TValue>() {
       return value as TValue
     },
     get error() {
-      const { error } = results[results.length - 1]
+      const { error } = results[results.length - 1] ?? {}
       return error
     }
   }

@@ -52,4 +52,10 @@ describe('suspense hook tests', () => {
 
     expect(result.current).toBe(undefined)
   })
+
+  test('should return undefined if error is requested before suspension has resolved', async () => {
+    const { result } = renderHook(() => useFetchName(true))
+
+    expect(result.error).toBe(undefined)
+  })
 })
