@@ -474,6 +474,15 @@
         "review",
         "code"
       ]
+    },
+    {
+      "login": "mrseanbaines",
+      "name": "Sean Baines",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24367010?v=4",
+      "profile": "https://seanbaines.com/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "skipCi": true,
