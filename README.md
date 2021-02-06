@@ -42,6 +42,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [The problem](#the-problem)
 - [The solution](#the-solution)
 - [When to use this library](#when-to-use-this-library)
@@ -232,6 +233,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/cliffzhaobupt"><img src="https://avatars3.githubusercontent.com/u/7374506?v=4?s=100" width="100px;" alt=""/><br /><sub><b>cliffzhaobupt</b></sub></a><br /><a href="#maintenance-cliffzhaobupt" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://github.com/jonkoops"><img src="https://avatars2.githubusercontent.com/u/695720?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jon Koops</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=jonkoops" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jpeyper"><img src="https://avatars2.githubusercontent.com/u/6560018?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jonathan Peyper</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/pulls?q=is%3Apr+reviewed-by%3Ajpeyper" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=jpeyper" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://seanbaines.com/"><img src="https://avatars.githubusercontent.com/u/24367010?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sean Baines</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=mrseanbaines" title="Documentation">📖</a></td>
   </tr>
 </table>
 
