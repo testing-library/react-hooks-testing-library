@@ -314,4 +314,5 @@ of the [other non-pure imports](/installation#pure-imports)) instead of the regu
 If neither of these approaches are suitable, setting the `RHTL_DISABLE_ERROR_FILTERING` environment
 variable to `true` before importing `@testing-library/react-hooks` will also disable this feature.
 
-> Please note that this may result is a significant amount of additional logging in you test output.
+> Please note that this may result in a significant amount of additional logging in your test
+> output.
