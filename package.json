@@ -53,7 +53,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
-    "all-contributors-cli": "6.19.0",
+    "all-contributors-cli": "6.20.0",
     "codecov": "3.8.1",
     "docz": "2.3.1",
     "docz-theme-default": "1.2.0",
