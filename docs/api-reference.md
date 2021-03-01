@@ -12,6 +12,7 @@ route: '/reference/api'
 - [`cleanup`](/reference/api#cleanup)
 - [`addCleanup`](/reference/api#addcleanup)
 - [`removeCleanup`](/reference/api#removecleanup)
+- [`suppressErrorOutput`](/reference/api#manually-suppress-output)
 
 ---
 
@@ -286,6 +287,10 @@ to filter out the unnecessary logging and restore the original version during cl
 side-effect can affect tests that also patch `console.error` (e.g. to assert a specific error
 message get logged) by replacing their custom implementation as well.
 
+> Please note that this is done automatically if the testing framework you're using supports the
+> `beforeEach` and `afterEach` global (like Jest, mocha and Jasmine). If not, you will need to do
+> [manual suppression](/reference/api#manually-suppress-output) around the test run.
+
 ### Disabling `console.error` filtering
 
 Importing `@testing-library/react-hooks/disable-error-filtering.js` in test setup files disable the
@@ -303,8 +308,8 @@ module.exports = {
 }
 ```
 
-Alternatively, you can change your test to import from `@testing-library/react-hooks/pure` (or any
-of the [other non-pure imports](/installation#pure-imports)) instead of the regular imports.
+Alternatively, you can change your test to import from `@testing-library/react-hooks` (or any of the
+[other non-pure imports](/installation#pure-imports)) instead of the regular imports.
 
 ```diff
 - import { renderHook, cleanup, act } from '@testing-library/react-hooks'
@@ -316,3 +321,25 @@ variable to `true` before importing `@testing-library/react-hooks` will also dis
 
 > Please note that this may result in a significant amount of additional logging in your test
 > output.
+
+### Manually suppress output
+
+If you are using [a pure import](/installation#pure-imports), you are running your tests in an
+environment that does not support `beforeEach` and `afterEach`, or if the automatic suppression is
+not available to you for some other reason, then you can use the `suppressErrorOutput` export to
+manually start and top suppress the output:
+
+```ts
+import { renderHook, suppressErrorOutput } from '@testing-library/react-hooks/pure'
+
+test('should handle thrown error', () => {
+  const restoreConsole = suppressErrorOutput()
+
+  try {
+    const { result } = renderHook(() => useCounter())
+    expect(result.error).toBeDefined()
+  } finally {
+    restoreConsole()
+  }
+})
+```

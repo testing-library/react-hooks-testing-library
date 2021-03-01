@@ -26,6 +26,7 @@ export type ReactHooksRenderer = {
   cleanup: () => void
   addCleanup: (callback: CleanupCallback) => () => void
   removeCleanup: (callback: CleanupCallback) => void
+  suppressErrorOutput: () => () => void
 }
 
 export * from '.'

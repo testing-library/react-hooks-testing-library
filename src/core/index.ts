@@ -2,6 +2,7 @@ import { CreateRenderer, Renderer, RenderResult, RenderHookOptions } from '../ty
 
 import { asyncUtils } from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
+import { suppressErrorOutput } from './console'
 
 function resultContainer<TValue>() {
   const results: Array<{ value?: TValue; error?: Error }> = []
@@ -81,4 +82,4 @@ function createRenderHook<
   return renderHook
 }
 
-export { createRenderHook, cleanup, addCleanup, removeCleanup }
+export { createRenderHook, cleanup, addCleanup, removeCleanup, suppressErrorOutput }
