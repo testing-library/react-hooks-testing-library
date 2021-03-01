@@ -5,10 +5,10 @@ describe('error output suppression (disabled) tests', () => {
 
   beforeAll(() => {
     process.env.RHTL_DISABLE_ERROR_FILTERING = 'true'
+    require('..')
   })
 
   test('should not patch console.error', () => {
-    require('..')
     expect(console.error).toBe(originalConsoleError)
   })
 })

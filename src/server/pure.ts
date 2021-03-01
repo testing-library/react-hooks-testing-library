@@ -61,6 +61,6 @@ const renderHook = createRenderHook(createServerRenderer)
 
 export { renderHook, act }
 
-export { cleanup, addCleanup, removeCleanup } from '../core'
+export { cleanup, addCleanup, removeCleanup, suppressErrorOutput } from '../core'
 
 export * from '../types/react'
