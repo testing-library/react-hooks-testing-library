@@ -483,6 +483,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "mvasin",
+      "name": "Mikhail Vasin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12434833?v=4",
+      "profile": "https://www.linkedin.com/in/mike-vasin/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "skipCi": true,
