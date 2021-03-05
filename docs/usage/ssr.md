@@ -23,7 +23,7 @@ to use SSR semantics.
 
 ## Hydration
 
-The result of rendering you hook is static are not interactive until it is hydrated into the DOM.
+The result of rendering your hook is static and not interactive until it is hydrated into the DOM.
 This can be done using the `hydrate` function that is returned from `renderHook`.
 
 Consider the `useCounter` example from the [Basic Hooks section](/usage/basic-hooks):
