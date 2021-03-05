@@ -236,6 +236,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://seanbaines.com/"><img src="https://avatars.githubusercontent.com/u/24367010?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sean Baines</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=mrseanbaines" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/mike-vasin/"><img src="https://avatars.githubusercontent.com/u/12434833?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mikhail Vasin</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=mvasin" title="Documentation">📖</a></td>
   </tr>
 </table>
 
