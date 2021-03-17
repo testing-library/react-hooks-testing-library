@@ -8,7 +8,9 @@
     "import/no-unresolved": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/no-unnecessary-condition": "off",
-    "@typescript-eslint/no-invalid-void-type": "off"
+    "@typescript-eslint/no-invalid-void-type": "off",
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
+    "@typescript-eslint/sort-type-union-intersection-members": "off"
   },
   "parserOptions": {
     "project": ["./tsconfig.json", "./scripts/tsconfig.json"]
