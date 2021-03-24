@@ -492,6 +492,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "agjs",
+      "name": "Aleksandar Grbic",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7226555?v=4",
+      "profile": "https://aleksandar.xyz",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "skipCi": true,
