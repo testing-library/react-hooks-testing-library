@@ -501,6 +501,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "yoniholmes",
+      "name": "Jonathan Holmes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/184589?v=4",
+      "profile": "https://github.com/yoniholmes",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "skipCi": true,

@@ -42,7 +42,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [The problem](#the-problem)
 - [The solution](#the-solution)
 - [When to use this library](#when-to-use-this-library)
@@ -238,6 +237,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://seanbaines.com/"><img src="https://avatars.githubusercontent.com/u/24367010?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sean Baines</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=mrseanbaines" title="Documentation">📖</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/mike-vasin/"><img src="https://avatars.githubusercontent.com/u/12434833?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mikhail Vasin</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=mvasin" title="Documentation">📖</a></td>
     <td align="center"><a href="https://aleksandar.xyz"><img src="https://avatars.githubusercontent.com/u/7226555?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aleksandar Grbic</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=agjs" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/yoniholmes"><img src="https://avatars.githubusercontent.com/u/184589?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jonathan Holmes</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=yoniholmes" title="Code">💻</a></td>
   </tr>
 </table>
 
