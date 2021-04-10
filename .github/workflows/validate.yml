@@ -17,19 +17,17 @@ jobs:
     if: ${{ !contains(github.head_ref, 'all-contributors') }}
     strategy:
       matrix:
-        node: [10.13, 12, 14, 15]
+        node: [10.13, 10, 12, 14, 15]
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.8.0
-        with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
 
@@ -56,14 +54,12 @@ jobs:
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.8.0
-        with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v2
         with:
           node-version: 14
 
