@@ -510,6 +510,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "MichaelDeBoey",
+      "name": "Michaël De Boey",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6643991?v=4",
+      "profile": "https://michaeldeboey.be",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "skipCi": true,
