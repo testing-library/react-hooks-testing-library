@@ -2,7 +2,7 @@ import ReactDOMServer from 'react-dom/server'
 import ReactDOM from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { RendererProps, RendererOptions } from '../types/react'
+import { RendererOptions, RendererProps } from '../types/react'
 
 import { createRenderHook } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
@@ -12,8 +12,8 @@ function createServerRenderer<TProps, TResult>(
   { wrapper }: RendererOptions<TProps>
 ) {
   let renderProps: TProps | undefined
-  let hydrated = false
-  const container = document.createElement('div')
+  let container: HTMLDivElement | undefined
+  let serverOutput: string = ''
   const testHarness = createTestHarness(rendererProps, wrapper, false)
 
   return {
@@ -21,35 +21,35 @@ function createServerRenderer<TProps, TResult>(
       renderProps = props
       act(() => {
         try {
-          const serverOutput = ReactDOMServer.renderToString(testHarness(props))
-          container.innerHTML = serverOutput
+          serverOutput = ReactDOMServer.renderToString(testHarness(props))
         } catch (e: unknown) {
           rendererProps.setError(e as Error)
         }
       })
     },
     hydrate() {
-      if (hydrated) {
+      if (container) {
         throw new Error('The component can only be hydrated once')
       } else {
+        container = document.createElement('div')
+        container.innerHTML = serverOutput
         act(() => {
-          ReactDOM.hydrate(testHarness(renderProps), container)
+          ReactDOM.hydrate(testHarness(renderProps), container!)
         })
-        hydrated = true
       }
     },
     rerender(props?: TProps) {
-      if (!hydrated) {
+      if (!container) {
         throw new Error('You must hydrate the component before you can rerender')
       }
       act(() => {
-        ReactDOM.render(testHarness(props), container)
+        ReactDOM.render(testHarness(props), container!)
       })
     },
     unmount() {
-      if (hydrated) {
+      if (container) {
         act(() => {
-          ReactDOM.unmountComponentAtNode(container)
+          ReactDOM.unmountComponentAtNode(container!)
         })
       }
     },

@@ -519,6 +519,16 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "xobotyi",
+      "name": "Anton Zinovyev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6178739?v=4",
+      "profile": "https://github.com/xobotyi",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "skipCi": true,

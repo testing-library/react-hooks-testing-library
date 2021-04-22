@@ -239,6 +239,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://aleksandar.xyz"><img src="https://avatars.githubusercontent.com/u/7226555?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aleksandar Grbic</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=agjs" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/yoniholmes"><img src="https://avatars.githubusercontent.com/u/184589?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jonathan Holmes</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=yoniholmes" title="Code">💻</a></td>
     <td align="center"><a href="https://michaeldeboey.be"><img src="https://avatars.githubusercontent.com/u/6643991?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michaël De Boey</b></sub></a><br /><a href="#maintenance-MichaelDeBoey" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/xobotyi"><img src="https://avatars.githubusercontent.com/u/6178739?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anton Zinovyev</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/issues?q=author%3Axobotyi" title="Bug reports">🐛</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=xobotyi" title="Code">💻</a></td>
   </tr>
 </table>
 
