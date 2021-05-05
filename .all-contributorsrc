@@ -538,6 +538,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "MatanBobi",
+      "name": "Matan Borenkraout",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12711091?v=4",
+      "profile": "https://matan.io",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "skipCi": true,
