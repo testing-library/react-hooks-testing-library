@@ -529,6 +529,15 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "marianna-exelate",
+      "name": "marianna-exelate",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24763042?v=4",
+      "profile": "https://github.com/marianna-exelate",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "skipCi": true,
