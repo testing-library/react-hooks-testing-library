@@ -6,7 +6,7 @@
     height="80"
     width="80"
     alt="ram"
-    src="https://raw.githubusercontent.com/testing-library/react-hooks-testing-library/master/public/ram.png"
+    src="https://raw.githubusercontent.com/testing-library/react-hooks-testing-library/main/public/ram.png"
   />
 </a>
 
@@ -24,11 +24,11 @@
 [![codecov](https://img.shields.io/codecov/c/github/testing-library/react-hooks-testing-library.svg?style=flat-square)](https://codecov.io/gh/testing-library/react-hooks-testing-library)
 [![version](https://img.shields.io/npm/v/@testing-library/react-hooks.svg?style=flat-square)](https://www.npmjs.com/package/@testing-library/react-hooks)
 [![downloads](https://img.shields.io/npm/dm/@testing-library/react-hooks.svg?style=flat-square)](http://www.npmtrends.com/@testing-library/react-hooks)
-[![MIT License](https://img.shields.io/npm/l/@testing-library/react-hooks.svg?style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/blob/master/LICENSE.md)
+[![MIT License](https://img.shields.io/npm/l/@testing-library/react-hooks.svg?style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/blob/main/LICENSE.md)
 
 [![All Contributors](https://img.shields.io/github/all-contributors/testing-library/react-hooks-testing-library?color=orange&style=flat-square)](#contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/blob/master/CODE_OF_CONDUCT.md)
+[![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/testing-library/react-hooks-testing-library/blob/main/CODE_OF_CONDUCT.md)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9a8f27a5-df38-4910-a248-4908b1ba29a7/deploy-status)](https://app.netlify.com/sites/react-hooks-testing-library/deploys)
 [![Discord](https://img.shields.io/discord/723559267868737556.svg?color=7389D8&labelColor=6A7EC2&logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/testing-library)
 
@@ -240,6 +240,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/yoniholmes"><img src="https://avatars.githubusercontent.com/u/184589?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jonathan Holmes</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=yoniholmes" title="Code">💻</a></td>
     <td align="center"><a href="https://michaeldeboey.be"><img src="https://avatars.githubusercontent.com/u/6643991?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michaël De Boey</b></sub></a><br /><a href="#maintenance-MichaelDeBoey" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://github.com/xobotyi"><img src="https://avatars.githubusercontent.com/u/6178739?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anton Zinovyev</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/issues?q=author%3Axobotyi" title="Bug reports">🐛</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=xobotyi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/kiragona"><img src="https://avatars.githubusercontent.com/u/4787291?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marianna Etelson</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=kiragona" title="Code">💻</a></td>
   </tr>
 </table>
 

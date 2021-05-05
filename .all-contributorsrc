@@ -529,6 +529,15 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "kiragona",
+      "name": "Marianna Etelson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4787291?v=4",
+      "profile": "https://github.com/kiragona",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "skipCi": true,
