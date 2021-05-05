@@ -242,6 +242,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/xobotyi"><img src="https://avatars.githubusercontent.com/u/6178739?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anton Zinovyev</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/issues?q=author%3Axobotyi" title="Bug reports">🐛</a> <a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=xobotyi" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/marianna-exelate"><img src="https://avatars.githubusercontent.com/u/24763042?v=4?s=100" width="100px;" alt=""/><br /><sub><b>marianna-exelate</b></sub></a><br /><a href="#infra-marianna-exelate" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://matan.io"><img src="https://avatars.githubusercontent.com/u/12711091?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matan Borenkraout</b></sub></a><br /><a href="#maintenance-MatanBobi" title="Maintenance">🚧</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
