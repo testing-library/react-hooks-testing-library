@@ -547,6 +547,15 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "andyrooger",
+      "name": "andyrooger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/420834?v=4",
+      "profile": "https://github.com/andyrooger",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "skipCi": true,

@@ -64,8 +64,8 @@ export type RenderHookOptions<TProps> = {
 }
 
 export type Act = {
-  (callback: () => void | undefined): void
   (callback: () => Promise<void | undefined>): Promise<undefined>
+  (callback: () => void | undefined): void
 }
 
 export type CleanupCallback = () => Promise<void> | void
