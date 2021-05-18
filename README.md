@@ -244,6 +244,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://matan.io"><img src="https://avatars.githubusercontent.com/u/12711091?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matan Borenkraout</b></sub></a><br /><a href="#maintenance-MatanBobi" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/andyrooger"><img src="https://avatars.githubusercontent.com/u/420834?v=4?s=100" width="100px;" alt=""/><br /><sub><b>andyrooger</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=andyrooger" title="Code">💻</a></td>
   </tr>
 </table>
 
