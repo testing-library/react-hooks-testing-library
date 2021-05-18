@@ -4,6 +4,9 @@
   "description": "Simple and complete React hooks testing utilities that encourage good testing practices.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=12"
+  },
   "keywords": [
     "testing",
     "react",
