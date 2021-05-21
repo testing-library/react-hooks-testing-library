@@ -3,6 +3,7 @@ import { ComponentType } from 'react'
 import {
   RenderHookOptions as BaseRenderHookOptions,
   RenderHookResult,
+  ServerRenderHookResult,
   Act,
   CleanupCallback
 } from '.'
@@ -27,6 +28,13 @@ export type ReactHooksRenderer = {
   addCleanup: (callback: CleanupCallback) => () => void
   removeCleanup: (callback: CleanupCallback) => void
   suppressErrorOutput: () => () => void
+}
+
+export type ReactHooksServerRenderer = Omit<ReactHooksRenderer, 'renderHook'> & {
+  renderHook: <TProps, TResult>(
+    callback: (props: TProps) => TResult,
+    options?: RenderHookOptions<TProps>
+  ) => ServerRenderHookResult<TProps, TResult>
 }
 
 export * from '.'

@@ -18,9 +18,17 @@ function removeCleanup(callback: CleanupCallback) {
   cleanupCallbacks = cleanupCallbacks.filter((cb) => cb !== callback)
 }
 
+function skipAutoCleanup() {
+  try {
+    return !!process.env.RHTL_SKIP_AUTO_CLEANUP
+  } catch {
+    return false
+  }
+}
+
 function autoRegisterCleanup() {
   // Automatically registers cleanup in supported testing frameworks
-  if (typeof afterEach === 'function' && !process.env.RHTL_SKIP_AUTO_CLEANUP) {
+  if (typeof afterEach === 'function' && !skipAutoCleanup()) {
     afterEach(async () => {
       await cleanup()
     })

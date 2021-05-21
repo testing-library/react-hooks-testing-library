@@ -2,9 +2,10 @@ import { useEffect } from 'react'
 
 import { ReactHooksServerRenderer } from '../../types/react'
 
-// This verifies that if pure imports are used
-// then we DON'T auto-wire up the afterEach for folks
-describe('skip auto cleanup (pure) tests', () => {
+// This verifies that if process.env is unavailable
+// then we still auto-wire up the afterEach for folks
+describe('skip auto cleanup (no process.env) tests', () => {
+  const originalEnv = process.env
   const cleanups: Record<string, boolean> = {
     ssr: false,
     hydrated: false
@@ -12,7 +13,17 @@ describe('skip auto cleanup (pure) tests', () => {
   let renderHook: ReactHooksServerRenderer['renderHook']
 
   beforeAll(() => {
-    renderHook = (require('../pure') as ReactHooksServerRenderer).renderHook
+    process.env = {
+      ...process.env,
+      get RHTL_SKIP_AUTO_CLEANUP(): string | undefined {
+        throw new Error('expected')
+      }
+    }
+    renderHook = (require('..') as ReactHooksServerRenderer).renderHook
+  })
+
+  afterAll(() => {
+    process.env = originalEnv
   })
 
   test('first', () => {
@@ -32,6 +43,6 @@ describe('skip auto cleanup (pure) tests', () => {
 
   test('second', () => {
     expect(cleanups.ssr).toBe(false)
-    expect(cleanups.hydrated).toBe(false)
+    expect(cleanups.hydrated).toBe(true)
   })
 })
