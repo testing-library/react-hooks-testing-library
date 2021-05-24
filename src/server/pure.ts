@@ -1,5 +1,5 @@
-import ReactDOMServer from 'react-dom/server'
-import ReactDOM from 'react-dom'
+import * as ReactDOMServer from 'react-dom/server'
+import * as ReactDOM from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
 import { RendererOptions, RendererProps } from '../types/react'

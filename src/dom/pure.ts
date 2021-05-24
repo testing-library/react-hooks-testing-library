@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom'
+import * as ReactDOM from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
 import { RendererProps, RendererOptions } from '../types/react'

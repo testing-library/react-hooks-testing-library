@@ -9,7 +9,7 @@ function hasDependency(name: string) {
   try {
     require(name)
     return true
-  } catch (error) {
+  } catch {
     return false
   }
 }

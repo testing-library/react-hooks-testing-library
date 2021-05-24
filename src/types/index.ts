@@ -5,6 +5,10 @@ export type Renderer<TProps> = {
   act: Act
 }
 
+export type ServerRenderer<TProps> = Renderer<TProps> & {
+  hydrate: () => void
+}
+
 export type RendererProps<TProps, TResult> = {
   callback: (props: TProps) => TResult
   setError: (error: Error) => void
@@ -58,6 +62,12 @@ export type RenderHookResult<
   Omit<Renderer<TProps>, 'render' | 'act'> &
   Omit<TRenderer, keyof Renderer<TProps>> &
   AsyncUtils
+
+export type ServerRenderHookResult<
+  TProps,
+  TValue,
+  TRenderer extends ServerRenderer<TProps> = ServerRenderer<TProps>
+> = RenderHookResult<TProps, TValue, TRenderer>
 
 export type RenderHookOptions<TProps> = {
   initialProps?: TProps
