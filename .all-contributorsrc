@@ -556,6 +556,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "bdwain",
+      "name": "Bryan Wain",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3982094?v=4",
+      "profile": "https://github.com/bdwain",
+      "contributions": [
+        "bug",
+        "review"
+      ]
     }
   ],
   "skipCi": true,
