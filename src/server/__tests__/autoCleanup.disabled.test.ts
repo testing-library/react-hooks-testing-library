@@ -9,12 +9,8 @@ describe('skip auto cleanup (disabled) tests', () => {
     ssr: false,
     hydrated: false
   }
-  let renderHook: ReactHooksServerRenderer['renderHook']
-
-  beforeAll(() => {
-    process.env.RHTL_SKIP_AUTO_CLEANUP = 'true'
-    renderHook = (require('..') as ReactHooksServerRenderer).renderHook
-  })
+  process.env.RHTL_SKIP_AUTO_CLEANUP = 'true'
+  const renderHook = (require('..') as ReactHooksServerRenderer).renderHook
 
   test('first', () => {
     const hookWithCleanup = (name: string) => {

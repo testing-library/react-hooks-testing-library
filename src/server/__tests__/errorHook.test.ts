@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { renderHook, act } from '..'
+import { renderHook } from '..'
 
 describe('error hook tests', () => {
   function useError(throwError?: boolean) {
