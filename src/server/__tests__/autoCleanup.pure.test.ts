@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-
-import { ReactHooksServerRenderer } from '../../types/react'
+import { renderHook } from '../pure'
 
 // This verifies that if pure imports are used
 // then we DON'T auto-wire up the afterEach for folks
@@ -9,11 +8,6 @@ describe('skip auto cleanup (pure) tests', () => {
     ssr: false,
     hydrated: false
   }
-  let renderHook: ReactHooksServerRenderer['renderHook']
-
-  beforeAll(() => {
-    renderHook = (require('../pure') as ReactHooksServerRenderer).renderHook
-  })
 
   test('first', () => {
     const hookWithCleanup = (name: string) => {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { renderHook, act } from '..'
+import { renderHook } from '..'
 
 describe('error hook tests', () => {
   function useError(throwError?: boolean) {
@@ -109,7 +109,7 @@ describe('error hook tests', () => {
   })
 
   describe('effect', () => {
-    test('should raise effect error', () => {
+    test('this one - should raise effect error', () => {
       const { result } = renderHook(() => useEffectError(true))
 
       expect(() => {
@@ -117,7 +117,7 @@ describe('error hook tests', () => {
       }).toThrow(Error('expected'))
     })
 
-    test('should capture effect error', () => {
+    test('this one - should capture effect error', () => {
       const { result } = renderHook(() => useEffectError(true))
       expect(result.error).toEqual(Error('expected'))
     })

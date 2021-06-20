@@ -1,14 +1,11 @@
 import { useEffect } from 'react'
-
-import { ReactHooksRenderer } from '../../types/react'
+import { renderHook, act, suppressErrorOutput } from '..'
 
 describe('error output suppression tests', () => {
+  const consoleError = console.error
+
   test('should not suppress relevant errors', () => {
-    const consoleError = console.error
     console.error = jest.fn()
-
-    const { suppressErrorOutput } = require('..') as ReactHooksRenderer
-
     try {
       const restoreConsole = suppressErrorOutput()
 
@@ -28,8 +25,6 @@ describe('error output suppression tests', () => {
   })
 
   test('should allow console.error to be mocked', async () => {
-    const { renderHook, act } = require('..') as ReactHooksRenderer
-    const consoleError = console.error
     console.error = jest.fn()
 
     try {

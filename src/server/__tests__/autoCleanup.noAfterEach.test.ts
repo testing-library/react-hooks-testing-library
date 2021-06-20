@@ -9,13 +9,9 @@ describe('skip auto cleanup (no afterEach) tests', () => {
     ssr: false,
     hydrated: false
   }
-  let renderHook: ReactHooksServerRenderer['renderHook']
-
-  beforeAll(() => {
-    // @ts-expect-error Turning off AfterEach -- ignore Jest LifeCycle Type
-    afterEach = false
-    renderHook = (require('..') as ReactHooksServerRenderer).renderHook
-  })
+  // @ts-expect-error Turning off AfterEach -- ignore Jest LifeCycle Type
+  afterEach = false
+  const renderHook = (require('..') as ReactHooksServerRenderer).renderHook
 
   test('first', () => {
     const hookWithCleanup = (name: string) => {
