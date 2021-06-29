@@ -32,10 +32,10 @@ function requireRenderer<TRendererType extends ReactHooksRenderer = ReactHooksRe
   return require(requirePath) as TRendererType
 }
 
-function hydratedServerRenderer(pure: boolean): ReactHooksRenderer {
-  const { renderHook, ...otherImports } = requireRenderer<ReactHooksServerRenderer>(
-    pure ? 'server/pure' : 'server'
-  )
+// This render turns the `server` renderer into a client renderer as many of the tests only
+// require hydration after the hook is renderer to be able to be reused for all the renderers
+function hydratedServerRenderer(baseRenderer: 'server' | 'server/pure'): ReactHooksRenderer {
+  const { renderHook, ...otherImports } = requireRenderer<ReactHooksServerRenderer>(baseRenderer)
 
   return {
     renderHook<TProps, TResult>(
@@ -61,8 +61,8 @@ const rendererResolvers = {
   'dom/pure': () => requireRenderer('default/pure'),
   'native/pure': () => requireRenderer('default/pure'),
   'server/pure': () => requireRenderer<ReactHooksServerRenderer>('server/pure'),
-  'server/hydrated': () => hydratedServerRenderer(false),
-  'server/hydrated/pure': () => hydratedServerRenderer(true)
+  'server/hydrated': () => hydratedServerRenderer('server'),
+  'server/hydrated/pure': () => hydratedServerRenderer('server/pure')
 }
 
 global.runForRenderers = function runForRenderers<TRenderer extends Renderer>(
@@ -77,6 +77,7 @@ global.runForLazyRenderers = function runForLazyRenderers<TRenderer extends Rend
   fn: (getRenderer: () => InferredRenderer<TRenderer>, rendererName: Renderer) => void
 ): void {
   renderers.forEach((renderer) => {
+    // eslint-disable-next-line jest/valid-title
     describe(renderer, () => {
       fn(() => rendererResolvers[renderer]() as InferredRenderer<TRenderer>, renderer)
     })
