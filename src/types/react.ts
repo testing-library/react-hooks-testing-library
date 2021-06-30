@@ -24,7 +24,7 @@ export type ReactHooksRenderer = {
     options?: RenderHookOptions<TProps>
   ) => RenderHookResult<TProps, TResult>
   act: Act
-  cleanup: () => void
+  cleanup: () => Promise<void>
   addCleanup: (callback: CleanupCallback) => () => void
   removeCleanup: (callback: CleanupCallback) => void
   suppressErrorOutput: () => () => void
