@@ -15,8 +15,7 @@ function createServerRenderer<TProps, TResult>(
   let container: HTMLDivElement | undefined
   let serverOutput: string = ''
   const testHarness = createTestHarness(rendererProps, wrapper, false)
-  // @ts-ignore
-  const root = ReactDOM.createRoot(container);
+  let root: any
   return {
     render(props?: TProps) {
       renderProps = props
@@ -35,7 +34,8 @@ function createServerRenderer<TProps, TResult>(
         container = document.createElement('div')
         container.innerHTML = serverOutput
         act(() => {
-          root.hydrateRoot(testHarness(renderProps))
+          // @ts-ignore
+          root = ReactDOM.hydrateRoot(container, testHarness(renderProps))
         })
       }
     },
@@ -50,7 +50,7 @@ function createServerRenderer<TProps, TResult>(
     unmount() {
       if (container) {
         act(() => {
-          ReactDOM.unmountComponentAtNode(container!)
+          root.unmount()
         })
       }
     },
