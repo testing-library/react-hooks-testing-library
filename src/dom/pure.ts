@@ -13,7 +13,7 @@ function createDomRenderer<TProps, TResult>(
   const container = document.createElement('div')
   const testHarness = createTestHarness(rendererProps, wrapper)
   // @ts-ignore
-  const root = ReactDOM.createRoot(container);
+  const root = ReactDOM.createRoot(container)
   return {
     render(props?: TProps) {
       act(() => {
