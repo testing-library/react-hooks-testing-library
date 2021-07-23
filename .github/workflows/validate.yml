@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         node: [12.13, 12, 14, 16]
-        react: [^16.9.0, ^17.0.2, next]
+        react: [16.9.0, ^16, ^17, next]
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
