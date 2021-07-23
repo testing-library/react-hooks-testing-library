@@ -6,6 +6,7 @@ import { RendererProps, RendererOptions } from '../types/react'
 import { createRenderHook } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
 
+// @ts-ignore
 const isReactConcurrent = !!ReactDOM.createRoot;
 
 function createDomRenderer<TProps, TResult>(
@@ -14,7 +15,6 @@ function createDomRenderer<TProps, TResult>(
 ) {
   const container = document.createElement('div')
   const testHarness = createTestHarness(rendererProps, wrapper)
-  // @ts-ignore
   if (isReactConcurrent) {
     // @ts-ignore
     const root = ReactDOM.createRoot(container)

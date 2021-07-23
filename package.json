@@ -33,7 +33,6 @@
   "scripts": {
     "setup": "npm install && npm run validate -s",
     "validate": "kcd-scripts validate",
-    "prepare": "npm run build",
     "build": "kcd-scripts build --out-dir lib && npm run generate:submodules",
     "generate:submodules": "ts-node scripts/generate-submodules.ts",
     "test": "kcd-scripts test",
