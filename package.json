@@ -44,7 +44,7 @@
     "docs:build": "docz build",
     "contributors:add": "all-contributors add",
     "install-16": "npm install --save-dev react@\"^16.9.0\" react-dom@\"^16.9.0\" react-test-renderer@\"^16.9.0\"",
-    "install-next": "npm install --save-dev react@next react-dom@next react-test-renderer@next",
+    "install-next": "npm install --save-dev react@next react-dom@next react-test-renderer@next"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
