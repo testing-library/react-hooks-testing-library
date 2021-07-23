@@ -39,7 +39,7 @@ jobs:
           HUSKY_SKIP_INSTALL: true
 
       - name: Use React version
-        run: npm install --save-dev react@${{ matrix.react }} react-dom@${{ matrix.react }} react-test-renderer@${{ matrix.react }}
+        run: npm install --save-dev react@"${{ matrix.react }}" react-dom@"${{ matrix.react }}" react-test-renderer@"${{ matrix.react }}"
 
       - name: ▶️ Run validate script
         run: npm run validate
