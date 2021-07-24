@@ -6,100 +6,54 @@ import { RendererOptions, RendererProps } from '../types/react'
 
 import { createRenderHook } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
-
-// @ts-ignore
-const isReactConcurrent = !!ReactDOM.createRoot;
+import { hydrateRoot } from '../helpers/createRoot'
 
 function createServerRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
   { wrapper }: RendererOptions<TProps>
 ) {
   let renderProps: TProps | undefined
-  let container: HTMLDivElement | undefined
   let serverOutput: string = ''
   const testHarness = createTestHarness(rendererProps, wrapper, false)
-  if (isReactConcurrent) {
-    let root: any
-    return {
-      render(props?: TProps) {
-        renderProps = props
-        act(() => {
-          try {
-            serverOutput = ReactDOMServer.renderToString(testHarness(props))
-          } catch (e: unknown) {
-            rendererProps.setError(e as Error)
-          }
-        })
-      },
-      hydrate() {
-        if (container) {
-          throw new Error('The component can only be hydrated once')
-        } else {
-          container = document.createElement('div')
-          container.innerHTML = serverOutput
-          act(() => {
-            // @ts-ignore
-            root = ReactDOM.hydrateRoot(container, testHarness(renderProps))
-          })
+  let root: ReactDOM.Root | undefined
+  return {
+    render(props?: TProps) {
+      renderProps = props
+      act(() => {
+        try {
+          serverOutput = ReactDOMServer.renderToString(testHarness(props))
+        } catch (e: unknown) {
+          rendererProps.setError(e as Error)
         }
-      },
-      rerender(props?: TProps) {
-        if (!container) {
+      })
+    },
+    hydrate() {
+      if (root) {
+        throw new Error('The component can only be hydrated once')
+      } else {
+        const container = document.createElement('div')
+        container.innerHTML = serverOutput
+        act(() => {
+          root = hydrateRoot(container, testHarness(renderProps))
+        })
+      }
+    },
+    rerender(props?: TProps) {
+      act(() => {
+        if (!root) {
           throw new Error('You must hydrate the component before you can rerender')
         }
-        act(() => {
-          root.render(testHarness(props))
-        })
-      },
-      unmount() {
-        if (container) {
-          act(() => {
-            root.unmount()
-          })
+        root.render(testHarness(props))
+      })
+    },
+    unmount() {
+      act(() => {
+        if (root) {
+          root.unmount()
         }
-      },
-      act
-    };
-  } else {
-    return {
-      render(props?: TProps) {
-        renderProps = props
-        act(() => {
-          try {
-            serverOutput = ReactDOMServer.renderToString(testHarness(props))
-          } catch (e: unknown) {
-            rendererProps.setError(e as Error)
-          }
-        })
-      },
-      hydrate() {
-        if (container) {
-          throw new Error('The component can only be hydrated once')
-        } else {
-          container = document.createElement('div')
-          container.innerHTML = serverOutput
-          act(() => {
-            ReactDOM.hydrate(testHarness(renderProps), container!)
-          })
-        }
-      },
-      rerender(props?: TProps) {
-        if (!container) {
-          throw new Error('You must hydrate the component before you can rerender')
-        }
-        act(() => {
-          ReactDOM.render(testHarness(props), container!)
-        })
-      },
-      unmount() {
-        if (container) {
-          act(() => {
-            ReactDOM.unmountComponentAtNode(container!)
-          })
-        }
-      },
-      act
-    };
+      })
+    },
+    act
   }
 }
 
