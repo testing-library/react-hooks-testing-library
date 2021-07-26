@@ -36,6 +36,12 @@ const renderHook = createRenderHook(createNativeRenderer)
 
 export { renderHook, act }
 
-export { cleanup, addCleanup, removeCleanup, suppressErrorOutput } from '../core'
+export {
+  cleanup,
+  addCleanup,
+  removeCleanup,
+  setDefaultWaitOptions,
+  suppressErrorOutput
+} from '../core'
 
 export * from '../types/react'

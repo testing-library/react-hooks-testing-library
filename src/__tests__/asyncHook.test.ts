@@ -1,6 +1,11 @@
+import { setDefaultWaitOptions } from 'core'
 import { useState, useRef, useEffect } from 'react'
 
 describe('async hook tests', () => {
+  beforeEach(() => {
+    setDefaultWaitOptions({ interval: 50, timeout: 1000 })
+  })
+
   const useSequence = (values: string[], intervalMs = 50) => {
     const [first, ...otherValues] = values
     const [value, setValue] = useState(() => first)
@@ -55,6 +60,17 @@ describe('async hook tests', () => {
       expect(result.current).toBe('first')
 
       await expect(waitForNextUpdate({ timeout: 10 })).rejects.toThrow(
+        Error('Timed out in waitForNextUpdate after 10ms.')
+      )
+    })
+
+    test('should reject if custom default timeout exceeded when waiting for next update', async () => {
+      setDefaultWaitOptions({ timeout: 10 })
+      const { result, waitForNextUpdate } = renderHook(() => useSequence(['first', 'second']))
+
+      expect(result.current).toBe('first')
+
+      await expect(waitForNextUpdate()).rejects.toThrow(
         Error('Timed out in waitForNextUpdate after 10ms.')
       )
     })
@@ -181,6 +197,20 @@ describe('async hook tests', () => {
         },
         { interval: 100 }
       )
+
+      expect(checks).toBe(3)
+    })
+
+    test('should check on custom default interval when waiting for expectation to pass', async () => {
+      setDefaultWaitOptions({ interval: 100 })
+      const { result, waitFor } = renderHook(() => useSequence(['first', 'second', 'third']))
+
+      let checks = 0
+
+      await waitFor(() => {
+        checks++
+        return result.current === 'third'
+      })
 
       expect(checks).toBe(3)
     })

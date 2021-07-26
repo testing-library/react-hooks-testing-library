@@ -32,8 +32,24 @@ function getRenderer() {
   }
 }
 
-const { renderHook, act, cleanup, addCleanup, removeCleanup, suppressErrorOutput } = getRenderer()
+const {
+  renderHook,
+  act,
+  cleanup,
+  addCleanup,
+  removeCleanup,
+  setDefaultWaitOptions,
+  suppressErrorOutput
+} = getRenderer()
 
-export { renderHook, act, cleanup, addCleanup, removeCleanup, suppressErrorOutput }
+export {
+  renderHook,
+  act,
+  cleanup,
+  addCleanup,
+  removeCleanup,
+  setDefaultWaitOptions,
+  suppressErrorOutput
+}
 
 export * from './types/react'

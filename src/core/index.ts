@@ -1,6 +1,6 @@
 import { CreateRenderer, Renderer, RenderResult, RenderHookOptions } from '../types'
 
-import { asyncUtils } from './asyncUtils'
+import { asyncUtils, setDefaultWaitOptions } from './asyncUtils'
 import { cleanup, addCleanup, removeCleanup } from './cleanup'
 import { suppressErrorOutput } from './console'
 
@@ -82,4 +82,11 @@ function createRenderHook<
   return renderHook
 }
 
-export { createRenderHook, cleanup, addCleanup, removeCleanup, suppressErrorOutput }
+export {
+  createRenderHook,
+  cleanup,
+  addCleanup,
+  removeCleanup,
+  suppressErrorOutput,
+  setDefaultWaitOptions
+}

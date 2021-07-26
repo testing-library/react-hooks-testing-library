@@ -566,6 +566,18 @@
         "bug",
         "review"
       ]
+    },
+    {
+      "login": "orokanasaru",
+      "name": "Michael Hensler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5751627?v=4",
+      "profile": "https://github.com/orokanasaru",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "test"
+      ]
     }
   ],
   "skipCi": true,

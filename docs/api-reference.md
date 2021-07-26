@@ -271,6 +271,30 @@ _Default: 1000_
 
 The maximum amount of time in milliseconds (ms) to wait.
 
+### `setDefaultWaitOptions`
+
+```ts
+function setDefaultWaitOptions({
+  interval?: number | false
+  timeout?: number | false
+}): void
+```
+
+Updates the default values for `interval` and `timeout` used by the `waitFor*` functions.
+
+#### `interval`
+
+_Default: 50_
+
+The amount of time in milliseconds (ms) to wait between checks of the callback if no renders occur.
+Interval checking is disabled if `interval` is not provided as a `falsy`.
+
+#### `timeout`
+
+_Default: 1000_
+
+The maximum amount of time in milliseconds (ms) to wait.
+
 ---
 
 ## `console.error`
