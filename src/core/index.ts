@@ -87,6 +87,6 @@ export {
   cleanup,
   addCleanup,
   removeCleanup,
-  suppressErrorOutput,
-  setDefaultWaitOptions
+  setDefaultWaitOptions,
+  suppressErrorOutput
 }
