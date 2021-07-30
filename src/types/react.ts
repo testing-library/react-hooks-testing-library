@@ -5,7 +5,8 @@ import {
   RenderHookResult,
   ServerRenderHookResult,
   Act,
-  CleanupCallback
+  CleanupCallback,
+  WaitOptions
 } from '.'
 
 export type WrapperComponent<TProps> = ComponentType<TProps>
@@ -27,6 +28,7 @@ export type ReactHooksRenderer = {
   cleanup: () => Promise<void>
   addCleanup: (callback: CleanupCallback) => () => void
   removeCleanup: (callback: CleanupCallback) => void
+  setDefaultWaitOptions: (options: WaitOptions) => void
   suppressErrorOutput: () => () => void
 }
 

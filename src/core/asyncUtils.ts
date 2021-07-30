@@ -10,8 +10,13 @@ import {
 import { resolveAfter, callAfter } from '../helpers/promises'
 import { TimeoutError } from '../helpers/error'
 
-const DEFAULT_INTERVAL = 50
-const DEFAULT_TIMEOUT = 1000
+let defaultInterval: number | false = 50
+let defaultTimeout: number | false = 1000
+
+function setDefaultWaitOptions({ interval, timeout }: WaitOptions) {
+  defaultInterval = interval ?? defaultInterval
+  defaultTimeout = timeout ?? defaultTimeout
+}
 
 function asyncUtils(act: Act, addResolver: (callback: () => void) => void): AsyncUtils {
   const wait = async (callback: () => boolean | void, { interval, timeout }: WaitOptions) => {
@@ -55,7 +60,7 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
 
   const waitFor = async (
     callback: () => boolean | void,
-    { interval = DEFAULT_INTERVAL, timeout = DEFAULT_TIMEOUT }: WaitForOptions = {}
+    { interval = defaultInterval, timeout = defaultTimeout }: WaitForOptions = {}
   ) => {
     const safeCallback = () => {
       try {
@@ -73,7 +78,7 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
 
   const waitForValueToChange = async (
     selector: () => unknown,
-    { interval = DEFAULT_INTERVAL, timeout = DEFAULT_TIMEOUT }: WaitForValueToChangeOptions = {}
+    { interval = defaultInterval, timeout = defaultTimeout }: WaitForValueToChangeOptions = {}
   ) => {
     const initialValue = selector()
 
@@ -83,9 +88,7 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
     }
   }
 
-  const waitForNextUpdate = async ({
-    timeout = DEFAULT_TIMEOUT
-  }: WaitForNextUpdateOptions = {}) => {
+  const waitForNextUpdate = async ({ timeout = defaultTimeout }: WaitForNextUpdateOptions = {}) => {
     let updated = false
     addResolver(() => {
       updated = true
@@ -104,4 +107,4 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
   }
 }
 
-export { asyncUtils }
+export { asyncUtils, setDefaultWaitOptions }
