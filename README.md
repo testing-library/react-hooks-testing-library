@@ -246,6 +246,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://matan.io"><img src="https://avatars.githubusercontent.com/u/12711091?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matan Borenkraout</b></sub></a><br /><a href="#maintenance-MatanBobi" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://github.com/andyrooger"><img src="https://avatars.githubusercontent.com/u/420834?v=4?s=100" width="100px;" alt=""/><br /><sub><b>andyrooger</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=andyrooger" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/bdwain"><img src="https://avatars.githubusercontent.com/u/3982094?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bryan Wain</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/issues?q=author%3Abdwain" title="Bug reports">🐛</a> <a href="https://github.com/testing-library/react-hooks-testing-library/pulls?q=is%3Apr+reviewed-by%3Abdwain" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/chris110408"><img src="https://avatars.githubusercontent.com/u/10645051?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chris Chen</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=chris110408" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
