@@ -43,7 +43,7 @@
     "docs:dev": "docz dev",
     "docs:build": "docz build",
     "contributors:add": "all-contributors add",
-    "install-16": "npm install --save-dev react@\"^16.9.0\" react-dom@\"^16.9.0\" react-test-renderer@\"^16.9.0\"",
+    "install-16": "npm install --save-dev react@\"^16.9.0\" react-dom@\"^16.9.0\" react-test-renderer@\"^16.9.0\""
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
