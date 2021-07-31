@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.0
+        uses: styfle/cancel-workflow-action@0.9.1
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
@@ -45,7 +45,7 @@ jobs:
         run: npm run validate
 
       - name: ⬆️ Upload coverage report
-        uses: codecov/codecov-action@v2.0.1
+        uses: codecov/codecov-action@v2.0.2
 
   release:
     needs: main
@@ -56,7 +56,7 @@ jobs:
       github.event_name == 'push' }}
     steps:
       - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.0
+        uses: styfle/cancel-workflow-action@0.9.1
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2

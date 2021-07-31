@@ -575,6 +575,15 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "chris110408",
+      "name": "Chris Chen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10645051?v=4",
+      "profile": "https://github.com/chris110408",
+      "contributions": [
+        "test"
+      ]
     }
   ],
   "skipCi": true,
