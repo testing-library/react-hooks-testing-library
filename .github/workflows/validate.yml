@@ -17,6 +17,7 @@ jobs:
     strategy:
       matrix:
         node: [12.13, 12, 14, 16]
+        react: [16.9.0, ^16, ^17]
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -36,6 +37,9 @@ jobs:
           useLockFile: false
         env:
           HUSKY_SKIP_INSTALL: true
+
+      - name: Use React version
+        run: npm install --save-dev react@"${{ matrix.react }}" react-dom@"${{ matrix.react }}" react-test-renderer@"${{ matrix.react }}"
 
       - name: ▶️ Run validate script
         run: npm run validate
