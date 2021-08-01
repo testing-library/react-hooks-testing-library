@@ -43,9 +43,10 @@
     "docs:dev": "docz dev",
     "docs:build": "docz build",
     "contributors:add": "all-contributors add",
-    "install:react-16-9": "npm install --no-save react@16.9.0 react-dom@16.9.0 react-test-renderer@16.9.0",
-    "install:react-16": "npm install --no-save react@^16 react-dom@^16 react-test-renderer@^16",
-    "install:react-17": "npm install --no-save react@^17 react-dom@^17 react-test-renderer@^17"
+    "install:react": "npm install --no-save react@${REACT_VERSION:-latest} react-dom@${REACT_VERSION:-latest} react-test-renderer@${REACT_VERSION:-latest}",
+    "install:react-16.9.0": "cross-env REACT_VERSION=16.9.0 npm run install:react",
+    "install:react-16": "cross-env REACT_VERSION=^16 npm run install:react",
+    "install:react-17": "cross-env REACT_VERSION=^17 npm run install:react"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
@@ -59,6 +60,7 @@
     "@typescript-eslint/parser": "4.28.5",
     "all-contributors-cli": "6.20.0",
     "codecov": "3.8.3",
+    "cross-env": "^7.0.3",
     "docz": "2.3.1",
     "docz-theme-default": "1.2.0",
     "docz-utils": "2.3.0",
