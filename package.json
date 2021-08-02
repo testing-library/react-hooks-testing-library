@@ -43,8 +43,10 @@
     "docs:dev": "docz dev",
     "docs:build": "docz build",
     "contributors:add": "all-contributors add",
-    "install-16": "npm install --save-dev react@\"^16.9.0\" react-dom@\"^16.9.0\" react-test-renderer@\"^16.9.0\"",
-    "install-next": "npm install --save-dev react@next react-dom@next react-test-renderer@next"
+    "install:react": "npm install --no-save react@${REACT_VERSION:-latest} react-dom@${REACT_VERSION:-latest} react-test-renderer@${REACT_VERSION:-latest}",
+    "install:react-16.9.0": "cross-env REACT_VERSION=16.9.0 npm run install:react",
+    "install:react-16": "cross-env REACT_VERSION=^16 npm run install:react",
+    "install:react-17": "cross-env REACT_VERSION=^17 npm run install:react"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
@@ -54,20 +56,22 @@
     "react-error-boundary": "^3.1.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.9.1",
-    "@typescript-eslint/parser": "^4.9.1",
+    "@typescript-eslint/eslint-plugin": "4.28.5",
+    "@typescript-eslint/parser": "4.28.5",
     "all-contributors-cli": "6.20.0",
     "codecov": "3.8.3",
+    "cross-env": "^7.0.3",
     "docz": "2.3.1",
     "docz-theme-default": "1.2.0",
     "docz-utils": "2.3.0",
-    "eslint": "7.31.0",
+    "eslint": "7.32.0",
+    "get-pkg-repo": "4.1.1",
     "kcd-scripts": "11.2.0",
-    "prettier": "^2.2.1",
+    "prettier": "2.3.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-test-renderer": "17.0.2",
-    "ts-node": "^10.0.0",
+    "ts-node": "10.1.0",
     "typescript": "4.3.5"
   },
   "peerDependencies": {
