@@ -6,11 +6,17 @@ import { RendererProps, WrapperComponent } from '../types/react'
 function createTestHarness<TProps, TResult>(
   { callback, setValue, setError }: RendererProps<TProps, TResult>,
   Wrapper?: WrapperComponent<TProps>,
-  suspense: boolean = true
+  suspense: boolean = true,
+  Custom?: WrapperComponent<TResult>
 ) {
   const TestComponent = ({ hookProps }: { hookProps?: TProps }) => {
     // coerce undefined into TProps, so it maintains the previous behaviour
-    setValue(callback(hookProps as TProps))
+    const result = callback(hookProps as TProps)
+    setValue(result)
+
+    if (Custom) {
+      return <Custom {...result} />
+    }
     return null
   }
 

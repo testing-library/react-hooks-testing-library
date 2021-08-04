@@ -1,27 +1,27 @@
 import { ComponentType } from 'react'
 
 import {
+  Act,
+  CleanupCallback,
   RenderHookOptions as BaseRenderHookOptions,
   RenderHookResult,
-  ServerRenderHookResult,
-  Act,
-  CleanupCallback
-} from '.'
+  ServerRenderHookResult
+} from './'
 
 export type WrapperComponent<TProps> = ComponentType<TProps>
 
-export type RendererOptions<TProps> = {
+export type RendererOptions<TProps, TResult> = {
   wrapper?: WrapperComponent<TProps>
+  customRender?: WrapperComponent<TResult>
 }
 
-export type RenderHookOptions<TProps> = BaseRenderHookOptions<TProps> & {
-  wrapper?: WrapperComponent<TProps>
-}
+export type RenderHookOptions<TProps, TResult> = BaseRenderHookOptions<TProps> &
+  RendererOptions<TProps, TResult>
 
 export type ReactHooksRenderer = {
   renderHook: <TProps, TResult>(
     callback: (props: TProps) => TResult,
-    options?: RenderHookOptions<TProps>
+    options?: RenderHookOptions<TProps, TResult>
   ) => RenderHookResult<TProps, TResult>
   act: Act
   cleanup: () => Promise<void>
@@ -33,7 +33,7 @@ export type ReactHooksRenderer = {
 export type ReactHooksServerRenderer = Omit<ReactHooksRenderer, 'renderHook'> & {
   renderHook: <TProps, TResult>(
     callback: (props: TProps) => TResult,
-    options?: RenderHookOptions<TProps>
+    options?: RenderHookOptions<TProps, TResult>
   ) => ServerRenderHookResult<TProps, TResult>
 }
 

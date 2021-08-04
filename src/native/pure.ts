@@ -1,16 +1,15 @@
 import { act, create, ReactTestRenderer } from 'react-test-renderer'
 
-import { RendererProps, RendererOptions } from '../types/react'
-
 import { createRenderHook } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
+import { RendererOptions, RendererProps } from '../types/react'
 
 function createNativeRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
-  { wrapper }: RendererOptions<TProps>
+  { wrapper, customRender }: RendererOptions<TProps, TResult>
 ) {
   let container: ReactTestRenderer
-  const testHarness = createTestHarness(rendererProps, wrapper)
+  const testHarness = createTestHarness(rendererProps, wrapper, true, customRender)
 
   return {
     render(props?: TProps) {

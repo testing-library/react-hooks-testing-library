@@ -54,6 +54,10 @@ A React component to wrap the test component in when rendering. This is usually 
 providers from `React.createContext` for the hook to access with `useContext`. `initialProps` and
 props subsequently set by `rerender` will be provided to the wrapper.
 
+### `customRender`
+
+Render a custom component use a hook result. This is usually used to get a dom ref.
+
 ## `renderHook` Result
 
 The `renderHook` function returns an object that has the following properties:

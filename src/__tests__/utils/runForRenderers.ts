@@ -40,7 +40,7 @@ function hydratedServerRenderer(baseRenderer: 'server' | 'server/pure'): ReactHo
   return {
     renderHook<TProps, TResult>(
       callback: (props: TProps) => TResult,
-      options?: RenderHookOptions<TProps>
+      options?: RenderHookOptions<TProps, TResult>
     ): RenderHookResult<TProps, TResult> {
       const { hydrate, ...otherUtils } = renderHook<TProps, TResult>(callback, options)
       hydrate()

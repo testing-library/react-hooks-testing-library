@@ -1,20 +1,19 @@
-import * as ReactDOMServer from 'react-dom/server'
 import * as ReactDOM from 'react-dom'
+import * as ReactDOMServer from 'react-dom/server'
 import { act } from 'react-dom/test-utils'
-
-import { RendererOptions, RendererProps } from '../types/react'
 
 import { createRenderHook } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
+import { RendererOptions, RendererProps } from '../types/react'
 
 function createServerRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
-  { wrapper }: RendererOptions<TProps>
+  { wrapper, customRender }: RendererOptions<TProps, TResult>
 ) {
   let renderProps: TProps | undefined
   let container: HTMLDivElement | undefined
   let serverOutput: string = ''
-  const testHarness = createTestHarness(rendererProps, wrapper, false)
+  const testHarness = createTestHarness(rendererProps, wrapper, false, customRender)
 
   return {
     render(props?: TProps) {

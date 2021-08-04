@@ -584,6 +584,17 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "ykan",
+      "name": "宇山",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1059877?v=4",
+      "profile": "https://github.com/ykan",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
     }
   ],
   "skipCi": true,

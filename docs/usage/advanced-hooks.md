@@ -134,6 +134,45 @@ Similar techniques can be used to disable the error for just the specific line, 
 project, but please take the time to understand the impact that disabling linting rules will have on
 you, your team, and your project.
 
+## Custom Render
+
+Sometimes, a hook is going to need a dom ref to do something like `getBoundingClientRect`. For
+example:
+
+```js
+import React, { useRef } from 'react';
+
+export function useDomRef() {
+  const domRef = useRef<HTMLElement>();
+  const refCallback = (el: HTMLElement | null) => {
+    if (el) {
+      domRef.current = el;
+      // do something with el
+      const domRect = el.getBoundingClientRect()
+    }
+  };
+
+  return { refCallback, domRef }
+}
+```
+
+In our test, we can use `customRender` to get a dom ref:
+
+```js
+import { renderHook, act } from '@testing-library/react-hooks'
+import { useDomRef } from './useDomRef'
+
+test("custom render won't throw error", () => {
+  const TestComponent = (props: ReturnType<typeof useDomRef>) => {
+    return <div ref={props.refCallback}>1</div>
+  }
+  const { result } = renderHook(() => useDomRef(), {
+    customRender: TestComponent
+  })
+  expect(result.current.domRef.current).toBeDefined()
+})
+```
+
 ## Async
 
 Sometimes, a hook can trigger asynchronous updates that will not be immediately reflected in the

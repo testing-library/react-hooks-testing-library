@@ -1,17 +1,16 @@
 import * as ReactDOM from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { RendererProps, RendererOptions } from '../types/react'
-
 import { createRenderHook } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
+import { RendererOptions, RendererProps } from '../types/react'
 
 function createDomRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
-  { wrapper }: RendererOptions<TProps>
+  { wrapper, customRender }: RendererOptions<TProps, TResult>
 ) {
   const container = document.createElement('div')
-  const testHarness = createTestHarness(rendererProps, wrapper)
+  const testHarness = createTestHarness(rendererProps, wrapper, true, customRender)
 
   return {
     render(props?: TProps) {
