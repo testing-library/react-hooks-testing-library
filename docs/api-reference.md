@@ -68,7 +68,7 @@ The `renderHook` function returns an object that has the following properties:
 }
 ```
 
-The `current` value or the `result` will reflect the latest of whatever is returned from the
+The `current` value of the `result` will reflect the latest of whatever is returned from the
 `callback` passed to `renderHook`. Any thrown values from the latest call will be reflected in the
 `error` value of the `result`. The `all` value is an array containing all the returns (including the
 most recent) from the callback. These could be `result` or an `error` depending on what the callback
