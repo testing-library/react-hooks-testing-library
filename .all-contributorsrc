@@ -584,6 +584,15 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "masious",
+      "name": "Masious",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6429009?v=4",
+      "profile": "https://www.facebook.com/masoud.bonabi",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "skipCi": true,
