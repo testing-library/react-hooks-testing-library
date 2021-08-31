@@ -7,7 +7,7 @@ import {
   AsyncUtils
 } from '../types'
 
-import { createTimeoutSignal } from '../helpers/createTimeoutSignal'
+import { createTimeoutController } from '../helpers/createTimeoutController'
 import { TimeoutError } from '../helpers/error'
 
 const DEFAULT_INTERVAL = 50
@@ -20,11 +20,11 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
       return callbackResult ?? callbackResult === undefined
     }
 
-    const timeoutSignal = createTimeoutSignal(timeout)
+    const timeoutSignal = createTimeoutController(timeout)
 
     const waitForResult = async () => {
       while (true) {
-        const intervalSignal = createTimeoutSignal(interval)
+        const intervalSignal = createTimeoutController(interval)
         timeoutSignal.onTimeout(() => intervalSignal.cancel())
 
         await intervalSignal.wrap(new Promise<void>(addResolver))

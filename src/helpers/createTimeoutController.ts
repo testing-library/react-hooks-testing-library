@@ -1,21 +1,21 @@
 import { WaitOptions } from '../types'
 
-function createTimeoutSignal(timeout: WaitOptions['timeout']) {
+function createTimeoutController(timeout: WaitOptions['timeout']) {
   let timeoutId: NodeJS.Timeout
   const timeoutCallbacks: Array<() => void> = []
 
-  const timeoutSignal = {
+  const timeoutController = {
     onTimeout(callback: () => void) {
       timeoutCallbacks.push(callback)
     },
     wrap(promise: Promise<void>) {
       return new Promise<void>((resolve, reject) => {
-        timeoutSignal.timedOut = false
-        timeoutSignal.onTimeout(resolve)
+        timeoutController.timedOut = false
+        timeoutController.onTimeout(resolve)
 
         if (timeout) {
           timeoutId = setTimeout(() => {
-            timeoutSignal.timedOut = true
+            timeoutController.timedOut = true
             timeoutCallbacks.forEach((callback) => callback())
             resolve()
           }, timeout)
@@ -24,7 +24,7 @@ function createTimeoutSignal(timeout: WaitOptions['timeout']) {
         promise
           .then(resolve)
           .catch(reject)
-          .finally(() => timeoutSignal.cancel())
+          .finally(() => timeoutController.cancel())
       })
     },
     cancel() {
@@ -33,7 +33,7 @@ function createTimeoutSignal(timeout: WaitOptions['timeout']) {
     timedOut: false
   }
 
-  return timeoutSignal
+  return timeoutController
 }
 
-export { createTimeoutSignal }
+export { createTimeoutController }
