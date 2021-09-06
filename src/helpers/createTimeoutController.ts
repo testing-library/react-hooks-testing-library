@@ -1,6 +1,6 @@
-import { WaitOptions } from '../types'
+import { jestFakeTimersAreEnabled } from './jestFakeTimersAreEnabled'
 
-function createTimeoutController(timeout: WaitOptions['timeout']) {
+function createTimeoutController(timeout: number | boolean, allowFakeTimers: boolean) {
   let timeoutId: NodeJS.Timeout
   const timeoutCallbacks: Array<() => void> = []
 
@@ -18,7 +18,11 @@ function createTimeoutController(timeout: WaitOptions['timeout']) {
             timeoutController.timedOut = true
             timeoutCallbacks.forEach((callback) => callback())
             resolve()
-          }, timeout)
+          }, timeout as number)
+
+          if (jestFakeTimersAreEnabled() && allowFakeTimers) {
+            jest.advanceTimersByTime(timeout as number)
+          }
         }
 
         promise

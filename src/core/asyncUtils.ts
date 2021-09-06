@@ -10,8 +10,8 @@ import {
 import { createTimeoutController } from '../helpers/createTimeoutController'
 import { TimeoutError } from '../helpers/error'
 
-const DEFAULT_INTERVAL = 50
 const DEFAULT_TIMEOUT = 1000
+const DEFAULT_INTERVAL = 50
 
 function asyncUtils(act: Act, addResolver: (callback: () => void) => void): AsyncUtils {
   const wait = async (callback: () => boolean | void, { interval, timeout }: WaitOptions) => {
@@ -20,11 +20,11 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
       return callbackResult ?? callbackResult === undefined
     }
 
-    const timeoutSignal = createTimeoutController(timeout)
+    const timeoutSignal = createTimeoutController(timeout as number | boolean, false)
 
     const waitForResult = async () => {
       while (true) {
-        const intervalSignal = createTimeoutController(interval)
+        const intervalSignal = createTimeoutController(interval as number | boolean, true)
         timeoutSignal.onTimeout(() => intervalSignal.cancel())
 
         await intervalSignal.wrap(new Promise<void>(addResolver))
