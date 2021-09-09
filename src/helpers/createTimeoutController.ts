@@ -1,8 +1,27 @@
 import { jestFakeTimersAreEnabled } from './jestFakeTimersAreEnabled'
 
-function createTimeoutController(timeout: number | boolean, allowFakeTimers: boolean) {
+const DEFAULT_TIMEOUT = 1000
+
+function createTimeoutController(timeout: number | false, options: { allowFakeTimers: boolean }) {
   let timeoutId: NodeJS.Timeout
   const timeoutCallbacks: Array<() => void> = []
+  let finished = false
+
+  const { allowFakeTimers } = options
+
+  const advanceTime = async (currentMs: number) => {
+    // eslint-disable-next-line no-negated-condition
+    if (currentMs < (!timeout ? DEFAULT_TIMEOUT : timeout)) {
+      jest.advanceTimersByTime(1)
+
+      await Promise.resolve()
+
+      if (finished) {
+        return
+      }
+      await advanceTime(currentMs + 1)
+    }
+  }
 
   const timeoutController = {
     onTimeout(callback: () => void) {
@@ -12,26 +31,28 @@ function createTimeoutController(timeout: number | boolean, allowFakeTimers: boo
       return new Promise<void>((resolve, reject) => {
         timeoutController.timedOut = false
         timeoutController.onTimeout(resolve)
-
         if (timeout) {
           timeoutId = setTimeout(() => {
             timeoutController.timedOut = true
             timeoutCallbacks.forEach((callback) => callback())
             resolve()
-          }, timeout as number)
-
-          if (jestFakeTimersAreEnabled() && allowFakeTimers) {
-            jest.advanceTimersByTime(timeout as number)
-          }
+          }, timeout)
+        }
+        if (jestFakeTimersAreEnabled() && allowFakeTimers) {
+          advanceTime(0)
         }
 
         promise
           .then(resolve)
           .catch(reject)
-          .finally(() => timeoutController.cancel())
+          .finally(() => {
+            finished = true
+            timeoutController.cancel()
+          })
       })
     },
     cancel() {
+      finished = true
       clearTimeout(timeoutId)
     },
     timedOut: false
@@ -40,4 +61,4 @@ function createTimeoutController(timeout: number | boolean, allowFakeTimers: boo
   return timeoutController
 }
 
-export { createTimeoutController }
+export { createTimeoutController, DEFAULT_TIMEOUT }
