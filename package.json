@@ -65,7 +65,7 @@
     "docz-theme-default": "1.2.0",
     "docz-utils": "2.3.0",
     "eslint": "7.32.0",
-    "get-pkg-repo": "4.1.1",
+    "get-pkg-repo": "5.0.0",
     "kcd-scripts": "11.2.0",
     "prettier": "2.3.2",
     "react": "17.0.2",
