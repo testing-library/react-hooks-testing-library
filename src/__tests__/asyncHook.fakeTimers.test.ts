@@ -145,8 +145,8 @@ describe('async hook (fake timers) tests', () => {
         Error('Timed out in waitForNextUpdate after 10ms.')
       )
     })
-    //  the test  run successfully after remove skip in local. However, it will not pass the checkers on github
-    test.skip('should not reject when waiting for next update if timeout has been disabled', async () => {
+
+    test('should not reject when waiting for next update if timeout has been disabled', async () => {
       const { result, waitForNextUpdate } = renderHook(() => useSequence(['first', 'second'], 1100))
 
       expect(result.current).toBe('first')
