@@ -67,7 +67,7 @@
     "eslint": "7.32.0",
     "get-pkg-repo": "4.1.1",
     "kcd-scripts": "11.2.2",
-    "prettier": "2.4.0",
+    "prettier": "2.4.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-test-renderer": "17.0.2",
