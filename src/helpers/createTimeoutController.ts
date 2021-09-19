@@ -1,11 +1,9 @@
 import { fakeTimersAreEnabled, advanceTimers } from './fakeTimers'
 
-function createTimeoutController(timeout: number | false, options: { allowFakeTimers: boolean }) {
+function createTimeoutController(timeout: number | false, { allowFakeTimers = false } = {}) {
   let timeoutId: NodeJS.Timeout
   const timeoutCallbacks: Array<() => void> = []
   let finished = false
-
-  const { allowFakeTimers } = options
 
   const timeoutController = {
     onTimeout(callback: () => void) {
@@ -23,7 +21,7 @@ function createTimeoutController(timeout: number | false, options: { allowFakeTi
             resolve()
           }, timeout)
         }
-        
+
         if (fakeTimersAreEnabled() && allowFakeTimers) {
           advanceTimers(() => finished)
         }

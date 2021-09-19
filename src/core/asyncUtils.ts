@@ -23,11 +23,11 @@ function asyncUtils(act: Act, addResolver: (callback: () => void) => void): Asyn
       return callbackResult ?? callbackResult === undefined
     }
 
-    const timeoutController = createTimeoutController(timeout, { allowFakeTimers: !interval })
+    const timeoutController = createTimeoutController(timeout, { allowFakeTimers: true })
 
     const waitForResult = async () => {
       while (true) {
-        const intervalController = createTimeoutController(interval, { allowFakeTimers: true })
+        const intervalController = createTimeoutController(interval)
         timeoutController.onTimeout(() => intervalController.cancel())
 
         await intervalController.wrap(new Promise<void>(addResolver))
