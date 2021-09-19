@@ -1,8 +1,9 @@
-import { WaitOptions } from '../types'
+import { fakeTimersAreEnabled, advanceTimers } from './fakeTimers'
 
-function createTimeoutController(timeout: WaitOptions['timeout']) {
+function createTimeoutController(timeout: number | false, { allowFakeTimers = false } = {}) {
   let timeoutId: NodeJS.Timeout
   const timeoutCallbacks: Array<() => void> = []
+  let finished = false
 
   const timeoutController = {
     onTimeout(callback: () => void) {
@@ -12,22 +13,30 @@ function createTimeoutController(timeout: WaitOptions['timeout']) {
       return new Promise<void>((resolve, reject) => {
         timeoutController.timedOut = false
         timeoutController.onTimeout(resolve)
-
         if (timeout) {
           timeoutId = setTimeout(() => {
+            finished = true
             timeoutController.timedOut = true
             timeoutCallbacks.forEach((callback) => callback())
             resolve()
           }, timeout)
         }
 
+        if (fakeTimersAreEnabled() && allowFakeTimers) {
+          advanceTimers(() => finished)
+        }
+
         promise
           .then(resolve)
           .catch(reject)
-          .finally(() => timeoutController.cancel())
+          .finally(() => {
+            finished = true
+            timeoutController.cancel()
+          })
       })
     },
     cancel() {
+      finished = true
       clearTimeout(timeoutId)
     },
     timedOut: false

@@ -14,32 +14,35 @@ const DEFAULT_INTERVAL = 50
 const DEFAULT_TIMEOUT = 1000
 
 function asyncUtils(act: Act, addResolver: (callback: () => void) => void): AsyncUtils {
-  const wait = async (callback: () => boolean | void, { interval, timeout }: WaitOptions) => {
+  const wait = async (
+    callback: () => boolean | void,
+    { interval, timeout }: Required<WaitOptions>
+  ) => {
     const checkResult = () => {
       const callbackResult = callback()
       return callbackResult ?? callbackResult === undefined
     }
 
-    const timeoutSignal = createTimeoutController(timeout)
+    const timeoutController = createTimeoutController(timeout, { allowFakeTimers: true })
 
     const waitForResult = async () => {
       while (true) {
-        const intervalSignal = createTimeoutController(interval)
-        timeoutSignal.onTimeout(() => intervalSignal.cancel())
+        const intervalController = createTimeoutController(interval)
+        timeoutController.onTimeout(() => intervalController.cancel())
 
-        await intervalSignal.wrap(new Promise<void>(addResolver))
+        await intervalController.wrap(new Promise<void>(addResolver))
 
-        if (checkResult() || timeoutSignal.timedOut) {
+        if (checkResult() || timeoutController.timedOut) {
           return
         }
       }
     }
 
     if (!checkResult()) {
-      await act(() => timeoutSignal.wrap(waitForResult()))
+      await act(() => timeoutController.wrap(waitForResult()))
     }
 
-    return !timeoutSignal.timedOut
+    return !timeoutController.timedOut
   }
 
   const waitFor = async (
