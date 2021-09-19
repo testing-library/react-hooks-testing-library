@@ -1,4 +1,4 @@
-import { jestFakeTimersAreEnabled } from './jestFakeTimersAreEnabled'
+import { fakeTimersAreEnabled, advanceTimers } from './fakeTimers'
 
 function createTimeoutController(timeout: number | false, options: { allowFakeTimers: boolean }) {
   let timeoutId: NodeJS.Timeout
@@ -6,19 +6,6 @@ function createTimeoutController(timeout: number | false, options: { allowFakeTi
   let finished = false
 
   const { allowFakeTimers } = options
-
-  const advanceTime = async (currentMs: number) => {
-    if (!timeout || currentMs < timeout) {
-      jest.advanceTimersByTime(1)
-
-      await Promise.resolve()
-
-      if (finished) {
-        return
-      }
-      await advanceTime(currentMs + 1)
-    }
-  }
 
   const timeoutController = {
     onTimeout(callback: () => void) {
@@ -35,8 +22,9 @@ function createTimeoutController(timeout: number | false, options: { allowFakeTi
             resolve()
           }, timeout)
         }
-        if (jestFakeTimersAreEnabled() && allowFakeTimers) {
-          advanceTime(0)
+        
+        if (fakeTimersAreEnabled() && allowFakeTimers) {
+          advanceTimers(timeout, () => finished)
         }
 
         promise
