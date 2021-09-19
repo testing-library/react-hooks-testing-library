@@ -17,6 +17,7 @@ function createTimeoutController(timeout: number | false, options: { allowFakeTi
         timeoutController.onTimeout(resolve)
         if (timeout) {
           timeoutId = setTimeout(() => {
+            finished = true
             timeoutController.timedOut = true
             timeoutCallbacks.forEach((callback) => callback())
             resolve()
@@ -24,7 +25,7 @@ function createTimeoutController(timeout: number | false, options: { allowFakeTi
         }
         
         if (fakeTimersAreEnabled() && allowFakeTimers) {
-          advanceTimers(timeout, () => finished)
+          advanceTimers(() => finished)
         }
 
         promise

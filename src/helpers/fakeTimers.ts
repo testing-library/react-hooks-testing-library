@@ -12,18 +12,13 @@ export const fakeTimersAreEnabled = () => {
   return false
 }
 
-export function advanceTimers(timeout: number | false, checkComplete: () => boolean) {
-  const advanceTime = async (currentMs: number) => {
-    if (!timeout || currentMs < timeout) {
+export function advanceTimers(checkComplete: () => boolean) {
+  const advanceTime = async () => {
+    if (!checkComplete()) {
       jest.advanceTimersByTime(1)
-
       await Promise.resolve()
-
-      if (checkComplete()) {
-        return
-      }
-      await advanceTime(currentMs + 1)
+      await advanceTime()
     }
   }
-  return advanceTime(0)
+  return advanceTime()
 }
