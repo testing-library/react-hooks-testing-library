@@ -1,7 +1,5 @@
 import { jestFakeTimersAreEnabled } from './jestFakeTimersAreEnabled'
 
-const DEFAULT_TIMEOUT = 1000
-
 function createTimeoutController(timeout: number | false, options: { allowFakeTimers: boolean }) {
   let timeoutId: NodeJS.Timeout
   const timeoutCallbacks: Array<() => void> = []
@@ -10,8 +8,7 @@ function createTimeoutController(timeout: number | false, options: { allowFakeTi
   const { allowFakeTimers } = options
 
   const advanceTime = async (currentMs: number) => {
-    // eslint-disable-next-line no-negated-condition
-    if (currentMs < (!timeout ? DEFAULT_TIMEOUT : timeout)) {
+    if (!timeout || currentMs < timeout) {
       jest.advanceTimersByTime(1)
 
       await Promise.resolve()
@@ -61,4 +58,4 @@ function createTimeoutController(timeout: number | false, options: { allowFakeTi
   return timeoutController
 }
 
-export { createTimeoutController, DEFAULT_TIMEOUT }
+export { createTimeoutController }

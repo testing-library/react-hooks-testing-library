@@ -7,10 +7,11 @@ import {
   AsyncUtils
 } from '../types'
 
-import { createTimeoutController, DEFAULT_TIMEOUT } from '../helpers/createTimeoutController'
+import { createTimeoutController } from '../helpers/createTimeoutController'
 import { TimeoutError } from '../helpers/error'
 
 const DEFAULT_INTERVAL = 50
+const DEFAULT_TIMEOUT = 1000
 
 function asyncUtils(act: Act, addResolver: (callback: () => void) => void): AsyncUtils {
   const wait = async (
