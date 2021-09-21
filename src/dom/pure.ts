@@ -1,10 +1,10 @@
-import * as ReactDOM from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
 import { RendererProps, RendererOptions } from '../types/react'
 
 import { createRenderHook } from '../core'
 import { createTestHarness } from '../helpers/createTestHarness'
+import { createRoot } from '../helpers/createRoot'
 
 function createDomRenderer<TProps, TResult>(
   rendererProps: RendererProps<TProps, TResult>,
@@ -12,21 +12,21 @@ function createDomRenderer<TProps, TResult>(
 ) {
   const container = document.createElement('div')
   const testHarness = createTestHarness(rendererProps, wrapper)
-
+  const root = createRoot(container)
   return {
     render(props?: TProps) {
       act(() => {
-        ReactDOM.render(testHarness(props), container)
+        root.render(testHarness(props))
       })
     },
     rerender(props?: TProps) {
       act(() => {
-        ReactDOM.render(testHarness(props), container)
+        root.render(testHarness(props))
       })
     },
     unmount() {
       act(() => {
-        ReactDOM.unmountComponentAtNode(container)
+        root.unmount()
       })
     },
     act

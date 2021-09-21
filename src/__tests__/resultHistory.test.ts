@@ -23,6 +23,7 @@ describe('result history tests', () => {
       rerender(2)
 
       expect(result.error).toEqual(Error('expected'))
+      // double error thrown for dom, but not default or native...
       expect(result.all).toEqual([0, 1, Error('expected')])
 
       rerender(3)
