@@ -146,7 +146,7 @@ to test against. It also does not come installed with a specific renderer, we cu
 [`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer) and
 [`react-dom`](https://www.npmjs.com/package/react-dom). You only need to install one of them,
 however, if you do have both installed, we will use `react-test-renderer` as the default. For more
-information see the [installation docs](https://react-hooks-testing-library.com/#installation).
+information see the [installation docs](https://react-hooks-testing-library.com/installation#renderer).
 Generally, the installed versions for `react` and the selected renderer should have matching
 versions:
 
