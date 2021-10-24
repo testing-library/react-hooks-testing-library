@@ -593,6 +593,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Laishuxin",
+      "name": "Laishuxin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56504759?v=4",
+      "profile": "https://github.com/Laishuxin",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "skipCi": true,
