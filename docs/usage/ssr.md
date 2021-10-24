@@ -46,7 +46,7 @@ import { renderHook, act } from '@testing-library/react-hooks/server'
 import useCounter from './useCounter'
 
 test('should increment counter', () => {
-  const { result } = renderHook(() => useCounter(0))
+  const { result } = renderHook(() => useCounter())
 
   act(() => {
     result.current.increment()
@@ -64,7 +64,7 @@ import { renderHook, act } from '@testing-library/react-hooks/server'
 import useCounter from './useCounter'
 
 test('should increment counter', () => {
-  const { result, hydrate } = renderHook(() => useCounter(0))
+  const { result, hydrate } = renderHook(() => useCounter())
 
   hydrate()
 
