@@ -146,9 +146,9 @@ to test against. It also does not come installed with a specific renderer, we cu
 [`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer) and
 [`react-dom`](https://www.npmjs.com/package/react-dom). You only need to install one of them,
 however, if you do have both installed, we will use `react-test-renderer` as the default. For more
-information see the [installation docs](https://react-hooks-testing-library.com/installation#renderer).
-Generally, the installed versions for `react` and the selected renderer should have matching
-versions:
+information see the
+[installation docs](https://react-hooks-testing-library.com/installation#renderer). Generally, the
+installed versions for `react` and the selected renderer should have matching versions:
 
 ```sh
 npm install react@^16.9.0
@@ -250,6 +250,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/chris110408"><img src="https://avatars.githubusercontent.com/u/10645051?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chris Chen</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=chris110408" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://www.facebook.com/masoud.bonabi"><img src="https://avatars.githubusercontent.com/u/6429009?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Masious</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=masious" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Laishuxin"><img src="https://avatars.githubusercontent.com/u/56504759?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Laishuxin</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=Laishuxin" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/andersonvom"><img src="https://avatars.githubusercontent.com/u/69922?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Anderson Mesquita</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=andersonvom" title="Code">💻</a></td>
   </tr>
 </table>
 

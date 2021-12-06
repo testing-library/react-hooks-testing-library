@@ -602,6 +602,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "andersonvom",
+      "name": "Anderson Mesquita",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69922?v=4",
+      "profile": "https://github.com/andersonvom",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "skipCi": true,
