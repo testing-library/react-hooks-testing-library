@@ -56,8 +56,8 @@
     "react-error-boundary": "^3.1.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "4.30.0",
-    "@typescript-eslint/parser": "4.30.0",
+    "@typescript-eslint/eslint-plugin": "5.5.0",
+    "@typescript-eslint/parser": "5.5.0",
     "all-contributors-cli": "6.20.0",
     "codecov": "3.8.3",
     "cross-env": "^7.0.3",
@@ -66,13 +66,13 @@
     "docz-utils": "2.3.0",
     "eslint": "7.32.0",
     "get-pkg-repo": "4.1.1",
-    "kcd-scripts": "11.2.0",
-    "prettier": "2.3.2",
+    "kcd-scripts": "11.2.2",
+    "prettier": "2.5.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-test-renderer": "17.0.2",
-    "ts-node": "10.2.1",
-    "typescript": "4.4.2"
+    "ts-node": "10.4.0",
+    "typescript": "4.5.2"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
