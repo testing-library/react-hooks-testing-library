@@ -13,7 +13,7 @@ function createServerRenderer<TProps, TResult>(
 ) {
   let renderProps: TProps | undefined
   let container: HTMLDivElement | undefined
-  let serverOutput: string = ''
+  let serverOutput = ''
   const testHarness = createTestHarness(rendererProps, wrapper, false)
 
   return {
