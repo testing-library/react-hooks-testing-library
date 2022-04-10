@@ -37,6 +37,17 @@
 [![Tweet](https://img.shields.io/twitter/url/https/github.com/testing-library/react-hooks-testing-library.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20react-hooks-testing-library%20by%20%40testing-library%20https%3A%2F%2Fgithub.com%2Ftesting-library%2Freact-hooks-testing-library%20%F0%9F%91%8D)
 <!-- prettier-ignore-end -->
 
+## A Note about React 18 Support
+
+As part of the changes for React 18, it has been decided that the `renderHook` API provided by this
+library will instead be included as official additions to both `react-testing-library`
+([PR](https://github.com/testing-library/react-testing-library/pull/991)) and
+`react-native-testing-library`
+([PR](https://github.com/callstack/react-native-testing-library/pull/923)) with the intention being
+to provide a more cohesive and consistent implementation for our users.
+
+Please be patient as we finalise these changes in the respective testing libraries.
+
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -146,9 +157,9 @@ to test against. It also does not come installed with a specific renderer, we cu
 [`react-test-renderer`](https://www.npmjs.com/package/react-test-renderer) and
 [`react-dom`](https://www.npmjs.com/package/react-dom). You only need to install one of them,
 however, if you do have both installed, we will use `react-test-renderer` as the default. For more
-information see the [installation docs](https://react-hooks-testing-library.com/installation#renderer).
-Generally, the installed versions for `react` and the selected renderer should have matching
-versions:
+information see the
+[installation docs](https://react-hooks-testing-library.com/installation#renderer). Generally, the
+installed versions for `react` and the selected renderer should have matching versions:
 
 ```sh
 npm install react@^16.9.0
