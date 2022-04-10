@@ -23,6 +23,17 @@ route: '/'
 
 <hr />
 
+## A Note about React 18 Support
+
+As part of the changes for React 18, it has been decided that the `renderHook` API provided by this
+library will instead be included as official additions to both `react-testing-library`
+([PR](https://github.com/testing-library/react-testing-library/pull/991)) and
+`react-native-testing-library`
+([PR](https://github.com/callstack/react-native-testing-library/pull/923)) with the intention being
+to provide a more cohesive and consistent implementation for our users.
+
+Please be patient as we finalise these changes in the respective testing libraries.
+
 ## The problem
 
 You're writing an awesome custom hook and you want to test it, but as soon as you call it you see
