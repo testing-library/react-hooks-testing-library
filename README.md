@@ -39,6 +39,22 @@
 
 ## A Note about React 18 Support
 
+If you are using the current version of `react-testing-library`, replace
+
+```js
+import { renderHook } from '@testing-library/react-hooks'
+```
+
+with
+
+```js
+import { renderHook } from '@testing-library/react'
+```
+
+Once replaced, `@testing-library/react-hooks` can be uninstalled.
+
+### Details
+
 As part of the changes for React 18, it has been decided that the `renderHook` API provided by this
 library will instead be included as official additions to both `react-testing-library`
 ([PR](https://github.com/testing-library/react-testing-library/pull/991)) and
