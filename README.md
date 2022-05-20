@@ -47,6 +47,7 @@ library will instead be included as official additions to both `react-testing-li
 to provide a more cohesive and consistent implementation for our users.
 
 Please be patient as we finalise these changes in the respective testing libraries.
+In the mean time you can install `@testing-library/react@^13.1`
 
 ## Table of Contents
 
