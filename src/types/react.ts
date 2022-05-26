@@ -1,4 +1,4 @@
-import { ComponentType } from 'react'
+import { ComponentType, ReactNode } from 'react'
 
 import {
   RenderHookOptions as BaseRenderHookOptions,
@@ -8,7 +8,11 @@ import {
   CleanupCallback
 } from '.'
 
-export type WrapperComponent<TProps> = ComponentType<TProps>
+export type WrapperComponent<TProps> = ComponentType<
+  TProps & {
+    children: ReactNode
+  }
+>
 
 export type RendererOptions<TProps> = {
   wrapper?: WrapperComponent<TProps>
