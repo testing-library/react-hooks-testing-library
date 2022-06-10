@@ -37,6 +37,18 @@
 [![Tweet](https://img.shields.io/twitter/url/https/github.com/testing-library/react-hooks-testing-library.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20react-hooks-testing-library%20by%20%40testing-library%20https%3A%2F%2Fgithub.com%2Ftesting-library%2Freact-hooks-testing-library%20%F0%9F%91%8D)
 <!-- prettier-ignore-end -->
 
+## A Note about React 18 Support
+
+As part of the changes for React 18, it has been decided that the `renderHook` API provided by this
+library will instead be included as official additions to both `react-testing-library`
+([PR](https://github.com/testing-library/react-testing-library/pull/991)) and
+`react-native-testing-library`
+([PR](https://github.com/callstack/react-native-testing-library/pull/923)) with the intention being
+to provide a more cohesive and consistent implementation for our users.
+
+Please be patient as we finalise these changes in the respective testing libraries.
+In the mean time you can install `@testing-library/react@^13.1`
+
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
