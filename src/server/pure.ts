@@ -13,19 +13,17 @@ function createServerRenderer<TProps, TResult>(
 ) {
   let renderProps: TProps | undefined
   let container: HTMLDivElement | undefined
-  let serverOutput: string = ''
+  let serverOutput = ''
   const testHarness = createTestHarness(rendererProps, wrapper, false)
 
   return {
     render(props?: TProps) {
       renderProps = props
-      act(() => {
-        try {
-          serverOutput = ReactDOMServer.renderToString(testHarness(props))
-        } catch (e: unknown) {
-          rendererProps.setError(e as Error)
-        }
-      })
+      try {
+        serverOutput = ReactDOMServer.renderToString(testHarness(props))
+      } catch (e: unknown) {
+        rendererProps.setError(e as Error)
+      }
     },
     hydrate() {
       if (container) {
