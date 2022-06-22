@@ -29,11 +29,13 @@ function createServerRenderer<TProps, TResult>(
       if (container) {
         throw new Error('The component can only be hydrated once')
       } else {
-        container = document.createElement('div')
-        container.innerHTML = serverOutput
-        act(() => {
-          ReactDOM.hydrate(testHarness(renderProps), container!)
-        })
+        if (typeof document !== 'undefined') {
+          container = document.createElement('div')
+          container.innerHTML = serverOutput
+          act(() => {
+            ReactDOM.hydrate(testHarness(renderProps), container!)
+          })
+        }
       }
     },
     rerender(props?: TProps) {
