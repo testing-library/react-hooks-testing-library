@@ -603,6 +603,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "amovar18",
+      "name": "Kudaligi Amoghavarsha",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59614577?v=4",
+      "profile": "https://github.com/amovar18",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "skipCi": true,
