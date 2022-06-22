@@ -35,6 +35,10 @@ function createServerRenderer<TProps, TResult>(
           act(() => {
             ReactDOM.hydrate(testHarness(renderProps), container!)
           })
+        } else {
+          throw new Error(
+            'Hydrate function can only be called in a client environment with a document available.'
+          )
         }
       }
     },
