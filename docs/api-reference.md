@@ -327,7 +327,7 @@ variable to `true` before importing `@testing-library/react-hooks` will also dis
 If you are using [a pure import](/installation#pure-imports), you are running your tests in an
 environment that does not support `beforeEach` and `afterEach`, or if the automatic suppression is
 not available to you for some other reason, then you can use the `suppressErrorOutput` export to
-manually start and top suppress the output:
+manually start and stop suppressing the output:
 
 ```ts
 import { renderHook, suppressErrorOutput } from '@testing-library/react-hooks/pure'
