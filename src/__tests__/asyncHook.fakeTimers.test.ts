@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 describe('async hook (fake timers) tests', () => {
   beforeEach(() => {
     jest.useFakeTimers()
@@ -20,8 +22,6 @@ describe('async hook (fake timers) tests', () => {
 
       let complete = false
 
-      jest.advanceTimersByTime(200)
-
       await waitFor(() => {
         expect(actual).toBe(expected)
         complete = true
@@ -30,26 +30,45 @@ describe('async hook (fake timers) tests', () => {
       expect(complete).toBe(true)
     })
 
-    test('should wait for arbitrary expectation to pass when using runOnlyPendingTimers()', async () => {
-      const { waitFor } = renderHook(() => null)
+    test('it waits for the data to be loaded using', async () => {
+      const fetchAMessage = () =>
+        new Promise((resolve) => {
+          // we are using random timeout here to simulate a real-time example
+          // of an async operation calling a callback at a non-deterministic time
+          const randomTimeout = Math.floor(Math.random() * 100)
+          setTimeout(() => {
+            resolve({ returnedMessage: 'Hello World' })
+          }, randomTimeout)
+        })
 
-      let actual = 0
-      const expected = 1
+      function useLoader() {
+        const [state, setState] = React.useState<{ data: unknown; loading: boolean }>({
+          data: undefined,
+          loading: true
+        })
+        React.useEffect(() => {
+          let cancelled = false
+          fetchAMessage().then((data) => {
+            if (!cancelled) {
+              setState({ data, loading: false })
+            }
+          })
 
-      setTimeout(() => {
-        actual = expected
-      }, 200)
+          return () => {
+            cancelled = true
+          }
+        }, [])
 
-      let complete = false
+        return state
+      }
 
-      jest.runOnlyPendingTimers()
+      const { result, waitFor } = renderHook(() => useLoader())
+
+      expect(result.current).toEqual({ data: undefined, loading: true })
 
       await waitFor(() => {
-        expect(actual).toBe(expected)
-        complete = true
+        expect(result.current).toEqual({ data: { returnedMessage: 'Hello World' }, loading: false })
       })
-
-      expect(complete).toBe(true)
     })
   })
 })
