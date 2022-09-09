@@ -42,7 +42,7 @@ your hook. We currently support two different renderers:
 - `react-test-renderer`
 - `react-dom`
 
-When using standard import for this library (show below), we will attempt to auto-detect which
+When using standard import for this library (see below), we will attempt to auto-detect which
 renderer you have installed and use it without needing any specific wiring up to make it happen. If
 you have both installed in your project, and you use the standard import (see below) the library
 will default to using `react-test-renderer`.
@@ -63,7 +63,7 @@ import { renderHook } from '@testing-library/react-hooks'
 ### Act
 
 Each render also provides a unique [`act` function](https://reactjs.org/docs/test-utils.html#act)
-that cannot be used with other renderers. In order to simplify with `act `function you need to use,
+that cannot be used with other renderers. In order to simplify which `act `function you need to use,
 we also export the correct one alongside the detected renderer for you:
 
 ```js
@@ -73,8 +73,8 @@ import { renderHook, act } from '@testing-library/react-hooks'
 ## Being specific
 
 Auto-detection is great for simplifying setup and getting out of your way, but sometimes you do need
-a little but more control. If a test needs requires a specific type of environment, the import can
-be appended to force a specific renderer to be use. The supported environments are:
+a little bit more control. If a test needs a specific type of environment, the import can
+be appended to force a specific renderer to be used. The supported environments are:
 
 - `dom`
 - `native`
