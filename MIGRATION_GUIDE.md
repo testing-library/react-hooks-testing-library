@@ -115,6 +115,20 @@ APIs. A similar result can be achieved by using `waitFor`:
 +});
 ```
 
+Alternatively this utility can be implemented as the following, for a direct migration:
+
+```ts
+import { waitFor } from '@testing-library/react';
+
+const waitForValueToChange = async <T,>(getValue: () => T) => {
+    const original = getValue();
+
+    await waitFor(async () => {
+        expect(await original).not.toBe(await getValue());
+    });
+};
+```
+
 ## `waitForNextUpdate`
 
 This utility has not been included in the React Testing Library or React Native Testing Library
