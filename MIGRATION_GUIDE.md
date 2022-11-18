@@ -120,7 +120,7 @@ Alternatively this utility can be implemented as the following, for a direct mig
 ```ts
 import { waitFor } from '@testing-library/react';
 
-const waitForValueToChange = async <T,>(getValue: () => T) => {
+const waitForValueToChange = async <T>(getValue: () => T) => {
     const original = getValue();
 
     await waitFor(async () => {
