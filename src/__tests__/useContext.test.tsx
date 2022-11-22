@@ -15,7 +15,7 @@ describe('useContext tests', () => {
     test('should get value from context provider', () => {
       const TestContext = createContext('foo')
 
-      const wrapper: React.FC = ({ children }) => (
+      const wrapper: React.FC<{ children: React.ReactElement }> = ({ children }) => (
         <TestContext.Provider value="bar">{children}</TestContext.Provider>
       )
 
@@ -29,7 +29,7 @@ describe('useContext tests', () => {
 
       const value = { current: 'bar' }
 
-      const wrapper: React.FC = ({ children }) => (
+      const wrapper: React.FC<{ children: React.ReactElement }> = ({ children }) => (
         <TestContext.Provider value={value.current}>{children}</TestContext.Provider>
       )
 
@@ -45,18 +45,20 @@ describe('useContext tests', () => {
     test('should update value in context when props are updated', () => {
       const TestContext = createContext('foo')
 
-      const wrapper: React.FC<{ current: string }> = ({ current, children }) => (
-        <TestContext.Provider value={current}>{children}</TestContext.Provider>
-      )
+      const wrapper: React.FC<{ current: string; children: React.ReactElement }> = ({
+        current,
+        children
+      }) => <TestContext.Provider value={current}>{children}</TestContext.Provider>
 
       const { result, rerender } = renderHook(() => useContext(TestContext), {
         wrapper,
         initialProps: {
-          current: 'bar'
+          current: 'bar',
+          children: <div />
         }
       })
 
-      rerender({ current: 'baz' })
+      rerender({ current: 'baz', children: <div /> })
 
       expect(result.current).toBe('baz')
     })
