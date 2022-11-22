@@ -62,8 +62,8 @@ library will instead be included as official additions to both `react-testing-li
 ([PR](https://github.com/callstack/react-native-testing-library/pull/923)) with the intention being
 to provide a more cohesive and consistent implementation for our users.
 
-Please be patient as we finalise these changes in the respective testing libraries.
-In the mean time you can install `@testing-library/react@^13.1`
+Please be patient as we finalise these changes in the respective testing libraries. In the mean time
+you can install `@testing-library/react@^13.1`
 
 ## Table of Contents
 
@@ -278,6 +278,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/chris110408"><img src="https://avatars.githubusercontent.com/u/10645051?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Chris Chen</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=chris110408" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://www.facebook.com/masoud.bonabi"><img src="https://avatars.githubusercontent.com/u/6429009?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Masious</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=masious" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Laishuxin"><img src="https://avatars.githubusercontent.com/u/56504759?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Laishuxin</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=Laishuxin" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+  <td align="center"><a href="https://github.com/joazco"><img src="https://avatars.githubusercontent.com/u/106530115?v=4?s=100" width="100px;" alt=""/><br /><sub><b>joazco</b></sub></a><br /><a href="https://github.com/testing-library/react-hooks-testing-library/commits?author=joazco" title="Code">💻</a></td>
   </tr>
 </table>
 
