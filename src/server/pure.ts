@@ -29,11 +29,17 @@ function createServerRenderer<TProps, TResult>(
       if (container) {
         throw new Error('The component can only be hydrated once')
       } else {
-        container = document.createElement('div')
-        container.innerHTML = serverOutput
-        act(() => {
-          ReactDOM.hydrate(testHarness(renderProps), container!)
-        })
+        if (typeof document !== 'undefined') {
+          container = document.createElement('div')
+          container.innerHTML = serverOutput
+          act(() => {
+            ReactDOM.hydrate(testHarness(renderProps), container!)
+          })
+        } else {
+          throw new Error(
+            'Hydrate function can only be called in a client environment with a document available.'
+          )
+        }
       }
     },
     rerender(props?: TProps) {
