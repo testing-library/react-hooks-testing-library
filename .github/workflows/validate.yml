@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.1.0
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v2
@@ -58,7 +58,7 @@ jobs:
       github.event_name == 'push' }}
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.1.0
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v2
