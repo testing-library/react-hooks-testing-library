@@ -46,16 +46,17 @@
     "install:react": "npm install --no-save react@${REACT_VERSION:-latest} react-dom@${REACT_VERSION:-latest} react-test-renderer@${REACT_VERSION:-latest}",
     "install:react-16.9.0": "cross-env REACT_VERSION=16.9.0 npm run install:react",
     "install:react-16": "cross-env REACT_VERSION=^16 npm run install:react",
-    "install:react-17": "cross-env REACT_VERSION=^17 npm run install:react"
+    "install:react-17": "cross-env REACT_VERSION=^17 npm run install:react",
+    "install:react-18": "cross-env REACT_VERSION=^18 npm run install:react"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
     "react-error-boundary": "^3.1.0"
   },
   "devDependencies": {
-    "@types/react": "17.0.44",
-    "@types/react-dom": "17.0.15",
-    "@types/react-test-renderer": "17.0.1",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "5.11.0",
     "@typescript-eslint/parser": "5.11.0",
     "all-contributors-cli": "6.20.0",
@@ -68,17 +69,17 @@
     "get-pkg-repo": "4.1.1",
     "kcd-scripts": "11.2.2",
     "prettier": "2.5.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-test-renderer": "17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-test-renderer": "^18.2.0",
     "ts-node": "10.5.0",
     "typescript": "4.5.5"
   },
   "peerDependencies": {
-    "@types/react": "^16.9.0 || ^17.0.0",
-    "react": "^16.9.0 || ^17.0.0",
-    "react-dom": "^16.9.0 || ^17.0.0",
-    "react-test-renderer": "^16.9.0 || ^17.0.0"
+    "@types/react": "^16.9.0 || ^17.0.0 || ^18.0.0 || ^18.1.0",
+    "react": "^16.9.0 || ^17.0.0 || ^18.0.0 || ^18.1.0",
+    "react-dom": "^16.9.0 || ^17.0.0 || ^18.0.0 || ^18.1.0",
+    "react-test-renderer": "^16.9.0 || ^17.0.0 || ^18.0.0 || ^18.1.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {
