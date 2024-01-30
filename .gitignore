@@ -18,3 +18,4 @@ coverage
 
 # settings from IDE
 .vscode
+.idea
