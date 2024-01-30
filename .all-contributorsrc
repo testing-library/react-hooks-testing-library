@@ -603,6 +603,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "mycarrysun",
+      "name": "Mike Harrison",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9121901?v=4",
+      "profile": "https://github.com/mycarrysun",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "skipCi": true,
